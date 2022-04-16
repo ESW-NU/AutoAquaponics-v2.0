@@ -1,13 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
+// import { collection, doc, onSnapshot } from "firebase/firestore";
 import ReactDOM from 'react-dom';
 import * as V from 'victory';
 import { VictoryLine } from 'victory';
 import { VictoryChart } from 'victory';
 import { VictoryTheme } from 'victory';
 
+
 function App() {
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => { 
+  //   const unsub = db.collection('stats').onSnapshot(() => {
+  //   });
+
+  //   //remember to unsubscribe from your realtime listener on unmount or you will create a memory leak
+  //   return () => unsub()
+  // }, []);
+
   return (
     <div className="App">
       <VictoryChart
