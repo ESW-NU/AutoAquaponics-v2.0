@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import * as V from 'victory';
 import { VictoryLine, VictoryChart, VictoryTheme, VictoryLabel } from 'victory';
+import GraphCard from './Components/GraphCard.js';
+import ResponsiveAppBar from './Components/ResponsiveAppBar.js';
 
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
 
@@ -63,6 +65,8 @@ function App() {
 
   return (
     <div className="App">
+      {/* <ResponsiveAppBar></ResponsiveAppBar> */}
+      <GraphCard></GraphCard>
       <DashboardGraphs title={graph.sensorGraphs}/>
       <LiveGraph title="pH" width={500}></LiveGraph>
       <LiveGraph title="pH2" width={1000}></LiveGraph>
