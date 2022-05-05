@@ -7,6 +7,8 @@ import * as V from 'victory';
 import { VictoryLine, VictoryChart, VictoryTheme, VictoryLabel } from 'victory';
 import GraphCard from './Components/GraphCard.js';
 import ResponsiveAppBar from './Components/ResponsiveAppBar.js';
+import AreaGraph from './Components/AreaGraph.js';
+import { ThemeProvider, createTheme } from '@mui/material/styles'; 
 
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
 
@@ -61,19 +63,44 @@ const LiveGraph = ({title}) => {
   );
 }
 
+
+
+const theme = createTheme({
+  typography: {
+    h1: {
+      fontFamily: 'Space Grotesk',
+      textTransform: 'none',
+      fontSize: 56,
+    },
+    h2: {
+      fontFamily: 'Space Grotesk',
+      textTransform: 'none',
+      fontSize: 32,
+    },
+    h3: {
+      fontFamily: 'Inter',
+      textTransform: 'none',
+      fontSize: 24,
+    },
+    body: {
+      fontFamily: 'Inter',
+      textTransform: 'none',
+      fontSize: 16,
+    },
+  },
+});
+
 function App() {
 
   return (
-    <div className="App">
-      {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-      <GraphCard></GraphCard>
-      <DashboardGraphs title={graph.sensorGraphs}/>
-      <LiveGraph title="pH" width={500}></LiveGraph>
-      <LiveGraph title="pH2" width={1000}></LiveGraph>
-      <pre>
-        
-      </pre>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        {/* <ResponsiveAppBar></ResponsiveAppBar> */}
+        <GraphCard></GraphCard>
+        {/* <AreaGraph></AreaGraph> */}
+        {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
+      </div>
+    </ThemeProvider>
   );
 }
 

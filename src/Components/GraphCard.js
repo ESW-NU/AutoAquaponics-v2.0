@@ -3,23 +3,35 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import AreaGraph from './AreaGraph.js';
+import "../CSS/graphCard.css";
+import {
+  ResponsiveContainer
+} from "recharts";
 
 const card = (
     <Card sx={{ minWidth: 100, minHeight: 100 }}>
     <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        Word of the Day
+          <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Typography variant="h3" gutterBottom>
+        Dissolved Solids
       </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+      <Typography variant="h2">
         adjective
+        <Typography variant="body"> adjective </Typography>
       </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
+      </Grid>
+      <ResponsiveContainer width="100%" height="40%">
+          <AreaGraph></AreaGraph>
+      </ResponsiveContainer>
     </CardContent>
     <CardActions>
       <Button size="small">Learn More</Button>
@@ -27,11 +39,16 @@ const card = (
   </Card>
 );
 
-const  GraphCard = () => {
+const GraphCard = () => {
   return (
-    <Box sx={{ width: 1/4 }}>
-        <Card variant="outlined">{card}</Card>
-    </Box>
+      <Box sx={{ width: 1/2 }} className="rc-parent">
+        <Card variant="outlined">
+          {card}
+          
+        </Card>
+         
+        
+      </Box>
   );
 }
 

@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk&family=Space+Mono&display=swap');
+
 .App {
   text-align: center;
 }
 
 body {
   background-color: #E1e1e1;
+  font-family: 'Inter', sans-serif;
 }
 
 .App-logo {
