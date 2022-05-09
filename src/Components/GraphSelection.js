@@ -9,7 +9,7 @@ const GraphSelection = () => {
   const [timescale, setTimescale] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
+    setTimescale(event.target.value);
   };
 
   return (
@@ -23,9 +23,9 @@ const GraphSelection = () => {
         onChange={handleChange}
       >
         <MenuItem value="">
-          <em>None</em>
+          <em>30 Min</em>
         </MenuItem>
-        <MenuItem value={10}>30 Min</MenuItem>
+        <MenuItem value={10}>1 Hour</MenuItem>
         <MenuItem value={20}>1 Day</MenuItem>
         <MenuItem value={30}>7 Days</MenuItem>
       </Select>

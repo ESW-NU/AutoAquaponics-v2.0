@@ -8,6 +8,8 @@ import { VictoryLine, VictoryChart, VictoryTheme, VictoryLabel } from 'victory';
 import GraphCard from './Components/GraphCard.js';
 import ResponsiveAppBar from './Components/ResponsiveAppBar.js';
 import AreaGraph from './Components/AreaGraph.js';
+import GuageCard from './Components/GuageCard.js';
+import Guage from './Components/Guage.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
 
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
@@ -97,6 +99,7 @@ function App() {
       <div className="App">
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
         <GraphCard></GraphCard>
+        <GuageCard></GuageCard>
         {/* <AreaGraph></AreaGraph> */}
         {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
       </div>

@@ -7,51 +7,64 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AreaGraph from './AreaGraph.js';
+import GraphSelection from './GraphSelection.js';
 import "../CSS/graphCard.css";
 import {
   ResponsiveContainer
 } from "recharts";
 
 const card = (
-    <Card sx={{ minWidth: 100, minHeight: 100 }}>
+  <Card sx={{ minWidth: 100, minHeight: 100}}>
     <CardContent>
-          <Grid
+      <Grid
         container
         direction="row"
         justifyContent="space-between"
         alignItems="center"
       >
         <Grid item>
-        <Typography variant="h3" gutterBottom>
-        Dissolved Solids
-      </Typography>
+          <Typography variant="h3" gutterBottom>
+            Dissolved Solids
+          </Typography>
         </Grid>
 
-       <Grid item>
-        <Typography variant="h1">
-        12
-      </Typography>
-      {/* <Typography variant="h3"> PPM </Typography> */}
+        <Grid item>
+            <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-end"
+          >
+            <Typography variant="h1">
+              12
+            </Typography>
+            <Typography variant="h3">
+              PPM
+            </Typography>
+          
+          {/* <Typography variant="h3"> PPM </Typography> */}
+          </Grid>
         </Grid>
       </Grid>
-      
+      <CardActions>
+        <GraphSelection></GraphSelection>
+      </CardActions>
       <ResponsiveContainer width="99%" aspect={3}>
-          <AreaGraph></AreaGraph>
+        <AreaGraph></AreaGraph>
       </ResponsiveContainer>
     </CardContent>
-    <CardActions>
-      <Button size="small">Learn More</Button>
-    </CardActions>
+    
+    
   </Card>
 );
 
 const GraphCard = () => {
   return (
-      <Box sx={{ width: 1/2 }}>
-        <Card variant="outlined">
-          {card}
-        </Card>
-      </Box>
+    <Box sx={{ width: 1 / 3}}>
+      {/* <Card variant="outlined"> */}
+        {card}
+      {/* </Card> */}
+    </Box>
   );
 }
 
