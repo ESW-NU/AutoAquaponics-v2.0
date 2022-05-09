@@ -6,11 +6,14 @@ import ReactDOM from 'react-dom';
 import * as V from 'victory';
 import { VictoryLine, VictoryChart, VictoryTheme, VictoryLabel } from 'victory';
 import GraphCard from './Components/GraphCard.js';
-import ResponsiveAppBar from './Components/ResponsiveAppBar.js';
 import AreaGraph from './Components/AreaGraph.js';
 import GuageCard from './Components/GuageCard.js';
+import GraphContainer from './Components/GraphContainer.js';
+import GuageContainer from './Components/GuageContainer.js';
 import Guage from './Components/Guage.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
 
@@ -23,49 +26,6 @@ const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidit
 //     "title": "Water Level",
 //     "title": "Water Temperature"
 //   }}
-
-const DashboardGraphs = ({graphData}) => {
-
-  return (
-    <>
-      <div>
-        { graph.map(title => <LiveGraph title={title} width={500}/>)}
-      </div>
-    </>
-  );
-}
-
-const LiveGraph = ({title}) => {
-
-  return(
-    <div>
-      <VictoryLabel text={title} x={225} y={30} textAnchor="middle"/>
-      <VictoryChart
-        theme={VictoryTheme.material}
-        // width={width}
-      >
-        <VictoryLine
-          style={{
-            data: { stroke: "#c43a31" },
-            parent: { border: "1px solid #ccc"}
-          }}
-          
-          data={[
-            { x: 1, y: 2 },
-            { x: 2, y: 3 },
-            { x: 3, y: 5 },
-            { x: 4, y: 4 },
-            { x: 5, y: 7 }
-          ]}
-
-        />
-      </VictoryChart>
-    </div>
-    
-  );
-}
-
-
 
 const theme = createTheme({
   typography: {
@@ -98,8 +58,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-        <GraphCard></GraphCard>
-        <GuageCard></GuageCard>
+        <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
+        <GuageContainer />
+        <GraphContainer />
+        {/* <GuageCard></GuageCard> */}
         {/* <AreaGraph></AreaGraph> */}
         {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
       </div>

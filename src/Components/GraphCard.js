@@ -49,9 +49,7 @@ const card = (
       <CardActions>
         <GraphSelection></GraphSelection>
       </CardActions>
-      <ResponsiveContainer width="99%" aspect={3}>
         <AreaGraph></AreaGraph>
-      </ResponsiveContainer>
     </CardContent>
     
     
@@ -60,11 +58,48 @@ const card = (
 
 const GraphCard = () => {
   return (
-    <Box sx={{ width: 1 / 3}}>
-      {/* <Card variant="outlined"> */}
-        {card}
-      {/* </Card> */}
-    </Box>
+    <>
+    <Card>
+    <CardContent>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Grid item>
+          <Typography variant="h3" gutterBottom>
+            Dissolved Solids
+          </Typography>
+        </Grid>
+
+        <Grid item>
+            <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-end"
+          >
+            <Typography variant="h1">
+              12
+            </Typography>
+            <Typography variant="h3">
+              PPM
+            </Typography>
+          
+          {/* <Typography variant="h3"> PPM </Typography> */}
+          </Grid>
+        </Grid>
+      </Grid>
+      <CardActions>
+        <GraphSelection></GraphSelection>
+      </CardActions>
+      <ResponsiveContainer width="50%" aspect={3}>
+        <AreaGraph></AreaGraph>
+      </ResponsiveContainer>
+    </CardContent>
+  </Card>
+  </>
   );
 }
 

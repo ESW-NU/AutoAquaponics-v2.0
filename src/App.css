@@ -2,6 +2,17 @@
 
 .App {
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.App * {
+  margin: 5px;
+}
+
+Card {
+  width: 20%;
 }
 
 body {

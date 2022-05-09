@@ -21,13 +21,14 @@ const data = [
 
 const Guage = () => {
     return (
+      // <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={150}
           height={200}
           data={data}
           margin={{
             top: 10,
-            right: 30,
+            right: 0,
             left: 0,
             bottom: 0,
           }}
@@ -41,6 +42,7 @@ const Guage = () => {
           <Tooltip />
           <Area type="monotone" dataKey="uv" stroke="#009444" fill="#009444" />
         </AreaChart>
+      // </ResponsiveContainer>
     );
 }
 
