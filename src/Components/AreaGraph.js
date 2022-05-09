@@ -57,10 +57,10 @@ const data = [
 
 const AreaGraph = () => {
   return (
-    <ResponsiveContainer width="190%" height="100%">
+    <ResponsiveContainer width="100%" height={300}>
         <AreaChart
         width={400}
-        height={100}
+        height={300}
         data={data}
         margin={{
             top: 10,
@@ -87,7 +87,7 @@ const AreaGraph = () => {
     <Tooltip />
     <Area type="monotone" dataKey="uv" stroke="#009444" fillOpacity={1} fill="url(#colorUv)" />
         </AreaChart>
- </ResponsiveContainer>
+  </ResponsiveContainer>
   );
 }
 

@@ -13,49 +13,6 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-const card = (
-  <Card sx={{ minWidth: 100, minHeight: 100}}>
-    <CardContent>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Grid item>
-          <Typography variant="h3" gutterBottom>
-            Dissolved Solids
-          </Typography>
-        </Grid>
-
-        <Grid item>
-            <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="flex-end"
-          >
-            <Typography variant="h1">
-              12
-            </Typography>
-            <Typography variant="h3">
-              PPM
-            </Typography>
-          
-          {/* <Typography variant="h3"> PPM </Typography> */}
-          </Grid>
-        </Grid>
-      </Grid>
-      <CardActions>
-        <GraphSelection></GraphSelection>
-      </CardActions>
-        <AreaGraph></AreaGraph>
-    </CardContent>
-    
-    
-  </Card>
-);
-
 const GraphCard = () => {
   return (
     <>
@@ -94,9 +51,7 @@ const GraphCard = () => {
       <CardActions>
         <GraphSelection></GraphSelection>
       </CardActions>
-      <ResponsiveContainer width="50%" aspect={3}>
-        <AreaGraph></AreaGraph>
-      </ResponsiveContainer>
+      <AreaGraph></AreaGraph>
     </CardContent>
   </Card>
   </>
