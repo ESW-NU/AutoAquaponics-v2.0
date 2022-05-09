@@ -21,15 +21,21 @@ const card = (
         justifyContent="space-between"
         alignItems="center"
       >
+        <Grid item>
         <Typography variant="h3" gutterBottom>
         Dissolved Solids
       </Typography>
-      <Typography variant="h2">
-        adjective
-        <Typography variant="body"> adjective </Typography>
+        </Grid>
+
+       <Grid item>
+        <Typography variant="h1">
+        12
       </Typography>
+      {/* <Typography variant="h3"> PPM </Typography> */}
+        </Grid>
       </Grid>
-      <ResponsiveContainer width="100%" height="40%">
+      
+      <ResponsiveContainer width="99%" aspect={3}>
           <AreaGraph></AreaGraph>
       </ResponsiveContainer>
     </CardContent>
@@ -41,13 +47,10 @@ const card = (
 
 const GraphCard = () => {
   return (
-      <Box sx={{ width: 1/2 }} className="rc-parent">
+      <Box sx={{ width: 1/2 }}>
         <Card variant="outlined">
           {card}
-          
         </Card>
-         
-        
       </Box>
   );
 }
