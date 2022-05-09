@@ -34,7 +34,10 @@ const Guage = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis style={{
+        fontSize: '1rem',
+        fontFamily: 'Inter',
+    }}/>
           <Tooltip />
           <Area type="monotone" dataKey="uv" stroke="#009444" fill="#009444" />
         </AreaChart>

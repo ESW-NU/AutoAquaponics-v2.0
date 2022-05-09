@@ -75,8 +75,14 @@ const AreaGraph = () => {
       <stop offset="95%" stopColor="#009444" stopOpacity={0}/>
     </linearGradient>
     </defs>
-    <XAxis dataKey="name" />
-    <YAxis />
+    <XAxis dataKey="name" style={{
+        fontSize: '1rem',
+        fontFamily: 'Inter',
+    }}/>
+    <YAxis style={{
+        fontSize: '1rem',
+        fontFamily: 'Inter',
+    }}/>
     <CartesianGrid strokeDasharray="3 3" />
     <Tooltip />
     <Area type="monotone" dataKey="uv" stroke="#009444" fillOpacity={1} fill="url(#colorUv)" />
