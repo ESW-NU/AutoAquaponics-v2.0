@@ -11,7 +11,6 @@ import GuageCard from './Components/GuageCard.js';
 import GraphContainer from './Components/GraphContainer.js';
 import GuageContainer from './Components/GuageContainer.js';
 import Guage from './Components/Guage.js';
-import ControlPanel from './Pages/ControlPanel.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -53,7 +52,7 @@ const theme = createTheme({
   },
 });
 
-function App() {
+const Dashboard = () => {
 
   return (
     <ThemeProvider theme={theme}>
@@ -67,8 +66,7 @@ function App() {
         {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
       </div>
     </ThemeProvider>
-    // <ControlPanel />
   );
 }
 
-export default App;
+export default Dashboard;
