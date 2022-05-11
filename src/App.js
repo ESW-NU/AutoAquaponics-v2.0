@@ -56,18 +56,18 @@ const theme = createTheme({
 function App() {
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-        <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
-        <GuageContainer />
-        <GraphContainer />
-        {/* <GuageCard></GuageCard> */}
-        {/* <AreaGraph></AreaGraph> */}
-        {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
-      </div>
-    </ThemeProvider>
-    // <ControlPanel />
+    // <ThemeProvider theme={theme}>
+    //   <div className="App">
+    //     {/* <ResponsiveAppBar></ResponsiveAppBar> */}
+    //     <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
+    //     <GuageContainer />
+    //     <GraphContainer />
+    //     {/* <GuageCard></GuageCard> */}
+    //     {/* <AreaGraph></AreaGraph> */}
+    //     {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
+    //   </div>
+    // </ThemeProvider>
+    <ControlPanel />
   );
 }
 

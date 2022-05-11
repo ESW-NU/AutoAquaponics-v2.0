@@ -1,0 +1,1 @@
+// make changes button for all control panel pages

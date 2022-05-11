@@ -1,0 +1,1 @@
+// base card for all control panel components
