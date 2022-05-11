@@ -15,6 +15,8 @@ import ControlPanel from './Pages/ControlPanel.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import OnOffTimer from './Components/OnOffTimer.js';
+import TimeEntry from './Components/TimeEntry.js';
 
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
 
@@ -67,7 +69,9 @@ function App() {
     //     {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
     //   </div>
     // </ThemeProvider>
-    <ControlPanel />
+    // <ControlPanel />
+    // <OnOffTimer/>
+    <TimeEntry/>
   );
 }
 
