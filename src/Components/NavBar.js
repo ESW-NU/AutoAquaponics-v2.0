@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
 import ResponsiveMenu from "react-responsive-navbar";
-import '../CSS/header.css'
+import '../CSS/NavBar.css'
 
 export const NavBar = () => {
   return (
@@ -45,6 +45,7 @@ export const NavBar = () => {
         >
           Settings
         </NavLink>
+        
       </div>
     </div>
   </header>

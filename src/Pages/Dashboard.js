@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 // import GraphCard from './Components/GraphCard.js';
 // import AreaGraph from './Components/AreaGraph.js';
 // import GuageCard from 'src/Components/GuageCard.js';
-// import GraphContainer from './Components/GraphContainer.js';
-// import GuageContainer from './Components/GuageContainer.js';
+import GraphContainer from '../Components/GraphContainer.js';
+import GuageContainer from '../Components/GuageContainer.js';
 // import Guage from './Components/Guage.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
 import Typography from '@mui/material/Typography';
@@ -56,8 +56,8 @@ export const Dashboard = () => {
       <div className="App">
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
         <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
-        {/* <GuageContainer></GuageContainer> */}
-        {/* <GraphContainer /> */}
+        <GuageContainer></GuageContainer>
+        <GraphContainer />
         {/* <GuageCard></GuageCard> */}
         {/* <AreaGraph></AreaGraph> */}
         {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
