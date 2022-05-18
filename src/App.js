@@ -2,21 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 // import { collection, doc, onSnapshot } from "firebase/firestore";
-import ReactDOM from 'react-dom';
-import * as V from 'victory';
-import { VictoryLine, VictoryChart, VictoryTheme, VictoryLabel } from 'victory';
-import GraphCard from './Components/GraphCard.js';
-import AreaGraph from './Components/AreaGraph.js';
-import GuageCard from './Components/GuageCard.js';
 import GraphContainer from './Components/GraphContainer.js';
 import GuageContainer from './Components/GuageContainer.js';
-import Guage from './Components/Guage.js';
 import ControlPanel from './Pages/ControlPanel.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import { Typography } from '@mui/material';
 import OnOffTimer from './Components/OnOffTimer.js';
-import TimeEntry from './Components/TimeEntry.js';
+import ControlEntry from './Components/ControlEntry.js';
+import FlowEntry from './Components/FlowEntry.js';
 
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
 
@@ -56,22 +49,24 @@ const theme = createTheme({
 });
 
 function App() {
-
+  
   return (
-    // <ThemeProvider theme={theme}>
-    //   <div className="App">
-    //     {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-    //     <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
-    //     <GuageContainer />
-    //     <GraphContainer />
-    //     {/* <GuageCard></GuageCard> */}
-    //     {/* <AreaGraph></AreaGraph> */}
-    //     {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
-    //   </div>
-    // </ThemeProvider>
-    // <ControlPanel />
-    // <OnOffTimer/>
-    <TimeEntry/>
+    <>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        {/* <ResponsiveAppBar></ResponsiveAppBar> */}
+        <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
+        <GuageContainer />
+        <GraphContainer />
+        {/* <GuageCard></GuageCard> */}
+        {/* <AreaGraph></AreaGraph> */}
+        {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
+      </div>
+    </ThemeProvider>
+    <OnOffTimer/>
+    <FlowEntry/>
+    <ControlEntry title="Backwash When Flow Rate Less Than (GPH)"/>
+    </>
   );
 }
 
