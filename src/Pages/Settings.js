@@ -1,7 +1,7 @@
-const Settings = () => {
+export const Settings = () => {
     return (
-        <div></div>
+        <div>Settings</div>
     );
 }
 
-export default Settings;
+// export default Settings;

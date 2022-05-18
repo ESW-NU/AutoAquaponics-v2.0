@@ -1,0 +1,33 @@
+.header {
+    position: fixed;
+    background: 'red';
+    top: 0;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .header__title {
+    color: white;
+    font-size: 1.8rem;
+  }
+  
+  .header__bar {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .header__nav {
+    color: rgb(102, 34, 102);
+    float: left;
+    padding: 10px 60px;
+    float:left;
+    text-decoration: none;
+    border-radius: 50px;
+    /* &:hover {
+      background: #39ee80;
+    } */
+  }
+  .header__nav:hover {
+    background: #39ee80;
+  }
