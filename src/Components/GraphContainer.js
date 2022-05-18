@@ -13,8 +13,6 @@ const GraphContainer = () => {
                 </Grid>
             ))}
         </Grid>
-
-        
     );
 
 }

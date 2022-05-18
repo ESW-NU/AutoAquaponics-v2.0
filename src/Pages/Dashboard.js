@@ -1,19 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useState, useEffect } from 'react';
 // import { collection, doc, onSnapshot } from "firebase/firestore";
 import ReactDOM from 'react-dom';
-import * as V from 'victory';
-import { VictoryLine, VictoryChart, VictoryTheme, VictoryLabel } from 'victory';
-import GraphCard from './Components/GraphCard.js';
-import AreaGraph from './Components/AreaGraph.js';
-import GuageCard from './Components/GuageCard.js';
-import GraphContainer from './Components/GraphContainer.js';
-import GuageContainer from './Components/GuageContainer.js';
-import Guage from './Components/Guage.js';
+// import GraphCard from './Components/GraphCard.js';
+// import AreaGraph from './Components/AreaGraph.js';
+// import GuageCard from 'src/Components/GuageCard.js';
+import GraphContainer from '../Components/GraphContainer.js';
+import GuageContainer from '../Components/GuageContainer.js';
+// import Guage from './Components/Guage.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+
 
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
 
@@ -52,14 +49,14 @@ const theme = createTheme({
   },
 });
 
-const Dashboard = () => {
+export const Dashboard = () => {
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
         <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
-        <GuageContainer />
+        <GuageContainer></GuageContainer>
         <GraphContainer />
         {/* <GuageCard></GuageCard> */}
         {/* <AreaGraph></AreaGraph> */}
@@ -69,4 +66,4 @@ const Dashboard = () => {
   );
 }
 
-export default Dashboard;
+// export default Dashboard;

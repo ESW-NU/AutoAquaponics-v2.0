@@ -1,7 +1,7 @@
-const VideoFeed = () => {
+export const VideoFeed = () => {
     return (
-        <div></div>
+        <div>Video Feed</div>
     );
 }
 
-export default VideoFeed;
+// export default VideoFeed;

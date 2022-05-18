@@ -1,16 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import {BrowserRouter,Routes, Route}from "react-router-dom";
 // import { collection, doc, onSnapshot } from "firebase/firestore";
 import GraphContainer from './Components/GraphContainer.js';
 import GuageContainer from './Components/GuageContainer.js';
-import ControlPanel from './Pages/ControlPanel.js';
+import NavBar from './Components/NavBar.js';
+// import ControlPanel from './Pages/ControlPanel.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; 
 import { Typography } from '@mui/material';
 import OnOffTimer from './Components/OnOffTimer.js';
 import ControlEntry from './Components/ControlEntry.js';
 import FlowEntry from './Components/FlowEntry.js';
-
+import { VideoFeed } from './Pages/VideoFeed';
+import { Dashboard } from './Pages/Dashboard';
+import { ControlPanel } from './Pages/ControlPanel';
+import { Settings } from './Pages/Settings';
 const graph = ["pH", "Total Dissolved Solids (TDS)", "Air Temperature", "Humidity", "Water Level", "Water Temperature"]
 
 // const graph = {
@@ -52,20 +57,29 @@ function App() {
   
   return (
     <>
+    <BrowserRouter>
     <ThemeProvider theme={theme}>
       <div className="App">
+        <NavBar/>
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-        <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
+        {/* <Typography variant='body' align='left'>SYSTEM SENSORS</Typography>
         <GuageContainer />
-        <GraphContainer />
+        <GraphContainer /> */}
         {/* <GuageCard></GuageCard> */}
         {/* <AreaGraph></AreaGraph> */}
         {/* <DashboardGraphs title={graph.sensorGraphs}/> */}
       </div>
+      <div>
+        <Routes>
+          <Route path="/"/>
+          <Route path="/Pages/VideoFeed" element={<VideoFeed/>}/>
+          <Route path="/Pages/Dashboard" element={<Dashboard/>}/>
+          <Route path="/Pages/ControlPanel" element={<ControlPanel/>}/>
+          <Route path="/Pages/Settings" element={<Settings/>}/>
+        </Routes>
+      </div>
     </ThemeProvider>
-    <OnOffTimer/>
-    <FlowEntry/>
-    <ControlEntry title="Backwash When Flow Rate Less Than (GPH)"/>
+    </BrowserRouter>
     </>
   );
 }
