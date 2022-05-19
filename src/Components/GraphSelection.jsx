@@ -1,19 +1,18 @@
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import * as React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const GraphSelection = () => {
-    
-  const [timescale, setTimescale] = React.useState('');
+  const [timescale, setTimescale] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setTimescale(event.target.value);
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
       <InputLabel id="demo-select-small">Timescale</InputLabel>
       <Select
         labelId="demo-select-small"
@@ -31,6 +30,6 @@ const GraphSelection = () => {
       </Select>
     </FormControl>
   );
-}
+};
 
 export default GraphSelection;
