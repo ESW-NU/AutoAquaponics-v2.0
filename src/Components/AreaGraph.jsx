@@ -9,7 +9,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-
 const AreaGraph = ({ data }) => {
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -32,7 +31,7 @@ const AreaGraph = ({ data }) => {
         </defs>
 
         <XAxis
-          dataKey="name"
+          dataKey="x"
           style={{
             fontSize: "1rem",
             fontFamily: "Inter",
@@ -51,7 +50,7 @@ const AreaGraph = ({ data }) => {
 
         <Area
           type="monotone"
-          dataKey="uv"
+          dataKey="y"
           stroke="#009444"
           fillOpacity={1}
           fill="url(#colorUv)"
