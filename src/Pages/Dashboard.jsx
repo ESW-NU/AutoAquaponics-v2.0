@@ -16,11 +16,11 @@ import { theme } from "../Lib/styling";
 export const Dashboard = () => {
   return (
     <ThemeProvider theme={theme}>
+      <Typography variant="body" align="left" padding="10px">
+        SYSTEM SENSORS
+      </Typography>
       <div className="App">
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-        <Typography variant="body" align="left">
-          SYSTEM SENSORS
-        </Typography>
 
         <GuageContainer />
         <GraphSelection />
