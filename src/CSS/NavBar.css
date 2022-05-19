@@ -7,9 +7,11 @@
   } */
   
   .header__title {
-    color: white;
-    font-size: 1.8rem;
-    justify-content: left;
+    color: black;
+    font-family: "Space Grotesk";
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 32px;
   }
 
   .header__bar {

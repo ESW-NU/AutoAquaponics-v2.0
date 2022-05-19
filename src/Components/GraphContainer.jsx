@@ -24,6 +24,17 @@ const GraphContainer = () => {
             }))}
           />
         </Grid>
+
+        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
+          <GraphCard
+            title={officialNameDict["air_temp"]}
+            unit={unitDict["air_temp"]}
+            data={data.map((pt) => ({
+              x: pt.unix_time,
+              y: pt.air_temp,
+            }))}
+          />
+        </Grid>
       </Grid>
 
       <pre>{JSON.stringify(data, null, 2)}</pre>
