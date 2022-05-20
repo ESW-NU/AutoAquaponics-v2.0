@@ -17,3 +17,13 @@ export const officialNameDict = {
     unix_time: "Unix Time",
     water_temp: "Water Temperature"
 }
+
+export function dashboardKeys(officialNameDict) {
+    const keys = Object.keys(officialNameDict);
+    let dbKeys = [];
+    Object.entries(officialNameDict).forEach(([key, value]) => {
+        dbKeys.push(key);
+    });
+
+    return dbKeys;
+}

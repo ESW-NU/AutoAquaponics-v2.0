@@ -2,7 +2,8 @@ import {
     collection,
     getDocs,
     limit,
-    query
+    query,
+    orderBy
 } from 'firebase/firestore';
 import {
     useState,
@@ -20,7 +21,8 @@ export function useFetchStats() {
         getDocs(
             query(
                 collection(db, 'stats'),
-                limit(20)
+                orderBy('unix_time', "desc"),
+                limit(40)
             )
         ).then(snapshot => {
             setData(

@@ -8,8 +8,8 @@
   
   .header__title {
     color: black;
-    font-family: "Space Grotesk";
-    font-weight: 950;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: Bold 700;
     text-decoration: none;
     font-size: 24px;
   }

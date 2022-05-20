@@ -6,7 +6,12 @@ import { useFetchStats } from "../Hooks/useFetchStats";
 
 const GraphContainer = () => {
   const { data } = useFetchStats();
-
+  console.log("raw data", data);
+  data.sort(function(a, b) {
+    return a.unix_time > b.unix_time;
+  });
+  console.log("sorted data", data);
+  
   return (
     <>
       <Grid
@@ -35,7 +40,32 @@ const GraphContainer = () => {
             }))}
           />
         </Grid>
+
+        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
+          <GraphCard
+            title={officialNameDict["distance"]}
+            unit={unitDict["distance"]}
+            data={data.map((pt) => ({
+              x: pt.unix_time,
+              y: pt.distance,
+            }))}
+          />
+        </Grid>
+
+        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
+          <GraphCard
+            title={officialNameDict["humidity"]}
+            unit={unitDict["humidity"]}
+            data={data.map((pt) => ({
+              x: pt.unix_time,
+              y: pt.humidity,
+            }))}
+          />
+        </Grid>
+        
       </Grid>
+
+      
 
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </>
