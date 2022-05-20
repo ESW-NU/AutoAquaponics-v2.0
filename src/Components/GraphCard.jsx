@@ -12,7 +12,14 @@ import "../CSS/graphCard.css";
 import { ResponsiveContainer } from "recharts";
 
 const GraphCard = ({ title, unit, data }) => {
-  const mostRecentDataPoint = Math.round(Object.entries(data)[0][1].y * 10) / 10 
+
+  // there has to be a better way to do this ** NEEDS WORK **
+  // const dataObj = Object.values(data)
+  // let middle = Object.values(dataObj)[1]
+  // let mostRecentDataPoint = Object.values(middle)[1]
+  const mostRecentDataPointRounded = Math.round(10)
+  // console.log("MostRecentDataPoint", mostRecentDataPointRounded)
+
   return (
     <>
       <Card>
@@ -36,7 +43,7 @@ const GraphCard = ({ title, unit, data }) => {
                 justifyContent="flex-end"
                 alignItems="flex-end"
               >
-                <Typography variant="h1">{mostRecentDataPoint}</Typography>
+                <Typography variant="h1">{mostRecentDataPointRounded}</Typography>
                 <Typography variant="h3">{unit}</Typography>
               </Grid>
             </Grid>

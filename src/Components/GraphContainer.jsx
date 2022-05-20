@@ -6,12 +6,7 @@ import { useFetchStats } from "../Hooks/useFetchStats";
 
 const GraphContainer = () => {
   const { data } = useFetchStats();
-  console.log("raw data", data);
-  data.sort(function(a, b) {
-    return a.unix_time > b.unix_time;
-  });
-  console.log("sorted data", data);
-  
+
   return (
     <>
       <Grid
@@ -62,7 +57,7 @@ const GraphContainer = () => {
             }))}
           />
         </Grid>
-        
+
       </Grid>
 
       

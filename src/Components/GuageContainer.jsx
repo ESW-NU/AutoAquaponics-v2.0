@@ -1,8 +1,17 @@
 import GuageCard from "./GuageCard";
-// import AreaGraph from './AreaGraph.js';
 import Grid from "@mui/material/Grid";
+import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
+import { db } from "../firebase";
 
 const GuageContainer = () => {
+
+  let dbKeys = dashboardKeys(officialNameDict);
+  console.log("dbkeys", dbKeys);
+
+  {Array.from(dbKeys).map((_, index) => (
+        console.log('key test', dbKeys[index])
+  ))}
+
   return (
     <Grid
       container
