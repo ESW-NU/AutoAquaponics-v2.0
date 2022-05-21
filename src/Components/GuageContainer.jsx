@@ -9,7 +9,8 @@ const GuageContainer = () => {
   console.log("dbkeys", dbKeys);
 
   {Array.from(dbKeys).map((_, index) => (
-        console.log('key test', dbKeys[index])
+ 
+        console.log('key test', dbKeys[index], unitDict[dbKeys[index]])
   ))}
 
   return (
