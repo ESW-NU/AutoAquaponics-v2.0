@@ -19,7 +19,7 @@ const data = [
     },
 ];
 
-const Guage = () => {
+const Gauge = () => {
     return (
       // <ResponsiveContainer width="100%" height="100%">
         <AreaChart
@@ -46,4 +46,4 @@ const Guage = () => {
     );
 }
 
-export default Guage;
+export default Gauge;

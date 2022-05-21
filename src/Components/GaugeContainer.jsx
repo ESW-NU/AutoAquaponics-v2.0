@@ -1,9 +1,9 @@
-import GuageCard from "./GuageCard";
+import GaugeCard from "./GaugeCard";
 import Grid from "@mui/material/Grid";
 import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
 import { db } from "../firebase";
 
-const GuageContainer = () => {
+const GaugeContainer = () => {
 
   let dbKeys = dashboardKeys(officialNameDict);
   console.log("dbkeys", dbKeys);
@@ -21,11 +21,11 @@ const GuageContainer = () => {
     >
       {Array.from(Array(5)).map((_, index) => (
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={index}>
-          <GuageCard />
+          <GaugeCard />
         </Grid>
       ))}
     </Grid>
   );
 };
 
-export default GuageContainer;
+export default GaugeContainer;

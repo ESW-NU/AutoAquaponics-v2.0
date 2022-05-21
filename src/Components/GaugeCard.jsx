@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import "../CSS/graphCard.css";
-import Guage from "./Guage.js";
+import Gauge from "./Gauge.js";
 
 // const card = (
 //     <Card sx={{ minWidth: 100, minHeight: 100 }}>
@@ -38,7 +38,7 @@ import Guage from "./Guage.js";
 //     </Card>
 // );
 
-const GuageCard = () => {
+const GaugeCard = () => {
   return (
     <Card sx={{ minWidth: 100, minHeight: 100 }}>
       <CardContent>
@@ -57,7 +57,7 @@ const GuageCard = () => {
             <Typography variant="h3">PPM</Typography>
           </Grid>
           <Grid item>
-            <Guage />
+            <Gauge />
           </Grid>
         </Grid>
       </CardContent>
@@ -65,4 +65,4 @@ const GuageCard = () => {
   );
 };
 
-export default GuageCard;
+export default GaugeCard;

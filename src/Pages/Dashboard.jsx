@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 // import AreaGraph from './Components/AreaGraph.js';
 // import GuageCard from 'src/Components/GuageCard.js';
 import GraphContainer from "../Components/GraphContainer";
-import GuageContainer from "../Components/GuageContainer";
+import GaugeContainer from "../Components/GaugeContainer";
 import GraphSelection from "../Components/GraphSelection";
 // import Guage from './Components/Guage.js';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -22,7 +22,7 @@ export const Dashboard = () => {
       <div className="App">
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
 
-        <GuageContainer />
+        <GaugeContainer />
         <GraphSelection />
         <GraphContainer />
       </div>
