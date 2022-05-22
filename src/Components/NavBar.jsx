@@ -17,7 +17,7 @@ export const NavBar = () => {
         <NavLink
           to="/"
           className={(isActive) =>
-            isActive ? "header__title is-active" : "header__title"
+            isActive ? "header__title-is-active" : "header__title"
           }
         >
           AUTOAQUAPONICS
@@ -28,7 +28,7 @@ export const NavBar = () => {
         <NavLink
           to="/Pages/VideoFeed"
           className={(isActive) =>
-            isActive ? "header__nav is-active" : "header__nav"
+            isActive ? "videoFeed-is-active" : "header__nav"
           }
         >
           Video Feed
@@ -36,7 +36,7 @@ export const NavBar = () => {
         <NavLink
           to="/Pages/Dashboard"
           className={(isActive) =>
-            isActive ? "header__nav is-active" : "header__nav"
+            isActive ? "header__nav" : "header__nav"
           }
         >
           Dashboard
@@ -44,7 +44,7 @@ export const NavBar = () => {
         <NavLink
           to="/Pages/ControlPanel"
           className={(isActive) =>
-            isActive ? "header__nav is-active" : "header__nav"
+            isActive ? "controlPanel-is-active" : "header__nav"
           }
         >
           Control Panel
@@ -52,7 +52,7 @@ export const NavBar = () => {
         <NavLink
           to="/Pages/Settings"
           className={(isActive) =>
-            isActive ? "header__nav is-active" : "header__nav"
+            isActive ? "settings-is-active" : "header__nav"
           }
         >
           Settings

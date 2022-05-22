@@ -6,38 +6,6 @@ import * as React from "react";
 import "../CSS/graphCard.css";
 import Gauge from "./Gauge.js";
 
-// const card = (
-//     <Card sx={{ minWidth: 100, minHeight: 100 }}>
-//         <CardContent>
-//             <Typography variant="h3" align="left" gutterBottom>
-//                 Dissolved Solids
-//             </Typography>
-//             <Grid
-//                 container
-//                 direction="row"
-//                 justifyContent="flex-start"
-//                 alignItems="center"
-//             >
-//                 <Grid item>
-//                     <Typography variant="h1">
-//                         12
-//                     </Typography>
-//                     <Typography variant="h3">
-//                         PPM
-//                     </Typography>
-//                 </Grid>
-//                 <Grid item>
-//                     <ResponsiveContainer width="99%" aspect={3}>
-//                         <Guage></Guage>
-//                     </ResponsiveContainer>
-//                 </Grid>
-
-//             </Grid>
-
-//         </CardContent>
-//     </Card>
-// );
-
 const GaugeCard = () => {
   return (
     <Card sx={{ minWidth: 100, minHeight: 100 }}>
@@ -48,7 +16,7 @@ const GaugeCard = () => {
         <Grid
           container
           direction="row"
-          justifyContent="flex-start"
+          justifyContent="space-around"
           alignItems="center"
           spacing={0}
         >

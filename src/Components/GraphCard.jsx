@@ -14,10 +14,11 @@ import { ResponsiveContainer } from "recharts";
 const GraphCard = ({ title, unit, data }) => {
 
   // there has to be a better way to do this ** NEEDS WORK **
-  // const dataObj = Object.values(data)
-  // let middle = Object.values(dataObj)[1]
+  const dataObj = Object.values(data)
+  let middle = Object.values(dataObj)[1]
   // let mostRecentDataPoint = Object.values(middle)[1]
   const mostRecentDataPointRounded = Math.round(10)
+  console.log('data',data)
   // console.log("MostRecentDataPoint", mostRecentDataPointRounded)
 
   return (

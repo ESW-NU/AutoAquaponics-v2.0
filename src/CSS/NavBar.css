@@ -5,7 +5,12 @@
     width: 100%;
     border-radius: 0 0 10px 10px;
   } */
-  
+  .header__bar {
+    align-items: left;
+    display: flex;
+    justify-content: center;
+  }
+
   .header__title {
     color: black;
     font-family: "Space Grotesk", sans-serif;
@@ -18,12 +23,6 @@
   }
   .header__title:focus {
     color: #009444;
-  }
-
-  .header__bar {
-    align-items: left;
-    display: flex;
-    justify-content: center;
   }
   
   .header__nav {
@@ -42,6 +41,7 @@
     background: white;
     filter: drop-shadow(0px 6px 30px rgba(0, 0, 0, 0.1));
   }
+  
 
 .button-18 {
   align-items: center;
