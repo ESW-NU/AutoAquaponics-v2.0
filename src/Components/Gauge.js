@@ -24,7 +24,7 @@ const Gauge = () => {
       // <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={150}
-          height={100}
+          height={200}
           data={data}
           margin={{
             top: 10,

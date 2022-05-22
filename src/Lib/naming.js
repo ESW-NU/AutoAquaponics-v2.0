@@ -19,13 +19,11 @@ export const officialNameDict = {
 }
 
 export function dashboardKeys(officialNameDict) {
-
     const keys = Object.keys(officialNameDict);
-
     let dbKeys = [];
     Object.entries(officialNameDict).forEach(([key, value]) => {
-        if (key !== 'unix_time') { dbKeys.push(key); }
-    }); 
+        dbKeys.push(key);
+    });
 
     return dbKeys;
 }

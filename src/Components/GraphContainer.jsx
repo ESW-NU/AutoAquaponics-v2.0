@@ -9,6 +9,16 @@ const GraphContainer = () => {
   let dbKeys = dashboardKeys(officialNameDict);
   let testing = "pH"
   var date = new Date(UNIX_Timestamp * 1000);
+  console.log('datEE', date);
+  {Array.from(dbKeys).map((_, index) => (
+ 
+        console.log('key test', dbKeys[index], unitDict[dbKeys[index]])
+  ))}
+
+  console.log('HERe', data.map((pt) => ({
+    x: pt.unix_time,
+    y: pt.pH,
+  })))
 
   return (
     <>
@@ -36,9 +46,8 @@ const GraphContainer = () => {
             unit={unitDict[dbKeys[index]]}
             data={data.map((pt) => ({
               x: pt.unix_time,
-              y: pt.air_temp,
-            }
-            ))}
+              y: pt.pH,
+            }))}
           />
         </Grid>
       ))}
