@@ -36,7 +36,7 @@ const GraphContainer = () => {
             unit={unitDict[dbKeys[index]]}
             data={data.map((pt) => ({
               x: pt.unix_time,
-              y: pt.air_temp,
+              y: pt[dbKeys[index]]
             }
             ))}
           />
