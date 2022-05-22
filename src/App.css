@@ -5,6 +5,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .App * {
@@ -16,7 +18,7 @@ Card {
 }
 
 body {
-  background-color: #E1e1e1;
+  background-color: #F2F2F2;
   font-family: 'Inter', sans-serif;
 }
 
