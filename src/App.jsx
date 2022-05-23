@@ -23,7 +23,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/Pages/VideoFeed" element={<VideoFeed />} />
               <Route path="/Pages/Dashboard" element={<Dashboard />} />
-              <Route path="/Pages/ControlPanel" element={<ControlPanel />} />
+              <Route path="/Pages/ControlPanel/*" element={<ControlPanel />} />
               <Route path="/Pages/Settings" element={<Settings />} />
             </Routes>
           </div>
