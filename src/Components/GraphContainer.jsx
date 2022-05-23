@@ -7,9 +7,15 @@ const GraphContainer = () => {
   const { data } = useFetchStats();
   const UNIX_Timestamp = 1653092117
   let dbKeys = dashboardKeys(officialNameDict);
+  // need to convert unix_time to date timescale
   let testing = "pH"
   var date = new Date(UNIX_Timestamp * 1000);
-
+  const pHdata = data.map((pt) => ({
+    x: new Date(pt.unix_time * 1000),
+    y: pt.pH
+  }
+  ))
+  console.log('pHdata', pHdata)
   return (
     <>
       <Grid
@@ -17,25 +23,13 @@ const GraphContainer = () => {
         spacing={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 1 }}
         columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }}
       >
-        {/* {dbKeys.forEach(function (item, index) {
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={index}>
-            <GraphCard
-              title={officialNameDict[item]}
-              unit={unitDict[item]}
-              data={data.map((pt) => ({
-                x: pt.unix_time,
-                y: pt.pH,
-              }))}
-            />
-          </Grid>
-        })} */}
         {Array.from(dbKeys).map((_, index) => (
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={index}>
           <GraphCard
             title={officialNameDict[dbKeys[index]]}
             unit={unitDict[dbKeys[index]]}
             data={data.map((pt) => ({
-              x: pt.unix_time,
+              x: Date(pt.unix_time * 1000),
               y: pt[dbKeys[index]]
             }
             ))}

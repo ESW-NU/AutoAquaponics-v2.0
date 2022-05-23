@@ -18,7 +18,7 @@ const GraphCard = ({ title, unit, data }) => {
   let middle = Object.values(dataObj)[1]
   // let mostRecentDataPoint = Object.values(middle)[1]
   const mostRecentDataPointRounded = Math.round(10)
-  console.log('data',data)
+  // console.log('data',data)
   // console.log("MostRecentDataPoint", mostRecentDataPointRounded)
 
   return (
