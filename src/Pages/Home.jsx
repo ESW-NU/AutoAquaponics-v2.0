@@ -1,8 +1,6 @@
 import React from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { theme } from "../Lib/styling";
 
 const systemCAD = require("../Lib/PlumbingCADclear.png");
 

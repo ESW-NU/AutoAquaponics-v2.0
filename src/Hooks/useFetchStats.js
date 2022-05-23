@@ -21,7 +21,7 @@ export function useFetchStats() {
         getDocs(
             query(
                 collection(db, 'stats'),
-                orderBy('unix_time', "desc"),
+                orderBy('unix_time'),
                 limit(40)
             )
         ).then(snapshot => {

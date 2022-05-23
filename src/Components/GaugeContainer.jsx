@@ -6,12 +6,12 @@ import { db } from "../firebase";
 const GaugeContainer = () => {
 
   let dbKeys = dashboardKeys(officialNameDict);
-  console.log("dbkeys", dbKeys);
+  // console.log("dbkeys", dbKeys);
 
-  {Array.from(dbKeys).map((_, index) => (
+  // {Array.from(dbKeys).map((_, index) => (
  
-        console.log('key test', dbKeys[index], unitDict[dbKeys[index]])
-  ))}
+  //       console.log('key test', dbKeys[index], unitDict[dbKeys[index]])
+  // ))}
 
   return (
     <Grid

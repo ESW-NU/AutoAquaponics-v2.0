@@ -16,8 +16,8 @@ export const NavBar = () => {
       <Grid>
         <NavLink
           to="/"
-          className={(isActive) =>
-            isActive ? "header__title-is-active" : "header__title"
+          className={({isActive}) =>
+            (isActive ? "header__title-is-active" : "header__title")
           }
         >
           AUTOAQUAPONICS
@@ -27,32 +27,32 @@ export const NavBar = () => {
       <Grid>
         <NavLink
           to="/Pages/VideoFeed"
-          className={(isActive) =>
-            isActive ? "videoFeed-is-active" : "header__nav"
+          className={({isActive}) =>
+            (isActive ? "header__nav-is-active" : "header__nav")
           }
         >
           Video Feed
         </NavLink>
         <NavLink
           to="/Pages/Dashboard"
-          className={(isActive) =>
-            isActive ? "header__nav" : "header__nav"
+          className={({isActive}) =>
+            (isActive ? "header__nav-is-active" : "header__nav")
           }
         >
           Dashboard
         </NavLink>
         <NavLink
           to="/Pages/ControlPanel"
-          className={(isActive) =>
-            isActive ? "controlPanel-is-active" : "header__nav"
+          className={({isActive}) =>
+            (isActive ? "header__nav-is-active" : "header__nav")
           }
         >
           Control Panel
         </NavLink>
         <NavLink
           to="/Pages/Settings"
-          className={(isActive) =>
-            isActive ? "settings-is-active" : "header__nav"
+          className={({isActive}) =>
+            (isActive ? "header__nav-is-active" : "header__nav")
           }
         >
           Settings
@@ -61,7 +61,7 @@ export const NavBar = () => {
 
       <Grid>
         <button className="button-18" role="button">
-          LOGIN
+          Login
         </button>
       </Grid>
     </Grid>
