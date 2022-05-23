@@ -9,6 +9,7 @@ const GraphSelection = () => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setTimescale(event.target.value);
+    console.log('target', timescale);
   };
 
   return (
@@ -21,12 +22,12 @@ const GraphSelection = () => {
         label="Timescale"
         onChange={handleChange}
       >
-        <MenuItem value="">
-          <em>30 Min</em>
+        <MenuItem value={30}>
+          <em>7 Days</em>
         </MenuItem>
-        <MenuItem value={10}>1 Hour</MenuItem>
+        <MenuItem valume={10}>1 Hour</MenuItem>
         <MenuItem value={20}>1 Day</MenuItem>
-        <MenuItem value={30}>7 Days</MenuItem>
+        {/* <MenuItem value={30}>7 Days</MenuItem> */}
       </Select>
     </FormControl>
   );

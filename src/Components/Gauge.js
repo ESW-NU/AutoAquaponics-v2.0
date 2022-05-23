@@ -33,7 +33,6 @@ const Gauge = () => {
             bottom: 0,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis style={{
         fontSize: '1rem',
