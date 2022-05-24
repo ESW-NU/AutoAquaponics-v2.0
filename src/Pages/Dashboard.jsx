@@ -12,8 +12,16 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { theme } from "../Lib/styling";
+import { SelectChangeEvent } from "@mui/material/Select";
 
 export const Dashboard = () => {
+
+  const [timescale, setTimescale] = React.useState("");
+  
+  function handleChange(event) {
+    setTimescale(event.target.value);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Typography variant="body" align="left" padding="10px">
@@ -21,10 +29,10 @@ export const Dashboard = () => {
       </Typography>
       <div className="App">
         {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-
+        
         <GaugeContainer />
-        <GraphSelection />
-        <GraphContainer />
+        <GraphSelection timescale={timescale} handleChange={handleChange.bind(this)}/>
+        <GraphContainer timescale={timescale}/>
       </div>
     </ThemeProvider>
   );

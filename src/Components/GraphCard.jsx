@@ -11,15 +11,15 @@ import GraphSelection from "./GraphSelection";
 import "../CSS/graphCard.css";
 import { ResponsiveContainer } from "recharts";
 
-const GraphCard = ({ title, unit, data }) => {
+const GraphCard = ({ title, unit, data, timescale }) => {
 
-  // there has to be a better way to do this ** NEEDS WORK **
-  const dataObj = Object.values(data)
-  let middle = Object.values(dataObj)[1]
-  // let mostRecentDataPoint = Object.values(middle)[1]
-  const mostRecentDataPointRounded = Math.round(10)
-  // console.log('data',data)
-  // console.log("MostRecentDataPoint", mostRecentDataPointRounded)
+  const unfiltered = Object.values(data);
+  const testTime = Date.now() - timescale;
+  const dataObj = unfiltered.filter(pt => pt.x.getTime() > testTime);
+  
+  let last = dataObj.slice(-1)[0]
+  let mostRecentDataPoint = (typeof last === 'undefined') ? null : last.y;
+  const mostRecentDataPointRounded = Math.round(mostRecentDataPoint);
 
   return (
     <>
@@ -52,7 +52,7 @@ const GraphCard = ({ title, unit, data }) => {
           {/* <CardActions>
             <GraphSelection></GraphSelection>
           </CardActions> */}
-          <AreaGraph data={data}></AreaGraph>
+          <AreaGraph data={dataObj}></AreaGraph>
         </CardContent>
       </Card>
     </>

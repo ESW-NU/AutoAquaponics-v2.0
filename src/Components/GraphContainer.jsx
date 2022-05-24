@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
 import { useFetchStats } from "../Hooks/useFetchStats";
 
-const GraphContainer = () => {
+const GraphContainer = ({timescale}) => {
   const { data } = useFetchStats();
   const UNIX_Timestamp = 1653092117
   let dbKeys = dashboardKeys(officialNameDict);
@@ -16,6 +16,7 @@ const GraphContainer = () => {
   // }
   // ))
   // console.log('pHdata', pHdata)
+
   return (
     <>
       <Grid
@@ -33,6 +34,7 @@ const GraphContainer = () => {
               y: pt[dbKeys[index]]
             }
             ))}
+            timescale={timescale}
           />
         </Grid>
       ))}

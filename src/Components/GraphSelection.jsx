@@ -2,15 +2,9 @@ import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 
-const GraphSelection = () => {
-  const [timescale, setTimescale] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setTimescale(event.target.value);
-    console.log('target', timescale);
-  };
+const GraphSelection = ({timescale, handleChange}) => {
 
   return (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
@@ -22,12 +16,12 @@ const GraphSelection = () => {
         label="Timescale"
         onChange={handleChange}
       >
-        <MenuItem value={30}>
-          <em>7 Days</em>
-        </MenuItem>
-        <MenuItem valume={10}>1 Hour</MenuItem>
-        <MenuItem value={20}>1 Day</MenuItem>
-        {/* <MenuItem value={30}>7 Days</MenuItem> */}
+        <MenuItem value={60*60*1000}>1 Hour</MenuItem>
+        <MenuItem value={24*60*60*1000}>1 Day</MenuItem>
+        <MenuItem value={7*24*60*60*1000}>7 Days</MenuItem>
+        {/* <MenuItem value={30*24*60*60*1000}>1 Month</MenuItem>
+        <MenuItem value={60*24*60*60*1000}>2 Months</MenuItem>
+        <MenuItem value={90*24*60*60*1000}>3 Months</MenuItem> */}
       </Select>
     </FormControl>
   );
