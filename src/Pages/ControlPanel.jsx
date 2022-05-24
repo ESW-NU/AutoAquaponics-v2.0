@@ -6,7 +6,8 @@ import CustomizedTable from "../Components/CustomizedTable";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-
+import Typography from "@mui/material/Typography";
+import '../CSS/ControlPanel.css'
 
 export const ControlPanel = () => {
   const SaveControls = () => {
@@ -16,6 +17,9 @@ export const ControlPanel = () => {
           <OnOffTimer />
           <FlowEntry />
           <ControlEntry title="Backwash When Flow Rate Less Than (GPH)" />
+          <button className="save-button" role="button">
+          Save Changes
+        </button>
         </CardContent>
       </Card>
     );
@@ -27,11 +31,16 @@ export const ControlPanel = () => {
         container
         direction="column"
         justifyContent="space-between"
-        alignItems="flex-end"
+        alignItems="flex-start"
       >
-        <CustomizedTable/>
-        <CustomizedTable/>
-
+        <Typography variant="body" align="left" padding="10px">
+          FUTURE ACTIVITY
+        </Typography>
+        <CustomizedTable />
+        <Typography variant="body" align="left" padding="10px">
+          PREVIOUS ACTIVITY
+        </Typography>
+        <CustomizedTable />
       </Grid>
     );
   };
@@ -55,6 +64,7 @@ export const ControlPanel = () => {
 
         <Grid>
           <SaveControls />
+          
         </Grid>
 
         <Grid>
