@@ -8,7 +8,7 @@ import Gauge from "./Gauge.js";
 
 const GaugeCard = () => {
   return (
-    <Card sx={{ minWidth: 100, minHeight: 100 }}>
+    <Card sx={{ minWidth: 150, minHeight: 100 }}>
       <CardContent>
         <Typography variant="h3" align="left" gutterBottom>
           Dissolved Solids

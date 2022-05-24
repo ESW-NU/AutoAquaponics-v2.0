@@ -8,14 +8,14 @@ const GraphContainer = () => {
   const UNIX_Timestamp = 1653092117
   let dbKeys = dashboardKeys(officialNameDict);
   // need to convert unix_time to date timescale
-  let testing = "pH"
-  var date = new Date(UNIX_Timestamp * 1000);
-  const pHdata = data.map((pt) => ({
-    x: new Date(pt.unix_time * 1000),
-    y: pt.pH
-  }
-  ))
-  console.log('pHdata', pHdata)
+  // let testing = "pH"
+  // var date = new Date(UNIX_Timestamp * 1000);
+  // const pHdata = data.map((pt) => ({
+  //   x: new Date(pt.unix_time * 1000),
+  //   y: pt.pH
+  // }
+  // ))
+  // console.log('pHdata', pHdata)
   return (
     <>
       <Grid
@@ -29,7 +29,7 @@ const GraphContainer = () => {
             title={officialNameDict[dbKeys[index]]}
             unit={unitDict[dbKeys[index]]}
             data={data.map((pt) => ({
-              x: Date(pt.unix_time * 1000),
+              x: new Date(pt.unix_time * 1000),
               y: pt[dbKeys[index]]
             }
             ))}
