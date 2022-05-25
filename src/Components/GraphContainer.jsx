@@ -4,7 +4,7 @@ import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
 import { useFetchStats } from "../Hooks/useFetchStats";
 
 const GraphContainer = ({timescale}) => {
-  const { data } = useFetchStats();
+  const { data } = useFetchStats(timescale);
   const UNIX_Timestamp = 1653092117
   let dbKeys = dashboardKeys(officialNameDict);
   // need to convert unix_time to date timescale
@@ -21,7 +21,7 @@ const GraphContainer = ({timescale}) => {
     <>
       <Grid
         container
-        spacing={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 1 }}
+        spacing={1}
         columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }}
       >
         {Array.from(dbKeys).map((_, index) => (

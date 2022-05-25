@@ -14,23 +14,25 @@ import {
 } from '../firebase';
 
 
-export function useFetchStats() {
+export function useFetchStats(timescale) {
+    let testTime = Math.floor((Date.now() - timescale)/1000);
+
     const [data, setData] = useState([])
 
     useEffect(() => {
         getDocs(
             query(
                 collection(db, 'stats'),
-                orderBy('unix_time'),
+                orderBy('unix_time', 'desc'),
+                // where('unix_time', '>', testTime),
                 limit(40)
             )
         ).then(snapshot => {
-            setData(
-                snapshot.docs.map(doc => ({
+            let dataTemp = snapshot.docs.map(doc => ({
                     ...doc.data(),
                     id: doc.id
-                }))
-            )
+            }))
+            setData(dataTemp.reverse());
         })
     }, []);
 

@@ -18,7 +18,7 @@ export const Dashboard = () => {
 
   const [timescale, setTimescale] = React.useState("");
   
-  function handleChange(event) {
+  const handleChange = (event) => {
     setTimescale(event.target.value);
   };
 
