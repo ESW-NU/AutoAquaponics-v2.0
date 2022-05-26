@@ -15,9 +15,9 @@ export const CPMenuBar = () => {
     >
       <Grid>
         <NavLink
-          to="/Pages/ControlPages/Backwashing"
+          to="profile"
           className={({ isActive }) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Backwashing
@@ -26,9 +26,9 @@ export const CPMenuBar = () => {
 
       <Grid>
         <NavLink
-          to="/Pages/ControlPages/FishFeeder"
+          to="account"
           className={({ isActive }) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Fish Feeder
@@ -39,7 +39,7 @@ export const CPMenuBar = () => {
         <NavLink
           to="/Pages/ControlPages/Lights"
           className={({ isActive }) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Lights
@@ -50,7 +50,7 @@ export const CPMenuBar = () => {
         <NavLink
           to="/Pages/ControlPages/Tolerances"
           className={({ isActive }) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Tolerances
@@ -61,14 +61,12 @@ export const CPMenuBar = () => {
         <NavLink
           to="/Pages/ControlPages/WaterPump"
           className={({ isActive }) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Water Pump
         </NavLink>
       </Grid>
-
-
     </Grid>
   );
 };
