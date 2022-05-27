@@ -32,8 +32,8 @@
     font-size: 24px;
   }
   
-  .header__nav {
-    color: black;
+  .cp__nav {
+    color: #B6B6B6;
     font-family: "Inter";
     font-size: 18px;
     padding: 10px 40px;
@@ -41,23 +41,24 @@
     text-decoration: none;
     border-radius: 50px;
   }
-  .header__nav:hover {
+  .cp__nav:hover {
     filter: drop-shadow(10px 6px 30px rgba(0, 0, 0, 1));
   }
   /* .header__nav:focus {
     background: white;
     filter: drop-shadow(0px 6px 30px rgba(0, 0, 0, 0.1));
   } */
-  .header__nav-is-active {
+  .cp__nav-is-active {
     color: black;
     font-family: "Inter";
     font-size: 18px;
     padding: 10px 40px;
     float:left;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 10px;
     background: white;
-    filter: drop-shadow(1px 1px 20px rgba(0, 0, 0, 0.2));
+    /* background-size: 100px 200px; */
+    /* flex: 0 0 100%; */
   }
 
 .button-18 {

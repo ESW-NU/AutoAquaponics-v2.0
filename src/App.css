@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk&family=Space+Mono&display=swap');
 
 .App {
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   padding-top: 10px;
   padding-bottom: 10px;
 }

@@ -1,14 +1,17 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import "../CSS/pages.css"
 
 const systemCAD = require("../Lib/PlumbingCADclear.png");
 
+
 export const Home = () => {
   return (
+    <div className="Pages">
       <Grid
         container
-        direction="columns"
+        direction="rows"
         justifyContent="space-evenly"
         alignItems="center"
       >
@@ -24,5 +27,6 @@ export const Home = () => {
           <img src={systemCAD} />
         </Grid>
       </Grid>
+    </div>
   );
 };

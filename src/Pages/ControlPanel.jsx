@@ -9,10 +9,11 @@ import { FishFeeder } from "./ControlPages/FishFeeder";
 import { Lights } from "./ControlPages/Lights";
 
 import { NavLink } from "react-router-dom";
+import "../CSS/pages.css"
 
 export const ControlPanel = () => {
   return (
-    <>
+    <div className="Pages">
       <ThemeProvider theme={theme}>
         <div>
           <CPMenuBar />
@@ -20,9 +21,8 @@ export const ControlPanel = () => {
 
         <Outlet />
       </ThemeProvider>
-    </>
-    // <Backwashing />
+    </div>
   );
 };
 
-// export default ControlPanel;
+export default ControlPanel;
