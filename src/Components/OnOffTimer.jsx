@@ -7,14 +7,16 @@ import FormControl from '@mui/material/FormControl';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-const OnOffTimer = () => {
+const OnOffTimer = ({onofftimer, handleOnofftimerChange}) => {
     return (
         <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">Status</FormLabel>
             <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue=""
+                defaultValue="off"
                 name="radio-buttons-group"
+                value={onofftimer}
+                onChange={handleOnofftimerChange}
             >
                 <FormControlLabel value="on" control={<Radio />} label="On" />
                 <FormControlLabel value="off" control={<Radio />} label="Off" />
