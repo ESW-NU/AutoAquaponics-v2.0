@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import ResponsiveMenu from "react-responsive-navbar";
 import Grid from "@mui/material/Grid";
-// import Item from "@mui/material/Item";
 import "../CSS/CPMenuBar.css";
 
 export const CPMenuBar = () => {
@@ -17,7 +16,7 @@ export const CPMenuBar = () => {
         <NavLink
           to="backwashing"
           className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
+            isActive ? "cp__nav-is-active" : "header__nav"
           }
         >
           Backwashing
@@ -28,7 +27,7 @@ export const CPMenuBar = () => {
         <NavLink
           to="fishFeeder"
           className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
+            isActive ? "cp__nav-is-active" : "header__nav"
           }
         >
           Fish Feeder
@@ -39,7 +38,7 @@ export const CPMenuBar = () => {
         <NavLink
           to="lights"
           className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
+            isActive ? "cp__nav-is-active" : "header__nav"
           }
         >
           Lights
@@ -50,7 +49,7 @@ export const CPMenuBar = () => {
         <NavLink
           to="tolerances"
           className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
+            isActive ? "cp__nav-is-active" : "header__nav"
           }
         >
           Tolerances
@@ -61,7 +60,7 @@ export const CPMenuBar = () => {
         <NavLink
           to="waterPump"
           className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
+            isActive ? "cp__nav-is-active" : "header__nav"
           }
         >
           Water Pump

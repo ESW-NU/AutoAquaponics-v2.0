@@ -15,26 +15,29 @@ import { theme } from "../Lib/styling";
 import { SelectChangeEvent } from "@mui/material/Select";
 
 export const Dashboard = () => {
-
   const [timescale, setTimescale] = React.useState("");
-  
+
   const handleChange = (event) => {
     setTimescale(event.target.value);
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Typography variant="body" align="left" padding="10px">
-        SYSTEM SENSORS
-      </Typography>
-      <div className="App">
-        {/* <ResponsiveAppBar></ResponsiveAppBar> */}
-        
+    <div className="App">
+      <ThemeProvider theme={theme}>
+        <Typography variant="body" align="left" padding="10px">
+          SYSTEM SENSORS
+        </Typography>
+
         <GaugeContainer />
-        <GraphSelection timescale={timescale} handleChange={handleChange.bind(this)}/>
-        <GraphContainer timescale={timescale}/>
-      </div>
-    </ThemeProvider>
+
+        <GraphSelection
+          timescale={timescale}
+          handleChange={handleChange.bind(this)}
+        />
+        
+        <GraphContainer timescale={timescale} />
+      </ThemeProvider>
+    </div>
   );
 };
 

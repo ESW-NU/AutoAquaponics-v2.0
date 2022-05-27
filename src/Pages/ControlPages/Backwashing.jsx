@@ -9,12 +9,13 @@ import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
+import Typography from "@mui/material/Typography";
 
 const SaveControls = () => {
   const [status, setStatus] = useState("on");
 
   return (
-    <Card sx={{ minWidth: 150, minHeight: 100 }}>
+    <Card sx={{ minWidth: 600, minHeight: 400 }}>
       <CardContent>
         {/* <OnOffTimer />
         <FlowEntry />
@@ -32,7 +33,7 @@ const SaveControls = () => {
             console.log(status);
             // call firebase and save
           }}
-          disabled
+          
           className="save-button"
           role="button"
         >
@@ -46,7 +47,9 @@ const SaveControls = () => {
 export const Backwashing = () => {
   return (
     <div>
-      Backwashing Page
+      <Typography variant="body" align="left" padding="10px">
+          BACKWASHING CONTROL PANEL
+      </Typography>
       <Grid
         container
         direction="row"
