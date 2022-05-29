@@ -100,7 +100,7 @@ export default function TimeEntry() {
         Duration (HH and MM)
         <FormControl variant="filled" sx={{ m: 1, minWidth: 120}}>
           <InputLabel htmlFor="component-filled">Hours</InputLabel>
-          <FilledInput id="component-filled" value={durHH} onChange={handleChangeDurHH} />
+          <FilledInput type="number" id="component-filled" value={durHH} onChange={handleChangeDurHH} />
         </FormControl>
         <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-filled-label">Minutes</InputLabel>
