@@ -16,8 +16,8 @@ export const NavBar = () => {
       <Grid>
         <NavLink
           to="/"
-          className={({isActive}) =>
-            (isActive ? "header__title-is-active" : "header__title")
+          className={({ isActive }) =>
+            isActive ? "header__title-is-active" : "header__title"
           }
         >
           AUTOAQUAPONICS
@@ -26,33 +26,33 @@ export const NavBar = () => {
 
       <Grid>
         <NavLink
-          to="/Pages/VideoFeed"
-          className={({isActive}) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+          to="/video-feed"
+          className={({ isActive }) =>
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Video Feed
         </NavLink>
         <NavLink
-          to="/Pages/Dashboard"
-          className={({isActive}) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+          to="/dashboard"
+          className={({ isActive }) =>
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Dashboard
         </NavLink>
         <NavLink
-          to="/Pages/ControlPanel"
-          className={({isActive}) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+          to="/control-panel"
+          className={({ isActive }) =>
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Control Panel
         </NavLink>
         <NavLink
-          to="/Pages/Settings"
-          className={({isActive}) =>
-            (isActive ? "header__nav-is-active" : "header__nav")
+          to="/settings"
+          className={({ isActive }) =>
+            isActive ? "header__nav-is-active" : "header__nav"
           }
         >
           Settings

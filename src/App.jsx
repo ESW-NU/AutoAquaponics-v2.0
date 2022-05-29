@@ -9,6 +9,11 @@ import { ControlPanel } from "./Pages/ControlPanel";
 import { Dashboard } from "./Pages/Dashboard";
 import { Settings } from "./Pages/Settings";
 import { VideoFeed } from "./Pages/VideoFeed";
+import { Backwashing } from "./Pages/ControlPages/Backwashing";
+import { FishFeeder } from "./Pages/ControlPages/FishFeeder";
+import { Lights } from "./Pages/ControlPages/Lights"
+import { Tolerances } from "./Pages/ControlPages/Tolerances";
+import { WaterPump } from "./Pages/ControlPages/WaterPump";
 
 function App() {
   return (
@@ -21,10 +26,20 @@ function App() {
           <div>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Pages/VideoFeed" element={<VideoFeed />} />
-              <Route path="/Pages/Dashboard" element={<Dashboard />} />
-              <Route path="/Pages/ControlPanel" element={<ControlPanel />} />
-              <Route path="/Pages/Settings" element={<Settings />} />
+
+              <Route path="/video-feed" element={<VideoFeed />} />
+              
+              <Route path="/dashboard" element={<Dashboard />} />
+
+              <Route path="/control-panel" element={<ControlPanel />} >
+                <Route path="backwashing" element={<Backwashing />} />
+                <Route path="fishFeeder" element={<FishFeeder />} />
+                <Route path="lights" element={<Lights />} />
+                <Route path="tolerances" element={<Tolerances />} />
+                <Route path="waterPump" element={<WaterPump />} />  
+              </Route>
+
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </div>
         </ThemeProvider>
