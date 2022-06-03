@@ -15,7 +15,7 @@ import { theme } from "../Lib/styling";
 import { SelectChangeEvent } from "@mui/material/Select";
 
 export const Dashboard = () => {
-  const [timescale, setTimescale] = React.useState("");
+  const [timescale, setTimescale] = React.useState(60*60*1000);
 
   const handleChange = (event) => {
     setTimescale(event.target.value);
