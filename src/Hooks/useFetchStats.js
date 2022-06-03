@@ -3,7 +3,8 @@ import {
     getDocs,
     limit,
     query,
-    orderBy
+    orderBy,
+    where
 } from 'firebase/firestore';
 import {
     useState,
@@ -16,16 +17,14 @@ import {
 
 export function useFetchStats(timescale) {
     let testTime = Math.floor((Date.now() - timescale)/1000);
-
     const [data, setData] = useState([])
 
     useEffect(() => {
         getDocs(
             query(
                 collection(db, 'stats'),
-                orderBy('unix_time', 'desc'),
-                // where('unix_time', '>', testTime),
-                limit(40)
+                where('unix_time', '>', testTime),
+                orderBy('unix_time', 'desc')
             )
         ).then(snapshot => {
             let dataTemp = snapshot.docs.map(doc => ({
@@ -34,7 +33,7 @@ export function useFetchStats(timescale) {
             }))
             setData(dataTemp.reverse());
         })
-    }, []);
+    }, [timescale]);
 
     return {
         data

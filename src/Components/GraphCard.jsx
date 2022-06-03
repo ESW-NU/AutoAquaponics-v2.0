@@ -13,9 +13,10 @@ import { ResponsiveContainer } from "recharts";
 
 const GraphCard = ({ title, unit, data, timescale }) => {
 
-  const unfiltered = Object.values(data);
-  const testTime = Date.now() - timescale;
-  const dataObj = unfiltered.filter(pt => pt.x.getTime() > testTime);
+  // const unfiltered = Object.values(data);
+  // const testTime = Date.now() - timescale;
+  // const dataObj = unfiltered.filter(pt => pt.x.getTime() > testTime);
+  const dataObj = Object.values(data);
   
   let last = dataObj.slice(-1)[0]
   let mostRecentDataPoint = (typeof last === 'undefined') ? null : last.y;

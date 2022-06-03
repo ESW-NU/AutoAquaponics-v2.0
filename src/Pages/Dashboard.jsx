@@ -27,8 +27,8 @@ export const Dashboard = () => {
         <Typography variant="body" align="left" padding="10px">
           SYSTEM SENSORS
         </Typography>
-
-        <GaugeContainer />
+        
+        {/* <GaugeContainer /> */}
 
         <GraphSelection
           timescale={timescale}
