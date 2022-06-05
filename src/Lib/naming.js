@@ -1,11 +1,11 @@
 export const unitDict = {
-    TDS: "PPM",
-    air_temp: "Fº",
-    distance: "CM",
+    TDS: "ppm",
+    air_temp: "ºC",
+    distance: "cm",
     humidity: "%",
     pH: "",
     unix_time: "",
-    water_temp: "Fº"
+    water_temp: "ºC"
 }
 
 export const officialNameDict = {
