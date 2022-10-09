@@ -16,7 +16,7 @@ export const Home = () => {
         alignItems="center"
       >
         <Grid item container direction="columns">
-          <Typography variant="h1">NORTHWESTERN ESW AUTOAQUAPONICS</Typography>
+          <Typography variant="h1">NORTHWESTERN AUTOAQUAPONICS</Typography>
           <Typography variant="h3">
             A fully automated aquaponic system in that can grow both fish and
             plants unattended for one month and be monitored & controlled
