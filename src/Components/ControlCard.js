@@ -1,3 +1,4 @@
+import React from "react";
 // base card for all control panel components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
