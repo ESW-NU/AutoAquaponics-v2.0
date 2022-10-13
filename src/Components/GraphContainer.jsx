@@ -1,3 +1,4 @@
+import React from "react";
 import GraphCard from "./GraphCard";
 import Grid from "@mui/material/Grid";
 import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";

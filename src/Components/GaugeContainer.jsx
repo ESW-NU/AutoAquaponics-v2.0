@@ -1,3 +1,4 @@
+import React from "react";
 import GaugeCard from "./GaugeCard";
 import Grid from "@mui/material/Grid";
 import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
