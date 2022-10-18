@@ -4,6 +4,7 @@
   text-align: left;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: left;
   padding-top: 10px;
   padding-bottom: 10px;

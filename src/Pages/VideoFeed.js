@@ -1,7 +1,7 @@
 import React from "react";
 export const VideoFeed = () => {
     return (
-        <div>Video Feed</div>
+        <div className="App">Video Feed</div>
     );
 }
 

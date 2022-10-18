@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 const GraphSelection = ({timescale, handleChange}) => {
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
+    <FormControl sx={{ m: 1, maxWidth: 200 }} size="medium">
       <InputLabel id="demo-select-small">Timescale</InputLabel>
       <Select
         labelId="demo-select-small"
