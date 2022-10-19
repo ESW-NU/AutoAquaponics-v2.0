@@ -1,3 +1,4 @@
+import React from "react";
 import {
     collection,
     getDocs,
@@ -17,7 +18,7 @@ import {
 
 export function useFetchStats(timescale) {
     let testTime = Math.floor((Date.now() - timescale)/1000);
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         getDocs(
