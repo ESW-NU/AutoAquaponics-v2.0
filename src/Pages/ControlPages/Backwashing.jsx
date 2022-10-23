@@ -1,6 +1,7 @@
 // import OnOffTimer from '.src/Components/OnOffTimer';
 // import FlowEntry from '.../Components/FlowEntry';
 //import ControlEntry from './Users/nataliebrewster/Desktop/autoAquaponics/AutoAquaponics-v2.0/src/Components/ControlEntry';
+import React from "react";
 import CustomizedTable from "../../Components/CustomizedTable";
 import OnOffTimer from "../../Components/OnOffTimer";
 import ControlEntry from "../../Components/ControlEntry";
