@@ -21,7 +21,7 @@ export const Home = () => {
           <Typography variant="h1">NORTHWESTERN ESW AUTOAQUAPONICS</Typography>
           <Typography variant="h3">
             A fully automated aquaponic system in that can grow both fish and
-            plants unattended for one month and be monitored & controlled
+            plants unattended for one month and be monitored and controlled
             remotely
           </Typography>
         </Grid>
