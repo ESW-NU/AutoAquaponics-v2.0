@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
