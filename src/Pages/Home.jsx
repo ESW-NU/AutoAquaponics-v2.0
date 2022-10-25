@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import "../CSS/pages.css"
@@ -12,23 +13,25 @@ export const Home = () => {
       <div className="Pages">
         <Grid
           container
-          direction="rows"
-          justifyContent="space-evenly"
-          alignItems="center"
-          >
-          <Grid item container direction="columns">
+          columns={6}
+          direction='row-reverse'
+          spacing={5}
+          justifyContent='center'
+        >
+          <Grid item lg={3}>
             <Typography variant="h1">NORTHWESTERN ESW AUTOAQUAPONICS</Typography>
             <Typography variant="h3">
               A fully automated aquaponic system in that can grow both fish and
-              plants unattended for one month and be monitored & controlled
+              plants unattended for one month and be monitored and controlled
               remotely
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid item lg={3}>
             <img src={systemCAD} />
           </Grid>
         </Grid>
       </div>
-    </div>
+     </div>
   );
 };
+// yes
