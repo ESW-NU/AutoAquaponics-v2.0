@@ -10,3 +10,12 @@
 .Pages * {
 margin: 5px;
 }
+
+.borderwoo {
+  border: 1px solid black;
+}
+
+.objectFill {
+  object-fit: contain;
+  border: 10px solid red;
+}
