@@ -1,7 +1,6 @@
 .Pages {
     text-align: left;
     display: flex;
-    flex-wrap: wrap;
     justify-content: left;
     padding-top: 10px;
     padding-bottom: 10px;
