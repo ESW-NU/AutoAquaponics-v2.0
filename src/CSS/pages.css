@@ -9,3 +9,8 @@
 .Pages * {
 margin: 5px;
 }
+
+.autoscaling-image {
+  width: 100%;
+  height: 100%;
+}
