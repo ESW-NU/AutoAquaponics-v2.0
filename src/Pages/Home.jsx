@@ -17,9 +17,8 @@ export const Home = () => {
         spacing={0}
         justifyContent='center'
         alignItems='center'
-        className="borderwoo"
       >
-        <Grid item xs={10} lg={5} className="borderwoo">
+        <Grid item xs={10} lg={5}>
             <Typography variant="h1">NORTHWESTERN ESW AUTOAQUAPONICS</Typography>
             <Typography variant="h3">
               A fully automated aquaponic system in that can grow both fish and
@@ -29,13 +28,12 @@ export const Home = () => {
               remotely
             </Typography>
         </Grid>
-        <Grid item xs={10} lg={6} className="borderwoo">
-          <div className="borderwoo">
-            <img src={systemCAD} className=" image" />
+        <Grid item xs={10} lg={6}>
+          <div>
+            <img src={systemCAD} className="autoscaling-image" />
           </div>
         </Grid>
       </Grid>
     </div>
   );
 };
-// yes
