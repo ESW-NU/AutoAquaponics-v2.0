@@ -13,14 +13,16 @@ import "../CSS/pages.css"
 
 export const ControlPanel = () => {
   return (
-    <div className="Pages">
-      <ThemeProvider theme={theme}>
-        <div>
-          <CPMenuBar />
-        </div>
+    <div className="App">
+      <div className="Pages">
+        <ThemeProvider theme={theme}>
+          <div>
+            <CPMenuBar />
+          </div>
 
-        <Outlet />
-      </ThemeProvider>
+          <Outlet />
+        </ThemeProvider>
+      </div>
     </div>
   );
 };
