@@ -14,3 +14,12 @@ margin: 5px;
   width: 100%;
   height: 100%;
 }
+
+a {
+  color: black;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #004b23;
+}
