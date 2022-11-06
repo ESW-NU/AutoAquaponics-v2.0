@@ -7,70 +7,78 @@ import "../CSS/NavBar.css";
 
 export const NavBar = () => {
   return (
-    <Grid
+    <Grid 
       container
       direction="row"
-      justifyContent="space-between"
-      alignItems="center"
+      justifyContent="center"
       columns={12}
     >
-      <Grid order={1}>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "header__title-is-active" : "header__title"
-          }
-        >
-          AUTOAQUAPONICS
-        </NavLink>
-      </Grid>
-
       <Grid
-        order={{xs: 3, lg: 2}}
-        xs={12}
-        lg="auto"
+        xs={10}
         container
         direction="row"
-        justifyContent="space-evenly"
+        justifyContent="space-between"
+        alignItems="center"
+        columns={11}
       >
-        <NavLink
-          to="/video-feed"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Video Feed
-        </NavLink>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Dashboard
-        </NavLink>
-        <NavLink
-          to="/control-panel"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Control Panel
-        </NavLink>
-        <NavLink
-          to="/settings"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Settings
-        </NavLink>
-      </Grid>
+        <Grid order={1}>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "header__title-is-active" : "header__title"
+            }
+          >
+            AUTOAQUAPONICS
+          </NavLink>
+        </Grid>
 
-      <Grid order={{xs: 2, lg: 3}}>
-        <button className="button-18" role="button">
-          Login
-        </button>
+        <Grid
+          order={{xs: 3, lg: 2}}
+          xs={12}
+          lg="auto"
+          container
+          direction="row"
+          justifyContent="space-evenly"
+        >
+          <NavLink
+            to="/video-feed"
+            className={({ isActive }) =>
+              isActive ? "header__nav-is-active" : "header__nav"
+            }
+          >
+            Video Feed
+          </NavLink>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive ? "header__nav-is-active" : "header__nav"
+            }
+          >
+            Dashboard
+          </NavLink>
+          <NavLink
+            to="/control-panel"
+            className={({ isActive }) =>
+              isActive ? "header__nav-is-active" : "header__nav"
+            }
+          >
+            Control Panel
+          </NavLink>
+          <NavLink
+            to="/settings"
+            className={({ isActive }) =>
+              isActive ? "header__nav-is-active" : "header__nav"
+            }
+          >
+            Settings
+          </NavLink>
+        </Grid>
+
+        <Grid order={{xs: 2, lg: 3}}>
+          <button className="button-18" role="button">
+            Login
+          </button>
+        </Grid>
       </Grid>
     </Grid>
   );
