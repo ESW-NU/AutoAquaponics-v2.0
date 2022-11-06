@@ -29,7 +29,7 @@ export const NavBar = () => {
       <Grid
         order={{xs: 3, lg: 2}}
         xs={12}
-        lg="auto"
+        lg={8}
         container
         direction="row"
         justifyContent="space-evenly"
