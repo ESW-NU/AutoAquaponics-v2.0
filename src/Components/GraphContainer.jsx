@@ -23,7 +23,7 @@ const GraphContainer = ({timescale}) => {
       <Grid
         container
         spacing={1}
-        columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }}
+        columns={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }}
       >
         {Array.from(dbKeys).map((_, index) => (
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={index}>
