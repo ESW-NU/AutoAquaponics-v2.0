@@ -6,9 +6,7 @@
     border-radius: 0 0 10px 10px;
   } */
   .header__bar {
-    align-items: left;
-    display: flex;
-    justify-content: center;
+    padding: 0px 50px;
   }
 
   .header__title {
@@ -36,7 +34,7 @@
     color: black;
     font-family: "Inter";
     font-size: 18px;
-    padding: 10px 40px;
+    padding: 10px 0px;
     float:left;
     text-decoration: none;
     border-radius: 50px;
