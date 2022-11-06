@@ -12,8 +12,9 @@ export const NavBar = () => {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
+      columns={12}
     >
-      <Grid>
+      <Grid order={1}>
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -24,7 +25,14 @@ export const NavBar = () => {
         </NavLink>
       </Grid>
 
-      <Grid>
+      <Grid
+        order={{xs: 3, lg: 2}}
+        xs={12}
+        lg="auto"
+        container
+        direction="row"
+        justifyContent="space-evenly"
+      >
         <NavLink
           to="/video-feed"
           className={({ isActive }) =>
@@ -59,7 +67,7 @@ export const NavBar = () => {
         </NavLink>
       </Grid>
 
-      <Grid>
+      <Grid order={{xs: 2, lg: 3}}>
         <button className="button-18" role="button">
           Login
         </button>
