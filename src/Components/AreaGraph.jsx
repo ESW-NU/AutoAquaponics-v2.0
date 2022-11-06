@@ -10,6 +10,15 @@ import {
 } from "recharts";
 
 const AreaGraph = ({ data }) => {
+  let color = "#009444";
+  const high = (element) => element.y > 50;
+
+  if (data.some(high)){
+    color = "#ff0000";
+  } else {
+    color = "#009444";
+
+  }
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
@@ -25,8 +34,8 @@ const AreaGraph = ({ data }) => {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="25%" stopColor="#009444" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#009444" stopOpacity={0} />
+            <stop offset="25%" stopColor={color} stopOpacity={0.8} />
+            <stop offset="95%" stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
 
