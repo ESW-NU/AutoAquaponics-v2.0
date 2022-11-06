@@ -29,9 +29,8 @@ const GraphCard = ({ title, unit, data, timescale }) => {
           <Grid
             container
             direction="column"
-            justifyContent="space-between"
-            alignItems="center"
-            columnSpacing={4}
+            justifyContent="flex-start"
+            alignItems="flex-start"
           >
             <Grid item>
               <Typography variant="h3" gutterBottom>
@@ -43,19 +42,18 @@ const GraphCard = ({ title, unit, data, timescale }) => {
               <Grid
                 container
                 direction="row"
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="flex-end"
               >
                 <Typography variant="h1">{mostRecentDataPointRounded}</Typography>
                 <Typography variant="h3">{unit}</Typography>
               </Grid>
             </Grid>
-            <AreaGraph data={dataObj}></AreaGraph>
           </Grid>
           {/* <CardActions>
             <GraphSelection></GraphSelection>
           </CardActions> */}
-
+          <AreaGraph data={dataObj}></AreaGraph>
         </CardContent>
       </Card>
     </>
