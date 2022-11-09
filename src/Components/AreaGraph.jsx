@@ -10,7 +10,8 @@ import {
 } from "recharts";
 
 const AreaGraph = ({ data }) => {
-  const high = data.some((element) => element.y > 30);
+  const range = data.some((element) => element.y > element.t.max || element.y < element.t.min);
+  console.log(data);
   if(!data[0]) return;
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -57,9 +58,9 @@ const AreaGraph = ({ data }) => {
         <Area
           type="monotone"
           dataKey="y"
-          stroke={high ? "red" : "green"}
-          fillOpacity={data.slice(-1)[0].y / 30}
-          fill={`url(#color${high ? "R" : "G"})`}
+          stroke={range ? "red" : "green"}
+          fillOpacity={1}
+          fill={`url(#color${range ? "R" : "G"})`}
         />
       </AreaChart>
     </ResponsiveContainer>
