@@ -51,7 +51,7 @@ export const NavBar = () => {
           Dashboard
         </NavLink>
         <NavLink
-          to="/control-panel"
+          to="/control-panel/tolerances"
           className={({ isActive }) =>
             isActive ? "header__nav-is-active" : "header__nav"
           }

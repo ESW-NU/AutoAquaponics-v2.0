@@ -14,6 +14,17 @@ export const CPMenuBar = () => {
     >
       <Grid>
         <NavLink
+          to="tolerances"      
+          className={({ isActive }) =>
+            isActive ? "cp__nav-is-active" : "header__nav"
+          }
+        >
+          Tolerances
+        </NavLink>
+      </Grid>
+
+      <Grid>
+        <NavLink
           to="backwashing"
           className={({ isActive }) =>
             isActive ? "cp__nav-is-active" : "header__nav"
@@ -42,17 +53,6 @@ export const CPMenuBar = () => {
           }
         >
           Lights
-        </NavLink>
-      </Grid>
-
-      <Grid>
-        <NavLink
-          to="tolerances"
-          className={({ isActive }) =>
-            isActive ? "cp__nav-is-active" : "header__nav"
-          }
-        >
-          Tolerances
         </NavLink>
       </Grid>
 
