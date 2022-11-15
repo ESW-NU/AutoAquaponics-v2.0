@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import {
   AreaChart,
   Area,
@@ -10,6 +10,9 @@ import {
 } from "recharts";
 
 const AreaGraph = ({ data }) => {
+  const range = data.some((element) => element.y > element.t.max || element.y < element.t.min);
+  console.log(data);
+  if(!data[0]) return;
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
@@ -24,9 +27,13 @@ const AreaGraph = ({ data }) => {
         }}
       >
         <defs>
-          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="25%" stopColor="#009444" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#009444" stopOpacity={0} />
+          <linearGradient id="colorG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="25%" stopColor="#009444" stopOpacity={1} />
+            <stop offset="95%" stopColor="#009444" stopOpacity={0.5} />
+          </linearGradient>
+          <linearGradient id="colorR" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="25%" stopColor="red" stopOpacity={1} />
+            <stop offset="95%" stopColor="red" stopOpacity={0.5} />
           </linearGradient>
         </defs>
 
@@ -51,9 +58,9 @@ const AreaGraph = ({ data }) => {
         <Area
           type="monotone"
           dataKey="y"
-          stroke="#009444"
+          stroke={range ? "red" : "green"}
           fillOpacity={1}
-          fill="url(#colorUv)"
+          fill={`url(#color${range ? "R" : "G"})`}
         />
       </AreaChart>
     </ResponsiveContainer>
