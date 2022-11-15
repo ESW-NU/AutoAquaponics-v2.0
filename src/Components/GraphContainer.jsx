@@ -5,25 +5,16 @@ import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
 import { useFetchStats } from "../Hooks/useFetchStats";
 
 const GraphContainer = ({timescale}) => {
+
   const { data, tolerances } = useFetchStats(timescale);
-  const UNIX_Timestamp = 1653092117
   let dbKeys = dashboardKeys(officialNameDict);
-  // need to convert unix_time to date timescale
-  // let testing = "pH"
-  // var date = new Date(UNIX_Timestamp * 1000);
-  // const pHdata = data.map((pt) => ({
-  //   x: new Date(pt.unix_time * 1000),
-  //   y: pt.pH
-  // }
-  // ))
-  // console.log('pHdata', pHdata)
-  // console.log(tolerances);
+
   return (
     <>
       <Grid
         container
         spacing={1}
-        columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }}
+        columns={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }}
       >
         {Array.from(dbKeys).map((_, index) => (
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={index}>

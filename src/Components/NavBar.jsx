@@ -8,12 +8,14 @@ import "../CSS/NavBar.css";
 export const NavBar = () => {
   return (
     <Grid
+      className="header__bar"
       container
       direction="row"
       justifyContent="space-between"
       alignItems="center"
+      columns={11}
     >
-      <Grid>
+      <Grid order={1}>
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -24,7 +26,14 @@ export const NavBar = () => {
         </NavLink>
       </Grid>
 
-      <Grid>
+      <Grid
+        order={{xs: 3, lg: 2}}
+        xs={12}
+        lg={8}
+        container
+        direction="row"
+        justifyContent="space-evenly"
+      >
         <NavLink
           to="/video-feed"
           className={({ isActive }) =>
@@ -59,7 +68,7 @@ export const NavBar = () => {
         </NavLink>
       </Grid>
 
-      <Grid>
+      <Grid order={{xs: 2, lg: 3}}>
         <button className="button-18" role="button">
           Login
         </button>
