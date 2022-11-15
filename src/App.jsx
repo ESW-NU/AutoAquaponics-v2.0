@@ -32,10 +32,10 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
 
               <Route path="/control-panel" element={<ControlPanel />} >
+                <Route path="tolerances"  element={<Tolerances />} />
                 <Route path="backwashing" element={<Backwashing />} />
                 <Route path="fishFeeder" element={<FishFeeder />} />
                 <Route path="lights" element={<Lights />} />
-                <Route path="tolerances" element={<Tolerances />} />
                 <Route path="waterPump" element={<WaterPump />} />  
               </Route>
 
