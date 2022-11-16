@@ -11,7 +11,6 @@ import {
 
 const AreaGraph = ({ data }) => {
   const range = data.some((element) => element.y > element.t.max || element.y < element.t.min);
-  console.log(data);
   if(!data[0]) return;
   return (
     <ResponsiveContainer width="100%" height={300}>

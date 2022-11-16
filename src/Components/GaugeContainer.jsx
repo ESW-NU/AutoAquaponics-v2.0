@@ -1,18 +1,8 @@
 import React from "react";
 import GaugeCard from "./GaugeCard";
 import Grid from "@mui/material/Grid";
-import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
-import { db } from "../firebase";
 
 const GaugeContainer = () => {
-
-  let dbKeys = dashboardKeys(officialNameDict);
-  // console.log("dbkeys", dbKeys);
-
-  // {Array.from(dbKeys).map((_, index) => (
- 
-  //       console.log('key test', dbKeys[index], unitDict[dbKeys[index]])
-  // ))}
 
   return (
     <Grid

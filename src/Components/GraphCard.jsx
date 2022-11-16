@@ -1,21 +1,13 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AreaGraph from "./AreaGraph";
-import GraphSelection from "./GraphSelection";
 import "../CSS/graphCard.css";
-import { ResponsiveContainer } from "recharts";
 
-const GraphCard = ({ title, unit, data, timescale }) => {
+const GraphCard = ({ title, unit, data, _ }) => {
 
-  // const unfiltered = Object.values(data);
-  // const testTime = Date.now() - timescale;
-  // const dataObj = unfiltered.filter(pt => pt.x.getTime() > testTime);
   const dataObj = Object.values(data);
   
   let last = dataObj.slice(-1)[0]
@@ -50,9 +42,6 @@ const GraphCard = ({ title, unit, data, timescale }) => {
               </Grid>
             </Grid>
           </Grid>
-          {/* <CardActions>
-            <GraphSelection></GraphSelection>
-          </CardActions> */}
           <AreaGraph data={dataObj}></AreaGraph>
         </CardContent>
       </Card>

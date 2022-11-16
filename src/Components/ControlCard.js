@@ -5,7 +5,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 const ControlCard = ({title, list}) => {
-    console.log(list);
     return (
         <Card sx={{ maxWidth: 600, minHeight: 100 }}>
           <CardContent>

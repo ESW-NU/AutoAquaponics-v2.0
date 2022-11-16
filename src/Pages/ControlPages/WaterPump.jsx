@@ -34,14 +34,14 @@ export const WaterPump = () => {
       >
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Grow Bed A" list={[
-            <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
+            <OnOffTimer key="timer" onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
+            <FlowEntry key="entry" flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
           ]}/>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Grow Bed B" list={[
-            <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
+            <OnOffTimer key="timer" onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
+            <FlowEntry key="entry" flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
           ]}/>
         </Grid>
       </Grid>

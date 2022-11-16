@@ -4,5 +4,3 @@ export const VideoFeed = () => {
         <div className="App">Video Feed</div>
     );
 }
-
-// export default VideoFeed;

@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from "react";
-// import { collection, doc, onSnapshot } from "firebase/firestore";
-import ReactDOM from "react-dom";
-// import GraphCard from './Components/GraphCard.js';
-// import AreaGraph from './Components/AreaGraph.js';
-// import GuageCard from 'src/Components/GuageCard.js';
+import React from "react";
 import GraphContainer from "../Components/GraphContainer";
-import GaugeContainer from "../Components/GaugeContainer";
+// import GaugeContainer from "../Components/GaugeContainer";
 import GraphSelection from "../Components/GraphSelection";
-// import Guage from './Components/Guage.js';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import { theme } from "../Lib/styling";
-import { SelectChangeEvent } from "@mui/material/Select";
 
 export const Dashboard = () => {
   const [timescale, setTimescale] = React.useState(60*60*1000);
@@ -40,5 +32,3 @@ export const Dashboard = () => {
     </div>
   );
 };
-
-// export default Dashboard;

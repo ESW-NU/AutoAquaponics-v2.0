@@ -4,5 +4,3 @@ export const Settings = () => {
         <div className="App">Settings</div>
     );
 }
-
-// export default Settings;
