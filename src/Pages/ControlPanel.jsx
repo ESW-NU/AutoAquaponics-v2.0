@@ -10,20 +10,22 @@ import { Lights } from "./ControlPages/Lights";
 
 import { NavLink } from "react-router-dom";
 import "../CSS/pages.css"
+import ComingSoon from "../Components/ComingSoon";
 
 export const ControlPanel = () => {
   return (
-    <div className="App">
-      <div className="Pages">
-        <ThemeProvider theme={theme}>
-          <div>
-            <CPMenuBar />
-          </div>
+    <ComingSoon/>
+    // <div className="App">
+    //   <div className="Pages">
+    //     <ThemeProvider theme={theme}>
+    //       <div>
+    //         <CPMenuBar />
+    //       </div>
 
-          <Outlet />
-        </ThemeProvider>
-      </div>
-    </div>
+    //       <Outlet />
+    //     </ThemeProvider>
+    //   </div>
+    // </div>
   );
 };
 

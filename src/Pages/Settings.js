@@ -1,6 +1,7 @@
 import React from "react";
+import ComingSoon from "../Components/ComingSoon";
 export const Settings = () => {
     return (
-        <div className="App">Settings</div>
+        <ComingSoon/>
     );
 }
