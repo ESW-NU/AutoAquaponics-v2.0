@@ -18,26 +18,26 @@ export const Lights = () => {
       >
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Shelf 1" list={[
-            <OnOffTimer/>,
-            <TimeEntry/>
+            <OnOffTimer key="timer"/>,
+            <TimeEntry key="entry"/>
           ]}/>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Shelf 2" list={[
-            <OnOffTimer/>,
-            <TimeEntry/>
+            <OnOffTimer key="timer"/>,
+            <TimeEntry key="entry"/>
           ]}/>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Fish Tank" list={[
-            <OnOffTimer/>,
-            <TimeEntry/>
+            <OnOffTimer key="timer"/>,
+            <TimeEntry key="entry"/>
           ]}/>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Basking" list={[
-            <OnOffTimer/>,
-            <TimeEntry/>
+            <OnOffTimer key="timer"/>,
+            <TimeEntry key="entry"/>
           ]}/>
         </Grid>
       </Grid>

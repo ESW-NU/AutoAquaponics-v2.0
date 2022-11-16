@@ -1,13 +1,11 @@
 
-import React, { PureComponent } from 'react';
+import React from 'react';
 import {
     AreaChart,
     Area,
     XAxis,
     YAxis,
-    CartesianGrid,
-    Tooltip,
-    ResponsiveContainer
+    Tooltip
 } from "recharts";
 
 const data = [
@@ -21,7 +19,6 @@ const data = [
 
 const Gauge = () => {
     return (
-      // <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={150}
           height={100}
@@ -41,7 +38,6 @@ const Gauge = () => {
           <Tooltip />
           <Area type="monotone" dataKey="uv" stroke="#009444" fill="#009444" />
         </AreaChart>
-      // </ResponsiveContainer>
     );
 }
 
