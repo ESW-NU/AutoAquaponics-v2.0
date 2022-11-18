@@ -8,8 +8,10 @@ import "../CSS/graphCard.css";
 
 const GraphCard = ({ title, unit, data, _ }) => {
 
-  const dataObj = Object.values(data);
-  
+  const dataO = Object.values(data);
+  const dataObj = dataO.filter(function isPositive(num) {
+    return num.y >= 0;
+  });
   let last = dataObj.slice(-1)[0]
   let mostRecentDataPoint = (typeof last === 'undefined') ? null : last.y;
   const mostRecentDataPointRounded = Math.round(mostRecentDataPoint);
