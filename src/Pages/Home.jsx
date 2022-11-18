@@ -25,7 +25,7 @@ export const Home = () => {
                 A fully automated aquaponic system in that can grow both fish and
                 plants unattended for one month and be
                 <NavLink to="/dashboard">monitored</NavLink> and
-                <NavLink to="/control-panel">controlled</NavLink>
+                <NavLink to="/control-panel/tolerances">controlled</NavLink>
                 remotely
               </Typography>
           </Grid>
