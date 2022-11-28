@@ -6,6 +6,7 @@ export const theme = createTheme({
         fontFamily: "Space Grotesk",
         textTransform: "none",
         fontSize: 56,
+		fontWeight: 600,
       },
       h2: {
         fontFamily: "Space Grotesk",
