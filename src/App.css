@@ -14,6 +14,11 @@
   margin: 5px;
 }
 
+.About * {
+  margin: 0px;
+  padding: 0px;
+}
+
 Card {
   width: 20%;
 }
