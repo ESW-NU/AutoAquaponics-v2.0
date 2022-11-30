@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import "../CSS/pages.css"
+import AboutSection from "../Components/AboutSection";
 
 const systemCAD = require("../Lib/PlumbingCADclear.png");
 
@@ -35,6 +36,20 @@ export const Home = () => {
             </div>
           </Grid>
         </Grid>
+      </div>
+      <div className="About">
+        <AboutSection 
+          image_left={true}
+          title={'Title 1'}
+          text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus ligula sit amet pharetra blandit. Fusce eu libero eu tellus dapibus aliquam et a massa. Sed condimentum porttitor ipsum nec efficitur. Morbi ullamcorper tincidunt lectus vestibulum lacinia. Suspendisse blandit molestie ex, et scelerisque leo laoreet vitae. Integer pellentesque varius orci quis commodo. Nulla pulvinar felis et rhoncus dapibus. Fusce laoreet vestibulum finibus. Integer non tellus erat. Sed et mauris at nisl vulputate posuere. Suspendisse potenti. Duis vitae interdum neque.'}
+          images={[systemCAD, systemCAD]}
+        />
+        <AboutSection 
+          image_left={false}
+          title={'Title 2'}
+          text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus ligula sit amet pharetra blandit. Fusce eu libero eu tellus dapibus aliquam et a massa. Sed condimentum porttitor ipsum nec efficitur. Morbi ullamcorper tincidunt lectus vestibulum lacinia. Suspendisse blandit molestie ex, et scelerisque leo laoreet vitae. Integer pellentesque varius orci quis commodo. Nulla pulvinar felis et rhoncus dapibus. Fusce laoreet vestibulum finibus. Integer non tellus erat. Sed et mauris at nisl vulputate posuere. Suspendisse potenti. Duis vitae interdum neque.'}
+          images={[systemCAD]}
+        />
       </div>
     </div>
   );
