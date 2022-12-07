@@ -20,7 +20,7 @@ export const NavBar = () => {
             isActive ? "header__title-is-active" : "header__title"
           }
         >
-          AUTOAQUAPONICS
+          AutoAquaponics
         </NavLink>
       </Grid>
 
