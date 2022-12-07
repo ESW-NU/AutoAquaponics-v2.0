@@ -41,10 +41,10 @@ export const Home = () => {
               <Typography variant="h1">Northwestern AutoAquaponics</Typography>
               <br></br>
               <Typography variant="h3">
-                A fully automated aquaponic system that can grow both fish and
-                plants unattended for months and be
+                A fully automated aquaponic system that grows both fish and
+                plants unattended for months and can be
                 <NavLink to="/dashboard">monitored</NavLink>and
-                <NavLink to="/control-panel">controlled</NavLink>
+                <NavLink to="/control-panel/tolerances">controlled</NavLink>
                 remotely
               </Typography>
           </Grid>

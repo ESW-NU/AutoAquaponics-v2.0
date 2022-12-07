@@ -34,12 +34,12 @@ export const NavBar = () => {
         justifyContent="space-evenly"
       >
         <NavLink
-          to="/video-feed"
+          to="/video-stream"
           className={({ isActive }) =>
             isActive ? "header__nav-is-active" : "header__nav"
           }
         >
-          Video Feed
+          Video Stream
         </NavLink>
         <NavLink
           to="/dashboard"

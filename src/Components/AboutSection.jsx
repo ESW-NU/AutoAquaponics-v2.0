@@ -31,11 +31,9 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                     <Typography className="about-text" variant="h6">
                                         Email: <button onClick={() => window.location = 'mailto:nu.urbanagriculture@gmail.com'}>nu.urbanagriculture@gmail.com</button>
                                         <br/>
-                                        Website: <a target='_blank' href='https://esw-nu.github.io/'>esw-nu.github.io</a>
-                                        <br/>
-                                        Blog: <a target='_blank' href='https://eswprojects.planio.com/projects/autoaquaponics'>eswprojects.planio.com/projects/autoaquaponics</a>
+                                        Project Blog: <a target='_blank' href='https://eswprojects.planio.com/projects/autoaquaponics'>eswprojects.planio.com/projects/autoaquaponics</a>
                                         <br/><br/>
-                                        This project was founded under Engineers for a Sustainable World @<a className='NU' target='_blank' href='https://www.northwestern.edu/'>Northwestern</a>
+                                        This project was founded under<a className='NU' target='_blank' href='https://esw-nu.github.io/'>Engineers for a Sustainable World @ Northwestern</a>
                                         <br/><br/>
                                         <i>Made possible with the support of:</i>
                                     </Typography>
