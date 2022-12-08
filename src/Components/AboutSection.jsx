@@ -29,7 +29,7 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                     <Typography variant="h2">{title}</Typography>
                                     <br/>
                                     <Typography className="about-text" variant="h6">
-                                        Email: <button onClick={() => window.location = 'mailto:nu.urbanagriculture@gmail.com'}>nu.urbanagriculture@gmail.com</button>
+                                        Email: <a target='_blank' href='mailto:nu.urbanagriculture@gmail.com'>nu.urbanagriculture@gmail.com</a>
                                         <br/>
                                         Project Blog: <a target='_blank' href='https://eswprojects.planio.com/projects/autoaquaponics'>eswprojects.planio.com/projects/autoaquaponics</a>
                                         <br/><br/>
