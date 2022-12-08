@@ -29,9 +29,11 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                     <Typography variant="h2">{title}</Typography>
                                     <br/>
                                     <Typography className="about-text" variant="h6">
-                                        Email: <a target='_blank' href='mailto:nu.urbanagriculture@gmail.com'>nu.urbanagriculture@gmail.com</a>
+                                        Email: <a target='_blank' href='mailto:contact.eswnu@gmail.com'>contact.eswnu@gmail.com</a>
                                         <br/>
-                                        Project Blog: <a target='_blank' href='https://eswprojects.planio.com/projects/autoaquaponics'>eswprojects.planio.com/projects/autoaquaponics</a>
+                                        Project Blog:<a target='_blank' href='https://eswprojects.planio.com/projects/autoaquaponics'>eswprojects.planio.com/projects/autoaquaponics</a>
+                                        <br></br>
+                                        Download or contribute to our code on<a target='_blank' href='https://github.com/ESW-NU/AutoAquaponics-v2.0/tree/deploy'>GitHub</a>
                                         <br/><br/>
                                         This project was founded under<a className='NU' target='_blank' href='https://esw-nu.github.io/'>Engineers for a Sustainable World @ Northwestern</a>
                                         <br/><br/>
