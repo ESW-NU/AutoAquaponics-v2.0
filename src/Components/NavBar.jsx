@@ -2,11 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import "../CSS/NavBar.css";
+import DrawerComp from "./DrawerComp";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export const NavBar = () => {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('lg'))
+
   return (
     <Grid
-      className="header__bar"
+      className="header__bar" 
       container
       direction="row"
       justifyContent="space-between"
@@ -24,7 +29,8 @@ export const NavBar = () => {
         </NavLink>
       </Grid>
 
-      <Grid
+      { !isMatch &&
+        <Grid
         item
         order={{xs: 3, lg: 2}}
         xs={12}
@@ -65,13 +71,19 @@ export const NavBar = () => {
         >
           Settings
         </NavLink>
-      </Grid>
+      </Grid> }
 
       <Grid order={{xs: 2, lg: 3}}>
         <button className="button-18">
           Login
         </button>
       </Grid>
+
+      { isMatch &&
+      <Grid order={{xs: 2, lg: 3}}>
+        <DrawerComp />
+
+      </Grid> }
     </Grid>
   );
 };
