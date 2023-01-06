@@ -68,9 +68,9 @@ export const NavBar = () => {
       </Grid>
 
       <Grid order={{xs: 2, lg: 3}}>
-        {/* <button className="button-18">
+        <button className="button-18">
           Login
-        </button> */}
+        </button>
       </Grid>
     </Grid>
   );
