@@ -10,8 +10,9 @@ import {
 } from "recharts";
 
 const AreaGraph = ({ data }) => {
-  const range = data.some((element) => element.y > element.t.max || element.y < element.t.min);
   if(!data[0]) return;
+  const last = data.at(-1);
+  const range = last.y > last.t.max || last.y < last.t.min;
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
