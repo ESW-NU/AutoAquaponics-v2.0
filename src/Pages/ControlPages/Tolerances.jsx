@@ -17,32 +17,32 @@ export const Tolerances = () => {
         >
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
             <ControlCard title="pH" list={[
-              <MaxMin/>
+              <MaxMin key="ph"/>
             ]}/>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
             <ControlCard title="TDS (ppm)" list={[
-              <MaxMin/>
+              <MaxMin key="tds"/>
             ]}/>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
             <ControlCard title="Relative Humidity (%)" list={[
-              <MaxMin/>
+              <MaxMin key="humidity"/>
             ]}/>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
             <ControlCard title="Air Temperature (ºC)" list={[
-              <MaxMin/>
+              <MaxMin key="airTemp"/>
             ]}/>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
             <ControlCard title="Water Temperature (ºC)" list={[
-              <MaxMin/>
+              <MaxMin key="waterTemp"/>
             ]}/>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
             <ControlCard title="Water Level (cm)" list={[
-              <MaxMin/>
+              <MaxMin key="waterLevel"/>
             ]}/>
           </Grid>
       </Grid>

@@ -10,6 +10,7 @@ import { Lights } from "./ControlPages/Lights";
 
 import { NavLink } from "react-router-dom";
 import "../CSS/pages.css"
+import ComingSoon from "../Components/ComingSoon";
 
 export const ControlPanel = () => {
   return (
@@ -19,6 +20,7 @@ export const ControlPanel = () => {
           <div>
             <CPMenuBar />
           </div>
+    
 
           <Outlet />
         </ThemeProvider>
