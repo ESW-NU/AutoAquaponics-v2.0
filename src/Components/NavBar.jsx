@@ -1,12 +1,19 @@
+
+
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import "../CSS/NavBar.css";
+import DrawerComp from "./DrawerComp";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export const NavBar = () => {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('lg'))
+
   return (
     <Grid
-      className="header__bar"
+      className="header__bar" 
       container
       direction="row"
       justifyContent="space-between"
@@ -20,11 +27,12 @@ export const NavBar = () => {
             isActive ? "header__title-is-active" : "header__title"
           }
         >
-          AutoAquaponics
+          AUTOAQUAPONICS
         </NavLink>
       </Grid>
 
-      <Grid
+      { !isMatch &&
+        <Grid
         item
         order={{xs: 3, lg: 2}}
         xs={12}
@@ -34,12 +42,12 @@ export const NavBar = () => {
         justifyContent="space-evenly"
       >
         <NavLink
-          to="/video-stream"
+          to="/video-feed"
           className={({ isActive }) =>
             isActive ? "header__nav-is-active" : "header__nav"
           }
         >
-          Video Stream
+          Video Feed
         </NavLink>
         <NavLink
           to="/dashboard"
@@ -65,13 +73,19 @@ export const NavBar = () => {
         >
           Settings
         </NavLink>
-      </Grid>
+      </Grid> }
 
       <Grid order={{xs: 2, lg: 3}}>
         <button className="button-18">
           Login
         </button>
       </Grid>
+
+      { isMatch &&
+      <Grid order={{xs: 2, lg: 3}}>
+        <DrawerComp />
+
+      </Grid> }
     </Grid>
   );
 };
