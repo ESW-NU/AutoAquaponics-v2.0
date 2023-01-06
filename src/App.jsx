@@ -27,7 +27,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
 
-              <Route path="/video-feed" element={<VideoFeed />} />
+              <Route path="/video-stream" element={<VideoFeed />} />
               
               <Route path="/dashboard" element={<Dashboard />} />
 

@@ -20,7 +20,7 @@ export const NavBar = () => {
             isActive ? "header__title-is-active" : "header__title"
           }
         >
-          AUTOAQUAPONICS
+          AutoAquaponics
         </NavLink>
       </Grid>
 
@@ -34,12 +34,12 @@ export const NavBar = () => {
         justifyContent="space-evenly"
       >
         <NavLink
-          to="/video-feed"
+          to="/video-stream"
           className={({ isActive }) =>
             isActive ? "header__nav-is-active" : "header__nav"
           }
         >
-          Video Feed
+          Video Stream
         </NavLink>
         <NavLink
           to="/dashboard"
