@@ -9,7 +9,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 export const NavBar = () => {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('lg'))
+  const isMatch = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <Grid
