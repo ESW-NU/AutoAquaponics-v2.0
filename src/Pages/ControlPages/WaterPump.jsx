@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import OnOffTimer from "../../Components/OnOffTimer";
 import FlowEntry from "../../Components/FlowEntry";
 import ControlCard from "../../Components/ControlCard";
+import CustomizedTable from "../../Components/CustomizedTable";
 
 export const WaterPump = () => {
   const [onofftimer, setOnofftimer] = useState("off");
@@ -29,21 +30,37 @@ export const WaterPump = () => {
       </Typography>
       <Grid
         container
-        spacing={1}
-        columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 2 }}
-      >
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Grow Bed A" list={[
-            <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
-          ]}/>
+        spacing = {0}
+        style={{
+          width: "1500px"
+        }}
+        
+        >
+        <Grid
+          container
+          spacing={2}
+          style={{
+            width: "1000px",
+          }}
+          height='100%' 
+          width='100%'
+          columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 2 }}
+        >
+          <Grid item xs={2} sm={1} md={1} lg={1} xl={1}>
+            <ControlCard title="Grow Bed A" list={[
+              <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
+              <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
+            ]}/>
+          </Grid>
+          <Grid item xs={2} sm={1} md={1} lg={1} xl={1}>
+            <ControlCard title="Grow Bed B" list={[
+              <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
+              <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
+            ]}/>
+          </Grid>
+          
         </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Grow Bed B" list={[
-            <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
-          ]}/>
-        </Grid>
+        <Grid><CustomizedTable/></Grid>
       </Grid>
     </div>
   );
