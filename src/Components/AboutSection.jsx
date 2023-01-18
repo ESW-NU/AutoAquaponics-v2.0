@@ -5,9 +5,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import "../CSS/pages.css"
 
-const esw = require("../Lib/esw.png");
-const wildIdeas = require("../Lib/wild-ideas.png");
-const msab = require("../Lib/msab.png");
+const esw = require("../Lib/esw.webp");
+const wildIdeas = require("../Lib/wild-ideas.webp");
+const msab = require("../Lib/msab.webp");
 
 const AboutSection = ({ image_left, title, text, images, contact }) => {
     if (contact) {

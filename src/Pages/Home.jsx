@@ -5,24 +5,24 @@ import Grid from "@mui/material/Grid";
 import "../CSS/pages.css"
 import AboutSection from "../Components/AboutSection";
 
-const systemCAD = require("../Lib/PlumbingCADclear.png");
-const plumbing = require("../Lib/plumbing.jpg");
-const outlet = require("../Lib/outlet.jpg");
-const rpi = require("../Lib/rpi.jpg");
-const software1 = require("../Lib/software1.jpg");
-const software2 = require("../Lib/software2.jpg");
-const fish = require("../Lib/fish.jpg");
-const topView = require("../Lib/top_view.jpg");
-const team = require("../Lib/team.jpg");
-const motorized = require("../Lib/motorized.jpg");
-const sensor = require("../Lib/sensor.jpg");
-const plants = require("../Lib/plants.jpg");
-const biofilm = require("../Lib/biofilm.jpg");
-const filter = require("../Lib/filter.jpg");
-const flow = require("../Lib/flow.jpg");
-const sump = require("../Lib/sump.jpg");
-const videoStream = require("../Lib/videoStream.png");
-const code = require("../Lib/code.jpg");
+const systemCAD = require("../Lib/PlumbingCADclear.webp");
+const plumbing = require("../Lib/plumbing.webp");
+const outlet = require("../Lib/outlet.webp");
+const rpi = require("../Lib/rpi.webp");
+const software1 = require("../Lib/software1.webp");
+const software2 = require("../Lib/software2.webp");
+const fish = require("../Lib/fish.webp");
+const topView = require("../Lib/top_view.webp");
+const team = require("../Lib/team.webp");
+const motorized = require("../Lib/motorized.webp");
+const sensor = require("../Lib/sensor.webp");
+const plants = require("../Lib/plants.webp");
+const biofilm = require("../Lib/biofilm.webp");
+const filter = require("../Lib/filter.webp");
+const flow = require("../Lib/flow.webp");
+const sump = require("../Lib/sump.webp");
+const videoStream = require("../Lib/videoStream.webp");
+const code = require("../Lib/code.webp");
 
 
 export const Home = () => {
