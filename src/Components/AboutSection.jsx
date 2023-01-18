@@ -23,7 +23,7 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                 columnSpacing={5}
                             >
                                 <Grid item xs={2} size='contain'>
-                                    <img src={images[0]} style={{width: '100%', height: '100%'}}/>
+                                    <img src={images[0]} style={{width: '100%', height: 'auto'}}/>
                                 </Grid>
                                 <Grid item xs={3}>
                                     <Typography variant="h2">{title}</Typography>
@@ -46,7 +46,7 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                         justifyContent='space-evenly'
                                     >
                                         <Grid item xs={1} size='contain'>
-                                            <img src={esw} style={{width: '90%', height: '90%'}}/>
+                                            <img src={esw} style={{width: '90%', height: 'auto'}}/>
                                         </Grid>
                                         <Grid item xs='auto' size='contain'>
                                             <img src={wildIdeas} style={{maxWidth: '100%', maxHeight: '100%'}}/>
@@ -84,16 +84,16 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                             columnSpacing={2}
                                         >
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[0]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[0]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[1]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[1]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[2]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[2]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[3]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[3]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -133,16 +133,16 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                             columnSpacing={2}
                                         >
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[0]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[0]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[1]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[1]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[2]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[2]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                             <Grid item xs={1} size='contain'>
-                                                <img src={images[3]} style={{width: '100%', height: '100%'}}/>
+                                                <img src={images[3]} style={{width: '100%', height: 'auto'}}/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -167,7 +167,7 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                     columnSpacing={5}
                                 >
                                     <Grid item xs={2} size='contain'>
-                                        <img src={images[0]} style={{width: '100%', height: '100%'}}/>
+                                        <img src={images[0]} style={{width: '100%', height: 'auto'}}/>
                                     </Grid>
                                     <Grid item xs={3}>
                                         <Typography variant="h2">{title}</Typography>
@@ -198,7 +198,7 @@ const AboutSection = ({ image_left, title, text, images, contact }) => {
                                         <Typography className="about-text" variant="h6">{text}</Typography>
                                     </Grid>
                                     <Grid item xs={2} size='contain'>
-                                        <img src={images[0]} style={{width: '100%', height: '100%'}}/>
+                                        <img src={images[0]} style={{width: '100%', height: 'auto'}}/>
                                     </Grid>
                                 </Grid>
                             </CardContent>
