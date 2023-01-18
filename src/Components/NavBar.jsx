@@ -34,8 +34,8 @@ export const NavBar = () => {
       { !isMatch &&
         <Grid
         item
-        order={{xs: 3, lg: 2}}
-        xs={12}
+        order={{sm: 3, md: 2}}
+        md={6.5}
         lg={8}
         container
         direction="row"
@@ -75,7 +75,7 @@ export const NavBar = () => {
         </NavLink>
       </Grid> }
 
-      <Grid order={{xs: 2, lg: 3}}>
+      <Grid order={{sm: 2, lg: 3}}>
         <button className="button-18">
           Login
         </button>
