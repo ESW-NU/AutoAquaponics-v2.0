@@ -26,6 +26,7 @@ export const NavBar = () => {
           className={({ isActive }) =>
             isActive ? "header__title-is-active" : "header__title"
           }
+style={{fontSize: isMatch ? 50: 24}}
         >
           AUTOAQUAPONICS
         </NavLink>
@@ -76,7 +77,7 @@ export const NavBar = () => {
       </Grid> }
 
       <Grid order={{xs: 3, sm:2, lg: 3}}>
-        <button className="button-18">
+        <button className="button-18" style={{fontSize: isMatch ? 30 : 24}}>
           Login
         </button>
       </Grid>
