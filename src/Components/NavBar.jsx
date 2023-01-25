@@ -9,7 +9,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 export const NavBar = () => {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('sm'))
+  const isMatch = useMediaQuery(theme.breakpoints.down('600')) || window.innerWidth < window.innerHeight;
 
   return (
     <Grid
@@ -75,14 +75,14 @@ export const NavBar = () => {
         </NavLink>
       </Grid> }
 
-      <Grid order={{sm: 2, lg: 3}}>
+      <Grid order={{xs: 3, sm:2, lg: 3}}>
         <button className="button-18">
           Login
         </button>
       </Grid>
 
       { isMatch &&
-      <Grid order={{xs: 2, lg: 3}}>
+      <Grid order={{xs: 0, lg: 3}}>
         <DrawerComp />
 
       </Grid> }
