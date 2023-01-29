@@ -16,17 +16,15 @@ import { Lights } from "./Pages/ControlPages/Lights"
 import { Tolerances } from "./Pages/ControlPages/Tolerances";
 import { WaterPump } from "./Pages/ControlPages/WaterPump";
 import ReactGA from 'react-ga4';
-// const TRACKING_ID = "330623545"; // OUR_TRACKING_ID
-// const TRACKING_ID = "349563764"; // OUR_TRACKING_ID
+
 const TRACKING_ID = "G-XQDHE464FW";
 ReactGA.initialize(TRACKING_ID);
 
-
 function App() {
-	useEffect(() => {
-		ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search });
-	// ReactGA.pageview(window.location.pathname + window.location.search);
-		}, []);
+	useEffect(() => { 
+		if (document.location.hostname.search("localhost") === -1) {
+			ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search + window.location.host});
+    }}, []);
   return (
     <>
       <BrowserRouter>
