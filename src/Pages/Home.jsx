@@ -32,7 +32,7 @@ export const Home = () => {
   return (
     <div className="App">
       <div className="Pages">
-        {/* <Grid
+        <Grid
           container
           columns={12}
           direction='row-reverse'
@@ -56,7 +56,7 @@ export const Home = () => {
               <img src={systemCAD} className="autoscaling-image" />
             </div>
           </Grid>
-        </Grid> */}
+        </Grid>
       </div>
       <div className="About">
         <AboutSection
