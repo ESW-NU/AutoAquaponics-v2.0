@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./Lib/styling";
 import React from "react";
+import {useEffect} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavBar from "./Components/NavBar";
@@ -14,8 +15,16 @@ import { FishFeeder } from "./Pages/ControlPages/FishFeeder";
 import { Lights } from "./Pages/ControlPages/Lights"
 import { Tolerances } from "./Pages/ControlPages/Tolerances";
 import { WaterPump } from "./Pages/ControlPages/WaterPump";
+import ReactGA from 'react-ga4';
+
+const TRACKING_ID = "G-XQDHE464FW";
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
+	useEffect(() => { 
+		if (document.location.hostname.search("localhost") === -1) {
+			ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search + window.location.host});
+    }}, []);
   return (
     <>
       <BrowserRouter>
