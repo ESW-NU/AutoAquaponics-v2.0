@@ -1,8 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import ResponsiveMenu from "react-responsive-navbar";
 import Grid from "@mui/material/Grid";
-// import Item from "@mui/material/Item";
 import "../CSS/NavBar.css";
 
 export const NavBar = () => {
@@ -22,11 +20,12 @@ export const NavBar = () => {
             isActive ? "header__title-is-active" : "header__title"
           }
         >
-          AUTOAQUAPONICS
+          AutoAquaponics
         </NavLink>
       </Grid>
 
       <Grid
+        item
         order={{xs: 3, lg: 2}}
         xs={12}
         lg={8}
@@ -35,12 +34,12 @@ export const NavBar = () => {
         justifyContent="space-evenly"
       >
         <NavLink
-          to="/video-feed"
+          to="/video-stream"
           className={({ isActive }) =>
             isActive ? "header__nav-is-active" : "header__nav"
           }
         >
-          Video Feed
+          Video Stream
         </NavLink>
         <NavLink
           to="/dashboard"
@@ -69,7 +68,7 @@ export const NavBar = () => {
       </Grid>
 
       <Grid order={{xs: 2, lg: 3}}>
-        <button className="button-18" role="button">
+        <button className="button-18">
           Login
         </button>
       </Grid>

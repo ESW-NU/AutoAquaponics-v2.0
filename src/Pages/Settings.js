@@ -1,10 +1,5 @@
 import React from "react";
-import FilledInput from '@mui/material/FilledInput';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Grid from "@mui/material/Grid";
-import "../CSS/pages.css"
-
+import ComingSoon from "../Components/ComingSoon";
 
 export const Settings = () => {
     return (

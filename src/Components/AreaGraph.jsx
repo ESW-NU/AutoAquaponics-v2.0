@@ -11,7 +11,6 @@ import {
 
 const AreaGraph = ({ data }) => {
   if(!data[0]) return;
-  console.log(data);
   const last = data.at(-1);
   const range = last.y > last.t.max || last.y < last.t.min;
   return (
