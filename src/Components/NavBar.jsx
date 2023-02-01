@@ -28,7 +28,7 @@ export const NavBar = () => {
           }
 style={{fontSize: isMatch ? window.innerWidth/15: 24}}
         >
-          AUTOAQUAPONICS
+          AutoAquaponics
         </NavLink>
       </Grid>
 
@@ -43,12 +43,12 @@ style={{fontSize: isMatch ? window.innerWidth/15: 24}}
         justifyContent="space-evenly"
       >
         <NavLink
-          to="/video-feed"
+          to="/video-stream"
           className={({ isActive }) =>
             isActive ? "header__nav-is-active" : "header__nav"
           }
         >
-          Video Feed
+          Video Stream
         </NavLink>
         <NavLink
           to="/dashboard"
