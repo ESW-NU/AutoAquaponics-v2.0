@@ -62,7 +62,7 @@ export const Home = () => {
         <AboutSection
           image_left={true}
           title={'Plumbing'}
-          images={[plumbing /*, sump, flow, filter*/]}
+          images={[plumbing, sump, flow, filter]}
         >
           Our plumbing system serves as the backbone of AutoAquaponics and facilitates the efficient
           transport of nutrients to the plants. It also removes solid waste and potentially toxic
