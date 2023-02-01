@@ -60,7 +60,7 @@ export const Home = () => {
       </div>
       <div className="About">
         <AboutSection
-          image_left={true}
+          image_left={false}
           title={'Plumbing'}
           images={[plumbing, sump, flow, filter]}
         >
@@ -73,7 +73,7 @@ export const Home = () => {
           the plants.
         </AboutSection>
         <AboutSection
-          image_left={false}
+          image_left={true}
           title={'Electronics'}
           images={[sensor, rpi, outlet, motorized]}
         >
@@ -88,7 +88,7 @@ export const Home = () => {
           the sensor data to a remote Firebase database, which can be seen on the Dashboard page.
         </AboutSection>
         <AboutSection
-          image_left={true}
+          image_left={false}
           title={'Software'}
           images={[software1, videoStream, code, software2]}
         >
@@ -104,7 +104,7 @@ export const Home = () => {
           that anyone can access. Stay tuned for more!
         </AboutSection>
         <AboutSection
-          image_left={false}
+          image_left={true}
           title={'Biology'}
           images={[fish, topView, biofilm, plants]}
         >
