@@ -9,7 +9,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 export const NavBar = () => {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('600')) || window.innerWidth < window.innerHeight;
+  const isMatch = useMediaQuery(theme.breakpoints.down(530)) || window.innerWidth < window.innerHeight;
 
   return (
     <Grid
@@ -26,7 +26,7 @@ export const NavBar = () => {
           className={({ isActive }) =>
             isActive ? "header__title-is-active" : "header__title"
           }
-style={{fontSize: isMatch ? 50: 24}}
+style={{fontSize: isMatch ? window.innerWidth/15: 24}}
         >
           AUTOAQUAPONICS
         </NavLink>
@@ -35,7 +35,7 @@ style={{fontSize: isMatch ? 50: 24}}
       { !isMatch &&
         <Grid
         item
-        order={{sm: 3, md: 2}}
+        order={{xs: 3, sm: 3, md: 2}}
         md={6.5}
         lg={8}
         container
@@ -76,14 +76,14 @@ style={{fontSize: isMatch ? 50: 24}}
         </NavLink>
       </Grid> }
 
-      <Grid order={{xs: 3, sm:2, lg: 3}}>
-        <button className="button-18" style={{fontSize: isMatch ? 30 : 24}}>
+      <Grid order={{xs: 2, lg: 3}}>
+        <button className="button-18" style={{fontSize: isMatch ? window.innerWidth/25 : 24}}>
           Login
         </button>
       </Grid>
 
       { isMatch &&
-      <Grid order={{xs: 0, lg: 3}}>
+      <Grid order={{xs: 0}} style={{margin: 0}}>
         <DrawerComp />
 
       </Grid> }

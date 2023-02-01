@@ -59,8 +59,8 @@ const DrawerComp = () => {
             </ListItemButton>
         </List>
     </Drawer>
-    <IconButton onClick={() => setOpen(!open)}>
-        <MenuRoundedIcon />
+    <IconButton onClick={() => setOpen(!open)} style={{padding: 0}}>
+        <MenuRoundedIcon style={{fontSize:window.innerWidth/20}} />
 
     </IconButton>
     </>
