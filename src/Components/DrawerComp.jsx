@@ -12,7 +12,7 @@ const DrawerComp = () => {
             <ListItemButton>
                 <ListItemIcon onClick={() => setOpen(!open)}>
                     <NavLink
-                        to="/video-feed"
+                        to="/video-stream"
                         className={({ isActive }) =>
                             isActive ? "header__nav-is-active" : "header__nav"
                         }
