@@ -17,7 +17,7 @@ const DrawerComp = () => {
                             isActive ? "header__nav-is-active" : "header__nav"
                         }
                         >
-                        Video Feed
+                        Video Stream
                     </NavLink>
                 </ListItemIcon>
             </ListItemButton>
