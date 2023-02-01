@@ -10,14 +10,16 @@
 margin: 5px;
 }
 
-.image-container {
-  padding-right: 80px;
-  position: relative;
-  float: right;
-}
+@media screen and (min-width: 1000px) {
+  .image-container {
+    padding-right: 80px;
+    position: relative;
+    float: right;
+  }
 
-.autoscaling-image {
-  width: 80vh;
+  .autoscaling-image {
+    width: 80vh;
+  }
 }
 
 .title-card-constant-height {
