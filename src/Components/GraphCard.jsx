@@ -22,9 +22,9 @@ const GraphCard = ({ title, unit, data, _ }) => {
         <CardContent>
           <Grid
             container
-            direction="column"
-            justifyContent="flex-start"
-            alignItems="flex-start"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
           >
             <Grid item>
               <Typography variant="h3" gutterBottom>
