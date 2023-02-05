@@ -14,18 +14,19 @@ import ComingSoon from "../Components/ComingSoon";
 
 export const ControlPanel = () => {
   return (
-    <div className="App">
-      <div className="Pages">
-        <ThemeProvider theme={theme}>
-          <div>
-            <CPMenuBar />
-          </div>
+    <ComingSoon/>
+    // <div className="App">
+    //   <div className="Pages">
+    //     <ThemeProvider theme={theme}>
+    //       <div>
+    //         <CPMenuBar />
+    //       </div>
     
 
-          <Outlet />
-        </ThemeProvider>
-      </div>
-    </div>
+    //       <Outlet />
+    //     </ThemeProvider>
+    //   </div>
+    // </div>
   );
 };
 
