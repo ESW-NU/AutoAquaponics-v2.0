@@ -23,7 +23,7 @@ const MaxMin = ({sensor}) => { // notice that a string 'sensor' is our input
         // send to firebase
         const minRef = doc(db, "tolerances", sensor);
         updateDoc(minRef, {
-            min: +minInput
+            min: +event.target.value
         });
 
     };
@@ -35,7 +35,8 @@ const MaxMin = ({sensor}) => { // notice that a string 'sensor' is our input
         // send to firebase
         const maxRef = doc(db, "tolerances", sensor);
         updateDoc(maxRef, {
-            max: +max
+            //max: +max
+            max: +event.target.value
         });
 
     };
