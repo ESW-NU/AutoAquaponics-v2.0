@@ -9,6 +9,7 @@ import { ControlPanel } from "./Pages/ControlPanel";
 import { Dashboard } from "./Pages/Dashboard";
 import { Settings } from "./Pages/Settings";
 import { VideoFeed } from "./Pages/VideoFeed";
+import { Login } from "./Pages/Login";
 import { Backwashing } from "./Pages/ControlPages/Backwashing";
 import { FishFeeder } from "./Pages/ControlPages/FishFeeder";
 import { Lights } from "./Pages/ControlPages/Lights"
@@ -40,6 +41,8 @@ function App() {
               </Route>
 
               <Route path="/settings" element={<Settings />} />
+
+              <Route path="/login" element={<Login />} />
             </Routes>
           </div>
         </ThemeProvider>
