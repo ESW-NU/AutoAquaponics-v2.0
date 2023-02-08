@@ -6,7 +6,7 @@
     border-radius: 0 0 10px 10px;
   } */
   .header__bar {
-    padding: 0px 50px;
+    padding: 0 20px;
   }
 
   .header__title {
@@ -50,7 +50,7 @@
     color: black;
     font-family: "Inter";
     font-size: 18px;
-    padding: 10px 40px;
+    padding: 10px 20px;
     float:left;
     text-decoration: none;
     border-radius: 50px;
