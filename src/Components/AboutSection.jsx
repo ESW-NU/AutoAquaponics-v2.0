@@ -50,7 +50,7 @@ const ImageGallery = ({images}) => {
 	});
 
 	return (
-		<Grid container columns={2} alignItmes="center" columnSpacing={2}>
+		<Grid container columns={2} alignItems="center" columnSpacing={2}>
 			{imageGridItems}
 		</Grid>
 	);
