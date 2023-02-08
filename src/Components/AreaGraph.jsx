@@ -22,8 +22,8 @@ const AreaGraph = ({ data }) => {
         data={data}
         margin={{
           top: 10,
-          right: 50,
-          left: -33,
+          right: 68,
+          left: -15,
           bottom: 0,
         }}
       >

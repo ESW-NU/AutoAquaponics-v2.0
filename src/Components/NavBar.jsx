@@ -5,11 +5,10 @@ import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import "../CSS/NavBar.css";
 import DrawerComp from "./DrawerComp";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 export const NavBar = () => {
-  const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down(530)) || window.innerWidth < window.innerHeight;
+  const isMatch = useMediaQuery('(max-aspect-ratio: 3/4)');
 
   return (
     <Grid
@@ -18,7 +17,6 @@ export const NavBar = () => {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      columns={11}
     >
       <Grid order={1}>
         <NavLink
@@ -26,7 +24,7 @@ export const NavBar = () => {
           className={({ isActive }) =>
             isActive ? "header__title-is-active" : "header__title"
           }
-style={{fontSize: isMatch ? window.innerWidth/15: 24}}
+style={{fontSize: isMatch ? 33: 24}}
         >
           AutoAquaponics
         </NavLink>
@@ -77,7 +75,7 @@ style={{fontSize: isMatch ? window.innerWidth/15: 24}}
       </Grid> }
 
       <Grid order={{xs: 2, lg: 3}}>
-        <button className="button-18" style={{fontSize: isMatch ? window.innerWidth/25 : 24}}>
+        <button className="button-18">
           Login
         </button>
       </Grid>

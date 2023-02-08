@@ -12,7 +12,8 @@ const AboutSection = ({image_left, title, images, children}) => {
 	} : {
 		imageWidth: 2,
 		textWidth: 3
-	}; // these will be ignored for smaller screens
+	} 	
+	; // these will be ignored for smaller screens
 	let totalWidth = 0;
 	for (const item in widths) {
 		totalWidth += widths[item];
@@ -23,9 +24,9 @@ const AboutSection = ({image_left, title, images, children}) => {
 	return (
 		<div className="App">
 			<div className="pages">
-				<Card sx={{maxWidth: 2000, minHeight: 300, paddingLeft: '20px', paddingRight: '20px'}}>
+				<Card sx={{maxWidth: 2000, minHeight: 300, paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '20px'}}>
 					<CardContent>
-						<Grid container columns={totalWidth} alignItems="center" columnSpacing={5}>
+						<Grid container columns={totalWidth} alignItems="center" columnSpacing={5} rowSpacing={5}>
 							<Grid item xs={totalWidth} lg={widths.imageWidth} size='contain' order={order.indexOf("images")}>
 								<ImageGallery images={images}/>
 							</Grid>
@@ -50,7 +51,7 @@ const ImageGallery = ({images}) => {
 	});
 
 	return (
-		<Grid container columns={2} alignItmes="center" columnSpacing={2}>
+		<Grid container columns={2} alignItems="center" columnSpacing={2}>
 			{imageGridItems}
 		</Grid>
 	);
