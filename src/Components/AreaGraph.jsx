@@ -11,8 +11,9 @@ import {
 
 const AreaGraph = ({ data }) => {
   if(!data[0]) return;
-  const last = data.at(-1);
-  const range = last.y > last.t.max || last.y < last.t.min;
+  // const last = data.at(-1);
+  // const range = last.y > last.t.max || last.y < last.t.min;
+  const range = false;
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
