@@ -75,9 +75,13 @@ style={{fontSize: isMatch ? 33: 24}}
       </Grid> }
 
       <Grid order={{xs: 2, lg: 3}}>
-        <button className="button-18">
-          Login
-        </button>
+        <button className="button-18">	       
+		  <NavLink
+			to="/login"
+		  >
+			Login
+		  </NavLink>
+		</button>
       </Grid>
 
       { isMatch &&
