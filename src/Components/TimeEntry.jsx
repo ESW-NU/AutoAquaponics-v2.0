@@ -17,8 +17,10 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Input from '@mui/material/Input';
 // import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { db } from '../firebase';
+import { doc, updateDoc } from "firebase/firestore";
 
-export default function TimeEntry() {
+export default function TimeEntry({shelf}) {
   const [startHH, setStartHH] = React.useState('');
   const [startMM, setStartMM] = React.useState('');
   const [meridiem, setMeridiem] = React.useState('');
@@ -27,18 +29,38 @@ export default function TimeEntry() {
 
   const handleChangeStartHH = (event) => {
     setStartHH(event.target.value);
+    const startHHRef = doc(db, "lights", shelf)
+    updateDoc(startHHRef, {
+      starthh: event.target.value
+    })
   };
   const handleChangeStartMM = (event) => {
     setStartMM(event.target.value);
+    const startMMRef = doc(db, "lights", shelf)
+    updateDoc(startMMRef, {
+      startmm: event.target.value
+    })
   };
   const handleChangeMeridiem = (event) => {
     setMeridiem(event.target.value);
+    const meridiemRef = doc(db, "lights", shelf)
+    updateDoc(meridiemRef, {
+      meridiem: event.target.value
+    })
   };
   const handleChangeDurHH = (event) => {
     setDurHH(event.target.value);
+    const durHHRef = doc(db, "lights", shelf)
+    updateDoc(durHHRef, {
+      durationhh: +event.target.value
+    })
   };
   const handleChangeDurMM = (event) => {
     setDurMM(event.target.value);
+    const durMMRef = doc(db, "lights", shelf)
+    updateDoc(durMMRef, {
+      durationmm: event.target.value
+    })
   };
 
   return (

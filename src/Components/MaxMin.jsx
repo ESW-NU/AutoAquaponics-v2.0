@@ -12,12 +12,12 @@ import { doc, updateDoc } from "firebase/firestore";
 const MaxMin = ({sensor}) => { // notice that a string 'sensor' is our input
     const [min, setMin] = React.useState(0);
     const [max, setMax] = React.useState(0);
-    let minInput = React.createRef();
+    //let minInput = React.createRef();
 
     const handleChangeMin = (event) => {
         // console.log(sensor[0].props.sensor);
         // console.log(sensor);
-        console.log(minInput);
+        //console.log(minInput);
         setMin(event.target.value);
         // console.log(event.target.value);
         // send to firebase
@@ -28,10 +28,10 @@ const MaxMin = ({sensor}) => { // notice that a string 'sensor' is our input
 
     };
     const handleChangeMax = (event) => {
-        console.log(sensor);
-        console.log(event);
+        //console.log(sensor);
+        //console.log(event);
         setMax(event.target.value);
-        console.log(max + "here");
+        //console.log(max + "here");
         // send to firebase
         const maxRef = doc(db, "tolerances", sensor);
         updateDoc(maxRef, {
@@ -54,7 +54,7 @@ const MaxMin = ({sensor}) => { // notice that a string 'sensor' is our input
         <div>
             <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="component-filled">Min</InputLabel>
-                <FilledInput ref={minInput} type="number" id="component-filled" value={min} onChange={(e) => handleChangeMin(e)} />
+                <FilledInput /*ref={minInput}*/ type="number" id="component-filled" value={min} onChange={(e) => handleChangeMin(e)} />
             </FormControl>
             <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="component-filled">Max</InputLabel>

@@ -6,7 +6,7 @@ import FlowEntry from "../../Components/FlowEntry";
 import ControlCard from "../../Components/ControlCard";
 
 export const WaterPump = () => {
-  const [onofftimer, setOnofftimer] = useState("off");
+  /*const [onofftimer, setOnofftimer] = useState("off");
   const [flow, setFlow] = useState(0);
   const [time, setTime] = useState(0);
 
@@ -20,7 +20,7 @@ export const WaterPump = () => {
 
   const handleTimeChange = (event) => {
     setTime(event.target.value);
-  }
+  }*/
 
   return (
     <div>
@@ -34,14 +34,14 @@ export const WaterPump = () => {
       >
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Grow Bed A" list={[
-            <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
+            <OnOffTimer lightORpump={"water-pump"} shelfbed={"bed-A"} bed={"bed-B"} /*onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}*//>,
+            <FlowEntry bed={"bed-A"} /*flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}*//>
           ]}/>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <ControlCard title="Grow Bed B" list={[
-            <OnOffTimer onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
+            <OnOffTimer lightORpump={"water-pump"} shelfbed={"bed-B"} bed={"bed-B"} /*onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}*//>,
+            <FlowEntry bed={"bed-B"} /*flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}*//>
           ]}/>
         </Grid>
       </Grid>

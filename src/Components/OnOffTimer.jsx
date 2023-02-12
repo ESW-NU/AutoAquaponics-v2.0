@@ -6,8 +6,22 @@ import FormLabel from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { db } from '../firebase';
+import { doc, updateDoc } from "firebase/firestore";
 
-const OnOffTimer = ({onofftimer, handleOnofftimerChange}) => {
+const OnOffTimer = ({lightORpump, shelfbed}) => { // the string 'shelf' is our input
+    const [status, setStatus] = React.useState();
+    //const [off, setOff] = React.useState();
+    //const [timer, setTimer] = React.useState();
+
+    const handleChangeStatus = (event) => {
+        setStatus(event.target.value);
+        const statusRef = doc(db, lightORpump, shelfbed);
+        updateDoc(statusRef, {
+            status: event.target.value
+        })
+    }
+
     return (
         <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">Status</FormLabel>
@@ -15,8 +29,8 @@ const OnOffTimer = ({onofftimer, handleOnofftimerChange}) => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="off"
                 name="radio-buttons-group"
-                value={onofftimer}
-                onChange={handleOnofftimerChange}
+                value={status}
+                onChange={handleChangeStatus}
             >
                 <FormControlLabel value="on" control={<Radio />} label="On" />
                 <FormControlLabel value="off" control={<Radio />} label="Off" />
