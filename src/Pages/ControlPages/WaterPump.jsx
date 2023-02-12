@@ -6,7 +6,7 @@ import FlowEntry from "../../Components/FlowEntry";
 import ControlCard from "../../Components/ControlCard";
 
 export const WaterPump = () => {
-  const [onofftimer, setOnofftimer] = useState("off");
+  /*const [onofftimer, setOnofftimer] = useState("off");
   const [flow, setFlow] = useState(0);
   const [time, setTime] = useState(0);
 
@@ -20,7 +20,7 @@ export const WaterPump = () => {
 
   const handleTimeChange = (event) => {
     setTime(event.target.value);
-  }
+  }*/
 
   return (
     <div>
