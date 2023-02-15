@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import zIndex from "@mui/material/styles/zIndex";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,14 +34,6 @@ function createData(control_change, status, date, person){
   this.date = date;
   this.person = person;
 }
-
-// const rows = [
-//   createData("Backwashing", 6.0, 24, "Ben"),
-//   createData("Tolerances", 9.0, 37, "Bill"),
-//   createData("Lights", 16.0, 24, "Natalie"),
-//   createData("Backwashing", 3.7, 67, "Lester"),
-//   createData("Fish Feeder", 16.0, 49, "Bill"),
-// ];
 
 const rows = [
   new createData("Backwashing", 6.0, 24, "Ben"),

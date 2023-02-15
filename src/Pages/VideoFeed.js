@@ -1,8 +1,7 @@
 import React from "react";
+import ComingSoon from "../Components/ComingSoon";
 export const VideoFeed = () => {
     return (
-        <div>Video Feed</div>
+        <ComingSoon/>
     );
 }
-
-// export default VideoFeed;

@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 const GraphSelection = ({timescale, handleChange}) => {
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 200 }} size="medium">
+    <FormControl sx={{ m: 1, maxWidth: 200 }} size="medium">
       <InputLabel id="demo-select-small">Timescale</InputLabel>
       <Select
         labelId="demo-select-small"
@@ -19,9 +19,6 @@ const GraphSelection = ({timescale, handleChange}) => {
         <MenuItem value={60*60*1000}>1 Hour</MenuItem>
         <MenuItem value={24*60*60*1000}>1 Day</MenuItem>
         <MenuItem value={7*24*60*60*1000}>7 Days</MenuItem>
-        {/* <MenuItem value={30*24*60*60*1000}>1 Month</MenuItem>
-        <MenuItem value={60*24*60*60*1000}>2 Months</MenuItem>
-        <MenuItem value={90*24*60*60*1000}>3 Months</MenuItem> */}
       </Select>
     </FormControl>
   );

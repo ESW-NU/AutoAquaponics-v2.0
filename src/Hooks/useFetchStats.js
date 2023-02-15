@@ -19,6 +19,8 @@ import {
 export function useFetchStats(timescale) {
     let testTime = Math.floor((Date.now() - timescale)/1000);
     const [data, setData] = useState([]);
+    const [tolerances, setTolerances] = useState([]);
+
 
     useEffect(() => {
         getDocs(
@@ -35,8 +37,20 @@ export function useFetchStats(timescale) {
             setData(dataTemp.reverse());
         })
     }, [timescale]);
-
+    useEffect(() => {
+        getDocs(
+            query(
+                collection(db, 'tolerances'),
+            )
+        ).then(snapshot => {
+            let dataTemp = snapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id
+            }))
+            setTolerances(dataTemp);
+        })
+    }, [timescale]);
     return {
-        data
+        data, tolerances
     }
 }

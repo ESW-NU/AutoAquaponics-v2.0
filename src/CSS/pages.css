@@ -1,7 +1,6 @@
 .Pages {
     text-align: left;
     display: flex;
-    flex-wrap: wrap;
     justify-content: left;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -9,4 +8,52 @@
 
 .Pages * {
 margin: 5px;
+}
+
+.image-container {
+  padding-right: 80px;
+  position: relative;
+  float: right;
+}
+
+.autoscaling-image {
+  width: 80vh;
+}
+
+.title-card-constant-height {
+  height: 100vh;
+}
+
+.about-text {
+  text-align: justify;
+}
+
+a {
+  color: #009444;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #004b23;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #009444;
+  font-family: "Inter", sans-serif;
+  font-size: 20;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.NU {
+  color: #4E2A84;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.NU:hover {
+  color: #836EAA;
 }

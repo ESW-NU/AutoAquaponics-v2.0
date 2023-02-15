@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import ResponsiveMenu from "react-responsive-navbar";
 import Grid from "@mui/material/Grid";
 import "../CSS/CPMenuBar.css";
 
@@ -12,6 +11,17 @@ export const CPMenuBar = () => {
       justifyContent="space-evenly"
       alignItems="flex-start"
     >
+      <Grid>
+        <NavLink
+          to="tolerances"      
+          className={({ isActive }) =>
+            isActive ? "cp__nav-is-active" : "header__nav"
+          }
+        >
+          Tolerances
+        </NavLink>
+      </Grid>
+
       <Grid>
         <NavLink
           to="backwashing"
@@ -42,17 +52,6 @@ export const CPMenuBar = () => {
           }
         >
           Lights
-        </NavLink>
-      </Grid>
-
-      <Grid>
-        <NavLink
-          to="tolerances"
-          className={({ isActive }) =>
-            isActive ? "cp__nav-is-active" : "header__nav"
-          }
-        >
-          Tolerances
         </NavLink>
       </Grid>
 

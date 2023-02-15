@@ -9,6 +9,7 @@ import { ControlPanel } from "./Pages/ControlPanel";
 import { Dashboard } from "./Pages/Dashboard";
 import { Settings } from "./Pages/Settings";
 import { VideoFeed } from "./Pages/VideoFeed";
+import { Login } from "./Pages/Login";
 import { Backwashing } from "./Pages/ControlPages/Backwashing";
 import { FishFeeder } from "./Pages/ControlPages/FishFeeder";
 import { Lights } from "./Pages/ControlPages/Lights"
@@ -27,19 +28,21 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
 
-              <Route path="/video-feed" element={<VideoFeed />} />
+              <Route path="/video-stream" element={<VideoFeed />} />
               
               <Route path="/dashboard" element={<Dashboard />} />
 
               <Route path="/control-panel" element={<ControlPanel />} >
+                <Route path="tolerances"  element={<Tolerances />} />
                 <Route path="backwashing" element={<Backwashing />} />
                 <Route path="fishFeeder" element={<FishFeeder />} />
                 <Route path="lights" element={<Lights />} />
-                <Route path="tolerances" element={<Tolerances />} />
                 <Route path="waterPump" element={<WaterPump />} />  
               </Route>
 
               <Route path="/settings" element={<Settings />} />
+
+              <Route path="/login" element={<Login />} />
             </Routes>
           </div>
         </ThemeProvider>
