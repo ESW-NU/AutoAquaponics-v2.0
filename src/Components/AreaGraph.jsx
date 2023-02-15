@@ -56,6 +56,7 @@ const AreaGraph = ({ data }) => {
         <Tooltip />
 
         <Area
+          name={data[0].t.id}
           type="monotone"
           dataKey="y"
           stroke={range ? "red" : "green"}
