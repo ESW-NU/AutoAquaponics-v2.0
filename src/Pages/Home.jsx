@@ -112,9 +112,9 @@ const Home = () => {
 					See our Project Blog <Link target='_blank' href='https://eswprojects.planio.com/projects/autoaquaponics'>here</Link>.
 					<br/>
 					Download or contribute to our code on <Link target='_blank' href='https://github.com/ESW-NU/AutoAquaponics-v2.0/tree/deploy'>GitHub</Link>.
-					<br/>
+					<br/><br/>
 					This project was founded under <Link className='NU' target='_blank' href='https://esw-nu.github.io/'>Engineers for a Sustainable World @ Northwestern</Link>
-					<br/>
+					<br/><br/>
 					<i>Made possible with the support of</i>
 					<Grid container direction="row" justifyContent="space-evenly">
 						<img css={{ maxHeight: 60 }} src={esw} alt="Engineers for a Sustainable World"/>
