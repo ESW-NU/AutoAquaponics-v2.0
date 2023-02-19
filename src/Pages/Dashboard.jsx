@@ -22,7 +22,6 @@ const Dashboard = () => {
 					variable={timescale}
 					setVariable={setTimescale}
 				/>
-				you have selected {timescale}
 			</Box>
 			<GraphContainer timescale={timescale} />
 		</Box>
