@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomizedTable from "../../Components/CustomizedTable";
 // import OnOffTimer from "../../Components/OnOffTimer";
 // import ControlEntry from "../../Components/ControlEntry";
@@ -6,7 +6,6 @@ import CustomizedTable from "../../Components/CustomizedTable";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import { useState } from "react";
 import Typography from "@mui/material/Typography";
 
 const SaveControls = () => {
