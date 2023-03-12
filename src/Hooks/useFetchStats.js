@@ -1,16 +1,14 @@
-import React from "react";
+import {
+  useState,
+  useEffect
+} from "react";
 import {
     collection,
     getDocs,
-    limit,
     query,
     orderBy,
     where
 } from 'firebase/firestore';
-import {
-    useState,
-    useEffect
-} from 'react'
 import {
     db
 } from '../firebase';
