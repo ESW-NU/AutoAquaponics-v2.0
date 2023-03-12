@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AreaGraph from "./AreaGraph";
-import "../CSS/graphCard.css";
+// import "../CSS/graphCard.css";
 
 const GraphCard = ({ title, unit, data, _ }) => {
 
