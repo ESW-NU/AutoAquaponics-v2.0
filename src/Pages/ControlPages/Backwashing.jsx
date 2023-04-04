@@ -7,6 +7,9 @@ import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { FormControl } from "@mui/material";
+import {InputLabel} from "@mui/material";
+import {FilledInput }from "@mui/material";
 
 const SaveControls = () => {
   const [status, setStatus] = useState("on");
@@ -17,27 +20,51 @@ const SaveControls = () => {
         {/* <OnOffTimer />
         <FlowEntry />
         <ControlEntry title="Backwash When Flow Rate Less Than (GPH)" /> */}
-        <input
-          type="checkbox"
-          checked={status === "on"}
-          onChange={(e) => {
-            setStatus(e.target.checked ? "on" : "off");
-          }}
-        />
+        Backwash When Flow Rate is Less Than (GPH): <br/>
+        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel htmlFor="component-filled"></InputLabel>
+                <FilledInput /*ref={minInput}*/ type="number" id="component-filled" min={0}   />
+            </FormControl>
 
-        <button
+<br/>
+<button
           onClick={() => {
             console.log(status);
             // call firebase and save
           }}
-          
+      
+          className="save-button"
+          role="button"
+        >
+          Off
+        </button>
+<button
+          onClick={() => {
+            console.log(status);
+            // call firebase and save
+          }}
+      
+          className="save-button"
+          role="button"
+        >
+          Backwash Now
+        </button>
+<button
+          onClick={() => {
+            console.log(status);
+            // call firebase and save
+          }}
+      
           className="save-button"
           role="button"
         >
           Save Changes
         </button>
+
+
       </CardContent>
     </Card>
+
   );
 };
 
