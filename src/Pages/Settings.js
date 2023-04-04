@@ -1,5 +1,9 @@
 import React from "react";
 import ComingSoon from "../Components/ComingSoon";
+import { Grid } from "@mui/material";
+import {FormControl} from "@mui/material"
+import { InputLabel } from "@mui/material"
+import { FilledInput} from "@mui/material"
 
 export const Settings = () => {
     return (
