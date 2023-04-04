@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 const AreaGraph = ({ data }) => {
-  if(!data[0]) return;
+  if(!data[0] || !data[0].t) return;
   const last = data.at(-1);
   const range = last.y > last.t.max || last.y < last.t.min;
   return (
@@ -21,8 +21,8 @@ const AreaGraph = ({ data }) => {
         data={data}
         margin={{
           top: 10,
-          right: 50,
-          left: -33,
+          right: 68,
+          left: -15,
           bottom: 0,
         }}
       >
@@ -56,6 +56,7 @@ const AreaGraph = ({ data }) => {
         <Tooltip />
 
         <Area
+          name={data[0].t.id}
           type="monotone"
           dataKey="y"
           stroke={range ? "red" : "green"}

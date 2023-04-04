@@ -29,7 +29,7 @@ function App() {
               <Route path="/" element={<Home />} />
 
               <Route path="/video-stream" element={<VideoFeed />} />
-              
+
               <Route path="/dashboard" element={<Dashboard />} />
 
               <Route path="/control-panel" element={<ControlPanel />} >
@@ -37,7 +37,7 @@ function App() {
                 <Route path="backwashing" element={<Backwashing />} />
                 <Route path="fishFeeder" element={<FishFeeder />} />
                 <Route path="lights" element={<Lights />} />
-                <Route path="waterPump" element={<WaterPump />} />  
+                <Route path="waterPump" element={<WaterPump />} />
               </Route>
 
               <Route path="/settings" element={<Settings />} />

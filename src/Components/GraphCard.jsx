@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AreaGraph from "./AreaGraph";
-import "../CSS/graphCard.css";
+// import "../CSS/graphCard.css";
 
 const GraphCard = ({ title, unit, data, _ }) => {
 
@@ -22,9 +22,9 @@ const GraphCard = ({ title, unit, data, _ }) => {
         <CardContent>
           <Grid
             container
-            direction="column"
-            justifyContent="flex-start"
-            alignItems="flex-start"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
           >
             <Grid item>
               <Typography variant="h3" gutterBottom>
