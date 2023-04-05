@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import ComingSoon from './Components/ComingSoon';
 import Dashboard from './Pages/Dashboard';
+import Login from './Pages/Login';
 
 const App = () => {
 	return (
@@ -18,6 +19,7 @@ const App = () => {
 						<Route path="/dashboard" element={<Dashboard/>}/>
 						<Route path="/control-panel" element={<ComingSoon/>}/>
 						<Route path="/settings" element={<ComingSoon/>}/>
+						<Route path="/login" element={<Login/>}/>
 					</Routes>
 				</Container>
 			</ThemeProvider>

@@ -98,7 +98,9 @@ const LoginButton = () => {
 				color: "common.white",
 			}}
 		>
-			Login
+		  <NavLink to="/login" >
+				Login
+		  </NavLink>
 		</Button>
 	)
 };
