@@ -3,6 +3,7 @@
 import { Box, Stack, Typography, Link, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AboutSection from "../Components/AboutSection";
+import Typed from 'react-typed'
 
 const systemCAD = require("../Lib/PlumbingCADclear.webp");
 const plumbing = require("../Lib/plumbing.webp");
@@ -32,7 +33,7 @@ const Home = () => {
 			<Stack direction={{ xs: "column-reverse", md: "row" }} alignItems="center">
 				<img style={{ width: "50vw" }} src={systemCAD} alt="System CAD"/>
 				<Box>
-					<Typography variant="h1">Northwestern AutoAquaponics</Typography>
+					<Typography variant="h1"><Typed strings={["Northwestern AutoAquaponics"]} typeSpeed={70} onComplete={(self) => self.cursor.remove()}/></Typography>
 					<Typography variant="body1">
 						A fully automated aquaponic system that grows both fish and plants
 						unattended for months and can be <Link component={RouterLink} to="/dashboard">monitored</Link> and <Link component={RouterLink} to="/control-panel/tolerances">controlled</Link> remotely
