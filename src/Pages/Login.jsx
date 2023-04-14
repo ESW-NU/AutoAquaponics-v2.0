@@ -1,11 +1,13 @@
 import React from "react";
 import { getAuth, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import { Navigate } from 'react-router-dom';
 import { useState } from "react";
 
 const Login = () => {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [redirectToHome, setRedirectToHome] = useState(false);
 	const auth = getAuth();
 
 	const handleLogout = () => {
@@ -24,12 +26,17 @@ const Login = () => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
 			console.log("SIGNED IN")
+			setRedirectToHome(true);
 			// Sign-in successful.
 		} catch (error) {
 			// An error happened.
 			console.error(error);
 		}
 	};
+
+  if (redirectToHome) {
+    return <Navigate to="/" />;
+  }
 
 	return (
 	  <div className="App">
