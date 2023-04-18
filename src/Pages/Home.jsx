@@ -3,6 +3,7 @@
 import { Box, Stack, Typography, Link, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AboutSection from "../Components/AboutSection";
+import Typed from 'react-typed';
 
 const systemCAD = require("../Lib/PlumbingCADclear.webp");
 const plumbing = require("../Lib/plumbing.webp");
