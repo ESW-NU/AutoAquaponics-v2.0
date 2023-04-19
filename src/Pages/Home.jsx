@@ -29,7 +29,7 @@ const msab = require("../Lib/msab.webp");
 
 const Home = () => {
 	return (
-		<>
+		<Stack direction="column" spacing={3}>
 			<Stack direction={{ xs: "column-reverse", md: "row" }} alignItems="center">
 				<img style={{ width: "50vw" }} src={systemCAD} alt="System CAD"/>
 				<Box>
@@ -44,7 +44,7 @@ const Home = () => {
 				<AboutSection
 					title="Plumbing"
 					images={[plumbing, sump, flow, filter]}
-					image_left={false}
+					image_left={true}
 				>
 					Our plumbing system serves as the backbone of AutoAquaponics and facilitates the efficient
 					transport of nutrients to the plants. It also removes solid waste and potentially toxic
@@ -57,7 +57,7 @@ const Home = () => {
 				<AboutSection
 					title="Electronics"
 					images={[sensor, rpi, outlet, motorized]}
-					image_left={true}
+					image_left={false}
 				>
 					These electronics put the Auto in AutoAquaponics, and allow us to both monitor and control
 					the system from anywhere in the world. Our electrical system currently features a smart
@@ -72,7 +72,7 @@ const Home = () => {
 				<AboutSection
 					title="Software"
 					images={[software1, videoStream, code, software2]}
-					image_left={false}
+					image_left={true}
 				>
 					AutoAquaponics’ software allows users to monitor and control the system remotely, and it
 					uses Python and C++ to run the electronics that interact with our physical system. Our
@@ -88,7 +88,7 @@ const Home = () => {
 				<AboutSection
 					title="Biology"
 					images={[fish, topView, biofilm, plants]}
-					image_left={true}
+					image_left={false}
 				>
 					Biology is an integral part of any farming system, and ours is no exception.
 					AutoAquaponics cycles nutrients between aquatic animals, microbes, and plants, all of
@@ -124,7 +124,7 @@ const Home = () => {
 					</Grid>
 				</AboutSection>
 			</Stack>
-		</>
+		</Stack>
 	)
 };
 
