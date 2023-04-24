@@ -29,7 +29,7 @@ const AreaGraph = ({ name, unit, data, isGreen }) => {
 
 		const point = payload[0].payload; // don't ask; the documentation for recharts is terrible
 		return active && (
-			<Paper sx={{ p: 1 }}>
+			<Paper sx={{ p: 1, width: 170 }}>
 				<Typography variant="body3">{point.x.toLocaleString()}</Typography>
 				<Typography variant="body1">{point.y} {unit}</Typography>
 			</Paper>
