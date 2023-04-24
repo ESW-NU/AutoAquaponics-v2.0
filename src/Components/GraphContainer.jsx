@@ -5,7 +5,7 @@ import { dashboardTrackedStats } from "../dashboardTrackedStats";
 import { useFetchStats } from "../Hooks/useFetchStats";
 
 const GraphContainer = ({ timescale }) => {
-	const { stats, tolerances } = useFetchStats(timescale);
+	const { loading, stats, tolerances } = useFetchStats(timescale);
 
 	return (
 		<Grid
@@ -18,11 +18,12 @@ const GraphContainer = ({ timescale }) => {
 					<GraphCard
 						name={name}
 						unit={unit}
+						loading={loading}
 						data={stats.map(({ unixTime, stats }) => ({
 							x: new Date(unixTime * 1000),
 							y: stats[key],
 						}))}
-						tolerance={tolerances[key]}
+						tolerance={tolerances.hasOwnProperty(key) ? tolerances[key] : { min: 0, max: 0 }} // in case tolerances haven't loaded in yet
 						timescale={timescale}
 					/>
 				</Grid>

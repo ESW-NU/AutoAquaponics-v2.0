@@ -4,8 +4,8 @@ import { db } from '../firebase';
 import { dashboardTrackedStats } from "../dashboardTrackedStats";
 
 /*
-Returns { stats, tolerances } where stats is an array of objects representating the stats at a
-certain time and tolerances is the an object where each property's
+Returns { loading, stats, tolerances } where stats is an array of objects representating the stats
+at a certain time and tolerances is the an object where each property's
 key is the key of a dashboard-tracked stat, and the value is a { min, max } object.
 
 Data type of stats: {
@@ -23,22 +23,27 @@ Data type of tolerances: {
 }
 */
 export function useFetchStats(timescale) {
-	let testTime = Math.floor((Date.now() - timescale) / 1000);
+	const [loading, setLoading] = useState(true);
 
 	// get stats
 	const [stats, setStats] = useState([]);
+	const testTime = Math.floor((Date.now() - timescale) / 1000);
 	useEffect(() => {
+		setLoading(true);
 		getDocs(
 			query(
 				collection(db, 'stats'),
 				where('unix_time', '>', testTime),
 				orderBy('unix_time', 'asc')
 			)
-		).then(snapshot => setStats(convertStatsSnapshot(snapshot)));
+		).then(snapshot => {
+			setStats(convertStatsSnapshot(snapshot));
+			setLoading(false);
+		});
 	}, [timescale]);
 
 	// get tolerances
-	const [tolerances, setTolerances] = useState([]);
+	const [tolerances, setTolerances] = useState({});
 	useEffect(() => {
 		getDocs(
 			query(
@@ -47,7 +52,7 @@ export function useFetchStats(timescale) {
 		).then(snapshot => setTolerances(convertTolerancesSnapshot(snapshot)));
 	}, []);
 
-	return { stats, tolerances };
+	return { loading, stats, tolerances };
 }
 
 /*
