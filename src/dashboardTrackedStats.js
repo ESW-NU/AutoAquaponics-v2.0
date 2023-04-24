@@ -6,7 +6,7 @@ export const dashboardTrackedStats = [
 	{ key: "TDS", name: "Total Dissolved Solids", unit: "ppm" },
 	{ key: "air_temp",  name: "Air Temperature", unit: "ºC" },
     { key: "distance", name: "Water Level", unit: "cm" },
-    { key: "humidity", name: "Humidity", unit: "humidity" },
+    { key: "humidity", name: "Humidity", unit: "%" },
     { key: "pH", name: "pH", unit: "" },
     { key: "water_temp", name: "Water Temperature", unit: "ºC" },
 ];

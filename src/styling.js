@@ -28,6 +28,11 @@ const themeBase = createTheme({
 			textTransform: "none",
 			fontSize: 18,
 		},
+		body3: {
+			fontFamily: "Inter",
+			textTransform: "none",
+			fontSize: 14
+		},
 		title: {
 			fontFamily: "Space Grotesk, sans-serif",
 			textTransform: "none",

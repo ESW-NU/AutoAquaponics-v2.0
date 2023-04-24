@@ -1,54 +1,47 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import { Paper, Typography, Stack, Box } from "@mui/material";
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import AreaGraph from "./AreaGraph";
-// import "../CSS/graphCard.css";
 
-const GraphCard = ({ title, unit, data, _ }) => {
+const overflowStyle = { whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" };
+const verticalCenteredStyle = { height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" };
 
-  const dataO = Object.values(data);
-  const dataObj = dataO.filter(function isPositive(num) {
-    return num.y >= 0;
-  });
-  let last = dataObj.slice(-1)[0]
-  let mostRecentDataPoint = (typeof last === 'undefined') ? null : last.y;
-  const mostRecentDataPointRounded = Math.round(mostRecentDataPoint);
+const GraphCard = ({ name, unit, data, tolerance, timescale }) => {
+	const positiveData = data.filter(({ y }) => y >= 0);
+	const hasData = positiveData.length > 0;
+	const latestY = hasData ? positiveData.at(-1).y : NaN;
+	const inRange = !Number.isNaN(latestY) && latestY <= tolerance.max && latestY >= tolerance.min;
 
-  return (
-    <>
-      <Card>
-        <CardContent>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography variant="h3" gutterBottom>
-                {title}
-              </Typography>
-            </Grid>
+	const titleBar = (
+		<Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ height: 60 }}>
+			<Typography variant="h3" sx={overflowStyle}>{name}</Typography>
+			{hasData ?
+				<Stack direction="row" alignItems="flex-end">
+					<Typography variant="h1">{Math.round(latestY).toString()}</Typography>
+					<Typography variant="h3">{unit}</Typography>
+				</Stack>
+			:
+				<Typography variant="h3">no data</Typography>
+			}
+		</Stack>
+	);
+	const content = hasData ? (
+		<AreaGraph name={name} unit={unit} data={positiveData} isGreen={inRange}/>
+	) : (
+		<Box sx={verticalCenteredStyle}>
+			<WarningAmberIcon sx={{ fontSize: 128 }}/>
+			<Typography variant="body2">There doesn't seem to be any data</Typography>
+		</Box>
+	);
 
-            <Grid item>
-              <Grid
-                container
-                direction="row"
-                justifyContent="flex-start"
-                alignItems="flex-end"
-              >
-                <Typography variant="h1">{mostRecentDataPointRounded}</Typography>
-                <Typography variant="h3">{unit}</Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <AreaGraph data={dataObj}></AreaGraph>
-        </CardContent>
-      </Card>
-    </>
-  );
+	return (
+		<Paper sx={{ p: 2 }}>
+			{titleBar}
+			<Box sx={{ height: 300 }}>
+				{content}
+			</Box>
+		</Paper>
+	)
 };
+
 
 export default GraphCard;

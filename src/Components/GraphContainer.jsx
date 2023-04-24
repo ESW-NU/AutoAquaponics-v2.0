@@ -16,19 +16,19 @@ const GraphContainer = ({ timescale }) => {
 			{dashboardTrackedStats.map(({ key, name, unit }) => (
 				<Grid item xs={1} key={key}>
 					<GraphCard
-						title={name}
+						name={name}
 						unit={unit}
 						data={stats.map(({ unixTime, stats }) => ({
 							x: new Date(unixTime * 1000),
 							y: stats[key],
-							t: tolerances[key],
 						}))}
+						tolerance={tolerances[key]}
 						timescale={timescale}
 					/>
 				</Grid>
 			))}
 		</Grid>
 	);
-}
+};
 
 export default GraphContainer;
