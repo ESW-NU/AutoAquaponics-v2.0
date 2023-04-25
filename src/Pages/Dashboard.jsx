@@ -10,15 +10,10 @@ const timescaleOptions = [ // in seconds, not milliseconds
 ];
 
 const Dashboard = () => {
-	const [isPending, startTransition] = useTransition();
 	const [zoom, setZoom] = useState(false); // whether to zoom in on available portion of graph
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
 	const [endTime, setEndTime] = useState(timeNowInSeconds());
 	const timeBounds = [endTime - timescale, endTime];
-
-	console.time("graphcontainer");
-	const graphContainer = <GraphContainer timeBounds={timeBounds} zoom={zoom}/>;
-	console.timeEnd("graphcontainer");
 
 	return (
 		<Box>
@@ -42,7 +37,7 @@ const Dashboard = () => {
 					onChange={() => setZoom(!zoom)}
 				/>
 			</Stack>
-			{graphContainer}
+			<GraphContainer timeBounds={timeBounds} zoom={zoom}/>
 		</Box>
 	);
 };

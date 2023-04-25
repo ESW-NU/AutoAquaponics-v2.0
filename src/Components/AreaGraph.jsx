@@ -58,6 +58,7 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 					type="number"
 					domain={zoom ? ['dataMin', 'dataMax'] : timeBounds}
 					style={theme.typography.body3}
+					interval="preserveStartEnd"
 				/>
 				<YAxis style={theme.typography.body3} domain={[0, 'auto']} allowDataOverflow={true}/>
 				<Area
