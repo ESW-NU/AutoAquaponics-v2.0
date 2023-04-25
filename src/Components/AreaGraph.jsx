@@ -18,7 +18,7 @@ const gradientBad = (
 	</linearGradient>
 );
 
-const AreaGraph = ({ name, unit, data, isGreen, timeBounds, zoom }) => {
+const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 	const theme = useTheme();
 
 	const [color, gradientName] = isGreen ? [colorGood, gradientGoodName] : [colorBad, gradientBadName];
@@ -31,7 +31,9 @@ const AreaGraph = ({ name, unit, data, isGreen, timeBounds, zoom }) => {
 		return active && (
 			<Paper sx={{ p: 1, width: 170 }}>
 				<Typography variant="body3">{new Date(point.x * 1000).toLocaleString()}</Typography>
-				<Typography variant="body1">{point.y} {unit}</Typography>
+				<Typography variant="body1">
+					{Number.isNaN(point.y) ? "bad reading" : `${point.y} ${unit}`}
+				</Typography>
 			</Paper>
 		);
 	};
@@ -39,7 +41,7 @@ const AreaGraph = ({ name, unit, data, isGreen, timeBounds, zoom }) => {
 	return (
 		<ResponsiveContainer>
 			<AreaChart
-				data={data}
+				data={stats}
 				margin={{ left: -20}} // left margin strays too far; is there a better way to fix?
 			>
 				<defs>
@@ -57,7 +59,7 @@ const AreaGraph = ({ name, unit, data, isGreen, timeBounds, zoom }) => {
 					domain={zoom ? ['dataMin', 'dataMax'] : timeBounds}
 					style={theme.typography.body3}
 				/>
-				<YAxis style={theme.typography.body3}/>
+				<YAxis style={theme.typography.body3} domain={[0, 'auto']} allowDataOverflow={true}/>
 				<Area
 					dataKey="y"
 					name={name}

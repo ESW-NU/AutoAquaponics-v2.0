@@ -5,25 +5,25 @@ import AreaGraph from "./AreaGraph";
 const overflowStyle = { whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" };
 const verticalCenteredStyle = { height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" };
 
-const GraphCard = ({ name, unit, loading, data, tolerance, timeBounds, zoom }) => {
-	const positiveData = data.filter(({ y }) => y >= 0);
-	const hasData = positiveData.length > 0;
-	const latestY = hasData ? positiveData.at(-1).y : NaN;
+const GraphCard = ({ name, unit, statKey, loading, stats, tolerance, timeBounds, zoom }) => {
+	const data = stats.map(({ unixTime, stats }) => ({
+		x: unixTime,
+		y: stats[statKey],
+	}));
+	const hasData = data.length > 0;
+	const latestY = hasData ? data.at(-1).y : NaN;
 	const inRange = !Number.isNaN(latestY) && latestY <= tolerance.max && latestY >= tolerance.min;
 
 	const titleBar = (
-		<Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ height: 60 }}>
-			<Typography variant="h3" sx={overflowStyle}>{name}</Typography>
-			{loading ?
-				<Typography variant="h3">loading</Typography>
-			: hasData ?
-				<Stack direction="row" alignItems="flex-end">
-					<Typography variant="h1">{Math.round(latestY).toString()}</Typography>
-					<Typography variant="h3">{unit}</Typography>
-				</Stack>
-			:
-				<Typography variant="h3">no data</Typography>
-			}
+		<Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ height: 60, typography: "h3" }}>
+			<Box sx={overflowStyle}>{name}</Box>
+			{loading ? "loading"
+			: !hasData ? "no data"
+			: Number.isNaN(latestY) ? "bad reading"
+			: <Stack direction="row" alignItems="flex-end">
+				<Typography variant="h1">{Math.round(latestY).toString()}</Typography>
+				<Typography variant="h3">{unit}</Typography>
+			</Stack>}
 		</Stack>
 	);
 	const content = loading ? (
@@ -32,7 +32,7 @@ const GraphCard = ({ name, unit, loading, data, tolerance, timeBounds, zoom }) =
 			<Typography variant="body2">Loading</Typography>
 		</Box>
 	) : hasData ? (
-		<AreaGraph name={name} unit={unit} data={positiveData} isGreen={inRange} timeBounds={timeBounds} zoom={zoom}/>
+		<AreaGraph name={name} unit={unit} stats={data} isGreen={inRange} timeBounds={timeBounds} zoom={zoom}/>
 	) : (
 		<Box sx={verticalCenteredStyle}>
 			<WarningAmberIcon color="warning" sx={{ fontSize: 128 }}/>

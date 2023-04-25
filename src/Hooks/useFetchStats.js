@@ -62,7 +62,7 @@ each representing the stats at a certain time. (see comment on useFetchStats for
 function convertStatsSnapshot(snapshot) {
 	return snapshot.docs.map(doc => ({
 		unixTime: doc.get("unix_time"),
-		stats: Object.fromEntries(dashboardTrackedStats.map(({ key }) => [key, doc.get(key)])),
+		stats: Object.fromEntries(dashboardTrackedStats.map(({ statKey }) => [statKey, doc.get(statKey)])),
 	}));
 }
 

@@ -1,5 +1,5 @@
 import { Box, FormControlLabel, Stack, Switch, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import SelectMenu from "../Components/SelectMenu";
 import GraphContainer from "../Components/GraphContainer";
 
@@ -10,10 +10,15 @@ const timescaleOptions = [ // in seconds, not milliseconds
 ];
 
 const Dashboard = () => {
+	const [isPending, startTransition] = useTransition();
 	const [zoom, setZoom] = useState(false); // whether to zoom in on available portion of graph
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
 	const [endTime, setEndTime] = useState(timeNowInSeconds());
 	const timeBounds = [endTime - timescale, endTime];
+
+	console.time("graphcontainer");
+	const graphContainer = <GraphContainer timeBounds={timeBounds} zoom={zoom}/>;
+	console.timeEnd("graphcontainer");
 
 	return (
 		<Box>
@@ -26,7 +31,7 @@ const Dashboard = () => {
 						variable={timescale}
 						setVariable={newTimescale => {
 							setTimescale(newTimescale);
-							setEndTime(timeNowInSeconds);
+							setEndTime(timeNowInSeconds());
 						}}
 					/>
 				</Box>
@@ -37,7 +42,7 @@ const Dashboard = () => {
 					onChange={() => setZoom(!zoom)}
 				/>
 			</Stack>
-			<GraphContainer timeBounds={timeBounds} zoom={zoom}/>
+			{graphContainer}
 		</Box>
 	);
 };
