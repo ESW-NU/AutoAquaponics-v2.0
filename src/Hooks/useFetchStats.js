@@ -22,25 +22,25 @@ Data type of tolerances: {
 	},
 }
 */
-export function useFetchStats(timescale) {
+export function useFetchStats(timeBounds) {
 	const [loading, setLoading] = useState(true);
 
 	// get stats
 	const [stats, setStats] = useState([]);
-	const testTime = Math.floor((Date.now() - timescale) / 1000);
 	useEffect(() => {
 		setLoading(true);
 		getDocs(
 			query(
 				collection(db, 'stats'),
-				where('unix_time', '>', testTime),
+				where('unix_time', '>', timeBounds[0]),
+				where('unix_time', '<', timeBounds[1]),
 				orderBy('unix_time', 'asc')
 			)
 		).then(snapshot => {
 			setStats(convertStatsSnapshot(snapshot));
 			setLoading(false);
 		});
-	}, [timescale]);
+	}, [timeBounds[0], timeBounds[1]]); // specify the bounds individually, otherwise React thinks the bounds changed and will re-run the Effect
 
 	// get tolerances
 	const [tolerances, setTolerances] = useState({});

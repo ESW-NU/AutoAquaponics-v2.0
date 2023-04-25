@@ -4,8 +4,8 @@ import Grid from "@mui/material/Grid";
 import { dashboardTrackedStats } from "../dashboardTrackedStats";
 import { useFetchStats } from "../Hooks/useFetchStats";
 
-const GraphContainer = ({ timescale }) => {
-	const { loading, stats, tolerances } = useFetchStats(timescale);
+const GraphContainer = ({ timeBounds, zoom }) => {
+	const { loading, stats, tolerances } = useFetchStats(timeBounds);
 
 	return (
 		<Grid
@@ -20,11 +20,12 @@ const GraphContainer = ({ timescale }) => {
 						unit={unit}
 						loading={loading}
 						data={stats.map(({ unixTime, stats }) => ({
-							x: new Date(unixTime * 1000),
+							x: unixTime,
 							y: stats[key],
 						}))}
 						tolerance={tolerances.hasOwnProperty(key) ? tolerances[key] : { min: 0, max: 0 }} // in case tolerances haven't loaded in yet
-						timescale={timescale}
+						timeBounds={timeBounds}
+						zoom={zoom}
 					/>
 				</Grid>
 			))}

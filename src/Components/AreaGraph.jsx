@@ -18,7 +18,7 @@ const gradientBad = (
 	</linearGradient>
 );
 
-const AreaGraph = ({ name, unit, data, isGreen }) => {
+const AreaGraph = ({ name, unit, data, isGreen, timeBounds, zoom }) => {
 	const theme = useTheme();
 
 	const [color, gradientName] = isGreen ? [colorGood, gradientGoodName] : [colorBad, gradientBadName];
@@ -30,7 +30,7 @@ const AreaGraph = ({ name, unit, data, isGreen }) => {
 		const point = payload[0].payload; // don't ask; the documentation for recharts is terrible
 		return active && (
 			<Paper sx={{ p: 1, width: 170 }}>
-				<Typography variant="body3">{point.x.toLocaleString()}</Typography>
+				<Typography variant="body3">{new Date(point.x * 1000).toLocaleString()}</Typography>
 				<Typography variant="body1">{point.y} {unit}</Typography>
 			</Paper>
 		);
@@ -49,7 +49,14 @@ const AreaGraph = ({ name, unit, data, isGreen }) => {
 				{/* Why is the documentation in ReCharts so bad ;-; Dear maintainer, if you care
 				enough then feel free to switch libraries lol */}
 				<CartesianGrid strokeDasharray="3 3"/>
-				<XAxis tick={false}/>
+				<XAxis
+					dataKey="x"
+					tickFormatter={(unixTime) => new Date(unixTime * 1000).toLocaleString([], { dateStyle: "short", timeStyle: "short" })}
+					scale="utc"
+					type="number"
+					domain={zoom ? ['dataMin', 'dataMax'] : timeBounds}
+					style={theme.typography.body3}
+				/>
 				<YAxis style={theme.typography.body3}/>
 				<Area
 					dataKey="y"
