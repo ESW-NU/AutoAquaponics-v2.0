@@ -7,10 +7,14 @@ import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { FormControl } from "@mui/material";
 import {InputLabel} from "@mui/material";
 import {FilledInput }from "@mui/material";
+import { Switch } from '@mui/material';
+import {FormGroup, FormControlLabel } from "@mui/material";
+import OnOffTimer from "../../Components/OnOffTimer";
 
 const SaveControls = () => {
   const [status, setStatus] = useState("on");
@@ -28,40 +32,19 @@ const SaveControls = () => {
             </FormControl>
 
 <br/>
-<button
-          onClick={() => {
-            console.log(status);
-            // call firebase and save
-          }}
-      
-          className="save-button"
-          role="button"
-        >
-          Off
-        </button>
-<button
-          onClick={() => {
-            console.log(status);
-            // call firebase and save
-          }}
-      
-          className="save-button"
-          role="button"
-        >
-          Backwash Now
-        </button>
-<button
-          onClick={() => {
-            console.log(status);
-            // call firebase and save
-          }}
-      
-          className="save-button"
-          role="button"
-        >
-          Save Changes
-        </button>
+<FormControl sx={{ m: 1, maxWidth: 1 }} size="xs">
 
+      <FormGroup>
+      <OnOffTimer lightORpump={"lights"} shelfbed={"shelf1"}/></FormGroup>
+        
+
+    </FormControl>
+    <button className="button-18">	       
+			Backwash Now
+		</button>
+    <button className="button-18">	       
+		 Save
+		</button>
 
       </CardContent>
     </Card>
