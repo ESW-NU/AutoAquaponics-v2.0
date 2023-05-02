@@ -16,6 +16,7 @@ const SelectMenu = ({ label, options, variable, setVariable }) => {
 			>
 				{options.map(({ value, display }) =>
 					<MenuItem
+						key={display}
 						sx={{ typography: typographyVariant }}
 						value={value}
 					>
