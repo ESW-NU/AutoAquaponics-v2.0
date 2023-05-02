@@ -1,5 +1,6 @@
 import { Paper, Typography, Box, Grid, ImageList, ImageListItem } from "@mui/material";
-
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 const AboutSection = ({ image_left, title, images, children }) => {
 	const text = (
@@ -17,7 +18,8 @@ const AboutSection = ({ image_left, title, images, children }) => {
 	);
 
 	return (
-		<Paper sx={{ minHeight: 300, p: 2 }}>
+		<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
+			<Paper sx={{ minHeight: 300, p: 2 }}>
 			<Grid
 				container
 				columns={2}
@@ -32,6 +34,7 @@ const AboutSection = ({ image_left, title, images, children }) => {
 				<Grid item xs={1}>{imageList}</Grid>
 			</Grid>
 		</Paper>
+		</AnimationOnScroll>
 	)
 };
 

@@ -5,6 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 import AboutSection from "../Components/AboutSection";
 import Typed from 'react-typed';
 
+
 const systemCAD = require("../Lib/PlumbingCADclear.webp");
 const plumbing = require("../Lib/plumbing.webp");
 const filter = require("../Lib/filter.webp");
@@ -41,7 +42,8 @@ const Home = () => {
 				</Box>
 			</Stack>
 			<Stack direction="column" spacing={3}>
-				<AboutSection
+			
+			<AboutSection
 					title="Plumbing"
 					images={[plumbing, sump, flow, filter]}
 					image_left={true}
@@ -54,6 +56,9 @@ const Home = () => {
 					filtration tank, and a biofilm reactor to convert ammonia from fish waste into nitrate for
 					the plants.
 				</AboutSection>
+				
+				
+				
 				<AboutSection
 					title="Electronics"
 					images={[sensor, rpi, outlet, motorized]}
