@@ -1,8 +1,8 @@
 import React from "react";
-import { getAuth, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Navigate } from 'react-router-dom';
 import { useState } from "react";
-import { Button, Stack, FilledInput } from "@mui/material";
+import { Button, Stack, FilledInput, Typography } from "@mui/material";
 
 const Login = () => {
 
@@ -10,6 +10,7 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 	const [redirectToHome, setRedirectToHome] = useState(false);
 	const auth = getAuth();
+	// const provider = new GoogleAuthProvider();
 
 	const handleLogout = () => {
 		const auth = getAuth();
@@ -42,8 +43,12 @@ const Login = () => {
 	return (
 	  <div className="App">
 			<div className="Pages">
+				<Typography variant="body2" textAlign="center">
+					Log in for admin access to modify control panel.
+				</Typography>
 				<form onSubmit={handleSubmit}>     
-					<Stack spacing={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }}>
+					<Stack spacing={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }} 
+					alignItems="center">
 						<FilledInput
 							variant="filled"
 							type="email"
