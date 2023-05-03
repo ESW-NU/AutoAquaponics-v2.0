@@ -49,6 +49,20 @@ const Login = () => {
 				<form onSubmit={handleSubmit}>     
 					<Stack spacing={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }} 
 					alignItems="center">
+						<Button
+							variant="link"
+							color="clickme"
+							sx={{
+								borderRadius: 100,
+								px: 2,
+								typography: "link",
+								color: "common.white",
+							}}>
+							<a href="https://docs.google.com/forms/d/e/1FAIpQLSdnzIE5u7dGyqt3qfcFstCCYsDW7Hskc6lQtDEGkmvgLd2bbA/viewform?usp=sf_link"
+							 target="_blank" rel="noopener noreferrer"> 
+								request an account
+							</a>
+						</Button>
 						<FilledInput
 							variant="filled"
 							type="email"
