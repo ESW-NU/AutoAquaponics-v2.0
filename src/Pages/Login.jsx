@@ -9,8 +9,8 @@ const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [redirectToHome, setRedirectToHome] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 	const auth = getAuth();
-	// const provider = new GoogleAuthProvider();
 
 	const handleLogout = () => {
 		const auth = getAuth();
@@ -31,13 +31,22 @@ const Login = () => {
 			setRedirectToHome(true);
 			// Sign-in successful.
 		} catch (error) {
-			// An error happened.
-			console.error(error);
+			console.log(error)
+			if (error.message.includes("auth/user-not-found") || error.message.includes("auth/invalid-email") ) {
+				console.log("user not found")
+				setErrorMessage("Incorrect email");
+			}
+			else if (error.message.includes("auth/wrong-password")) {
+				setErrorMessage("Incorrect password");
+			}
+			else {
+				setErrorMessage("Unknown error occurred");
+			}
 		}
 	};
 
   if (redirectToHome) {
-    return <Navigate to="/" />;
+		return <Navigate to="/" />;
   }
 
 	return (
@@ -75,6 +84,7 @@ const Login = () => {
 									maxWidth: 400,
 									maxHeight: 45
 							}}
+							error={errorMessage.includes("email")}
 						/>  
 						<FilledInput
 							type="password"
@@ -87,7 +97,9 @@ const Login = () => {
 									minWidth: 200,
 									maxWidth: 400
 							}}
+							error={errorMessage.includes("password")}
 						/>
+						{errorMessage && <Typography variant="body2" color="#D02226">{errorMessage}</Typography>}
 						<Button type="submit" 
 										sx={{
 												borderRadius: 75,
