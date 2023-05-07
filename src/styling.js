@@ -18,15 +18,17 @@ const themeBase = createTheme({
 			textTransform: "none",
 			fontSize: 24,
 		},
-		body1: {
+		h4: {
 			fontFamily: "Inter",
 			textTransform: "none",
 			fontSize: 24,
+			lineHeight: 1.5,
 		},
-		body2: {
+		body1: {
 			fontFamily: "Inter",
 			textTransform: "none",
 			fontSize: 18,
+			// this makes it look exactly like the old body2 lineHeight: 1.43,
 		},
 		title: {
 			fontFamily: "Space Grotesk, sans-serif",
@@ -39,7 +41,7 @@ const themeBase = createTheme({
 			textTransform: "none",
 			fontSize: 18,
 			textDecoration: "none",
-		}
+		},
 	},
 	palette: {
 		primary: {

@@ -33,7 +33,7 @@ const Home = () => {
 				<img style={{ width: "50vw" }} src={systemCAD} alt="System CAD"/>
 				<Box>
 					<Typography variant="h1">Northwestern AutoAquaponics</Typography>
-					<Typography variant="body1">
+					<Typography variant="h4">
 						A fully automated aquaponic system that grows both fish and plants
 						unattended for months and can be <Link component={RouterLink} to="/dashboard">monitored</Link> and <Link component={RouterLink} to="/control-panel/tolerances">controlled</Link> remotely
 					</Typography>
