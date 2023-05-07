@@ -1,8 +1,9 @@
 import React from "react";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Navigate } from 'react-router-dom';
 import { useState } from "react";
 import { Button, Stack, FilledInput, Typography } from "@mui/material";
+import { auth } from "../firebase";
 
 const Login = () => {
 
@@ -10,19 +11,17 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 	const [redirectToHome, setRedirectToHome] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
-	const auth = getAuth();
 
 	const handleLogout = () => {
-		const auth = getAuth();
-			signOut(auth).then(() => {
-				console.log("SIGNED OUT")
-			// Sign-out successful.
-			}).catch((error) => {
-			// An error happened.
-				console.error(error);
-			});
+		signOut(auth).then(() => {
+			console.log("SIGNED OUT")
+		// Sign-out successful.
+		}).catch((error) => {
+		// An error happened.
+			console.error(error);
+		});
 	};
-	
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -55,8 +54,8 @@ const Login = () => {
 				<Typography variant="body2" textAlign="center">
 					Log in for admin access to modify control panel.
 				</Typography>
-				<form onSubmit={handleSubmit}>     
-					<Stack spacing={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }} 
+				<form onSubmit={handleSubmit}>
+					<Stack spacing={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }}
 					alignItems="center">
 						<Button
 							variant="link"
@@ -68,7 +67,7 @@ const Login = () => {
 								color: "common.white",
 							}}>
 							<a href="https://docs.google.com/forms/d/e/1FAIpQLSdnzIE5u7dGyqt3qfcFstCCYsDW7Hskc6lQtDEGkmvgLd2bbA/viewform?usp=sf_link"
-							 target="_blank" rel="noopener noreferrer"> 
+							 target="_blank" rel="noopener noreferrer">
 								request an account
 							</a>
 						</Button>
@@ -85,7 +84,7 @@ const Login = () => {
 									maxHeight: 45
 							}}
 							error={errorMessage.includes("email")}
-						/>  
+						/>
 						<FilledInput
 							type="password"
 							value={password}
@@ -100,7 +99,7 @@ const Login = () => {
 							error={errorMessage.includes("password")}
 						/>
 						{errorMessage && <Typography variant="body2" color="#D02226">{errorMessage}</Typography>}
-						<Button type="submit" 
+						<Button type="submit"
 										sx={{
 												borderRadius: 75,
 												px: 2,
@@ -111,7 +110,7 @@ const Login = () => {
 						>
 							Login
 						</Button>
-						<Button	
+						<Button
 							variant="outlined"
 							sx={{
 									borderRadius: 100,

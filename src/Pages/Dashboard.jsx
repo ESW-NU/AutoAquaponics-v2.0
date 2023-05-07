@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../Hooks/UserContext";
 import SelectMenu from "../Components/SelectMenu";
 import GraphContainer from "../Components/GraphContainer";
 
@@ -11,9 +12,13 @@ const timescaleOptions = [
 
 const Dashboard = () => {
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
+	const user = useContext(UserContext);
 
 	return (
 		<Box>
+			<Box>
+				The current user is {JSON.stringify(user)}
+			</Box>
 			<Typography variant="h3">System Sensors</Typography>
 			<Box sx={{ maxWidth: 200, my: 3 }}>
 				<SelectMenu
