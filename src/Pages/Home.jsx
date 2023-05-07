@@ -4,6 +4,8 @@ import { Box, Stack, Typography, Link, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AboutSection from "../Components/AboutSection";
 import Typed from 'react-typed';
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 
 const systemCAD = require("../Lib/PlumbingCADclear.webp");
@@ -43,11 +45,12 @@ const Home = () => {
 			</Stack>
 			<Stack direction="column" spacing={3}>
 			
-			<AboutSection
+			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
+				<AboutSection
 					title="Plumbing"
 					images={[plumbing, sump, flow, filter]}
 					image_left={true}
-				>
+					>
 					Our plumbing system serves as the backbone of AutoAquaponics and facilitates the efficient
 					transport of nutrients to the plants. It also removes solid waste and potentially toxic
 					contaminants from the fish tank to ensure the health of our fish. AutoAquaponics’ plumbing
@@ -56,9 +59,10 @@ const Home = () => {
 					filtration tank, and a biofilm reactor to convert ammonia from fish waste into nitrate for
 					the plants.
 				</AboutSection>
+			</AnimationOnScroll>
 				
 				
-				
+			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1}>
 				<AboutSection
 					title="Electronics"
 					images={[sensor, rpi, outlet, motorized]}
@@ -74,6 +78,9 @@ const Home = () => {
 					level) to help us understand the state of the system in real time. The Raspberry Pi pushes
 					the sensor data to a remote Firebase database, which can be seen on the Dashboard page.
 				</AboutSection>
+			</AnimationOnScroll>	
+
+			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
 				<AboutSection
 					title="Software"
 					images={[software1, videoStream, code, software2]}
@@ -90,6 +97,9 @@ const Home = () => {
 					lighting/flooding durations. Video Stream will include a live stream video of our fish
 					that anyone can access. Stay tuned for more!
 				</AboutSection>
+			</AnimationOnScroll>
+
+			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1}>
 				<AboutSection
 					title="Biology"
 					images={[fish, topView, biofilm, plants]}
@@ -108,6 +118,7 @@ const Home = () => {
 					living in the system (ramshorn snails, cherry shrimps, and gammarus pulex) to serve as
 					live food sources for the fish.
 				</AboutSection>
+			</AnimationOnScroll>
 				<AboutSection
 					title="Contact Us"
 					images={[team]}
