@@ -1,5 +1,6 @@
 import { Box, FormControlLabel, Stack, Switch, Typography } from "@mui/material";
-import { useState, useTransition } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../Hooks/UserContext";
 import SelectMenu from "../Components/SelectMenu";
 import GraphContainer from "../Components/GraphContainer";
 
@@ -14,9 +15,13 @@ const Dashboard = () => {
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
 	const [endTime, setEndTime] = useState(timeNowInSeconds());
 	const timeBounds = [endTime - timescale, endTime];
+	const user = useContext(UserContext);
 
 	return (
 		<Box>
+			<Box>
+				The current user is {JSON.stringify(user)}
+			</Box>
 			<Typography variant="h3">System Sensors</Typography>
 			<Stack direction="row" alignItems="center" spacing={2}>
 				<Box sx={{ width: 200, my: 3 }}>

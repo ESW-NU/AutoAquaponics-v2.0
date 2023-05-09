@@ -3,7 +3,7 @@ import { Paper, Typography, Box, Grid, ImageList, ImageListItem } from "@mui/mat
 
 const AboutSection = ({ image_left, title, images, children }) => {
 	const text = (
-		<Box sx={{ typography: "body2" }}>
+		<Box sx={{ typography: "body1" }}>
 			<Typography variant="h2">{title}</Typography>
 			{children}
 		</Box>

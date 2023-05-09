@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
 import { useState } from 'react';
-import { NavLink } from "react-router-dom";
-import { Grid, Stack, Box, useMediaQuery, Typography, Button, IconButton, Collapse } from '@mui/material';
+import { NavLink, useNavigate } from "react-router-dom";
+import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse } from '@mui/material';
+import Button from "./Button";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import theme from "../styling";
@@ -21,6 +22,7 @@ const inheritTextDecoration = {
 export const NavBar = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 	const [open, setOpen] = useState(false);
+	const navigate = useNavigate();
 
 	return (
 		<Box>
@@ -38,7 +40,7 @@ export const NavBar = () => {
 						<NavBarLinks links={links}/>
 					</Grid>}
 					<Grid item>
-						<LoginButton/>
+						<Button onClick={()=> navigate("/login")}>Login</Button>
 					</Grid>
 				</Grid>
 			</Stack>
@@ -84,23 +86,6 @@ const NavBarLinks = ({ links }) => {
 			)}
 		</Stack>
 	);
-};
-
-const LoginButton = () => {
-	return (
-		<Button
-			variant="contained"
-			color="clickme"
-			sx={{
-				borderRadius: 100,
-				px: 2,
-				typography: "link",
-				color: "common.white",
-			}}
-		>
-			Login
-		</Button>
-	)
 };
 
 export default NavBar;

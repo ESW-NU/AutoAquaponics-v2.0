@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+import { getAuth } from '@firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyASROLzF7oKnE5klKSznqJnBbFzt5B0Cpw",
@@ -25,3 +26,4 @@ const appCheck = initializeAppCheck(app, { // eslint-disable-line no-unused-vars
 });
 
 export const db = getFirestore(app);
+export const auth = getAuth(app);
