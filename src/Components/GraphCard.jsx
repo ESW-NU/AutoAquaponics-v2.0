@@ -19,7 +19,7 @@ const GraphCard = ({ name, unit, statKey, loading, stats, tolerance, timeBounds,
 			<Box sx={overflowStyle}>{name}</Box>
 			{loading ? "loading"
 			: !hasData ? "no data"
-			: Number.isNaN(latestY) ? "bad reading"
+			: Number.isNaN(latestY) ? "it broke :("
 			: <Stack direction="row" alignItems="flex-end">
 				<Typography variant="h1">{Math.round(latestY).toString()}</Typography>
 				<Typography variant="h3">{unit}</Typography>

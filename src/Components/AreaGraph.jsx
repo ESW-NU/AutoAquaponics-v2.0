@@ -31,9 +31,8 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 		return active && (
 			<Paper sx={{ p: 1, width: 170 }}>
 				<Typography variant="body3">{new Date(point.x * 1000).toLocaleString()}</Typography>
-				<Typography variant="body1">
-					{Number.isNaN(point.y) ? "bad reading" : `${point.y} ${unit}`}
-				</Typography>
+				{Number.isNaN(point.y) ? <Typography variant="body2">direct complaints and harassment to REDACTED</Typography>
+				: <Typography variant="body1">{point.y} {unit}</Typography>}
 			</Paper>
 		);
 	};
