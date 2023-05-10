@@ -1,6 +1,5 @@
 import { Box, FormControlLabel, Stack, Switch, Typography } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../Hooks/UserContext";
+import { useState } from "react";
 import SelectMenu from "../Components/SelectMenu";
 import GraphContainer from "../Components/GraphContainer";
 
@@ -15,7 +14,6 @@ const Dashboard = () => {
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
 	const [endTime, setEndTime] = useState(timeNowInSeconds());
 	const timeBounds = [endTime - timescale, endTime];
-	const user = useContext(UserContext);
 
 	return (
 		<Box>

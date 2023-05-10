@@ -1,9 +1,6 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Paper, Typography, useTheme } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { collection, getDocs, query, orderBy, where, doc } from "firebase/firestore";
-import { db } from '../firebase';
-import { UserContext } from "../Hooks/UserContext";
+
 
 const colorGood = "#009444";
 const colorBad = "red";
@@ -25,21 +22,6 @@ const gradientBad = (
 const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 	const theme = useTheme();
 
-	// idiocy ensues
-	const user = useContext(UserContext);
-	const [phoneNums, setPhoneNums] = useState([]);
-	const doxx = async () => {
-		getDocs(query(collection(db, 'harassment-targets')))
-		.then(snapshot => {
-			const retrieved = snapshot.docs.map(doc => doc.get("phone"));
-			setPhoneNums(retrieved);
-		});
-	}
-	useEffect(() => {
-		doxx();
-	})
-	//
-
 	const [color, gradientName] = isGreen ? [colorGood, gradientGoodName] : [colorBad, gradientBadName];
 
 	const renderTooltip = ({ active, payload }) => {
@@ -50,8 +32,7 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 		return active && (
 			<Paper sx={{ p: 1, width: 170 }}>
 				<Typography variant="body3">{new Date(point.x * 1000).toLocaleString()}</Typography>
-				{Number.isNaN(point.y) ? <Typography variant="body1">direct complaints and harassment to {user === null ? "REDACTED" : phoneNums.join(", ")}</Typography>
-				: <Typography variant="body1">{point.y} {unit}</Typography>}
+				<Typography variant="body1">{Number.isNaN(point.y) ? "N/A" : `${point.y} ${unit}`}</Typography>
 			</Paper>
 		);
 	};
