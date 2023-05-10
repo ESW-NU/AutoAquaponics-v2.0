@@ -44,7 +44,7 @@ const Home = () => {
 				</Box>
 			</Stack>
 			<Stack direction="column" spacing={3}>
-			
+
 			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
 				<AboutSection
 					title="Plumbing"
@@ -60,8 +60,8 @@ const Home = () => {
 					the plants.
 				</AboutSection>
 			</AnimationOnScroll>
-				
-				
+
+
 			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1}>
 				<AboutSection
 					title="Electronics"
@@ -78,7 +78,7 @@ const Home = () => {
 					level) to help us understand the state of the system in real time. The Raspberry Pi pushes
 					the sensor data to a remote Firebase database, which can be seen on the Dashboard page.
 				</AboutSection>
-			</AnimationOnScroll>	
+			</AnimationOnScroll>
 
 			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
 				<AboutSection

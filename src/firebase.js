@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { getAuth } from '@firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
@@ -13,6 +14,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app)
+export const auth = getAuth(app);
 
 // The following line will generate an App Check debug token that should be registered in the Firebase
 // in order to verify API calls. This bypasses the ReCaptcha attestation, but requires access to the
@@ -23,5 +26,3 @@ const appCheck = initializeAppCheck(app, { // eslint-disable-line no-unused-vars
     provider: new ReCaptchaV3Provider(reCaptchaPublicKey),
     isTokenAutoRefreshEnabled: true,
 });
-
-export const db = getFirestore(app);

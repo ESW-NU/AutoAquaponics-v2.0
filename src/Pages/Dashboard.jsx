@@ -32,7 +32,7 @@ const Dashboard = () => {
 				</Box>
 				<FormControlLabel
 					control={<Switch/>}
-					label={<Typography variant="body2">Zoom in on available data</Typography>}
+					label="Zoom in on available data"
 					checked={zoom}
 					onChange={() => setZoom(!zoom)}
 				/>

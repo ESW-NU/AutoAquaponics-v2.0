@@ -29,14 +29,14 @@ const GraphCard = ({ name, unit, statKey, loading, stats, tolerance, timeBounds,
 	const content = loading ? (
 		<Box sx={verticalCenteredStyle}>
 			<CircularProgress color="info"/>
-			<Typography variant="body2">Loading</Typography>
+			<Typography variant="body1">Loading</Typography>
 		</Box>
 	) : hasData ? (
 		<AreaGraph name={name} unit={unit} stats={data} isGreen={inRange} timeBounds={timeBounds} zoom={zoom}/>
 	) : (
 		<Box sx={verticalCenteredStyle}>
 			<WarningAmberIcon color="warning" sx={{ fontSize: 128 }}/>
-			<Typography variant="body2">There doesn't seem to be any data</Typography>
+			<Typography variant="body1">There doesn't seem to be any data</Typography>
 		</Box>
 	);
 
