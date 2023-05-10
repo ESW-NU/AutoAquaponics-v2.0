@@ -1,19 +1,20 @@
-import React from "react";
-import Typography from "@mui/material/Typography";
+import { Box } from "@mui/material";
 
 const ComingSoon = () => {
-    return (
-        <div style={{
-            width: '50%',
-            position: 'absolute',
-            top: '45%',
-            left: '50%',
-            transform: 'translateY(-50%)',
-            transform: 'translateX(-50%)'
-        }}>
-            <Typography style={{textAlign: 'center', color: '#009444'}}variant="h1">COMING 2023</Typography>
-        </div>
-    );
-}
+	return (
+		<Box
+			sx={{
+				display: "flex",
+				justifyContent: "center",
+				alignItems:"center",
+				height: "80vh",
+				color: "primary.main",
+				typography: "h1"
+			}}
+		>
+			COMING 2023
+		</Box>
+	);
+};
 
 export default ComingSoon;

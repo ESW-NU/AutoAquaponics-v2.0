@@ -1,95 +1,108 @@
+/** @jsxImportSource @emotion/react */
 
+import { useState, useContext } from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
+import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import MyButton from "../Components/Button";
+import BubbleNavLinks from './BubbleNavLinks';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
+import theme from "../styling";
+import { UserContext } from "../Hooks/UserContext";
+import { auth } from '../firebase';
+import { signOut } from '@firebase/auth';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import BuildIcon from '@mui/icons-material/Build';
+import SettingsIcon from '@mui/icons-material/Settings';
 
-import React from "react";
-import { NavLink } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import "../CSS/NavBar.css";
-import DrawerComp from "./DrawerComp";
-import { useMediaQuery } from "@mui/material";
+const links = [
+	{ addr: "/video-stream", label: "Video Stream" },
+	{ addr: "/dashboard", label: "Dashboard" },
+	{ addr: "/control-panel", label: "Control Panel" },
+	{ addr: "settings", label: "Settings" }
+];
 
 export const NavBar = () => {
-  const isMatch = useMediaQuery('(max-aspect-ratio: 3/4)');
+	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+	const [open, setOpen] = useState(false);
+	const user = useContext(UserContext);
+	const navigate = useNavigate();
 
-  return (
-    <Grid
-      className="header__bar" 
-      container
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Grid order={1}>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "header__title-is-active" : "header__title"
-          }
-style={{fontSize: isMatch ? 33: 24}}
-        >
-          AutoAquaponics
-        </NavLink>
-      </Grid>
+	const handleLogout = () => {
+		signOut(auth).then(() => {
+			console.log("Signed out");
+			navigate("/");
+		}).catch((error) => {
+			console.error(error);
+		});
+	};
 
-      { !isMatch &&
-        <Grid
-        item
-        order={{xs: 3, sm: 3, md: 2}}
-        md={6.5}
-        lg={8}
-        container
-        direction="row"
-        justifyContent="space-evenly"
-      >
-        <NavLink
-          to="/video-stream"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Video Stream
-        </NavLink>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Dashboard
-        </NavLink>
-        <NavLink
-          to="/control-panel/tolerances"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Control Panel
-        </NavLink>
-        <NavLink
-          to="/settings"
-          className={({ isActive }) =>
-            isActive ? "header__nav-is-active" : "header__nav"
-          }
-        >
-          Settings
-        </NavLink>
-      </Grid> }
+	return (
+		<Box>
+			<Stack direction="row" alignItems="center" spacing={3} sx={{ p: 2 }}>
+				{isSmall && <IconButton onClick={() => setOpen(!open)}>
+					{open ? <MenuOpenRoundedIcon /> : <MenuRoundedIcon />}
+				</IconButton>}
+				<Grid container direction="row" justifyContent="space-between" alignItems="center">
+					<Grid item>
+						<NavLink css={{ textDecoration: "inherit" }} to="/">
+							<Typography sx={{ color: "primary.main", "&:hover": { color: "primary.dark" } }} variant="title">AutoAquaponics</Typography>
+						</NavLink>
+					</Grid>
+					{!isSmall && <Grid item xs>
+						<Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-evenly" alignItems="center">
+							<BubbleNavLinks links={links} />
+						</Stack>
+					</Grid>}
+					<Grid item>
+						{user === null ? (
+							<MyButton onClick={() => navigate("/login")}>Login</MyButton>
+						) : (
+							<Tooltip title={`signed in as ${user.email}`}>
+								<MyButton onClick={handleLogout}>Logout</MyButton>
+							</Tooltip>
+						)}
+					</Grid>
+				</Grid>
+			</Stack>
 
-      <Grid order={{xs: 2, lg: 3}}>
-        <button className="button-18">	       
-		  <NavLink
-			to="/login"
-		  >
-			Login
-		  </NavLink>
-		</button>
-      </Grid>
+			<Collapse in={open && isSmall} timeout="auto" unmountOnExit>
+				<Paper elevation={3} sx={{ mx: 3, marginBottom: 5 }}>
+					{/* tsk tsk Don't Repeat Yourself */}
+					<List component="div" disablePadding>
+						<ListItemButton sx={{ pl: 3 }} href="/video-stream" label={"Video Stream"} divider={true}>
+							<ListItemIcon>
+								<VideocamIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Video Stream</Typography></ListItemText>
+						</ListItemButton>
 
-      { isMatch &&
-      <Grid order={{xs: 0}} style={{margin: 0}}>
-        <DrawerComp />
+						<ListItemButton sx={{ pl: 3 }} href="/dashboard" label={"Dashboard"} divider={true}>
+							<ListItemIcon>
+								<DashboardIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Dashboard</Typography></ListItemText>
+						</ListItemButton>
 
-      </Grid> }
-    </Grid>
-  );
+						<ListItemButton sx={{ pl: 3 }} href="/control-panel" label={"Control Panel"} divider={true}>
+							<ListItemIcon>
+								<BuildIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Control Panel</Typography></ListItemText>
+						</ListItemButton>
+
+						<ListItemButton sx={{ pl: 3 }} href="settings" label={"setting"} divider={true}>
+							<ListItemIcon>
+								<SettingsIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Settings</Typography></ListItemText>
+						</ListItemButton>
+					</List>
+				</Paper>
+			</Collapse>
+		</Box>
+	);
 };
+
 export default NavBar;

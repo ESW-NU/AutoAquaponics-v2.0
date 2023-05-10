@@ -1,64 +1,78 @@
 import React from "react";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { Box, Paper, TextField, Button as MuiButton, Stack, Typography } from "@mui/material";
+import MyButton from "../Components/Button";
+import { auth } from "../firebase";
 
-function loginUser(){
-	const auth = getAuth();
-	let email = document.getElementsByName("email")[0].value;
-	let password = document.getElementsByName("password")[0].value;
-	signInWithEmailAndPassword(auth, email, password)
-	  .then((userCredential) => {
-		  console.log("SIGNED IN")
-		  // Signed in 
-		  const user = userCredential.user;
-		  console.log(user)
-	  })
-	  .catch((error) => {
-		const errorCode = error.code;
-		const errorMessage = error.message;
-	  });
-};
+const requestFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdnzIE5u7dGyqt3qfcFstCCYsDW7Hskc6lQtDEGkmvgLd2bbA/viewform?usp=sf_link";
 
-function logoutUser(){
-	const auth = getAuth();
-		signOut(auth).then(() => {
-			console.log("SIGNED OUT")
-		// Sign-out successful.
-		}).catch((error) => {
-		// An error happened.
-		});
-};
+const Login = () => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [verifying, setVerifying] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+	const navigate = useNavigate();
 
-function getUser(){
-	const auth = getAuth();
-	onAuthStateChanged(auth, (user) => {
-	  if (user) {
-		console.log("CURRENT USER exists with uid: ")
-		// User is signed in, see docs for a list of available properties
-		// https://firebase.google.com/docs/reference/js/firebase.User
-		const uid = user.uid;
-		console.log(uid)
-		// ...
-	  } else {
-		console.log("NO USER LOGGED IN")
-		// User is signed out
-		// ...
-	  }
-	});
-}
-export const Login = () => {
+	const handleSubmit = async () => {
+		setVerifying(true);
+		try {
+			let userCredential = await signInWithEmailAndPassword(auth, email, password);
+			console.log(`Signed in as ${userCredential.user.email}`);
+			navigate("/");
+		} catch(error) {
+			if (error.message.includes("auth/user-not-found") || error.message.includes("auth/invalid-email")) {
+				setErrorMessage("Invalid email");
+			} else if (error.message.includes("auth/wrong-password")) {
+				setErrorMessage("Incorrect password");
+			} else {
+				setErrorMessage("Unknown error occurred");
+			}
+		};
+		setVerifying(false);
+	};
+
 	return (
-	  <div className="App">
-			<div className="Pages">
-				<div>
-					<label for="email">Email:</label>
-					<input type="email" id="email" name="email"/><br/>
-					<label for="password">Password:</label>
-					<input type="password" id="password" name="password"/><br/>
-					<button onClick={loginUser}>Submit</button><br/>
-					<button onClick={logoutUser}>Logout</button><br/>
-					<button onClick={getUser}>Check user</button>
-				</div>
-			</div>
-		</div>
+		<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+			<Paper sx={{ maxWidth: 400, p: 3 }}>
+				<Stack alignItems="center" spacing={1}>
+					<Typography variant="h3" textAlign="center">
+						Log in for admin access to modify control panel.
+					</Typography>
+					<MuiButton
+						variant="text"
+						color="clickme"
+						sx={{ typography: "link" }}
+						onClick={() => window.open(requestFormUrl, "_blank")}
+					>
+						Request an account
+					</MuiButton>
+					<TextField
+						variant="filled"
+						label="Email"
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+						error={errorMessage.includes("email")}
+					/>
+					<TextField
+						variant="filled"
+						label="Password"
+						type="password"
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+						error={errorMessage.includes("password")}
+					/>
+					{errorMessage && <Typography variant="body1" color="error">{errorMessage}</Typography>}
+					{verifying ? (
+						<MyButton disabled>Logging in...</MyButton>
+					) : (
+						<MyButton onClick={handleSubmit}>Login</MyButton>
+					)}
+				</Stack>
+			</Paper>
+		</Box>
 	);
 };
+
+export default Login

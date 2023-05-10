@@ -3,38 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/base": "^5.0.0-alpha.79",
-    "@mui/icons-material": "^5.6.2",
-    "@mui/material": "^5.7.0",
-    "@mui/styled-engine-sc": "^5.6.1",
-    "@mui/system": "^5.6.4",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.5",
-    "@testing-library/user-event": "^13.5.0",
-    "firebase": "^9.8.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-responsive-navbar": "^1.0.11",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.0",
-    "recharts": "^2.1.9",
-    "styled-components": "^5.3.5",
-    "victory": "^36.3.2",
-    "web-vitals": "^2.1.4"
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
+    "@mui/system": "^5.11.9",
+    "@radix-ui/react-navigation-menu": "^1.1.2",
+    "animate.css": "^4.1.1",
+    "firebase": "^9.17.1",
+    "react": "^18.2.0",
+    "react-animation-on-scroll": "^5.1.0",
+    "react-awesome-reveal": "^4.2.3",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "^5.0.1",
+    "react-typed": "^1.2.0",
+    "recharts": "^2.4.3",
+    "web-vitals": "^3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -49,7 +40,6 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^4.4.0",
-    "sass": "^1.51.0"
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

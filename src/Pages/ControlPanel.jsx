@@ -1,32 +1,43 @@
 import React from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "../Lib/styling";
-import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
-import CPMenuBar from "../Components/CPMenuBar.jsx";
+import { Route, Routes } from "react-router-dom";
+import theme from "../styling";
 
-import { Backwashing } from "./ControlPages/Backwashing";
-import { FishFeeder } from "./ControlPages/FishFeeder";
-import { Lights } from "./ControlPages/Lights";
+import Tolerances from "./ControlPages/Tolerances";
+import Backwashing from "./ControlPages/Backwashing";
+import FishFeeder from "./ControlPages/FishFeeder";
+import Lights from "./ControlPages/Lights";
+import WaterPump from "./ControlPages/WaterPump";
 
-import { NavLink } from "react-router-dom";
-import "../CSS/pages.css"
-import ComingSoon from "../Components/ComingSoon";
+import { Grid, Stack, useMediaQuery } from "@mui/material";
+import BubbleNavLinks from "../Components/BubbleNavLinks";
 
-export const ControlPanel = () => {
-  return (
-    <div className="App">
-      <div className="Pages">
-        <ThemeProvider theme={theme}>
-          <div>
-            <CPMenuBar />
-          </div>
-    
+const ControlPanel = () => {
+	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
-          <Outlet />
-        </ThemeProvider>
-      </div>
-    </div>
-  );
+	return (
+		<Grid container>
+			{!isSmall && <Grid item xs="auto">
+				<Stack alignItems="flex-start" spacing={1} sx={{ width: 200, p: 3 }}>
+					<BubbleNavLinks links={[
+						{ label: "Tolerances", addr: "tolerances" },
+						{ label: "Backwashing", addr: "backwashing" },
+						{ label: "Fish Feeder", addr: "fishFeeder" },
+						{ label: "Lights", addr: "lights" },
+						{ label: "Water Pump", addr: "waterPump" },
+					]}/>
+				</Stack>
+			</Grid>}
+			<Grid item xs>
+				<Routes>
+					<Route path="tolerances" element={<Tolerances/>}/>
+					<Route path="backwashing" element={<Backwashing/>}/>
+					<Route path="fishFeeder" element={<FishFeeder/>}/>
+					<Route path="lights" element={<Lights/>}/>
+					<Route path="waterPump" element={<WaterPump/>}/>
+				</Routes>
+			</Grid>
+		</Grid>
+	);
 };
 
 export default ControlPanel;

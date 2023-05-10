@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomizedTable from "../../Components/CustomizedTable";
 // import OnOffTimer from "../../Components/OnOffTimer";
 // import ControlEntry from "../../Components/ControlEntry";
@@ -6,8 +6,6 @@ import CustomizedTable from "../../Components/CustomizedTable";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { FormControl } from "@mui/material";
 import {InputLabel} from "@mui/material";
@@ -36,13 +34,13 @@ const SaveControls = () => {
 
       <FormGroup>
       <OnOffTimer lightORpump={"lights"} shelfbed={"shelf1"}/></FormGroup>
-        
+
 
     </FormControl>
-    <button className="button-18">	       
+    <button className="button-18">
 			Backwash Now
 		</button>
-    <button className="button-18">	       
+    <button className="button-18">
 		 Save
 		</button>
 

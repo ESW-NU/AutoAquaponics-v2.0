@@ -1,55 +1,49 @@
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./Lib/styling";
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
-import NavBar from "./Components/NavBar";
-import { Home } from "./Pages/Home";
-import { ControlPanel } from "./Pages/ControlPanel";
-import { Dashboard } from "./Pages/Dashboard";
-import { Settings } from "./Pages/Settings";
-import { VideoFeed } from "./Pages/VideoFeed";
-import { Login } from "./Pages/Login";
-import { Backwashing } from "./Pages/ControlPages/Backwashing";
-import { FishFeeder } from "./Pages/ControlPages/FishFeeder";
-import { Lights } from "./Pages/ControlPages/Lights"
-import { Tolerances } from "./Pages/ControlPages/Tolerances";
-import { WaterPump } from "./Pages/ControlPages/WaterPump";
+import { useEffect, useState } from 'react';
+import { Container, ThemeProvider } from '@mui/material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { UserContext } from './Hooks/UserContext';
+import theme from './styling';
+import NavBar from './Components/NavBar';
+import Home from './Pages/Home';
+import Dashboard from './Pages/Dashboard';
+import ControlPanel from "./Pages/ControlPanel";
+import Settings from "./Pages/Settings";
+import Login from './Pages/Login';
+import ComingSoon from './Components/ComingSoon';
 
-function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <div className="App">
-            <NavBar />
-          </div>
-          <div>
-            <Routes>
-              <Route path="/" element={<Home />} />
+const App = () => {
+	const [user, setUser] = useState(null);
 
-              <Route path="/video-stream" element={<VideoFeed />} />
-              
-              <Route path="/dashboard" element={<Dashboard />} />
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			setUser(user);
+		})
+		return () => {
+			unsubscribe();
+		}
+	}, []);
 
-              <Route path="/control-panel" element={<ControlPanel />} >
-                <Route path="tolerances"  element={<Tolerances />} />
-                <Route path="backwashing" element={<Backwashing />} />
-                <Route path="fishFeeder" element={<FishFeeder />} />
-                <Route path="lights" element={<Lights />} />
-                <Route path="waterPump" element={<WaterPump />} />  
-              </Route>
-
-              <Route path="/settings" element={<Settings />} />
-
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </div>
-        </ThemeProvider>
-      </BrowserRouter>
-    </>
-  );
+	return (
+		<BrowserRouter>
+			<UserContext.Provider value={user}>
+				<ThemeProvider theme={theme}>
+					<NavBar/>
+					<Container maxWidth="xl">
+						<Routes>
+							<Route path="/" element={<Home/>}/>
+							<Route path="/video-stream" element={<ComingSoon/>}/>
+							<Route path="/dashboard" element={<Dashboard/>}/>
+							<Route path="/control-panel/*" element={<ControlPanel/>}/>
+							<Route path="/settings" element={<Settings/>}/>
+							<Route path="/login" element={<Login/>}/>
+						</Routes>
+					</Container>
+				</ThemeProvider>
+			</UserContext.Provider>
+		</BrowserRouter>
+	);
 }
 
 export default App;
-// hi
