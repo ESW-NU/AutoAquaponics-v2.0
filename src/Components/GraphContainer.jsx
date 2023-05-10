@@ -3,18 +3,24 @@ import GraphCard from "./GraphCard";
 import Grid from "@mui/material/Grid";
 import { dashboardTrackedStats } from "../dashboardTrackedStats";
 import { useFetchStats } from "../Hooks/useFetchStats";
+import { Fade } from 'react-awesome-reveal';
+
 
 const GraphContainer = ({ timeBounds, zoom }) => {
 	const { loading, stats, tolerances } = useFetchStats(timeBounds);
 
 	return (
+		
 		<Grid
 			container
 			spacing={1}
 			columns={{ xs: 1, md: 2, lg: 3 }}
 		>
-			{dashboardTrackedStats.map(({ statKey, name, unit }) => (
+			
+			{dashboardTrackedStats.map(({ statKey, name, unit }, index) => (
+				
 				<Grid item xs={1} key={statKey}>
+					<Fade cascade={true} duration={1000} delay={index*200}>
 					<GraphCard
 						name={name}
 						unit={unit}
@@ -25,9 +31,15 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 						timeBounds={timeBounds}
 						zoom={zoom}
 					/>
+					</Fade>
 				</Grid>
+				
 			))}
+			
 		</Grid>
+		
+
+		
 	);
 };
 

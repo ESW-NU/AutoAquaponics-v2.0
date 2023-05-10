@@ -17,7 +17,8 @@ const AboutSection = ({ image_left, title, images, children }) => {
 	);
 
 	return (
-		<Paper sx={{ minHeight: 300, p: 2 }}>
+		
+			<Paper sx={{ minHeight: 300, p: 2 }}>
 			<Grid
 				container
 				columns={2}
@@ -32,6 +33,7 @@ const AboutSection = ({ image_left, title, images, children }) => {
 				<Grid item xs={1}>{imageList}</Grid>
 			</Grid>
 		</Paper>
+	
 	)
 };
 
