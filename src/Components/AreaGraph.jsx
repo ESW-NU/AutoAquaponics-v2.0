@@ -1,7 +1,7 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Paper, Typography, useTheme } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, where, doc } from "firebase/firestore";
 import { db } from '../firebase';
 import { UserContext } from "../Hooks/UserContext";
 
@@ -27,22 +27,18 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 
 	// idiocy ensues
 	const user = useContext(UserContext);
-	const [yannisPhoneNumber, setYannisPhoneNumber] = useState("");
-	const fetchYannisPhoneNumber = async () => {
-		getDocs(
-			query(
-				collection(db, 'harassment-targets'),
-				where('name', '==', "Yanni"),
-			)
-		).then(snapshot => {
-			setYannisPhoneNumber(snapshot.docs[0].data().phone);
+	const [phoneNums, setPhoneNums] = useState([]);
+	const doxx = async () => {
+		getDocs(query(collection(db, 'harassment-targets')))
+		.then(snapshot => {
+			const retrieved = snapshot.docs.map(doc => doc.get("phone"));
+			setPhoneNums(retrieved);
 		});
 	}
 	useEffect(() => {
-		fetchYannisPhoneNumber();
+		doxx();
 	})
 	//
-
 
 	const [color, gradientName] = isGreen ? [colorGood, gradientGoodName] : [colorBad, gradientBadName];
 
@@ -54,7 +50,7 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 		return active && (
 			<Paper sx={{ p: 1, width: 170 }}>
 				<Typography variant="body3">{new Date(point.x * 1000).toLocaleString()}</Typography>
-				{Number.isNaN(point.y) ? <Typography variant="body1">direct complaints and harassment to {user === null ? "REDACTED" : yannisPhoneNumber}</Typography>
+				{Number.isNaN(point.y) ? <Typography variant="body1">direct complaints and harassment to {user === null ? "REDACTED" : phoneNums.join(", ")}</Typography>
 				: <Typography variant="body1">{point.y} {unit}</Typography>}
 			</Paper>
 		);
@@ -98,14 +94,5 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 		</ResponsiveContainer>
 	);
 };
-
-async function getYannisPhoneNumber() {
-	return (await getDocs(
-		query(
-			collection(db, 'harassment-targets'),
-			where('name', '==', "Yanni"),
-		)
-	)).docs[0].data().phone;
-}
 
 export default AreaGraph;
