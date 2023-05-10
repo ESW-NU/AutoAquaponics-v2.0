@@ -1,12 +1,15 @@
 /** @jsxImportSource @emotion/react */
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse } from '@mui/material';
-import Button from "./Button";
+import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip } from '@mui/material';
+import MyButton from "../Components/Button";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import theme from "../styling";
+import { UserContext } from "../Hooks/UserContext";
+import { auth } from '../firebase';
+import { signOut } from '@firebase/auth';
 
 const links = [
 	{ addr: "/video-stream", label: "Video Stream" },
@@ -22,7 +25,17 @@ const inheritTextDecoration = {
 export const NavBar = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 	const [open, setOpen] = useState(false);
+	const user = useContext(UserContext);
 	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		signOut(auth).then(() => {
+			console.log("Signed out");
+			navigate("/");
+		}).catch((error) => {
+			console.error(error);
+		});
+	};
 
 	return (
 		<Box>
@@ -40,7 +53,13 @@ export const NavBar = () => {
 						<NavBarLinks links={links}/>
 					</Grid>}
 					<Grid item>
-						<Button onClick={()=> navigate("/login")}>Login</Button>
+						{user === null ? (
+							<MyButton onClick={()=> navigate("/login")}>Login</MyButton>
+						) : (
+							<Tooltip title={`signed in as ${user.email}`}>
+								<MyButton onClick={handleLogout}>Logout</MyButton>
+							</Tooltip>
+						)}
 					</Grid>
 				</Grid>
 			</Stack>
