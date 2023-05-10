@@ -1,6 +1,5 @@
 import { Paper, Typography, Box, Grid, ImageList, ImageListItem } from "@mui/material";
 
-
 const AboutSection = ({ image_left, title, images, children }) => {
 	const text = (
 		<Box sx={{ typography: "body1" }}>
@@ -17,7 +16,7 @@ const AboutSection = ({ image_left, title, images, children }) => {
 	);
 
 	return (
-		<Paper sx={{ minHeight: 300, p: 2 }}>
+			<Paper sx={{ minHeight: 300, p: 2 }}>
 			<Grid
 				container
 				columns={2}

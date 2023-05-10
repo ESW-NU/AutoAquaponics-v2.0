@@ -3,6 +3,10 @@
 import { Box, Stack, Typography, Link, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AboutSection from "../Components/AboutSection";
+import Typed from 'react-typed';
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+
 
 const systemCAD = require("../Lib/PlumbingCADclear.webp");
 const plumbing = require("../Lib/plumbing.webp");
@@ -28,23 +32,25 @@ const msab = require("../Lib/msab.webp");
 
 const Home = () => {
 	return (
-		<>
+		<Stack direction="column" spacing={3}>
 			<Stack direction={{ xs: "column-reverse", md: "row" }} alignItems="center">
 				<img style={{ width: "50vw" }} src={systemCAD} alt="System CAD"/>
 				<Box>
-					<Typography variant="h1">Northwestern AutoAquaponics</Typography>
-					<Typography variant="h4">
+					<Typography variant="h1"><Typed strings={["Northwestern AutoAquaponics"]} typeSpeed={40} onComplete={(self) => self.cursor.remove()}/></Typography>
+					<Typography variant="body1">
 						A fully automated aquaponic system that grows both fish and plants
 						unattended for months and can be <Link component={RouterLink} to="/dashboard">monitored</Link> and <Link component={RouterLink} to="/control-panel/tolerances">controlled</Link> remotely
 					</Typography>
 				</Box>
 			</Stack>
 			<Stack direction="column" spacing={3}>
+
+			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
 				<AboutSection
 					title="Plumbing"
 					images={[plumbing, sump, flow, filter]}
-					image_left={false}
-				>
+					image_left={true}
+					>
 					Our plumbing system serves as the backbone of AutoAquaponics and facilitates the efficient
 					transport of nutrients to the plants. It also removes solid waste and potentially toxic
 					contaminants from the fish tank to ensure the health of our fish. AutoAquaponics’ plumbing
@@ -53,10 +59,14 @@ const Home = () => {
 					filtration tank, and a biofilm reactor to convert ammonia from fish waste into nitrate for
 					the plants.
 				</AboutSection>
+			</AnimationOnScroll>
+
+
+			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1}>
 				<AboutSection
 					title="Electronics"
 					images={[sensor, rpi, outlet, motorized]}
-					image_left={true}
+					image_left={false}
 				>
 					These electronics put the Auto in AutoAquaponics, and allow us to both monitor and control
 					the system from anywhere in the world. Our electrical system currently features a smart
@@ -68,10 +78,13 @@ const Home = () => {
 					level) to help us understand the state of the system in real time. The Raspberry Pi pushes
 					the sensor data to a remote Firebase database, which can be seen on the Dashboard page.
 				</AboutSection>
+			</AnimationOnScroll>
+
+			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
 				<AboutSection
 					title="Software"
 					images={[software1, videoStream, code, software2]}
-					image_left={false}
+					image_left={true}
 				>
 					AutoAquaponics’ software allows users to monitor and control the system remotely, and it
 					uses Python and C++ to run the electronics that interact with our physical system. Our
@@ -84,10 +97,13 @@ const Home = () => {
 					lighting/flooding durations. Video Stream will include a live stream video of our fish
 					that anyone can access. Stay tuned for more!
 				</AboutSection>
+			</AnimationOnScroll>
+
+			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1}>
 				<AboutSection
 					title="Biology"
 					images={[fish, topView, biofilm, plants]}
-					image_left={true}
+					image_left={false}
 				>
 					Biology is an integral part of any farming system, and ours is no exception.
 					AutoAquaponics cycles nutrients between aquatic animals, microbes, and plants, all of
@@ -102,6 +118,7 @@ const Home = () => {
 					living in the system (ramshorn snails, cherry shrimps, and gammarus pulex) to serve as
 					live food sources for the fish.
 				</AboutSection>
+			</AnimationOnScroll>
 				<AboutSection
 					title="Contact Us"
 					images={[team]}
@@ -123,7 +140,7 @@ const Home = () => {
 					</Grid>
 				</AboutSection>
 			</Stack>
-		</>
+		</Stack>
 	)
 };
 

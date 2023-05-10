@@ -28,7 +28,12 @@ const themeBase = createTheme({
 			fontFamily: "Inter",
 			textTransform: "none",
 			fontSize: 18,
-			// this makes it look exactly like the old body2 lineHeight: 1.43,
+			lineHeight: 1.43,
+		},
+		body3: {
+			fontFamily: "Inter",
+			textTransform: "none",
+			fontSize: 14
 		},
 		title: {
 			fontFamily: "Space Grotesk, sans-serif",

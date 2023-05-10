@@ -2,7 +2,7 @@
 
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip } from '@mui/material';
+import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import MyButton from "../Components/Button";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
@@ -10,6 +10,10 @@ import theme from "../styling";
 import { UserContext } from "../Hooks/UserContext";
 import { auth } from '../firebase';
 import { signOut } from '@firebase/auth';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import BuildIcon from '@mui/icons-material/Build';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const links = [
 	{ addr: "/video-stream", label: "Video Stream" },
@@ -41,7 +45,7 @@ export const NavBar = () => {
 		<Box>
 			<Stack direction="row" alignItems="center" spacing={3} sx={{ p: 2 }}>
 				{isSmall && <IconButton onClick={() => setOpen(!open)}>
-					{open ? <MenuOpenRoundedIcon/> : <MenuRoundedIcon/>}
+					{open ? <MenuOpenRoundedIcon /> : <MenuRoundedIcon />}
 				</IconButton>}
 				<Grid container direction="row" justifyContent="space-between" alignItems="center">
 					<Grid item>
@@ -50,11 +54,11 @@ export const NavBar = () => {
 						</NavLink>
 					</Grid>
 					{!isSmall && <Grid item xs>
-						<NavBarLinks links={links}/>
+						<NavBarLinks links={links} />
 					</Grid>}
 					<Grid item>
 						{user === null ? (
-							<MyButton onClick={()=> navigate("/login")}>Login</MyButton>
+							<MyButton onClick={() => navigate("/login")}>Login</MyButton>
 						) : (
 							<Tooltip title={`signed in as ${user.email}`}>
 								<MyButton onClick={handleLogout}>Logout</MyButton>
@@ -63,8 +67,40 @@ export const NavBar = () => {
 					</Grid>
 				</Grid>
 			</Stack>
-			<Collapse in={isSmall && open}>
-				<NavBarLinks links={links} />
+
+			<Collapse in={open && isSmall} timeout="auto" unmountOnExit>
+				<Paper elevation={3} sx={{ mx: 3, marginBottom: 5 }}>
+					{/* tsk tsk Don't Repeat Yourself */}
+					<List component="div" disablePadding>
+						<ListItemButton sx={{ pl: 3 }} href="/video-stream" label={"Video Stream"} divider={true}>
+							<ListItemIcon>
+								<VideocamIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Video Stream</Typography></ListItemText>
+						</ListItemButton>
+
+						<ListItemButton sx={{ pl: 3 }} href="/dashboard" label={"Dashboard"} divider={true}>
+							<ListItemIcon>
+								<DashboardIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Dashboard</Typography></ListItemText>
+						</ListItemButton>
+
+						<ListItemButton sx={{ pl: 3 }} href="/control-panel" label={"Control Panel"} divider={true}>
+							<ListItemIcon>
+								<BuildIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Control Panel</Typography></ListItemText>
+						</ListItemButton>
+
+						<ListItemButton sx={{ pl: 3 }} href="settings" label={"setting"} divider={true}>
+							<ListItemIcon>
+								<SettingsIcon />
+							</ListItemIcon>
+							<ListItemText><Typography variant={"body1"}>Settings</Typography></ListItemText>
+						</ListItemButton>
+					</List>
+				</Paper>
 			</Collapse>
 		</Box>
 	);

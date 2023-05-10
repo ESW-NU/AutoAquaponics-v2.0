@@ -8,11 +8,16 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "@mui/system": "^5.11.9",
+    "@radix-ui/react-navigation-menu": "^1.1.2",
+    "animate.css": "^4.1.1",
     "firebase": "^9.17.1",
     "react": "^18.2.0",
+    "react-animation-on-scroll": "^5.1.0",
+    "react-awesome-reveal": "^4.2.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
+    "react-typed": "^1.2.0",
     "recharts": "^2.4.3",
     "web-vitals": "^3.1.1"
   },
@@ -21,12 +26,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
