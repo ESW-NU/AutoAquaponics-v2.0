@@ -1,12 +1,12 @@
-import React from "react";
+import { useState } from "react";
 // flow rate and pump time entries for a grow bed (water pump page)
-import TextField from '@mui/material/TextField';
+import { Box, TextField, Typography } from '@mui/material';
 import { db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
 
 const FlowEntry = ({bed}/*{flow, time, handleFlowChange, handleTimeChange}*/) => {
-    const [flow, setFlow] = React.useState('');
-    const [time, setTime] = React.useState('');
+    const [flow, setFlow] = useState('');
+    const [time, setTime] = useState('');
 
     const handleChangeFlow = (event) => {
         setFlow(event.target.value);
@@ -24,12 +24,10 @@ const FlowEntry = ({bed}/*{flow, time, handleFlowChange, handleTimeChange}*/) =>
     }
 
     return (
-        <div>
-            <p>Flow Rate (GPH)</p>
-            <TextField id="flowrate" type="number" value={flow} onChange={handleChangeFlow} inputProps={{step:1}} />
-            <p>Pump Time (min)</p>
+        <Box>
+            <Typography variant="body1">Pump Time (min)</Typography>
             <TextField id="pumptime" type="number" value={time} onChange={handleChangeTime} inputProps={{step:10}} />
-        </div>
+        </Box>
     );
 }
 

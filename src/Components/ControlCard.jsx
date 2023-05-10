@@ -1,26 +1,14 @@
-import React from "react";
-// base card for all control panel components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import { Paper, Typography, Box } from "@mui/material";
 
-const ControlCard = ({title, list}) => {
-    return (
-        <Card sx={{ maxWidth: 600, minHeight: 100 }}>
-          <CardContent>
-            <Grid
-              container
-              columns={1}>
-              <h3>{title}</h3>
-              <Grid
-                container
-                columns={list.length}>
-                {list.map(item => item)}
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-    )
+const ControlCard = ({title, children}) => {
+	return (
+		<Paper sx={{ p: 2, minHeight: 100 }}>
+			<Typography variant="h3">{title}</Typography>
+			<Box sx={{ paddingTop: 2, display: "flex", flexDirection: "row" }}>
+				{children}
+			</Box>
+		</Paper>
+	);
 }
 
 export default ControlCard;

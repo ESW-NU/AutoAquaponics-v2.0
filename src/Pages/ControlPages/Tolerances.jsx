@@ -8,7 +8,7 @@ import MaxMin from "../../Components/MaxMin";
 //import db from "../../firebase";
 
 export const Tolerances = () => {
-  
+
   // Push Function to be used by Save button "onClick"
   // const Push = async (e) => {
   //   e.preventDefault();
@@ -45,34 +45,34 @@ export const Tolerances = () => {
         columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }}
         >
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="pH" list={[
+            <ControlCard title="pH">
               <MaxMin sensor={"pH"} />
-            ]}/>
+            </ControlCard>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="TDS (ppm)" list={[
+            <ControlCard title="TDS (ppm)">
               <MaxMin sensor={"TDS"} />
-            ]}/>
+            </ControlCard>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Relative Humidity (%)" list={[
+            <ControlCard title="Relative Humidity (%)">
               <MaxMin sensor={"humidity"} />
-            ]}/>
+            </ControlCard>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Air Temperature (ºC)" list={[
+            <ControlCard title="Air Temperature (ºC)">
               <MaxMin sensor={"air_temp"} />
-            ]}/>
+            </ControlCard>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Water Temperature (ºC)" list={[
+            <ControlCard title="Water Temperature (ºC)">
               <MaxMin sensor={"water_temp"} />
-            ]}/>
+            </ControlCard>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Water Level (cm)" list={[
+            <ControlCard title="Water Level (cm)">
               <MaxMin sensor={"distance"} />
-            ]}/>
+            </ControlCard>
           </Grid>
       </Grid>
     </div>

@@ -1,52 +1,44 @@
-import {React, useState} from "react";
-import Grid from "@mui/material/Grid";
+import { useState } from "react";
+import { Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Stack } from "@mui/material";
+import { db } from '../../firebase';
+import { doc, updateDoc } from "firebase/firestore";
 import Typography from "@mui/material/Typography";
-import OnOffTimer from "../../Components/OnOffTimer";
 import FlowEntry from "../../Components/FlowEntry";
 import ControlCard from "../../Components/ControlCard";
+import OnOffTimer from "../../Components/OnOffTimer";
 
 export const WaterPump = () => {
-  /*const [onofftimer, setOnofftimer] = useState("off");
-  const [flow, setFlow] = useState(0);
-  const [time, setTime] = useState(0);
+	const [status, setStatus] = useState("on"); // grab initial value from firebase
 
-  const handleOnofftimerChange = (event) => {
-    setOnofftimer(event.target.value);
-  }
+	const handleChangeStatus = (newStatus) => {
+		setStatus(newStatus);
+		console.log(`setting status to ${newStatus}`)
+	}
 
-  const handleFlowChange = (event) => {
-    setFlow(event.target.value);
-  }
-
-  const handleTimeChange = (event) => {
-    setTime(event.target.value);
-  }*/
-
-  return (
-    <div>
-      <Typography variant="body" align="left" padding="10px">
-        WATER PUMP CONTROL PANEL
-      </Typography>
-      <Grid
-        container
-        spacing={1}
-        columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 2 }}
-      >
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Grow Bed A" list={[
-            <OnOffTimer lightORpump={"water-pump"} shelfbed={"bed-A"} bed={"bed-B"} /*onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}*//>,
-            <FlowEntry bed={"bed-A"} /*flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}*//>
-          ]}/>
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Grow Bed B" list={[
-            <OnOffTimer lightORpump={"water-pump"} shelfbed={"bed-B"} bed={"bed-B"} /*onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}*//>,
-            <FlowEntry bed={"bed-B"} /*flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}*//>
-          ]}/>
-        </Grid>
-      </Grid>
-    </div>
-  );
+	return (
+		<Stack spacing={1}>
+			<Typography variant="h2">Water Pump</Typography>
+			<OnOffTimer status={status} onChangeStatus={handleChangeStatus}/>
+			{status === "timer" && (
+				<Grid
+					container
+					spacing={1}
+					columns={{ xs: 1, md: 2, lg: 3 }}
+				>
+					<Grid item>
+						<ControlCard title="Grow Bed A">
+							<FlowEntry bed={"bed-A"}/>
+						</ControlCard>
+					</Grid>
+					<Grid item>
+						<ControlCard title="Grow Bed B">
+							<FlowEntry bed={"bed-B"}/>
+						</ControlCard>
+					</Grid>
+				</Grid>
+			)}
+		</Stack>
+	);
 }
 
 export default WaterPump;
