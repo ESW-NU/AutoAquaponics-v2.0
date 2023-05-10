@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "@mui/system": "^5.11.9",
+    "@radix-ui/react-navigation-menu": "^1.1.2",
     "animate.css": "^4.1.1",
     "firebase": "^9.17.1",
     "react": "^18.2.0",
