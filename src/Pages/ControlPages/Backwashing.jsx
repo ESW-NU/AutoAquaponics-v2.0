@@ -16,14 +16,13 @@ export const Backwashing = () => {
 				{ label: "On", value: "on" },
 				{ label: "Off", value: "off" },
 			]}/>
-			{getValueAndStatus(document, "status").v === "on" && (
-				<NumericalControl
-					label="Threshold flow rate"
-					document={document}
-					field="threshold-flow-rate"
-					verify={n => n >= 0}
-				/>
-			)}
+			<NumericalControl
+				label="Threshold flow rate"
+				document={document}
+				field="threshold-flow-rate"
+				verify={n => n >= 0}
+				disabled={getValueAndStatus(document, "status").v !== "on"}
+			/>
 		</ControlCard>
 	);
 

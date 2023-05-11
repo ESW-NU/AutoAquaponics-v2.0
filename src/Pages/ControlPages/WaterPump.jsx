@@ -10,6 +10,8 @@ export const WaterPump = () => {
     const { getValueAndStatus } = useContext(ControlValuesContext);
 	const document = "water-pump";
 
+	const statusIsTimer = getValueAndStatus(document, "status").v === "timer";
+
 	return (
 		<Stack spacing={1} >
 			<Typography variant="h2">Water Pump</Typography>
@@ -18,34 +20,34 @@ export const WaterPump = () => {
 				{ label: "Off", value: "off" },
 				{ label: "Timer", value: "timer" },
 			]}/>
-			{getValueAndStatus(document, "status").v === "timer" && (
-				<Grid
-					container
-					spacing={1}
-					columns={{ xs: 1, md: 2, lg: 3 }}
-				>
-					<Grid item>
-						<ControlCard title="Grow Bed A">
-							<NumericalControl
-								label="Pump time (minutes)"
-								document={document}
-								field="bed-A-flow"
-								verify={n => n >= 0}
-							/>
-						</ControlCard>
-					</Grid>
-					<Grid item>
-						<ControlCard title="Grow Bed B">
-							<NumericalControl
-								label="Pump time (minutes)"
-								document={document}
-								field="bed-B-flow"
-								verify={n => n >= 0}
-							/>
-						</ControlCard>
-					</Grid>
+			<Grid
+				container
+				spacing={1}
+				columns={{ xs: 1, md: 2, lg: 3 }}
+			>
+				<Grid item>
+					<ControlCard title="Grow Bed A">
+						<NumericalControl
+							label="Pump time (minutes)"
+							document={document}
+							field="bed-A-flow"
+							verify={n => n >= 0}
+							disabled={!statusIsTimer}
+						/>
+					</ControlCard>
 				</Grid>
-			)}
+				<Grid item>
+					<ControlCard title="Grow Bed B">
+						<NumericalControl
+							label="Pump time (minutes)"
+							document={document}
+							field="bed-B-flow"
+							verify={n => n >= 0}
+							disabled={!statusIsTimer}
+						/>
+					</ControlCard>
+				</Grid>
+			</Grid>
 		</Stack>
 	);
 }
