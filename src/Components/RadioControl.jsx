@@ -4,7 +4,7 @@ import { RadioGroup, Radio, FormLabel, FormControl, FormControlLabel } from '@mu
 import { useContext } from 'react';
 import { ControlValuesContext } from '../Hooks/ControlValuesContext';
 
-const RadioControl = ({ document, field, label, options }) => {
+const RadioControl = ({ document, field, label, options, enabled = true }) => {
     const { getValueAndStatus, dispatchLocalValueChange } = useContext(ControlValuesContext);
     const { s, v } = getValueAndStatus(document, field);
     const color = s ? "edited" : undefined;
@@ -18,7 +18,7 @@ const RadioControl = ({ document, field, label, options }) => {
                 onChange={e => dispatchLocalValueChange({ type: "set_value", document, field, newValue: e.target.value })}
             >
                 {options.map(({ label, value }) => (
-                    <FormControlLabel key={value} value={value} control={<Radio color={color}/>} label={label} />
+                    <FormControlLabel key={value} value={value} control={<Radio color={color}/>} label={label} disabled={!enabled}/>
                 ))}
             </RadioGroup>
         </FormControl>

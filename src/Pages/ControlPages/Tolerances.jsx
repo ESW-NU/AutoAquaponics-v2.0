@@ -3,7 +3,7 @@ import ControlCard from "../../Components/ControlCard";
 import { systemStatMeta } from '../../systemMeta';
 import NumericalControl from '../../Components/NumericalControl';
 
-export const Tolerances = () => {
+export const Tolerances = ({ enabled }) => {
 	const collection = "tolerances";
 
 	return (
@@ -22,12 +22,14 @@ export const Tolerances = () => {
 									label="max"
 									document={`${collection}/${statKey}`}
 									field="max"
+									enabled={enabled}
 									verify={n => n >= 0}
 								/>
 								<NumericalControl
 									label="min"
 									document={`${collection}/${statKey}`}
 									field="min"
+									enabled={enabled}
 									verify={n => n >= 0}
 								/>
 							</Stack>

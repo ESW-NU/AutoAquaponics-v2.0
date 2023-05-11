@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Grid, Paper, useMediaQuery } from "@mui/material";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -19,6 +19,7 @@ import FishFeeder from "./ControlPages/FishFeeder";
 import Lights from "./ControlPages/Lights";
 import WaterPump from "./ControlPages/WaterPump";
 import ControlsOverviewPanel from "../Components/ControlsOverviewPanel";
+import { UserContext } from "../Hooks/UserContext";
 
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
@@ -65,6 +66,9 @@ const ControlPanel = () => {
 		s: localValues[document]?.hasOwnProperty(field),
 	});
 
+	const user = useContext(UserContext);
+	const enabled = user !== null;
+
 	return (
 		<ControlValuesContext.Provider value={{
 			remoteValues,
@@ -88,11 +92,11 @@ const ControlPanel = () => {
 				</Grid>
 				<Grid item xs>
 					<Routes>
-						<Route path="tolerances" element={<Tolerances/>}/>
-						<Route path="backwashing" element={<Backwashing/>}/>
-						<Route path="fishFeeder" element={<FishFeeder/>}/>
-						<Route path="lights" element={<Lights/>}/>
-						<Route path="waterPump" element={<WaterPump/>}/>
+						<Route path="tolerances" element={<Tolerances enabled={enabled}/>}/>
+						<Route path="backwashing" element={<Backwashing enabled={enabled}/>}/>
+						<Route path="fishFeeder" element={<FishFeeder enabled={enabled}/>}/>
+						<Route path="lights" element={<Lights enabled={enabled}/>}/>
+						<Route path="waterPump" element={<WaterPump enabled={enabled}/>}/>
 					</Routes>
 				</Grid>
 			</Grid>

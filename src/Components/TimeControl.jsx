@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { TimeField } from '@mui/x-date-pickers';
 import { ControlValuesContext } from '../Hooks/ControlValuesContext';
 
-const TimeControl = ({ label, document, disabled = false }) => {
+const TimeControl = ({ label, document, enabled = true }) => {
 	const { getValueAndStatus, dispatchLocalValueChange } = useContext(ControlValuesContext);
 	const { v: starthhV, s: starthhS } = getValueAndStatus(document, "starthh");
 	const { v: startmmV, s: startmmS } = getValueAndStatus(document, "startmm");
@@ -27,7 +27,7 @@ const TimeControl = ({ label, document, disabled = false }) => {
 			color={edited ? "edited" : undefined}
 			value={startDate}
 			onChange={setStartDate}
-			disabled={disabled}
+			disabled={!enabled}
 		/>
 	);
 };

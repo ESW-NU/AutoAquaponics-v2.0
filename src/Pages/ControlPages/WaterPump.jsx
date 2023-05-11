@@ -6,7 +6,7 @@ import RadioControl from "../../Components/RadioControl";
 import { useContext } from 'react';
 import { ControlValuesContext } from '../../Hooks/ControlValuesContext';
 
-export const WaterPump = () => {
+export const WaterPump = ({ enabled }) => {
     const { getValueAndStatus } = useContext(ControlValuesContext);
 	const collection = "water-pump";
 
@@ -15,7 +15,7 @@ export const WaterPump = () => {
 	return (
 		<Stack spacing={1} >
 			<Typography variant="h2">Water Pump</Typography>
-			<RadioControl document={`${collection}/status`} field="status" label="Status" options={[
+			<RadioControl document={`${collection}/status`} field="status" label="Status" enabled={enabled} options={[
 				{ label: "On", value: "on" },
 				{ label: "Off", value: "off" },
 				{ label: "Timer", value: "timer" },
@@ -32,7 +32,7 @@ export const WaterPump = () => {
 							document={`${collection}/bed-A`}
 							field="pumpTime"
 							verify={n => n >= 0}
-							disabled={!statusIsTimer}
+							enabled={enabled && statusIsTimer}
 						/>
 					</ControlCard>
 				</Grid>
@@ -43,7 +43,7 @@ export const WaterPump = () => {
 							document={`${collection}/bed-B`}
 							field="pumpTime"
 							verify={n => n >= 0}
-							disabled={!statusIsTimer}
+							enabled={enabled && statusIsTimer}
 						/>
 					</ControlCard>
 				</Grid>

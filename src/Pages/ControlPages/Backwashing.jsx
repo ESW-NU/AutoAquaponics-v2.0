@@ -6,13 +6,13 @@ import NumericalControl from "../../Components/NumericalControl";
 import RadioControl from "../../Components/RadioControl";
 import MyButton from "../../Components/Button";
 
-export const Backwashing = () => {
+export const Backwashing = ({ enabled }) => {
 	const { getValueAndStatus } = useContext(ControlValuesContext);
 	const document = "backwashing/backwashing";
 
 	const automaticBackwashingCard = (
 		<ControlCard title="Automatic Backwashing">
-			<RadioControl label="Automatic?" document={document} field="status" options={[
+			<RadioControl label="Automatic?" document={document} field="status" enabled={enabled} options={[
 				{ label: "On", value: "on" },
 				{ label: "Off", value: "off" },
 			]}/>
@@ -21,7 +21,7 @@ export const Backwashing = () => {
 				document={document}
 				field="threshold-flow-rate"
 				verify={n => n >= 0}
-				disabled={getValueAndStatus(document, "status").v !== "on"}
+				enabled={enabled && getValueAndStatus(document, "status").v === "on"}
 			/>
 		</ControlCard>
 	);
