@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { UserContext } from "../Hooks/UserContext";
 import { db } from "../firebase";
-import { updateDoc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 
 
 const ControlsOverviewPanel = () => {
@@ -15,14 +15,13 @@ const ControlsOverviewPanel = () => {
 
 	const submitDocChanges = () => {
 		console.log(ctrlVals);
-		return; // UNTESTED CODE BELOW; BEWARE
-		localValues = { "testingcollection/testingdoc" : { "one": 1, "two": "dos" } };
+		const local = ctrlVals.local;
 		Promise.all(
-			Object.keys(localValues).map(docPath => updateDoc(doc(db, docPath), localValues[docPath]))
+			Object.keys(local).map(docPath => updateDoc(doc(db, docPath), local[docPath]))
 		).then(() => {
 			reloadRemoteValues(true);
 		}).catch(error => {
-			console.log(error);
+			console.log(error); // TODO make this a snackbar
 			reloadRemoteValues(false);
 		})
 	};
