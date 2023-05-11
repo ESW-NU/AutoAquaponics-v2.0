@@ -1,80 +1,51 @@
-import React, { useState } from "react";
-import CustomizedTable from "../../Components/CustomizedTable";
-// import OnOffTimer from "../../Components/OnOffTimer";
-// import ControlEntry from "../../Components/ControlEntry";
-// import FlowEntry from "../../Components/FlowEntry";
-import CardContent from "@mui/material/CardContent";
-import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import { FormControl } from "@mui/material";
-import {InputLabel} from "@mui/material";
-import {FilledInput }from "@mui/material";
-import { Switch } from '@mui/material';
-import {FormGroup, FormControlLabel } from "@mui/material";
-import OnOffTimer from "../../Components/OnOffTimer";
-
-const SaveControls = () => {
-  const [status, setStatus] = useState("on");
-
-  return (
-    <Card sx={{ minWidth: 600, minHeight: 400 }}>
-      <CardContent>
-        {/* <OnOffTimer />
-        <FlowEntry />
-        <ControlEntry title="Backwash When Flow Rate Less Than (GPH)" /> */}
-        Backwash When Flow Rate is Less Than (GPH): <br/>
-        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel htmlFor="component-filled"></InputLabel>
-                <FilledInput /*ref={minInput}*/ type="number" id="component-filled" min={0}   />
-            </FormControl>
-
-<br/>
-<FormControl sx={{ m: 1, maxWidth: 1 }} size="xs">
-
-      <FormGroup>
-      <OnOffTimer lightORpump={"lights"} shelfbed={"shelf1"}/></FormGroup>
-
-
-    </FormControl>
-    <button className="button-18">
-			Backwash Now
-		</button>
-    <button className="button-18">
-		 Save
-		</button>
-
-      </CardContent>
-    </Card>
-
-  );
-};
+import { useContext } from "react";
+import { Stack, Grid, Typography } from "@mui/material";
+import { ControlValuesContext } from "../../Hooks/ControlValuesContext";
+import ControlCard from "../../Components/ControlCard";
+import NumericalControl from "../../Components/NumericalControl";
+import RadioControl from "../../Components/RadioControl";
+import MyButton from "../../Components/Button";
 
 export const Backwashing = () => {
-  return (
-    <div>
-      <Typography variant="body" align="left" padding="10px">
-          BACKWASHING CONTROL PANEL
-      </Typography>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Grid>
-          <SaveControls />
-        </Grid>
+	const { getValueAndStatus } = useContext(ControlValuesContext);
+	const document = "backwashing";
 
-        <Grid>
-          <CustomizedTable />
-        </Grid>
-      </Grid>
-      {/* <OnOffTimer/>
-            <FlowEntry/>
-            <ControlEntry title="Backwash When Flow Rate Less Than (GPH)"/> */}
-    </div>
-  );
+	const automaticBackwashingCard = (
+		<ControlCard title="Automatic Backwashing">
+			<RadioControl label="Automatic?" document={document} field="status" options={[
+				{ label: "On", value: "on" },
+				{ label: "Off", value: "off" },
+			]}/>
+			{getValueAndStatus(document, "status").v === "on" && (
+				<NumericalControl
+					label="Threshold flow rate"
+					document={document}
+					field="threshold-flow-rate"
+				/>
+			)}
+		</ControlCard>
+	);
+
+	const manualOverrideCard = (
+		<ControlCard title="Manual Override">
+			<Stack spacing={1}>
+				<MyButton variant="contained">Backwash NOW</MyButton>
+				<Typography variant="body2" color="warning.main">
+					Unlike the other controls of the control panel, this will <em>instantly</em> take effect.
+				</Typography>
+			</Stack>
+		</ControlCard>
+	);
+
+	return (
+		<Stack spacing={1}>
+			<Typography variant="h2">Backwashing</Typography>
+			<Grid container spacing={1} columns={{ xs: 1, md: 2 }}>
+				<Grid item xs={1}>{automaticBackwashingCard}</Grid>
+				<Grid item xs={1}>{manualOverrideCard}</Grid>
+			</Grid>
+		</Stack>
+	);
 };
 
 export default Backwashing;

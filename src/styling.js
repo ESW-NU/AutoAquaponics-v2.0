@@ -30,10 +30,10 @@ const themeBase = createTheme({
 			fontSize: 18,
 			lineHeight: 1.43,
 		},
-		body3: {
+		body2: {
 			fontFamily: "Inter",
 			textTransform: "none",
-			fontSize: 14
+			fontSize: 14,
 		},
 		title: {
 			fontFamily: "Space Grotesk, sans-serif",
