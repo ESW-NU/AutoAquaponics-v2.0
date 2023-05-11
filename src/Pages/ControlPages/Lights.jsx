@@ -1,48 +1,35 @@
-import React from "react";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import OnOffTimer from "../../Components/RadioControl";
-import TimeEntry from "../../Components/TimeEntry";
+import { Stack, Typography, Grid } from "@mui/material";
+import { systemLightsMeta } from "../../systemMeta";
 import ControlCard from "../../Components/ControlCard";
+import RadioControl from "../../Components/RadioControl";
 
 export const Lights = () => {
-  return (
-    <div>
-      <Typography variant="body" align="left" padding="10px">
-        LIGHTS CONTROL PANEL
-      </Typography>
-      <Grid
-        container
-        spacing={1}
-        columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 2 }}
-      >
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Shelf 1" list={[
-            <OnOffTimer lightORpump={"lights"} shelfbed={"shelf1"}/>,
-            <TimeEntry shelf={"shelf1"} />
-          ]}/>
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Shelf 2" list={[
-            <OnOffTimer lightORpump={"lights"} shelfbed={"shelf2"} />,
-            <TimeEntry shelf={"shelf2"} />
-          ]}/>
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Fish Tank" list={[
-            <OnOffTimer lightORpump={"lights"} shelfbed={"fish-tank"} />,
-            <TimeEntry shelf={"fish-tank"} />
-          ]}/>
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Basking" list={[
-            <OnOffTimer lightORpump={"lights"} shelfbed={"basking"} />,
-            <TimeEntry shelf={"basking"} />
-          ]}/>
-        </Grid>
-      </Grid>
-    </div>
-  );
+	const document = "lights";
+
+	return (
+		<Stack spacing={1}>
+			<Typography variant="h2">Lights</Typography>
+			<Grid container spacing={1} columns={{ xs: 1, md: 2 }}>
+				{systemLightsMeta.map(({ partKey, name }) => (
+					<Grid item key={partKey}>
+						<ControlCard title={name}>
+							<RadioControl
+								document={`${document}/${partKey}`}
+								field="status"
+								label="Status"
+								options={[
+									{ label: "On", value: "on" },
+									{ label: "Off", value: "off" },
+									{ label: "Timer", value: "timer" },
+								]}
+							/>
+						</ControlCard>
+					</Grid>
+				))}
+			</Grid>
+		</Stack>
+
+	);
 };
 
 export default Lights;

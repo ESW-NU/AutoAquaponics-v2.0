@@ -1,7 +1,7 @@
 import React from "react";
 import GraphCard from "./GraphCard";
 import Grid from "@mui/material/Grid";
-import { systemStatMeta } from "../systemStatMeta";
+import { systemStatMeta } from "../systemMeta";
 import { useFetchStats } from "../Hooks/useFetchStats";
 import { Fade } from 'react-awesome-reveal';
 

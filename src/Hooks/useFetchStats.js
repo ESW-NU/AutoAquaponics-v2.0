@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
 import { db } from '../firebase';
-import { systemStatMeta } from "../systemStatMeta";
+import { systemStatMeta } from "../systemMeta";
 
 /*
 Returns { loading, stats, tolerances } where stats is an array of objects representating the stats

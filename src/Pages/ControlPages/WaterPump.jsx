@@ -13,7 +13,7 @@ export const WaterPump = () => {
 	return (
 		<Stack spacing={1} >
 			<Typography variant="h2">Water Pump</Typography>
-			<RadioControl document={document} field="status" options={[
+			<RadioControl document={document} field="status" label="Status" options={[
 				{ label: "On", value: "on" },
 				{ label: "Off", value: "off" },
 				{ label: "Timer", value: "timer" },

@@ -1,6 +1,6 @@
 import { Stack, Typography, Grid } from '@mui/material';
 import ControlCard from "../../Components/ControlCard";
-import { systemStatMeta } from '../../systemStatMeta';
+import { systemStatMeta } from '../../systemMeta';
 import NumericalControl from '../../Components/NumericalControl';
 
 export const Tolerances = () => {

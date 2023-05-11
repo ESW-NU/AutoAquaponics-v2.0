@@ -10,3 +10,13 @@ export const systemStatMeta = [
     { statKey: "pH", name: "pH", unit: "" },
     { statKey: "water_temp", name: "Water Temperature", unit: "ºC" },
 ];
+
+/*
+Each element in this array represents a component of the system whose lights can be controlled.
+*/
+export const systemLightsMeta = [
+    { partKey: "shelf1", name: "Shelf 1" },
+    { partKey: "shelf2", name: "Shelf 2" },
+    { partKey: "fish-tank", name: "Fish Tank"},
+    { partKey: "basking", name: "Basking" },
+];
