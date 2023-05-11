@@ -23,9 +23,9 @@ export const WaterPump = () => {
 			<Grid
 				container
 				spacing={1}
-				columns={{ xs: 1, md: 2, lg: 3 }}
+				columns={2}
 			>
-				<Grid item>
+				<Grid item xs={1}>
 					<ControlCard title="Grow Bed A">
 						<NumericalControl
 							label="Pump time (minutes)"
@@ -36,7 +36,7 @@ export const WaterPump = () => {
 						/>
 					</ControlCard>
 				</Grid>
-				<Grid item>
+				<Grid item xs={1}>
 					<ControlCard title="Grow Bed B">
 						<NumericalControl
 							label="Pump time (minutes)"

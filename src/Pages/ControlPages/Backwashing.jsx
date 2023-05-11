@@ -40,7 +40,7 @@ export const Backwashing = () => {
 	return (
 		<Stack spacing={1}>
 			<Typography variant="h2">Backwashing</Typography>
-			<Grid container spacing={1} columns={{ xs: 1, md: 2 }}>
+			<Grid container spacing={1} columns={2}>
 				<Grid item xs={1}>{automaticBackwashingCard}</Grid>
 				<Grid item xs={1}>{manualOverrideCard}</Grid>
 			</Grid>

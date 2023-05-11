@@ -13,7 +13,6 @@ const LightControlCard = ({ collection, partKey, name }) => {
 	const { getValueAndStatus } = useContext(ControlValuesContext);
 	const statusIsTimer = getValueAndStatus(document, "status").v === "timer";
 
-
 	return (
 		<ControlCard title={name}>
 			<Stack spacing={1}>
@@ -59,9 +58,9 @@ export const Lights = () => {
 	return (
 		<Stack spacing={1}>
 			<Typography variant="h2">Lights</Typography>
-			<Grid container spacing={1} columns={{ xs: 1, md: 2 }}>
+			<Grid container spacing={1} columns={{ xs: 1, sm: 2 }}>
 				{systemLightsMeta.map(({ partKey, name }) => (
-					<Grid item key={partKey}>
+					<Grid item key={partKey} xs={1}>
 						<LightControlCard collection={collection} partKey={partKey} name={name}/>
 					</Grid>
 				))}

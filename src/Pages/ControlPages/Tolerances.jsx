@@ -12,7 +12,7 @@ export const Tolerances = () => {
 			<Grid
 				container
 				spacing={1}
-				columns={{ xs: 1, md: 2, lg: 3 }}
+				columns={{ xs: 1, sm: 2, lg: 3 }}
 			>
 				{systemStatMeta.map(({ statKey, name }) => (
 					<Grid item key={statKey} xs={1}>
