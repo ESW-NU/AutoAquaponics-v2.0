@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import { Grid, Paper, useMediaQuery } from "@mui/material";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { Grid, useMediaQuery } from "@mui/material";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import HeightIcon from '@mui/icons-material/Height';
 import WavesIcon from '@mui/icons-material/Waves';
@@ -92,6 +92,7 @@ const ControlPanel = () => {
 				</Grid>
 				<Grid item xs>
 					<Routes>
+						<Route index element={<Navigate replace to="tolerances"/>}/>
 						<Route path="tolerances" element={<Tolerances enabled={enabled}/>}/>
 						<Route path="backwashing" element={<Backwashing enabled={enabled}/>}/>
 						<Route path="fishFeeder" element={<FishFeeder enabled={enabled}/>}/>
