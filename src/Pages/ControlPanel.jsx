@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Route, Routes, NavLink } from "react-router-dom";
-import { Grid, List, ListItemButton, Paper, useMediaQuery, ListItemIcon } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { Grid, Paper, useMediaQuery } from "@mui/material";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import HeightIcon from '@mui/icons-material/Height';
 import WavesIcon from '@mui/icons-material/Waves';
@@ -12,6 +12,7 @@ import { ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase';
 import { systemControlsCollections } from "../systemMeta";
+import NavLinksPanel from "../Components/NavLinksPanel";
 import Tolerances from "./ControlPages/Tolerances";
 import Backwashing from "./ControlPages/Backwashing";
 import FishFeeder from "./ControlPages/FishFeeder";
@@ -71,7 +72,7 @@ const ControlPanel = () => {
 					<Paper sx={{ p: 2 }}>STUFF HERE</Paper>
 				</Grid>
 				<Grid item xs={12} md="auto">
-					<PanelNavLinks fullWidth={isSmall} links={[
+					<NavLinksPanel fullWidth={isSmall} links={[
 						{ label: "Tolerances", addr: "tolerances", icon: <HeightIcon/> },
 						{ label: "Backwashing", addr: "backwashing", icon: <WavesIcon/>},
 						{ label: "Fish Feeder", addr: "fishFeeder", icon: <FastfoodIcon/> },
@@ -92,35 +93,5 @@ const ControlPanel = () => {
 		</ControlValuesContext.Provider>
 	);
 };
-
-const PanelNavLinks = ({ links, fullWidth }) => {
-	const linkStyle = {
-		color: "common.black",
-		typography: "link",
-		p: 2,
-	};
-
-	return (
-		<Paper sx={[{ p: 1 }, !fullWidth && { width: 250 }]}>
-			<List>
-				{links.map((link, index) => (
-					<NavLink
-						to={link.addr}
-						style={{ width: "100%", textDecoration: "none" }}
-					>{({ isActive }) => (
-						<ListItemButton
-							selected={isActive}
-							divider={index !== links.length - 1}
-							sx={linkStyle}
-						>
-							{link.icon && <ListItemIcon>{link.icon}</ListItemIcon>}
-							{link.label}
-						</ListItemButton>
-					)}</NavLink>
-				))}
-			</List>
-		</Paper>
-	);
-}
 
 export default ControlPanel;

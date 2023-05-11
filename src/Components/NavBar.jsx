@@ -2,7 +2,7 @@
 
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
 import MyButton from "../Components/Button";
 import BubbleNavLinks from './BubbleNavLinks';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
@@ -15,6 +15,7 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BuildIcon from '@mui/icons-material/Build';
 import SettingsIcon from '@mui/icons-material/Settings';
+import NavLinksPanel from './NavLinksPanel';
 
 const links = [
 	{ addr: "/video-stream", label: "Video Stream" },
@@ -66,40 +67,16 @@ export const NavBar = () => {
 					</Grid>
 				</Grid>
 			</Stack>
-
 			<Collapse in={open && isSmall} timeout="auto" unmountOnExit>
-				<Paper elevation={3} sx={{ mx: 3, marginBottom: 5 }}>
-					{/* tsk tsk Don't Repeat Yourself */}
-					<List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 3 }} href="/video-stream" label={"Video Stream"} divider={true}>
-							<ListItemIcon>
-								<VideocamIcon />
-							</ListItemIcon>
-							<ListItemText><Typography variant={"body1"}>Video Stream</Typography></ListItemText>
-						</ListItemButton>
-
-						<ListItemButton sx={{ pl: 3 }} href="/dashboard" label={"Dashboard"} divider={true}>
-							<ListItemIcon>
-								<DashboardIcon />
-							</ListItemIcon>
-							<ListItemText><Typography variant={"body1"}>Dashboard</Typography></ListItemText>
-						</ListItemButton>
-
-						<ListItemButton sx={{ pl: 3 }} href="/control-panel" label={"Control Panel"} divider={true}>
-							<ListItemIcon>
-								<BuildIcon />
-							</ListItemIcon>
-							<ListItemText><Typography variant={"body1"}>Control Panel</Typography></ListItemText>
-						</ListItemButton>
-
-						<ListItemButton sx={{ pl: 3 }} href="settings" label={"setting"} divider={true}>
-							<ListItemIcon>
-								<SettingsIcon />
-							</ListItemIcon>
-							<ListItemText><Typography variant={"body1"}>Settings</Typography></ListItemText>
-						</ListItemButton>
-					</List>
-				</Paper>
+				<Box sx={{ p: 3 }}>
+					<NavLinksPanel fullWidth links={[
+						{ label: "Video Stream", addr: "/video-stream", icon: <VideocamIcon/> },
+						{ label: "Dashboard", addr: "/dashboard", icon: <DashboardIcon/> },
+						{ label: "Control Panel", addr: "/control-panel", icon: <BuildIcon/> },
+						{ label: "Settings", addr: "/settings", icon: <SettingsIcon/> },
+					]}/>
+					<Divider sx={{ my: 2 }}/>
+				</Box>
 			</Collapse>
 		</Box>
 	);
