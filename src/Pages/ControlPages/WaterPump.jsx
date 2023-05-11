@@ -1,25 +1,20 @@
-import { useState } from "react";
-import { Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Stack } from "@mui/material";
-import { db } from '../../firebase';
-import { doc, updateDoc } from "firebase/firestore";
+import { Grid, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FlowEntry from "../../Components/FlowEntry";
 import ControlCard from "../../Components/ControlCard";
 import OnOffTimer from "../../Components/OnOffTimer";
+import { useContext } from 'react';
+import { ControlValuesContext } from '../../Hooks/ControlValuesContext';
 
 export const WaterPump = () => {
-	const [status, setStatus] = useState("on"); // grab initial value from firebase
-
-	const handleChangeStatus = (newStatus) => {
-		setStatus(newStatus);
-		console.log(`setting status to ${newStatus}`)
-	}
+    const { getValueAndStatus } = useContext(ControlValuesContext);
+	const document = "water-pump";
 
 	return (
-		<Stack spacing={1}>
+		<Stack spacing={1} >
 			<Typography variant="h2">Water Pump</Typography>
-			<OnOffTimer status={status} onChangeStatus={handleChangeStatus}/>
-			{status === "timer" && (
+			<OnOffTimer document={document} field="status"/>
+			{getValueAndStatus(document, "status").v === "timer" && (
 				<Grid
 					container
 					spacing={1}
@@ -27,12 +22,12 @@ export const WaterPump = () => {
 				>
 					<Grid item>
 						<ControlCard title="Grow Bed A">
-							<FlowEntry bed={"bed-A"}/>
+							<FlowEntry document={document} field="bed-A-flow"/>
 						</ControlCard>
 					</Grid>
 					<Grid item>
 						<ControlCard title="Grow Bed B">
-							<FlowEntry bed={"bed-B"}/>
+							<FlowEntry document={document} field="bed-B-flow"/>
 						</ControlCard>
 					</Grid>
 				</Grid>

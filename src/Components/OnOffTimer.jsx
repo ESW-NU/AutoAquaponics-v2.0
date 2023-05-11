@@ -1,27 +1,26 @@
 // on/off/timer buttons for lights and water pump pages
 
-import { useState } from 'react';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormLabel from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Radio from '@mui/material/Radio';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { db } from '../firebase';
-import { doc, updateDoc } from "firebase/firestore";
+import { RadioGroup, Radio, FormLabel, FormControl, FormControlLabel } from '@mui/material';
+import { useContext } from 'react';
+import { ControlValuesContext } from '../Hooks/ControlValuesContext';
 
-const OnOffTimer = ({ status, onChangeStatus}) => {
+const OnOffTimer = ({ document, field }) => {
+    const { getValueAndStatus, dispatchLocalValueChange } = useContext(ControlValuesContext);
+    const { s, v } = getValueAndStatus(document, field);
+    const color = s ? "edited" : undefined;
+
     return (
         <FormControl>
-            <FormLabel>Status</FormLabel>
+            <FormLabel focused={s ? true : undefined } color={color}>Status</FormLabel>
             <RadioGroup
                 row
                 name="status"
-                value={status}
-                onChange={e => onChangeStatus(e.target.value)}
+                value={v}
+                onChange={e => dispatchLocalValueChange({ document, field, newValue: e.target.value })}
             >
-                <FormControlLabel value="on" control={<Radio/>} label="On" />
-                <FormControlLabel value="off" control={<Radio/>} label="Off" />
-                <FormControlLabel value="timer" control={<Radio/>} label="Timer" />
+                <FormControlLabel value="on" control={<Radio color={color}/>} label="On" />
+                <FormControlLabel value="off" control={<Radio color={color}/>} label="Off" />
+                <FormControlLabel value="timer" control={<Radio color={color}/>} label="Timer" />
             </RadioGroup>
         </FormControl>
     );

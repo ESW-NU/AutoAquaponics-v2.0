@@ -58,6 +58,11 @@ const themeBase = createTheme({
 			main: "#FBB040",
 			dark: "#C98C30",
 		},
+		edited: {
+			dark: "#b28704",
+			main: "#ffc107",
+			light: "#ffcd38",
+		},
 	},
 });
 
