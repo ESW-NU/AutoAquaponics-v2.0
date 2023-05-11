@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Stack, Typography, Grid } from "@mui/material";
-import { ControlValuesContext } from "../../Hooks/ControlValuesContext";
+import { getValueAndStatus, ControlValuesContext } from "../../Hooks/ControlValuesContext";
 import { systemLightsMeta } from "../../systemMeta";
 import ControlCard from "../../Components/ControlCard";
 import RadioControl from "../../Components/RadioControl";
@@ -10,8 +10,8 @@ import NumericalControl from "../../Components/NumericalControl";
 const LightControlCard = ({ collection, partKey, name, enabled }) => {
 	const document = `${collection}/${partKey}`;
 
-	const { getValueAndStatus } = useContext(ControlValuesContext);
-	const statusIsTimer = getValueAndStatus(document, "status").v === "timer";
+	const { ctrlVals } = useContext(ControlValuesContext);
+	const statusIsTimer = getValueAndStatus(ctrlVals, document, "status").v === "timer";
 
 	return (
 		<ControlCard title={name}>

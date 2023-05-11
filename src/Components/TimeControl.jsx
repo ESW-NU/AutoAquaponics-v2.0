@@ -3,19 +3,19 @@
 import { useContext } from "react";
 import dayjs from "dayjs";
 import { TimeField } from '@mui/x-date-pickers';
-import { ControlValuesContext } from '../Hooks/ControlValuesContext';
+import { getValueAndStatus, ControlValuesContext } from '../Hooks/ControlValuesContext';
 
 const TimeControl = ({ label, document, enabled = true }) => {
-	const { getValueAndStatus, dispatchLocalValueChange } = useContext(ControlValuesContext);
-	const { v: starthhV, s: starthhS } = getValueAndStatus(document, "starthh");
-	const { v: startmmV, s: startmmS } = getValueAndStatus(document, "startmm");
-	const { v: startmeridiemV, startmeridiemS } = getValueAndStatus(document, "meridiem");
+    const { ctrlVals, dispatchCtrlVals } = useContext(ControlValuesContext);
+	const { v: starthhV, s: starthhS } = getValueAndStatus(ctrlVals, document, "starthh");
+	const { v: startmmV, s: startmmS } = getValueAndStatus(ctrlVals, document, "startmm");
+	const { v: startmeridiemV, startmeridiemS } = getValueAndStatus(ctrlVals, document, "meridiem");
 
 	const startDate = dayjs().hour(starthhV + (startmeridiemV === "PM" ? 12 : 0)).minute(startmmV);
 	const setStartDate = (date) => {
-		dispatchLocalValueChange({ type: "set_value", document, field: "starthh", newValue: date.hour() % 12 });
-		dispatchLocalValueChange({ type: "set_value", document, field: "startmm", newValue: date.minute() });
-		dispatchLocalValueChange({ type: "set_value", document, field: "meridiem", newValue: date.hour() >= 12 ? "PM" : "AM"});
+		dispatchCtrlVals({ type: "set_local", document, field: "starthh", newValue: date.hour() % 12 });
+		dispatchCtrlVals({ type: "set_local", document, field: "startmm", newValue: date.minute() });
+		dispatchCtrlVals({ type: "set_local", document, field: "meridiem", newValue: date.hour() >= 12 ? "PM" : "AM"});
 	};
 
 	const edited = starthhS || startmmS || startmeridiemS;

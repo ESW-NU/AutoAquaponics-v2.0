@@ -4,13 +4,13 @@ import NumericalControl from "../../Components/NumericalControl";
 import ControlCard from "../../Components/ControlCard";
 import RadioControl from "../../Components/RadioControl";
 import { useContext } from 'react';
-import { ControlValuesContext } from '../../Hooks/ControlValuesContext';
+import { getValueAndStatus, ControlValuesContext } from '../../Hooks/ControlValuesContext';
 
 export const WaterPump = ({ enabled }) => {
-    const { getValueAndStatus } = useContext(ControlValuesContext);
+    const { ctrlVals } = useContext(ControlValuesContext);
 	const collection = "water-pump";
 
-	const statusIsTimer = getValueAndStatus(`${collection}/status`, "status").v === "timer";
+	const statusIsTimer = getValueAndStatus(ctrlVals, `${collection}/status`, "status").v === "timer";
 
 	return (
 		<Stack spacing={1} >

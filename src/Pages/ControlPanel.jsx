@@ -8,7 +8,7 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFan } from '@fortawesome/free-solid-svg-icons'
 import theme from "../styling";
-import { ControlValuesContext } from "../Hooks/ControlValuesContext";
+import { ctrlValsReducer, ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase';
 import { systemControlsCollections } from "../systemMeta";
@@ -24,9 +24,9 @@ import { UserContext } from "../Hooks/UserContext";
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
-	const [remoteValues, setRemoteValues] = useState(null);
-	const fetchRemoteValues = () => {
-		setRemoteValues(null);
+	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: null, local: {} });
+	const fetchRemoteValues = (discardLocal) => {
+		dispatchCtrlVals({ type: "discard_remote" });
 		Promise.all(
 			systemControlsCollections.map(collName => getDocs(collection(db, collName)))
 		).then(querySnapshotArray => {
@@ -35,48 +35,22 @@ const ControlPanel = () => {
 				// get an array of [path, data] pairs
 				querySnapshot.docs.map(doc => [doc.ref.path, doc.data()])
 			).flat();
-			setRemoteValues(Object.fromEntries(pairs));
+			if (discardLocal) {
+				// do this first to avoid the unnecessary checks in replace_remote
+				dispatchCtrlVals({ type: "discard_local" });
+			}
+			dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
 		});
 	};
 	useEffect(() => fetchRemoteValues(), []);
-
-	const localControlValuesReducer = (oldLocalValues, action) => {
-		switch (action.type) {
-			case "discard":
-				return {};
-			case "set_value":
-				const { document, field, newValue} = action;
-				const newLocalValues = structuredClone(oldLocalValues);
-				if (remoteValues?.[document]?.[field] === newValue) {
-					if (newLocalValues.hasOwnProperty(document) && newLocalValues[document].hasOwnProperty(field)) {
-						delete newLocalValues[document][field];
-						if (Object.keys(newLocalValues[document]).length === 0) {
-							delete newLocalValues[document];
-						}
-					}
-				} else {
-					newLocalValues[document] = { ...newLocalValues[document], [field]: newValue};
-				}
-				return newLocalValues;
-			default:
-				return oldLocalValues;
-		}
-	};
-	const [localValues, dispatchLocalValueChange] = useReducer(localControlValuesReducer, {});
-	const getValueAndStatus = (document, field) => ({
-		v: localValues[document]?.[field] ?? remoteValues?.[document]?.[field] ?? null, // null is the most sensible default until the remote values have been retrieved
-		s: localValues[document]?.hasOwnProperty(field),
-	});
 
 	const user = useContext(UserContext);
 	const enabled = user !== null;
 
 	return (
 		<ControlValuesContext.Provider value={{
-			remoteValues,
-			localValues,
-			getValueAndStatus,
-			dispatchLocalValueChange,
+			ctrlVals,
+			dispatchCtrlVals,
 			reloadRemoteValues: fetchRemoteValues,
 		}}>
 			<Grid container spacing={3}>

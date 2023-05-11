@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { Stack, Grid, Typography } from "@mui/material";
-import { ControlValuesContext } from "../../Hooks/ControlValuesContext";
+import { getValueAndStatus, ControlValuesContext } from "../../Hooks/ControlValuesContext";
 import ControlCard from "../../Components/ControlCard";
 import NumericalControl from "../../Components/NumericalControl";
 import RadioControl from "../../Components/RadioControl";
 import MyButton from "../../Components/Button";
 
 export const Backwashing = ({ enabled }) => {
-	const { getValueAndStatus } = useContext(ControlValuesContext);
+	const { ctrlVals } = useContext(ControlValuesContext);
 	const document = "backwashing/backwashing";
 
 	const automaticBackwashingCard = (
@@ -21,7 +21,7 @@ export const Backwashing = ({ enabled }) => {
 				document={document}
 				field="threshold-flow-rate"
 				verify={n => n >= 0}
-				enabled={enabled && getValueAndStatus(document, "status").v === "on"}
+				enabled={enabled && getValueAndStatus(ctrlVals, document, "status").v === "on"}
 			/>
 		</ControlCard>
 	);

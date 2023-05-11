@@ -3,12 +3,29 @@ import { Box, Button, LinearProgress, Paper, Stack, Link as MuiLink } from "@mui
 import { Link as RouterLink } from "react-router-dom";
 import { ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { UserContext } from "../Hooks/UserContext";
+import { db } from "../firebase";
+import { updateDoc } from "firebase/firestore";
+
 
 const ControlsOverviewPanel = () => {
-	const { remoteValues, localValues, dispatchLocalValueChange, reloadRemoteValues } = useContext(ControlValuesContext);
+	const { ctrlVals, dispatchCtrlVals, reloadRemoteValues } = useContext(ControlValuesContext);
 	const user = useContext(UserContext);
-	const loading = remoteValues === null;
-	const edited = Object.entries(localValues).length > 0;
+	const loading = ctrlVals.remote === null;
+	const edited = Object.entries(ctrlVals.local).length > 0;
+
+	const submitDocChanges = () => {
+		console.log(ctrlVals);
+		return; // UNTESTED CODE BELOW; BEWARE
+		localValues = { "testingcollection/testingdoc" : { "one": 1, "two": "dos" } };
+		Promise.all(
+			Object.keys(localValues).map(docPath => updateDoc(doc(db, docPath), localValues[docPath]))
+		).then(() => {
+			reloadRemoteValues(true);
+		}).catch(error => {
+			console.log(error);
+			reloadRemoteValues(false);
+		})
+	};
 
 	const color = loading ?
 		"common.white"
@@ -34,7 +51,7 @@ const ControlsOverviewPanel = () => {
 						</Box>
 						<Button
 							variant="text"
-							onClick={reloadRemoteValues}
+							onClick={() => reloadRemoteValues(false)}
 						>Refresh</Button>
 					</>
 				) : edited ? (
@@ -42,15 +59,16 @@ const ControlsOverviewPanel = () => {
 						<Box sx={{ width: "100%" }}>You have unsaved changes!</Box>
 						<Button
 							variant="contained"
+							onClick={submitDocChanges}
 						>Save</Button>
 						<Button
 							variant="text"
 							color="warning"
-							onClick={() => dispatchLocalValueChange({ type: "discard" })}
+							onClick={() => dispatchCtrlVals({ type: "discard_local" })}
 						>Discard</Button>
 						<Button
 							variant="text"
-							onClick={reloadRemoteValues}
+							onClick={() => reloadRemoteValues(false)}
 						>Refresh</Button>
 					</>
 				) : (
@@ -58,7 +76,7 @@ const ControlsOverviewPanel = () => {
 						<Box sx={{ width: "100%" }}>Up to date!</Box>
 						<Button
 							variant="text"
-							onClick={reloadRemoteValues}
+							onClick={() => reloadRemoteValues(false)}
 						>Refresh</Button>
 					</>
 				)}
