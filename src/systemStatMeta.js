@@ -1,8 +1,8 @@
 /*
-Each element in this array represents a statistic that the dashboard will track; updating this
-object will cause the dashboard to update which stats it tracks.
+Each element in this array represents a statistic that the dashboard will track and that the
+tolerances control page will control; updating this object will cause both pages to change too
 */
-export const dashboardTrackedStats = [
+export const systemStatMeta = [
 	{ statKey: "TDS", name: "Total Dissolved Solids", unit: "ppm" },
 	{ statKey: "air_temp",  name: "Air Temperature", unit: "ºC" },
     { statKey: "distance", name: "Water Level", unit: "cm" },

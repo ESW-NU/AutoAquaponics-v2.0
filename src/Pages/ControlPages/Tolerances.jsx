@@ -1,82 +1,27 @@
-import React from 'react'
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import { Stack, Typography, Grid } from '@mui/material';
 import ControlCard from "../../Components/ControlCard";
 import MaxMin from "../../Components/MaxMin";
-//import MakeChanges from "../../Components/MakeChanges";
-//import { collection, addDoc } from "firebase/firestore";
-//import db from "../../firebase";
+import { systemStatMeta } from '../../systemStatMeta';
 
 export const Tolerances = () => {
-
-  // Push Function to be used by Save button "onClick"
-  // const Push = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const docRef = await addDoc(collection(db, "tolerances"), {
-  //       pH_min: pH_min,
-  //       pH_max: pH_max,
-  //       TDS_min: TDS_min,
-  //       TDS_max: TDS_max,
-  //       humidity_min: humidity_min,
-  //       humidity_max: humidity_max,
-  //       air_temp_min: air_temp_min,
-  //       air_temp_max: air_temp_max,
-  //       water_temp_min: water_temp_min,
-  //       water_temp_max: water_temp_max,
-  //       water_level_min: water_level_min,
-  //       water_level_max: water_level_max,
-  //     });
-  //     console.log("Document written with ID: ", docRef.id);
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-  // }
-
-  return (
-    <div>
-      <Typography variant="body" align="left" padding="10px">
-        TOLERANCES CONTROL PANEL
-      </Typography>
-      <Grid
-        container
-        spacing={1}
-        columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }}
-        >
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="pH">
-              <MaxMin sensor={"pH"} />
-            </ControlCard>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="TDS (ppm)">
-              <MaxMin sensor={"TDS"} />
-            </ControlCard>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Relative Humidity (%)">
-              <MaxMin sensor={"humidity"} />
-            </ControlCard>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Air Temperature (ºC)">
-              <MaxMin sensor={"air_temp"} />
-            </ControlCard>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Water Temperature (ºC)">
-              <MaxMin sensor={"water_temp"} />
-            </ControlCard>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Water Level (cm)">
-              <MaxMin sensor={"distance"} />
-            </ControlCard>
-          </Grid>
-      </Grid>
-    </div>
-  )
+	return (
+		<Stack spacing={1}>
+			<Typography variant="h2">Tolerances</Typography>
+			<Grid
+				container
+				spacing={1}
+				columns={{ xs: 1, md: 2, lg: 3 }}
+			>
+				{systemStatMeta.map(({ statKey, unit, name }) => (
+					<Grid item xs={1}>
+						<ControlCard title={name}>
+							<MaxMin document={`tolerances/${statKey}`}/>
+						</ControlCard>
+					</Grid>
+				))}
+			</Grid>
+		</Stack>
+	)
 }
 
 export default Tolerances;

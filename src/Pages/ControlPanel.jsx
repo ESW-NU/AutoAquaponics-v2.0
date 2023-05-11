@@ -38,7 +38,7 @@ const ControlPanel = () => {
 	};
 	const [localValues, dispatchLocalValueChange] = useReducer(localControlValuesReducer, {});
 	const getValueAndStatus = (document, field) => ({
-		v: localValues[document]?.[field] ?? remoteValues[document]?.[field] ?? null,
+		v: localValues[document]?.[field] ?? remoteValues[document]?.[field] ?? null, // null is the most sensible default until the remote values have been retrieved
 		s: localValues[document]?.hasOwnProperty(field),
 	});
 
