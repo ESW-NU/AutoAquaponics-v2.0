@@ -47,12 +47,15 @@ const themeBase = createTheme({
 			fontSize: 18,
 			textDecoration: "none",
 		},
+		button: {
+			fontFamily: "Inter",
+		},
 	},
 	palette: {
 		primary: {
-			light: "#ffffff",
+			light: "#4cc174",
 			main: "#009444",
-			dark: "#004b23",
+			dark: "#006326",
 		},
 		clickme: {
 			main: "#FBB040",

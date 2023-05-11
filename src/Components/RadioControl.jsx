@@ -15,7 +15,7 @@ const RadioControl = ({ document, field, label, options }) => {
             <RadioGroup
                 row
                 value={v}
-                onChange={e => dispatchLocalValueChange({ document, field, newValue: e.target.value })}
+                onChange={e => dispatchLocalValueChange({ type: "set_value", document, field, newValue: e.target.value })}
             >
                 {options.map(({ label, value }) => (
                     <FormControlLabel key={value} value={value} control={<Radio color={color}/>} label={label} />

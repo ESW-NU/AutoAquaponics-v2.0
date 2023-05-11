@@ -13,9 +13,9 @@ const TimeControl = ({ label, document, disabled = false }) => {
 
 	const startDate = dayjs().hour(starthhV + (startmeridiemV === "PM" ? 12 : 0)).minute(startmmV);
 	const setStartDate = (date) => {
-		dispatchLocalValueChange({ document, field: "starthh", newValue: date.hour() % 12 });
-		dispatchLocalValueChange({ document, field: "startmm", newValue: date.minute() });
-		dispatchLocalValueChange({ document, field: "meridiem", newValue: date.hour() >= 12 ? "PM" : "AM"});
+		dispatchLocalValueChange({ type: "set_value", document, field: "starthh", newValue: date.hour() % 12 });
+		dispatchLocalValueChange({ type: "set_value", document, field: "startmm", newValue: date.minute() });
+		dispatchLocalValueChange({ type: "set_value", document, field: "meridiem", newValue: date.hour() >= 12 ? "PM" : "AM"});
 	};
 
 	const edited = starthhS || startmmS || startmeridiemS;

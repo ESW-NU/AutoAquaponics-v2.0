@@ -10,7 +10,7 @@ const NumericalControl = ({ label, document, field, disabled = false, step = 1, 
 	const handleChange = (e) => {
 		const newValue = Number(e.target.value);
 		if (verify(newValue)) {
-			dispatchLocalValueChange({ document, field, newValue });
+			dispatchLocalValueChange({ type: "set_value", document, field, newValue });
 		}
 	};
 
