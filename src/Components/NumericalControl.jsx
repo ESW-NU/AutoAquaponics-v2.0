@@ -21,7 +21,7 @@ const NumericalControl = ({ label, document, field, disabled = false, step = 1, 
 			type="number"
 			inputProps={{ step }}
 			disabled={disabled}
-			value={v ?? 0}
+			value={v ?? ""}
 			onChange={handleChange}
 			color={s ? "edited" : undefined}
 			focused={s ? true : undefined}

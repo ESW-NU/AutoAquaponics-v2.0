@@ -8,7 +8,7 @@ import MyButton from "../../Components/Button";
 
 export const Backwashing = () => {
 	const { getValueAndStatus } = useContext(ControlValuesContext);
-	const document = "backwashing";
+	const document = "backwashing/backwashing";
 
 	const automaticBackwashingCard = (
 		<ControlCard title="Automatic Backwashing">

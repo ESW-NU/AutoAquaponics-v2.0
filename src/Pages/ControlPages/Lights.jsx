@@ -7,16 +7,18 @@ import RadioControl from "../../Components/RadioControl";
 import TimeControl from "../../Components/TimeControl";
 import NumericalControl from "../../Components/NumericalControl";
 
-const LightControlCard = ({ document, partKey, name }) => {
-	const { getValueAndStatus } = useContext(ControlValuesContext);
+const LightControlCard = ({ collection, partKey, name }) => {
+	const document = `${collection}/${partKey}`;
 
-	const statusIsTimer = getValueAndStatus(`${document}/${partKey}`, "status").v === "timer";
+	const { getValueAndStatus } = useContext(ControlValuesContext);
+	const statusIsTimer = getValueAndStatus(document, "status").v === "timer";
+
 
 	return (
 		<ControlCard title={name}>
 			<Stack spacing={1}>
 				<RadioControl
-					document={`${document}/${partKey}`}
+					document={document}
 					field="status"
 					label="Status"
 					options={[
@@ -27,20 +29,20 @@ const LightControlCard = ({ document, partKey, name }) => {
 				/>
 				<TimeControl
 					label="Start time"
-					document={`${document}/${partKey}`}
+					document={document}
 					disabled={!statusIsTimer}
 				/>
 				<Stack direction="row" spacing={1}>
 					<NumericalControl
 						label="Duration (H)"
-						document={`${document}/${partKey}`}
+						document={document}
 						field="durationhh"
 						verify={n => n >= 0}
 						disabled={!statusIsTimer}
 					/>
 					<NumericalControl
 						label="Duration (M)"
-						document={`${document}/${partKey}`}
+						document={document}
 						field="durationmm"
 						verify={n => n >= 0}
 						disabled={!statusIsTimer}
@@ -51,7 +53,7 @@ const LightControlCard = ({ document, partKey, name }) => {
 	);
 }
 
-const document = "lights";
+const collection = "lights";
 
 export const Lights = () => {
 	return (
@@ -60,7 +62,7 @@ export const Lights = () => {
 			<Grid container spacing={1} columns={{ xs: 1, md: 2 }}>
 				{systemLightsMeta.map(({ partKey, name }) => (
 					<Grid item key={partKey}>
-						<LightControlCard document={document} partKey={partKey} name={name}/>
+						<LightControlCard collection={collection} partKey={partKey} name={name}/>
 					</Grid>
 				))}
 			</Grid>

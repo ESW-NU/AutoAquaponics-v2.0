@@ -4,7 +4,7 @@ import { systemStatMeta } from '../../systemMeta';
 import NumericalControl from '../../Components/NumericalControl';
 
 export const Tolerances = () => {
-	const document = "tolerances";
+	const collection = "tolerances";
 
 	return (
 		<Stack spacing={1}>
@@ -20,13 +20,13 @@ export const Tolerances = () => {
 							<Stack spacing={1}>
 								<NumericalControl
 									label="max"
-									document={`${document}/${statKey}`}
+									document={`${collection}/${statKey}`}
 									field="max"
 									verify={n => n >= 0}
 								/>
 								<NumericalControl
 									label="min"
-									document={`${document}/${statKey}`}
+									document={`${collection}/${statKey}`}
 									field="min"
 									verify={n => n >= 0}
 								/>
