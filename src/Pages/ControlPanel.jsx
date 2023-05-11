@@ -1,29 +1,42 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Grid, Stack, useMediaQuery } from "@mui/material";
 import theme from "../styling";
 import { ControlValuesContext } from "../Hooks/ControlValuesContext";
-
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../firebase';
+import { systemControlsCollections } from "../systemMeta";
+import BubbleNavLinks from "../Components/BubbleNavLinks";
 import Tolerances from "./ControlPages/Tolerances";
 import Backwashing from "./ControlPages/Backwashing";
 import FishFeeder from "./ControlPages/FishFeeder";
 import Lights from "./ControlPages/Lights";
 import WaterPump from "./ControlPages/WaterPump";
 
-import { Grid, Stack, useMediaQuery } from "@mui/material";
-import BubbleNavLinks from "../Components/BubbleNavLinks";
-
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
-	const remoteValues = {
-		a: "alice",
-		b: "bob",
-		"water-pump": {
-			"status": "on",
-			"bed-A-flow": 10,
-			"bed-B-flow": 11,
-		},
-	}; // TODO populate with actual firebase values
+	const [remoteValues, setRemoteValues] = useState({});
+	const fetchRemoteValues = () => {
+		for (const collectionName of systemControlsCollections) {
+			getDocs(collection(db, collectionName))
+			.then(snapshot => {
+				// use an updater here because the promises are fulfilled asynchronously
+				setRemoteValues(oldRemoteValues => ({
+					...oldRemoteValues,
+					...Object.fromEntries(snapshot.docs.map(doc =>
+						[`${collectionName}/${doc.id}`, doc.data()]
+					)),
+				}));
+			})
+			.catch(error => {
+				console.log(error);
+				console.log(`while retrieving ${collectionName}`)
+			});
+		}
+	};
+	useEffect(() => { fetchRemoteValues(); }, []);
+
 	const localControlValuesReducer = (oldLocalValues, { document, field, newValue }) => {
 		const newLocalValues = structuredClone(oldLocalValues);
 		if (remoteValues[document]?.[field] === newValue) {
