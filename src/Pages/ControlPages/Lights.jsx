@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import OnOffTimer from "../../Components/OnOffTimer";
+import OnOffTimer from "../../Components/RadioControl";
 import TimeEntry from "../../Components/TimeEntry";
 import ControlCard from "../../Components/ControlCard";
 

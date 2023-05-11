@@ -2,7 +2,7 @@ import { Grid, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NumericalControl from "../../Components/NumericalControl";
 import ControlCard from "../../Components/ControlCard";
-import OnOffTimer from "../../Components/OnOffTimer";
+import RadioControl from "../../Components/RadioControl";
 import { useContext } from 'react';
 import { ControlValuesContext } from '../../Hooks/ControlValuesContext';
 
@@ -13,7 +13,11 @@ export const WaterPump = () => {
 	return (
 		<Stack spacing={1} >
 			<Typography variant="h2">Water Pump</Typography>
-			<OnOffTimer document={document} field="status"/>
+			<RadioControl document={document} field="status" options={[
+				{ label: "On", value: "on" },
+				{ label: "Off", value: "off" },
+				{ label: "Timer", value: "timer" },
+			]}/>
 			{getValueAndStatus(document, "status").v === "timer" && (
 				<Grid
 					container

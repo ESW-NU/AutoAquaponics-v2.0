@@ -13,7 +13,7 @@ const NumericalControl = ({ label, document, field }) => {
 			fullWidth
 			type="number"
 			inputProps={{ step: 10 }}
-			value={v}
+			value={v ?? 0}
 			onChange={e => dispatchLocalValueChange({ document, field, newValue: Number(e.target.value) })}
 			color={s ? "edited" : undefined}
 			focused={s ? true : undefined}

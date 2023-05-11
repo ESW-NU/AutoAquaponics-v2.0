@@ -13,7 +13,7 @@ export const Tolerances = () => {
 				columns={{ xs: 1, md: 2, lg: 3 }}
 			>
 				{systemStatMeta.map(({ statKey, name }) => (
-					<Grid item xs={1}>
+					<Grid item key={statKey} xs={1}>
 						<ControlCard title={name}>
 							<Stack spacing={1}>
 								<NumericalControl label="max" document={`tolerances/${statKey}`} field="max"/>
