@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { Box, Button, LinearProgress, Paper, Stack } from "@mui/material";
+import { Box, Button, LinearProgress, Paper, Stack, Link as MuiLink } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import { ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { UserContext } from "../Hooks/UserContext";
 
@@ -29,7 +30,7 @@ const ControlsOverviewPanel = () => {
 				) : user === null ? (
 					<>
 						<Box sx={{ width: "100%" }}>
-							Up to date! To make changes, log in.
+							Up to date! To make changes, <MuiLink component={RouterLink} to="/login">log in</MuiLink>
 						</Box>
 						<Button
 							variant="text"
