@@ -47,10 +47,12 @@ const ControlPanel = () => {
 			case "set_value":
 				const { document, field, newValue} = action;
 				const newLocalValues = structuredClone(oldLocalValues);
-				if (remoteValues[document]?.[field] === newValue) {
-					delete newLocalValues[document][field];
-					if (Object.keys(newLocalValues[document]).length === 0) {
-						delete newLocalValues[document];
+				if (remoteValues?.[document]?.[field] === newValue) {
+					if (newLocalValues.hasOwnProperty(document) && newLocalValues[document].hasOwnProperty(field)) {
+						delete newLocalValues[document][field];
+						if (Object.keys(newLocalValues[document]).length === 0) {
+							delete newLocalValues[document];
+						}
 					}
 				} else {
 					newLocalValues[document] = { ...newLocalValues[document], [field]: newValue};
