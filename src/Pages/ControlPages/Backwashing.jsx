@@ -21,6 +21,7 @@ export const Backwashing = () => {
 					label="Threshold flow rate"
 					document={document}
 					field="threshold-flow-rate"
+					verify={n => n >= 0}
 				/>
 			)}
 		</ControlCard>

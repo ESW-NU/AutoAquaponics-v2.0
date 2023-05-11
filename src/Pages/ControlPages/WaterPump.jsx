@@ -26,12 +26,22 @@ export const WaterPump = () => {
 				>
 					<Grid item>
 						<ControlCard title="Grow Bed A">
-							<NumericalControl label="Pump time (minutes)" document={document} field="bed-A-flow"/>
+							<NumericalControl
+								label="Pump time (minutes)"
+								document={document}
+								field="bed-A-flow"
+								verify={n => n >= 0}
+							/>
 						</ControlCard>
 					</Grid>
 					<Grid item>
 						<ControlCard title="Grow Bed B">
-							<NumericalControl label="Pump time (minutes)" document={document} field="bed-B-flow"/>
+							<NumericalControl
+								label="Pump time (minutes)"
+								document={document}
+								field="bed-B-flow"
+								verify={n => n >= 0}
+							/>
 						</ControlCard>
 					</Grid>
 				</Grid>
