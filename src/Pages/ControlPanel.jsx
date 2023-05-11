@@ -1,12 +1,17 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import { Grid, Stack, useMediaQuery } from "@mui/material";
+import { Route, Routes, NavLink } from "react-router-dom";
+import { Grid, List, ListItemButton, Paper, useMediaQuery, ListItemIcon } from "@mui/material";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import HeightIcon from '@mui/icons-material/Height';
+import WavesIcon from '@mui/icons-material/Waves';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFan } from '@fortawesome/free-solid-svg-icons'
 import theme from "../styling";
 import { ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase';
 import { systemControlsCollections } from "../systemMeta";
-import BubbleNavLinks from "../Components/BubbleNavLinks";
 import Tolerances from "./ControlPages/Tolerances";
 import Backwashing from "./ControlPages/Backwashing";
 import FishFeeder from "./ControlPages/FishFeeder";
@@ -61,18 +66,19 @@ const ControlPanel = () => {
 			getValueAndStatus,
 			dispatchLocalValueChange,
 		}}>
-			<Grid container>
-				{!isSmall && <Grid item xs="auto">
-					<Stack alignItems="flex-start" spacing={1} sx={{ width: 200, p: 3 }}>
-						<BubbleNavLinks links={[
-							{ label: "Tolerances", addr: "tolerances" },
-							{ label: "Backwashing", addr: "backwashing" },
-							{ label: "Fish Feeder", addr: "fishFeeder" },
-							{ label: "Lights", addr: "lights" },
-							{ label: "Water Pump", addr: "waterPump" },
-						]}/>
-					</Stack>
-				</Grid>}
+			<Grid container spacing={3}>
+				<Grid item xs={12}>
+					<Paper sx={{ p: 2 }}>STUFF HERE</Paper>
+				</Grid>
+				<Grid item xs={12} md="auto">
+					<PanelNavLinks fullWidth={isSmall} links={[
+						{ label: "Tolerances", addr: "tolerances", icon: <HeightIcon/> },
+						{ label: "Backwashing", addr: "backwashing", icon: <WavesIcon/>},
+						{ label: "Fish Feeder", addr: "fishFeeder", icon: <FastfoodIcon/> },
+						{ label: "Lights", addr: "lights", icon: <LightbulbIcon/> },
+						{ label: "Water Pump", addr: "waterPump", icon: <FontAwesomeIcon icon={faFan}/> },
+					]}/>
+				</Grid>
 				<Grid item xs>
 					<Routes>
 						<Route path="tolerances" element={<Tolerances/>}/>
@@ -86,5 +92,35 @@ const ControlPanel = () => {
 		</ControlValuesContext.Provider>
 	);
 };
+
+const PanelNavLinks = ({ links, fullWidth }) => {
+	const linkStyle = {
+		color: "common.black",
+		typography: "link",
+		p: 2,
+	};
+
+	return (
+		<Paper sx={[{ p: 1 }, !fullWidth && { width: 250 }]}>
+			<List>
+				{links.map((link, index) => (
+					<NavLink
+						to={link.addr}
+						style={{ width: "100%", textDecoration: "none" }}
+					>{({ isActive }) => (
+						<ListItemButton
+							selected={isActive}
+							divider={index !== links.length - 1}
+							sx={linkStyle}
+						>
+							{link.icon && <ListItemIcon>{link.icon}</ListItemIcon>}
+							{link.label}
+						</ListItemButton>
+					)}</NavLink>
+				))}
+			</List>
+		</Paper>
+	);
+}
 
 export default ControlPanel;
