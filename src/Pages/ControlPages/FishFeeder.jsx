@@ -1,14 +1,14 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
 import ComingSoon from "../../Components/ComingSoon";
+import { Stack, Typography } from "@mui/material";
 
 export const FishFeeder = () => {
-  return (
-    <Typography variant="body" align="left" padding="10px">
-      FISH FEEDER CONTROL PANEL
-      <ComingSoon/>
-    </Typography>
-  );
+	return (
+		<Stack spacing={1}>
+			<Typography variant="h2">Fish Feeder</Typography>
+			<ComingSoon/>
+		</Stack>
+	);
 };
 
 export default FishFeeder;
