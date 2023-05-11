@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Container, ThemeProvider } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -27,21 +29,23 @@ const App = () => {
 
 	return (
 		<BrowserRouter>
-			<UserContext.Provider value={user}>
-				<ThemeProvider theme={theme}>
-					<NavBar/>
-					<Container maxWidth="xl">
-						<Routes>
-							<Route path="/" element={<Home/>}/>
-							<Route path="/video-stream" element={<ComingSoon/>}/>
-							<Route path="/dashboard" element={<Dashboard/>}/>
-							<Route path="/control-panel/*" element={<ControlPanel/>}/>
-							<Route path="/settings" element={<Settings/>}/>
-							<Route path="/login" element={<Login/>}/>
-						</Routes>
-					</Container>
-				</ThemeProvider>
-			</UserContext.Provider>
+			<LocalizationProvider dateAdapter={AdapterDayjs}>
+				<UserContext.Provider value={user}>
+					<ThemeProvider theme={theme}>
+						<NavBar/>
+						<Container maxWidth="xl">
+							<Routes>
+								<Route path="/" element={<Home/>}/>
+								<Route path="/video-stream" element={<ComingSoon/>}/>
+								<Route path="/dashboard" element={<Dashboard/>}/>
+								<Route path="/control-panel/*" element={<ControlPanel/>}/>
+								<Route path="/settings" element={<Settings/>}/>
+								<Route path="/login" element={<Login/>}/>
+							</Routes>
+						</Container>
+					</ThemeProvider>
+				</UserContext.Provider>
+			</LocalizationProvider>
 		</BrowserRouter>
 	);
 }

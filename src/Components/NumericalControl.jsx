@@ -3,18 +3,25 @@ import { TextField } from '@mui/material';
 import { useContext } from 'react';
 import { ControlValuesContext } from '../Hooks/ControlValuesContext';
 
-const NumericalControl = ({ label, document, field }) => {
+const NumericalControl = ({ label, document, field, step = 1, verify = () => true }) => {
 	const { getValueAndStatus, dispatchLocalValueChange } = useContext(ControlValuesContext);
 	const { v, s } = getValueAndStatus(document, field);
+
+	const handleChange = (e) => {
+		const newValue = Number(e.target.value);
+		if (verify(newValue)) {
+			dispatchLocalValueChange({ document, field, newValue });
+		}
+	};
 
 	return (
 		<TextField
 			label={label}
 			fullWidth
 			type="number"
-			inputProps={{ step: 10 }}
+			inputProps={{ step }}
 			value={v ?? 0}
-			onChange={e => dispatchLocalValueChange({ document, field, newValue: Number(e.target.value) })}
+			onChange={handleChange}
 			color={s ? "edited" : undefined}
 			focused={s ? true : undefined}
 		/>
