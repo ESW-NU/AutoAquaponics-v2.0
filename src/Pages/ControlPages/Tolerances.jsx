@@ -1,7 +1,7 @@
 import { Stack, Typography, Grid } from '@mui/material';
 import ControlCard from "../../Components/ControlCard";
-import MaxMin from "../../Components/MaxMin";
 import { systemStatMeta } from '../../systemStatMeta';
+import NumericalControl from '../../Components/NumericalControl';
 
 export const Tolerances = () => {
 	return (
@@ -12,10 +12,13 @@ export const Tolerances = () => {
 				spacing={1}
 				columns={{ xs: 1, md: 2, lg: 3 }}
 			>
-				{systemStatMeta.map(({ statKey, unit, name }) => (
+				{systemStatMeta.map(({ statKey, name }) => (
 					<Grid item xs={1}>
 						<ControlCard title={name}>
-							<MaxMin document={`tolerances/${statKey}`}/>
+							<Stack spacing={1}>
+								<NumericalControl label="max" document={`tolerances/${statKey}`} field="max"/>
+								<NumericalControl label="min" document={`tolerances/${statKey}`} field="min"/>
+							</Stack>
 						</ControlCard>
 					</Grid>
 				))}

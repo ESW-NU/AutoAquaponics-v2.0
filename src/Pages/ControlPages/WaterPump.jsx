@@ -1,6 +1,6 @@
 import { Grid, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import FlowEntry from "../../Components/FlowEntry";
+import NumericalControl from "../../Components/NumericalControl";
 import ControlCard from "../../Components/ControlCard";
 import OnOffTimer from "../../Components/OnOffTimer";
 import { useContext } from 'react';
@@ -22,12 +22,12 @@ export const WaterPump = () => {
 				>
 					<Grid item>
 						<ControlCard title="Grow Bed A">
-							<FlowEntry document={document} field="bed-A-flow"/>
+							<NumericalControl label="Pump time (minutes)" document={document} field="bed-A-flow"/>
 						</ControlCard>
 					</Grid>
 					<Grid item>
 						<ControlCard title="Grow Bed B">
-							<FlowEntry document={document} field="bed-B-flow"/>
+							<NumericalControl label="Pump time (minutes)" document={document} field="bed-B-flow"/>
 						</ControlCard>
 					</Grid>
 				</Grid>
