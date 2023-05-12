@@ -30,7 +30,7 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 		const point = payload[0].payload; // don't ask; the documentation for recharts is terrible
 		return active && (
 			<Paper sx={{ p: 1, width: 170 }}>
-				<Typography variant="body3">{new Date(point.x * 1000).toLocaleString()}</Typography>
+				<Typography variant="body2">{new Date(point.x * 1000).toLocaleString()}</Typography>
 				<Typography variant="body1">
 					{Number.isNaN(point.y) ? "bad reading" : `${point.y} ${unit}`}
 				</Typography>
@@ -57,10 +57,10 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 					scale="utc"
 					type="number"
 					domain={zoom ? ['dataMin', 'dataMax'] : timeBounds}
-					style={theme.typography.body3}
+					style={theme.typography.body2}
 					interval="preserveStartEnd"
 				/>
-				<YAxis style={theme.typography.body3} domain={[0, 'auto']} allowDataOverflow={true}/>
+				<YAxis style={theme.typography.body2} domain={[0, 'auto']} allowDataOverflow={true}/>
 				<Area
 					dataKey="y"
 					name={name}
@@ -71,7 +71,7 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 					fill={`url(#${gradientName})`}
 					isAnimationActive
 				/>
-				<Tooltip style={theme.typography.body3} content={renderTooltip}/>
+				<Tooltip style={theme.typography.body2} content={renderTooltip}/>
 			</AreaChart>
 		</ResponsiveContainer>
 	);

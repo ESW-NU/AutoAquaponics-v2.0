@@ -1,53 +1,44 @@
-import React from 'react'
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import { Stack, Typography, Grid } from '@mui/material';
 import ControlCard from "../../Components/ControlCard";
-import MaxMin from "../../Components/MaxMin";
+import { systemStatMeta } from '../../systemMeta';
+import NumericalControl from '../../Components/NumericalControl';
 
-export const Tolerances = () => {
-  return (
-    <div>
-      <Typography variant="body" align="left" padding="10px">
-        TOLERANCES CONTROL PANEL
-      </Typography>
-      <Grid
-        container
-        spacing={1}
-        columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }}
-        >
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="pH" list={[
-              <MaxMin key="ph"/>
-            ]}/>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="TDS (ppm)" list={[
-              <MaxMin key="tds"/>
-            ]}/>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Relative Humidity (%)" list={[
-              <MaxMin key="humidity"/>
-            ]}/>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Air Temperature (ºC)" list={[
-              <MaxMin key="airTemp"/>
-            ]}/>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Water Temperature (ºC)" list={[
-              <MaxMin key="waterTemp"/>
-            ]}/>
-          </Grid>
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-            <ControlCard title="Water Level (cm)" list={[
-              <MaxMin key="waterLevel"/>
-            ]}/>
-          </Grid>
-      </Grid>
-    </div>
-  )
+export const Tolerances = ({ enabled }) => {
+	const collection = "tolerances";
+
+	return (
+		<Stack spacing={1}>
+			<Typography variant="h2">Tolerances</Typography>
+			<Grid
+				container
+				spacing={1}
+				columns={{ xs: 1, sm: 2, lg: 3 }}
+			>
+				{systemStatMeta.map(({ statKey, name }) => (
+					<Grid item key={statKey} xs={1}>
+						<ControlCard title={name}>
+							<Stack spacing={1}>
+								<NumericalControl
+									label="max"
+									document={`${collection}/${statKey}`}
+									field="max"
+									enabled={enabled}
+									verify={n => n >= 0}
+								/>
+								<NumericalControl
+									label="min"
+									document={`${collection}/${statKey}`}
+									field="min"
+									enabled={enabled}
+									verify={n => n >= 0}
+								/>
+							</Stack>
+						</ControlCard>
+					</Grid>
+				))}
+			</Grid>
+		</Stack>
+	)
 }
 
 export default Tolerances;
