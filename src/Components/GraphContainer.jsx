@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from '../firebase';
 import GraphCard from "./GraphCard";
-import { dashboardTrackedStats } from "../dashboardTrackedStats";
+import { Grid, Alert } from "@mui/material";
+import { systemStatMeta } from "../systemMeta";
 import { useFetchStats } from "../Hooks/useFetchStats";
-import { Alert, Grid } from "@mui/material";
+import { Fade } from 'react-awesome-reveal';
 
 const GraphContainer = ({ timeBounds, zoom }) => {
 	const { loading, stats, tolerances } = useFetchStats(timeBounds);
+
 	// idiocy ensues
 	const [doxxedPpl, setDoxxedPpl] = useState([]);
 	const doxx = async () => {
@@ -34,8 +36,9 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 				spacing={1}
 				columns={{ xs: 1, md: 2, lg: 3 }}
 			>
-				{dashboardTrackedStats.map(({ statKey, name, unit }) => (
+				{systemStatMeta.map(({ statKey, name, unit }, index) => (
 					<Grid item xs={1} key={statKey}>
+						<Fade cascade={true} duration={1000} delay={index*200}>
 						<GraphCard
 							name={name}
 							unit={unit}
@@ -46,6 +49,7 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 							timeBounds={timeBounds}
 							zoom={zoom}
 						/>
+						</Fade>
 					</Grid>
 				))}
 			</Grid>

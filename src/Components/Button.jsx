@@ -1,6 +1,7 @@
 import { Button as MuiButton } from "@mui/material";
+import { forwardRef } from "react";
 
-const Button = ({ onClick, disabled = false, children }) => {
+const Button = forwardRef((props, ref) => {
 	return (
 		<MuiButton
 			variant="contained"
@@ -11,12 +12,10 @@ const Button = ({ onClick, disabled = false, children }) => {
 				typography: "link",
 				color: "common.white",
 			}}
-			disabled={disabled}
-			onClick={onClick}
-		>
-			{children}
-		</MuiButton>
+			{...props}
+			ref={ref}
+		/>
 	)
-};
+});
 
 export default Button;
