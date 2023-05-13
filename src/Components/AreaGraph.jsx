@@ -1,6 +1,7 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Paper, Typography, useTheme } from "@mui/material";
 
+
 const colorGood = "#009444";
 const colorBad = "red";
 const gradientGoodName = "gradientGood";
@@ -32,7 +33,7 @@ const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
 			<Paper sx={{ p: 1, width: 170 }}>
 				<Typography variant="body2">{new Date(point.x * 1000).toLocaleString()}</Typography>
 				<Typography variant="body1">
-					{Number.isNaN(point.y) ? "bad reading" : `${point.y} ${unit}`}
+					{Number.isNaN(point.y) ? "N/A" : `${point.y} ${unit}`}
 				</Typography>
 			</Paper>
 		);

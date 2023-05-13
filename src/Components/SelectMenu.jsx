@@ -11,10 +11,7 @@ const SelectMenu = ({ label, options, variable, setVariable }) => {
 				onChange={event => setVariable(event.target.value)}
 			>
 				{options.map(({ value, display }) =>
-					<MenuItem
-						key={display}
-						value={value}
-					>
+					<MenuItem key={display} value={value}>
 						{display}
 					</MenuItem>)}
 			</Select>
