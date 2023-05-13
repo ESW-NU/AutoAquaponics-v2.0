@@ -7,12 +7,12 @@ const ComingSoon = () => {
 				display: "flex",
 				justifyContent: "center",
 				alignItems:"center",
-				height: "80vh",
+				height: "70vh",
 				color: "primary.main",
 				typography: "h1"
 			}}
 		>
-			COMING 2023
+			COMING FALL 2023
 		</Box>
 	);
 };

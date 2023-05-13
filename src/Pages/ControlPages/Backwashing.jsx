@@ -1,3 +1,20 @@
+import { Stack, Typography } from "@mui/material";
+import ComingSoon from "../../Components/ComingSoon";
+
+const Backwashing = () => {
+	return (
+		<Stack spacing={1}>
+			<Typography variant="h2">Backwashing</Typography>
+			<ComingSoon/>
+		</Stack>
+	);
+};
+
+export default Backwashing;
+
+// the code below will be used when the physical system actually responds to backwashing controls
+
+/*
 import { useContext } from "react";
 import { Stack, Grid, Typography } from "@mui/material";
 import { getValueAndStatus, ControlValuesContext } from "../../Hooks/ControlValuesContext";
@@ -6,7 +23,7 @@ import NumericalControl from "../../Components/NumericalControl";
 import RadioControl from "../../Components/RadioControl";
 import MyButton from "../../Components/Button";
 
-export const Backwashing = ({ enabled }) => {
+const Backwashing = ({ enabled }) => {
 	const { ctrlVals } = useContext(ControlValuesContext);
 	const document = "backwashing/backwashing";
 
@@ -49,3 +66,4 @@ export const Backwashing = ({ enabled }) => {
 };
 
 export default Backwashing;
+*/
