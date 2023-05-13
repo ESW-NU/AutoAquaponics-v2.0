@@ -23,7 +23,7 @@ export const WaterPump = ({ enabled }) => {
 			<Grid
 				container
 				spacing={1}
-				columns={2}
+				columns={{ xs: 1, sm: 2}}
 			>
 				<Grid item xs={1}>
 					<ControlCard title="Grow Bed A">
