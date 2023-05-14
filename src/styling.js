@@ -18,15 +18,22 @@ const themeBase = createTheme({
 			textTransform: "none",
 			fontSize: 24,
 		},
-		body1: {
+		h4: {
 			fontFamily: "Inter",
 			textTransform: "none",
 			fontSize: 24,
+			lineHeight: 1.5,
+		},
+		body1: {
+			fontFamily: "Inter",
+			textTransform: "none",
+			fontSize: 18,
+			lineHeight: 1.43,
 		},
 		body2: {
 			fontFamily: "Inter",
 			textTransform: "none",
-			fontSize: 18,
+			fontSize: 14,
 		},
 		title: {
 			fontFamily: "Space Grotesk, sans-serif",
@@ -39,17 +46,25 @@ const themeBase = createTheme({
 			textTransform: "none",
 			fontSize: 18,
 			textDecoration: "none",
-		}
+		},
+		button: {
+			fontFamily: "Inter",
+		},
 	},
 	palette: {
 		primary: {
-			light: "#ffffff",
+			light: "#4cc174",
 			main: "#009444",
-			dark: "#004b23",
+			dark: "#006326",
 		},
 		clickme: {
 			main: "#FBB040",
 			dark: "#C98C30",
+		},
+		edited: {
+			dark: "#b28704",
+			main: "#ffc107",
+			light: "#ffcd38",
 		},
 	},
 });

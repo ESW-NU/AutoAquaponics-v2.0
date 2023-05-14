@@ -1,11 +1,21 @@
 /** @jsxImportSource @emotion/react */
 
-import { useState } from 'react';
-import { NavLink } from "react-router-dom";
-import { Grid, Stack, Box, useMediaQuery, Typography, Button, IconButton, Collapse } from '@mui/material';
+import { useState, useContext } from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
+import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import MyButton from "../Components/Button";
+import BubbleNavLinks from './BubbleNavLinks';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import theme from "../styling";
+import { UserContext } from "../Hooks/UserContext";
+import { auth } from '../firebase';
+import { signOut } from '@firebase/auth';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import BuildIcon from '@mui/icons-material/Build';
+import SettingsIcon from '@mui/icons-material/Settings';
+import NavLinksPanel from './NavLinksPanel';
 
 const links = [
 	{ addr: "/video-stream", label: "Video Stream" },
@@ -14,93 +24,62 @@ const links = [
 	{ addr: "settings", label: "Settings" }
 ];
 
-const inheritTextDecoration = {
-	textDecoration: "inherit",
-};
-
 export const NavBar = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 	const [open, setOpen] = useState(false);
+	const user = useContext(UserContext);
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		signOut(auth).then(() => {
+			console.log("Signed out");
+			navigate("/");
+		}).catch((error) => {
+			console.error(error);
+		});
+	};
 
 	return (
 		<Box>
 			<Stack direction="row" alignItems="center" spacing={3} sx={{ p: 2 }}>
 				{isSmall && <IconButton onClick={() => setOpen(!open)}>
-					{open ? <MenuOpenRoundedIcon/> : <MenuRoundedIcon/>}
+					{open ? <MenuOpenRoundedIcon /> : <MenuRoundedIcon />}
 				</IconButton>}
 				<Grid container direction="row" justifyContent="space-between" alignItems="center">
 					<Grid item>
-						<NavLink css={inheritTextDecoration} to="/">
+						<NavLink css={{ textDecoration: "inherit" }} to="/">
 							<Typography sx={{ color: "primary.main", "&:hover": { color: "primary.dark" } }} variant="title">AutoAquaponics</Typography>
 						</NavLink>
 					</Grid>
 					{!isSmall && <Grid item xs>
-						<NavBarLinks links={links}/>
+						<Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-evenly" alignItems="center">
+							<BubbleNavLinks links={links} />
+						</Stack>
 					</Grid>}
 					<Grid item>
-						<LoginButton/>
+						{user === null ? (
+							<MyButton onClick={() => navigate("/login")}>Login</MyButton>
+						) : (
+							<Tooltip title={`signed in as ${user.email}`}>
+								<MyButton onClick={handleLogout}>Logout</MyButton>
+							</Tooltip>
+						)}
 					</Grid>
 				</Grid>
 			</Stack>
-			<Collapse in={isSmall && open}>
-				<NavBarLinks links={links} />
+			<Collapse in={open && isSmall} timeout="auto" unmountOnExit>
+				<Box sx={{ p: 3 }}>
+					<NavLinksPanel fullWidth links={[
+						{ label: "Video Stream", addr: "/video-stream", icon: <VideocamIcon/> },
+						{ label: "Dashboard", addr: "/dashboard", icon: <DashboardIcon/> },
+						{ label: "Control Panel", addr: "/control-panel", icon: <BuildIcon/> },
+						{ label: "Settings", addr: "/settings", icon: <SettingsIcon/> },
+					]}/>
+					<Divider sx={{ my: 2 }}/>
+				</Box>
 			</Collapse>
 		</Box>
 	);
-};
-
-const NavBarLinks = ({ links }) => {
-	const linkStyle = {
-		color: "common.black",
-		typography: "link",
-		px: 0,
-		py: 1,
-		textDecoration: "none",
-		borderRadius: 50,
-	};
-	const hoverLinkStyle = {
-		filter: "drop-shadow(10px 6px 30px rgba(0, 0, 0, 1))",
-	};
-	const activeLinkStyle = {
-		px: 4,
-		py: 1,
-		bgcolor: "common.white",
-		filter: "drop-shadow(1px 1px 20px rgba(0, 0, 0, 0.2))",
-	};
-
-	return (
-		<Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-evenly" alignItems="center">
-			{links.map((link) =>
-				<Grid item key={link.label}>
-					<NavLink css={inheritTextDecoration} to={link.addr}>{({ isActive }) =>
-						<Box sx={[
-							linkStyle,
-							isActive ? activeLinkStyle : { "&:hover": hoverLinkStyle }
-						]}>
-							{link.label}
-						</Box>
-					}</NavLink>
-				</Grid>
-			)}
-		</Stack>
-	);
-};
-
-const LoginButton = () => {
-	return (
-		<Button
-			variant="contained"
-			color="clickme"
-			sx={{
-				borderRadius: 100,
-				px: 2,
-				typography: "link",
-				color: "common.white",
-			}}
-		>
-			Login
-		</Button>
-	)
 };
 
 export default NavBar;

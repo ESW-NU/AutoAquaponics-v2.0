@@ -1,39 +1,60 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query } from "firebase/firestore";
+import { db } from '../firebase';
 import GraphCard from "./GraphCard";
-import Grid from "@mui/material/Grid";
-import { officialNameDict, unitDict, dashboardKeys } from "../Lib/naming";
+import { Grid, Alert } from "@mui/material";
+import { systemStatMeta } from "../systemMeta";
 import { useFetchStats } from "../Hooks/useFetchStats";
+import { Fade } from 'react-awesome-reveal';
 
-const GraphContainer = ({timescale}) => {
+const GraphContainer = ({ timeBounds, zoom }) => {
+	const { loading, stats, tolerances } = useFetchStats(timeBounds);
 
-  const { data, tolerances } = useFetchStats(timescale);
-  let dbKeys = dashboardKeys(officialNameDict);
+	// idiocy ensues
+	const [doxxedPpl, setDoxxedPpl] = useState([]);
+	const doxx = async () => {
+		getDocs(query(collection(db, 'harassment-targets')))
+		.then(snapshot => {
+			setDoxxedPpl(snapshot.docs.map(doc => ({ name: doc.get("name"), phoneNum: doc.get("phone") })));
+		});
+	};
+	useEffect(() => {
+		doxx();
+	});
+	const existsBadReading = !loading && (stats.length == 0 || Object.values(stats.at(-1).stats).includes(NaN));
+	//
 
-  return (
-    <>
-      <Grid
-        container
-        spacing={1}
-        columns={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }}
-      >
-        {Array.from(dbKeys).map((_, index) => (
-          <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={index}>
-            <GraphCard
-              title={officialNameDict[dbKeys[index]]}
-              unit={unitDict[dbKeys[index]]}
-              data={data.map((pt) => ({
-                x: new Date(pt.unix_time * 1000),
-                y: pt[dbKeys[index]],
-                t: tolerances.find((e) => e.id === dbKeys[index])
-              }
-              ))}
-              timescale={timescale}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </>
-  );
+	return (
+		<>
+			{existsBadReading && <Alert sx={{ my: 3 }} severity="error">
+				You may have noticed some sensors aren't working properly. This is 100% the fault of
+				the electronics team. Please direct your complaints and harassment
+				to {doxxedPpl.map(({ name, phoneNum}) => `${name} (${phoneNum})`).join(" and ")}.
+			</Alert>}
+			<Grid
+				container
+				spacing={1}
+				columns={{ xs: 1, md: 2, lg: 3 }}
+			>
+				{systemStatMeta.map(({ statKey, name, unit }, index) => (
+					<Grid item xs={1} key={statKey}>
+						<Fade cascade={true} duration={1000} delay={index*200}>
+						<GraphCard
+							name={name}
+							unit={unit}
+							statKey={statKey}
+							loading={loading}
+							stats={stats}
+							tolerance={tolerances.hasOwnProperty(statKey) ? tolerances[statKey] : { min: 0, max: 0 }} // in case tolerances haven't loaded in yet
+							timeBounds={timeBounds}
+							zoom={zoom}
+						/>
+						</Fade>
+					</Grid>
+				))}
+			</Grid>
+		</>
+	);
 };
 
 export default GraphContainer;

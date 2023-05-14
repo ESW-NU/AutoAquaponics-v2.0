@@ -1,71 +1,81 @@
-import React from "react";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { Paper, Typography, useTheme } from "@mui/material";
 
-const AreaGraph = ({ data }) => {
-  if(!data[0] || !data[0].t) return;
-  const last = data.at(-1);
-  const range = last.y > last.t.max || last.y < last.t.min;
-  return (
-    <ResponsiveContainer width="100%" height={300}>
-      <AreaChart
-        width={400}
-        height={300}
-        data={data}
-        margin={{
-          top: 10,
-          right: 68,
-          left: -15,
-          bottom: 0,
-        }}
-      >
-        <defs>
-          <linearGradient id="colorG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="25%" stopColor="#009444" stopOpacity={1} />
-            <stop offset="95%" stopColor="#009444" stopOpacity={0.5} />
-          </linearGradient>
-          <linearGradient id="colorR" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="25%" stopColor="red" stopOpacity={1} />
-            <stop offset="95%" stopColor="red" stopOpacity={0.5} />
-          </linearGradient>
-        </defs>
 
-        <XAxis
-          dataKey="x"
-          style={{
-            fontSize: "1rem",
-            fontFamily: "Inter",
-          }}
-        />
+const colorGood = "#009444";
+const colorBad = "red";
+const gradientGoodName = "gradientGood";
+const gradientGood = (
+	<linearGradient id={gradientGoodName} x1="0" y1="0" x2="0" y2="1">
+		<stop offset="25%" stopColor={colorGood} stopOpacity={1} />
+		<stop offset="95%" stopColor={colorGood} stopOpacity={0.5} />
+	</linearGradient>
+);
+const gradientBadName = "gradientBad";
+const gradientBad = (
+	<linearGradient id={gradientBadName} x1="0" y1="0" x2="0" y2="1">
+		<stop offset="25%" stopColor={colorBad} stopOpacity={1} />
+		<stop offset="95%" stopColor={colorBad} stopOpacity={0.5} />
+	</linearGradient>
+);
 
-        <YAxis
-          style={{
-            fontSize: "1rem",
-            fontFamily: "Inter",
-          }}
-        />
-        <CartesianGrid strokeDasharray="3 3" />
+const AreaGraph = ({ name, unit, stats, isGreen, timeBounds, zoom }) => {
+	const theme = useTheme();
 
-        <Tooltip />
+	const [color, gradientName] = isGreen ? [colorGood, gradientGoodName] : [colorBad, gradientBadName];
 
-        <Area
-          name={data[0].t.id}
-          type="monotone"
-          dataKey="y"
-          stroke={range ? "red" : "green"}
-          fillOpacity={1}
-          fill={`url(#color${range ? "R" : "G"})`}
-        />
-      </AreaChart>
-    </ResponsiveContainer>
-  );
+	const renderTooltip = ({ active, payload }) => {
+		// use early return to prevent running into undefined values
+		if (!active) { return false; }
+
+		const point = payload[0].payload; // don't ask; the documentation for recharts is terrible
+		return active && (
+			<Paper sx={{ p: 1, width: 170 }}>
+				<Typography variant="body2">{new Date(point.x * 1000).toLocaleString()}</Typography>
+				<Typography variant="body1">
+					{Number.isNaN(point.y) ? "N/A" : `${point.y} ${unit}`}
+				</Typography>
+			</Paper>
+		);
+	};
+
+	return (
+		<ResponsiveContainer>
+			<AreaChart
+				data={stats}
+				margin={{ left: -20}} // left margin strays too far; is there a better way to fix?
+			>
+				<defs>
+					{gradientGood}
+					{gradientBad}
+				</defs>
+				{/* Why is the documentation in ReCharts so bad ;-; Dear maintainer, if you care
+				enough then feel free to switch libraries lol */}
+				<CartesianGrid strokeDasharray="3 3"/>
+				<XAxis
+					dataKey="x"
+					tickFormatter={(unixTime) => new Date(unixTime * 1000).toLocaleString([], { dateStyle: "short", timeStyle: "short" })}
+					scale="utc"
+					type="number"
+					domain={zoom ? ['dataMin', 'dataMax'] : timeBounds}
+					style={theme.typography.body2}
+					interval="preserveStartEnd"
+				/>
+				<YAxis style={theme.typography.body2} domain={[0, 'auto']} allowDataOverflow={true}/>
+				<Area
+					dataKey="y"
+					name={name}
+					unit={unit}
+					type="monotone"
+					stroke={color}
+					fillOpacity={1}
+					fill={`url(#${gradientName})`}
+					isAnimationActive
+				/>
+				<Tooltip style={theme.typography.body2} content={renderTooltip}/>
+			</AreaChart>
+		</ResponsiveContainer>
+	);
 };
 
 export default AreaGraph;

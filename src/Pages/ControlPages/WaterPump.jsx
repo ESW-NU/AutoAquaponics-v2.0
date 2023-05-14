@@ -1,52 +1,55 @@
-import {React, useState} from "react";
-import Grid from "@mui/material/Grid";
+import { Grid, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import OnOffTimer from "../../Components/OnOffTimer";
-import FlowEntry from "../../Components/FlowEntry";
+import NumericalControl from "../../Components/NumericalControl";
 import ControlCard from "../../Components/ControlCard";
+import RadioControl from "../../Components/RadioControl";
+import { useContext } from 'react';
+import { getValueAndStatus, ControlValuesContext } from '../../Hooks/ControlValuesContext';
 
-export const WaterPump = () => {
-  const [onofftimer, setOnofftimer] = useState("off");
-  const [flow, setFlow] = useState(0);
-  const [time, setTime] = useState(0);
+export const WaterPump = ({ enabled }) => {
+    const { ctrlVals } = useContext(ControlValuesContext);
+	const collection = "water-pump";
 
-  const handleOnofftimerChange = (event) => {
-    setOnofftimer(event.target.value);
-  }
+	const statusIsTimer = getValueAndStatus(ctrlVals, `${collection}/status`, "status").v === "timer";
 
-  const handleFlowChange = (event) => {
-    setFlow(event.target.value);
-  }
-
-  const handleTimeChange = (event) => {
-    setTime(event.target.value);
-  }
-
-  return (
-    <div>
-      <Typography variant="body" align="left" padding="10px">
-        WATER PUMP CONTROL PANEL
-      </Typography>
-      <Grid
-        container
-        spacing={1}
-        columns={{ xs: 1, sm: 1, md: 1, lg: 2, xl: 2 }}
-      >
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Grow Bed A" list={[
-            <OnOffTimer key="timer" onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry key="entry" flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
-          ]}/>
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <ControlCard title="Grow Bed B" list={[
-            <OnOffTimer key="timer" onofftimer={onofftimer} handleOnofftimerChange={handleOnofftimerChange}/>,
-            <FlowEntry key="entry" flow={flow} time={time} handleFlowChange={handleFlowChange} handleTimeChange={handleTimeChange}/>
-          ]}/>
-        </Grid>
-      </Grid>
-    </div>
-  );
+	return (
+		<Stack spacing={1} >
+			<Typography variant="h2">Water Pump</Typography>
+			<RadioControl document={`${collection}/status`} field="status" label="Status" enabled={enabled} options={[
+				{ label: "On", value: "on" },
+				{ label: "Off", value: "off" },
+				{ label: "Timer", value: "timer" },
+			]}/>
+			<Grid
+				container
+				spacing={1}
+				columns={{ xs: 1, sm: 2}}
+			>
+				<Grid item xs={1}>
+					<ControlCard title="Grow Bed A">
+						<NumericalControl
+							label="Pump time (minutes)"
+							document={`${collection}/bed-A`}
+							field="pumpTime"
+							verify={n => n >= 0}
+							enabled={enabled && statusIsTimer}
+						/>
+					</ControlCard>
+				</Grid>
+				<Grid item xs={1}>
+					<ControlCard title="Grow Bed B">
+						<NumericalControl
+							label="Pump time (minutes)"
+							document={`${collection}/bed-B`}
+							field="pumpTime"
+							verify={n => n >= 0}
+							enabled={enabled && statusIsTimer}
+						/>
+					</ControlCard>
+				</Grid>
+			</Grid>
+		</Stack>
+	);
 }
 
 export default WaterPump;
