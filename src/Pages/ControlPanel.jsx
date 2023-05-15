@@ -4,9 +4,6 @@ import { Grid, useMediaQuery } from "@mui/material";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import HeightIcon from '@mui/icons-material/Height';
 import WavesIcon from '@mui/icons-material/Waves';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFan } from '@fortawesome/free-solid-svg-icons'
 import theme from "../styling";
 import { ctrlValsReducer, ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { collection, getDocs } from "firebase/firestore";
@@ -20,6 +17,11 @@ import Lights from "./ControlPages/Lights";
 import WaterPump from "./ControlPages/WaterPump";
 import ControlsOverviewPanel from "../Components/ControlsOverviewPanel";
 import { UserContext } from "../Hooks/UserContext";
+import arrowIcon from "../Lib/icons/arrows.png";
+import backwashingIcon from "../Lib/icons/backwashing.png";
+import fishFoodIcon from "../Lib/icons/fish_food.png";
+import lightIcon from "../Lib/icons/light.png";
+import waterPumpIcon from "../Lib/icons/water_pump.png";
 
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
@@ -59,11 +61,11 @@ const ControlPanel = () => {
 				</Grid>
 				<Grid item xs={12} md="auto">
 					<NavLinksPanel fullWidth={isSmall} links={[
-						{ label: "Tolerances", addr: "tolerances", icon: <HeightIcon/> },
-						{ label: "Backwashing", addr: "backwashing", icon: <WavesIcon/>},
-						{ label: "Fish Feeder", addr: "fishFeeder", icon: <FastfoodIcon/> },
-						{ label: "Lights", addr: "lights", icon: <LightbulbIcon/> },
-						{ label: "Water Pump", addr: "waterPump", icon: <FontAwesomeIcon icon={faFan}/> },
+						{ label: "Tolerances", addr: "tolerances", icon: <Icon img={arrowIcon} alt="arrow icon"/> },
+						{ label: "Backwashing", addr: "backwashing", icon: <Icon img={backwashingIcon} alt="backwashing icon"/>},
+						{ label: "Fish Feeder", addr: "fishFeeder", icon: <Icon img={fishFoodIcon} alt="fish feeder icon"/> },
+						{ label: "Lights", addr: "lights", icon: <Icon img={lightIcon} alt="lights icon" /> },
+						{ label: "Water Pump", addr: "waterPump", icon: <Icon img={waterPumpIcon} alt="water pump icon"/> },
 					]}/>
 				</Grid>
 				<Grid item xs>
@@ -80,5 +82,11 @@ const ControlPanel = () => {
 		</ControlValuesContext.Provider>
 	);
 };
+
+const Icon = ({ img, alt }) => {
+	return (
+		<img height={20} src={img} alt={alt}/>
+	);
+}
 
 export default ControlPanel;
