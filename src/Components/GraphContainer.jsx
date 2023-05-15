@@ -20,7 +20,7 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 	};
 	useEffect(() => {
 		doxx();
-	});
+	}, []);
 	const existsBadReading = !loading && (stats.length == 0 || Object.values(stats.at(-1).stats).includes(NaN));
 	//
 
