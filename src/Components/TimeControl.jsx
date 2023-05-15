@@ -22,6 +22,7 @@ const TimeControl = ({ label, document, enabled = true }) => {
 
 	return (
 		<TimeField
+			fullWidth
 			label={label}
 			focused={edited ? true : undefined}
 			color={edited ? "edited" : undefined}

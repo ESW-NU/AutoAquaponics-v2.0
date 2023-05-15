@@ -15,24 +15,28 @@ const LightControlCard = ({ collection, partKey, name, enabled }) => {
 
 	return (
 		<ControlCard title={name}>
-			<Stack spacing={1}>
-				<RadioControl
-					document={document}
-					field="status"
-					label="Status"
-					enabled={enabled}
-					options={[
-						{ label: "On", value: "on" },
-						{ label: "Off", value: "off" },
-						{ label: "Timer", value: "timer" },
-					]}
-				/>
-				<TimeControl
-					label="Start time"
-					document={document}
-					enabled={enabled && statusIsTimer}
-				/>
-				<Stack direction="row" spacing={1}>
+			<Grid container spacing={2}>
+				<Grid item xs={12}>
+					<RadioControl
+						document={document}
+						field="status"
+						label="Status"
+						enabled={enabled}
+						options={[
+							{ label: "On", value: "on" },
+							{ label: "Off", value: "off" },
+							{ label: "Timer", value: "timer" },
+						]}
+					/>
+				</Grid>
+				<Grid item xs={12}>
+					<TimeControl
+						label="Start time"
+						document={document}
+						enabled={enabled && statusIsTimer}
+					/>
+				</Grid>
+				<Grid item xs={6}>
 					<NumericalControl
 						label="Duration (H)"
 						document={document}
@@ -40,6 +44,8 @@ const LightControlCard = ({ collection, partKey, name, enabled }) => {
 						verify={n => n >= 0}
 						enabled={enabled && statusIsTimer}
 					/>
+				</Grid>
+				<Grid item xs={6}>
 					<NumericalControl
 						label="Duration (M)"
 						document={document}
@@ -47,8 +53,8 @@ const LightControlCard = ({ collection, partKey, name, enabled }) => {
 						verify={n => n >= 0}
 						enabled={enabled && statusIsTimer}
 					/>
-				</Stack>
-			</Stack>
+				</Grid>
+			</Grid>
 		</ControlCard>
 	);
 }
