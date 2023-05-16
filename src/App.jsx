@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { Container, ThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -14,7 +15,6 @@ import ControlPanel from "./Pages/ControlPanel";
 import Settings from "./Pages/Settings";
 import Login from './Pages/Login';
 import ComingSoon from './Components/ComingSoon';
-import ReactGA from 'react-ga4';
 
 const TRACKING_ID = "G-XQDHE464FW";
 ReactGA.initialize(TRACKING_ID);
