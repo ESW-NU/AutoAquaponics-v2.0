@@ -19,6 +19,7 @@
     "react-animation-on-scroll": "^5.1.0",
     "react-awesome-reveal": "^4.2.3",
     "react-dom": "^18.2.0",
+    "react-ga4": "^2.1.0",
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
     "react-typed": "^1.2.0",
