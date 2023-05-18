@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, IconButton, Avatar, Menu, MenuItem } from '@mui/material';
+import { Tooltip, IconButton, Avatar, Menu, MenuItem } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../Hooks/UserContext";
 import { auth } from '../firebase';
 import { signOut } from "firebase/auth";
@@ -33,25 +33,26 @@ const AccountBubble = () => {
   
   return(
     <div style={{ position: 'relative' }}>
-      <IconButton
-              id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}>
-        <Avatar 
-          sx={{bgcolor: theme.palette.primary.dark}}
-        >
-          {letter}
-        </Avatar>
-      </IconButton>
+			<Tooltip title={`signed in as ${user.email}`}>
+				<IconButton
+					id="account-button"
+					aria-controls={open ? 'account-menu' : undefined}
+					aria-haspopup="true"
+					aria-expanded={open ? 'true' : undefined}
+					onClick={handleClick}
+				>
+					<Avatar sx={{bgcolor: theme.palette.primary.dark}}>
+						{letter}
+					</Avatar>
+				</IconButton>
+			</Tooltip>
       <Menu
-        id="basic-menu"
+        id="account-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'account-button',
         }}
       >
         <MenuItem  
