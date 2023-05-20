@@ -12,17 +12,17 @@ The frontend uses the React framework, with [Material UI](https://mui.com/) prov
 
 ### Setup
 
-To build and run this app, you must have the `npm` installed. To deploy the app, you must have the `firebase` command installed. Run `npm install` in the project directly once to install all required packages. (You may need to run `npm install --force` instead, if there are dependency conflicts. We ~~are~~ should be working on this!) You may also need to rerun the `npm start` script after installing. Switching between branches that have different dependencies may require running `npm install` again.
+To build and run this app, you must have the `npm` installed. To deploy the app, you must have the `firebase` command installed. Run `npm install` in the project directory once to install all required packages. (You may need to run `npm install --force` instead, if there are dependency conflicts. We ~~are~~ should be working on this!) You may also need to rerun the `npm start` script after installing. Switching between branches that have different dependencies may require running `npm install` again.
 
 ### Development
 
-Executing `npm start` in the project directory will run the app in development mode on `http://localhost:3000`. The application will reload in the browser with hotfixes when changes are made to the source files. Use Ctrl + C to stop the script. Although the hotfixing works great most of the time, you may need to reload the browser page or even stop and restart the script for some changes to take place.
+Running `npm start` in the project directory will run the app in development mode on `http://localhost:3000`. The application will reload in the browser with hotfixes when changes are made to the source files. Use Ctrl + C to stop the script. Although the hotfixing works great most of the time, you may need to reload the browser page or even stop and restart the script for some changes to take place.
 
-Note that, because of the local development environment, all Firebase App Checks will fail. Normally, this would mean that the application will not be able to interact with the Firestore backend database; however, App Check is currently not enforced. Use a debug token (see [this line of code](https://github.com/ESW-NU/AutoAquaponics-v2.0/blob/c0dc11cdd86be4506a8b286488324ed439dfc4fe/src/firebase.js#LL23C1-L23C91)) or a [local emulator](https://firebase.google.com/docs/emulator-suite) to solve this issue.
+Note that, unless you have one of our super secret debug tokens, all Firebase App Checks will fail because of the local development environment. Normally, this would mean that the application will not be able to interact with the Firestore backend database; however, App Check is currently not enforced. Use a debug token or a [local emulator](https://firebase.google.com/docs/emulator-suite) to solve this issue.
 
 ### Production
 
-Executing `npm run build` in the project directory will create an optimized production build in the `build` folder. This build can be run locally by running `serve -s build` and connecting to `http://localhost:3000`, or by running `firebase emulators:start` and connecting to `http://localhost:5000`. The build can be deployed to a preview Firebase hosting channel using `firebase hosting:channel:deploy CHANNEL-ID`, replacing `CHANNEL-ID` with the name of the preview channel. Avoid deploying to the live channel using this method; prefer making a pull request to the `deploy` branch instead.
+Running `npm run build` in the project directory will create an optimized production build in the `build` folder. This build can be served locally by running `serve -s build` and connecting to `http://localhost:3000`, or by running `firebase emulators:start` and connecting to `http://localhost:5000`. With the appropriate permissions, the build can be deployed to a preview Firebase hosting channel using `firebase hosting:channel:deploy CHANNEL-ID`, replacing `CHANNEL-ID` with the name of the preview channel. Avoid deploying to the live channel using this method; prefer making a pull request to the `deploy` branch instead.
 
 ## Oveview of features
 
@@ -32,7 +32,7 @@ The home page contains an overview of the AutoAquaponics system and the subteams
 
 ### Video Stream
 
-COMING SOON
+Coming soon.
 
 ### Dashboard
 
@@ -43,7 +43,7 @@ The dashboard contains a number of live graphs showing the output of the sensors
 The control panel displays the current control configuration being used by the system.
 - The **Tolerances** page specifies a range over which a certain monitored parameter (e.g. pH level) is considered "good." This determines the color of the corresponding graph in the dashboard, as well as alerts sent to certain "emergency contacts" should a parameter value go out of range.
 - The **Backwashing** page refers to ~~the automatic reversal of the quantum fish field caused by buildup of marine nuclear waste~~. The backwashing hardware is currently not working.
-- The **Fish feeder** page controls the fish feeder 🧠. The fish feeder is currently not working.
+- The **Fish feeder** page controls the fish feeder :brain:. The fish feeder is currently in development.
 - The **Lights** page controls the lighting of individual parts of the system. The lights can be turned on, turned off, or set on a timer to turn on for a certain duration at a certain time of day.
 - The **Water Pump** page controls the water pumps that feed into the grow beds. The pumps can be turned on, turned off, or set on a timer to pump for a specific time.
 
@@ -51,8 +51,8 @@ Logged in users will be able to change these configuration values and save their
 
 ### Settings
 
-COMING SOON
+Coming soon.
 
 # Why 2.0?
 
-In ye olden days, members of the ESWNU AutoAquaponics team would have to remotely access (via VNC Viewer) a single computer connected directly to the system in order to monitor and control it. This rather clunky method meant that only one person could log in at a time; two people logged in at the same time could literally see the each other moving the computer's cursor. AutoAquaponics v2.0 is our answer to this issue. It allows multiple team members, plus the general public, to interact with the system, and with a much prettier user interface too. The code for AutoAquaponics v1.0 can be found [here](https://github.com/ESW-NU/AutoAquaponics).
+In ye olden days, members of the ESWNU AutoAquaponics team would have to remotely access (via VNC Viewer) a single computer connected directly to the system in order to monitor and control it. This rather clunky method meant that only one person could log in at a time; two people logged in at the same time could literally see the each other moving the computer's cursor. AutoAquaponics v2.0 is our answer to this issue. It allows multiple team members, plus the general public, to interact with the system (and with a much prettier user interface too!). The code for AutoAquaponics v1.0 can be found [here](https://github.com/ESW-NU/AutoAquaponics).
