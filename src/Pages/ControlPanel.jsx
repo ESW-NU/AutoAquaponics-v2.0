@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Grid, useMediaQuery } from "@mui/material";
+import { Grid, Stack, useMediaQuery } from "@mui/material";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import HeightIcon from '@mui/icons-material/Height';
 import WavesIcon from '@mui/icons-material/Waves';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import HistoryIcon from '@mui/icons-material/History';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFan } from '@fortawesome/free-solid-svg-icons'
 import theme from "../styling";
@@ -20,6 +21,7 @@ import Lights from "./ControlPages/Lights";
 import WaterPump from "./ControlPages/WaterPump";
 import ControlsOverviewPanel from "../Components/ControlsOverviewPanel";
 import { UserContext } from "../Hooks/UserContext";
+import Changelog from "./ControlPages/Changelog";
 
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
@@ -58,17 +60,23 @@ const ControlPanel = () => {
 					<ControlsOverviewPanel/>
 				</Grid>
 				<Grid item xs={12} md="auto">
-					<NavLinksPanel fullWidth={isSmall} links={[
-						{ label: "Tolerances", addr: "tolerances", icon: <HeightIcon/> },
-						{ label: "Backwashing", addr: "backwashing", icon: <WavesIcon/>},
-						{ label: "Fish Feeder", addr: "fishFeeder", icon: <FastfoodIcon/> },
-						{ label: "Lights", addr: "lights", icon: <LightbulbIcon/> },
-						{ label: "Water Pump", addr: "waterPump", icon: <FontAwesomeIcon icon={faFan}/> },
-					]}/>
+					<Stack spacing={1}>
+						<NavLinksPanel fullWidth={isSmall} links={[
+							{ label: "Changelog", addr: "changelog", icon: <HistoryIcon/> },
+						]}/>
+						<NavLinksPanel fullWidth={isSmall} links={[
+							{ label: "Tolerances", addr: "tolerances", icon: <HeightIcon/> },
+							{ label: "Backwashing", addr: "backwashing", icon: <WavesIcon/>},
+							{ label: "Fish Feeder", addr: "fishFeeder", icon: <FastfoodIcon/> },
+							{ label: "Lights", addr: "lights", icon: <LightbulbIcon/> },
+							{ label: "Water Pump", addr: "waterPump", icon: <FontAwesomeIcon icon={faFan}/> },
+						]}/>
+					</Stack>
 				</Grid>
 				<Grid item xs>
 					<Routes>
-						<Route index element={<Navigate replace to="tolerances"/>}/>
+						<Route index element={<Navigate replace to="changelog"/>}/>
+						<Route path="changelog" element={<Changelog/>}/>
 						<Route path="tolerances" element={<Tolerances enabled={enabled}/>}/>
 						<Route path="backwashing" element={<Backwashing enabled={enabled}/>}/>
 						<Route path="fishFeeder" element={<FishFeeder enabled={enabled}/>}/>

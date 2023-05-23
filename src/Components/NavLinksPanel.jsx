@@ -9,7 +9,7 @@ const NavLinksPanel = ({ links, fullWidth }) => {
 	};
 
 	return (
-		<Paper sx={[{ p: 1 }, !fullWidth && { width: 250 }]}>
+		<Paper sx={[{ p: 0 }, !fullWidth && { width: 250 }]}>
 			<List>
 				{links.map((link, index) => (
 					<NavLink
