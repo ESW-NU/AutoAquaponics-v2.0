@@ -10,6 +10,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { UserContext } from './Hooks/UserContext';
 import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
 	const [user, setUser] = useState(null);
@@ -27,6 +28,7 @@ const App = () => {
 		<BrowserRouter>
 			<UserContext.Provider value={user}>
 				<ThemeProvider theme={theme}>
+					<ToastContainer/>
 					<NavBar/>
 					<Container maxWidth="xl">
 						<Routes>

@@ -1,39 +1,57 @@
 import React from "react";
 import { Tooltip, IconButton, Avatar, Menu, MenuItem } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../Hooks/UserContext";
 import { auth } from '../firebase';
-import { signOut } from "firebase/auth";
+import { signOut, sendPasswordResetEmail } from "firebase/auth";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import theme from "../styling";
 
 const AccountBubble = () => {
     
   const user = useContext(UserContext);
-  const letter = user.email[0].toUpperCase();
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+	const toast_config = {position: toast.POSITION.TOP_CENTER, autoClose:2000};
+  const letter = user.email[0].toUpperCase();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+	
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   const handleLogout = () => {
     signOut(auth).then(() => { 
+			toast('Logged out!', toast_config);
       setAnchorEl(null);
       navigate("/");
     }).catch((error) => {
+			toast.error('Error logging out', toast_config);
       console.error(error);
     });
   };
   
+	const handlePasswordChange = () => {
+		console.log(user.email)
+		sendPasswordResetEmail(auth, user.email) 
+		.then(() => {
+			toast.success('Password reset email sent!', toast_config);
+		})
+		.catch((error) => {
+			toast.error('Error sending password reset email', toast_config);
+			console.error(error)
+		});
+	};
+
   return(
     <div style={{ position: 'relative' }}>
-			<Tooltip title={`signed in as ${user.email}`}>
+			<Tooltip title={`Logged in as ${user.email}`}>
 				<IconButton
 					id="account-button"
 					aria-controls={open ? 'account-menu' : undefined}
@@ -55,10 +73,11 @@ const AccountBubble = () => {
           'aria-labelledby': 'account-button',
         }}
       >
-        <MenuItem  
-          onClick={handleLogout}
-        >
+        <MenuItem onClick={handleLogout}>
           Logout
+        </MenuItem>
+        <MenuItem onClick={handlePasswordChange}>
+          Change Password
         </MenuItem>
       </Menu>
     </div>	
