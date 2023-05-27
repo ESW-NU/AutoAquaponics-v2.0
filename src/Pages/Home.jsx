@@ -39,7 +39,7 @@ const Home = () => {
 					<Typography variant="h1"><Typed strings={["Northwestern AutoAquaponics"]} typeSpeed={40} onComplete={(self) => self.cursor.remove()}/></Typography>
 					<Typography variant="body1">
 						A fully automated aquaponic system that grows both fish and plants
-						unattended for months and can be <Link component={RouterLink} to="/dashboard">monitored</Link> and <Link component={RouterLink} to="/control-panel/tolerances">controlled</Link> remotely
+						unattended for months and can be <Link component={RouterLink} to="/dashboard">monitored</Link> and <Link component={RouterLink} to="/control-panel">controlled</Link> remotely
 					</Typography>
 				</Box>
 			</Stack>
