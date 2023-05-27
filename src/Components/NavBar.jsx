@@ -32,8 +32,8 @@ export const NavBar = () => {
 	const navigate = useNavigate();
 
 	return (
-		<Box>
-			<Stack direction="row" alignItems="center" spacing={3} sx={{ p: 2 }}>
+		<>
+			<Stack direction="row" alignItems="center" spacing={3} sx={{ p: 2, height: 60 }}>
 				{isSmall && <IconButton onClick={() => setOpen(!open)}>
 					{open ? <MenuOpenRoundedIcon /> : <MenuRoundedIcon />}
 				</IconButton>}
@@ -90,7 +90,7 @@ export const NavBar = () => {
 					</List>
 				</Paper>
 			</Collapse>
-		</Box>
+		</>
 	);
 };
 
