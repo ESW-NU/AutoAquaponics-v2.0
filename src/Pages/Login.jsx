@@ -1,5 +1,6 @@
 import React from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { Box, Paper, TextField, Button as MuiButton, Stack, Typography } from "@mui/material";
@@ -18,6 +19,9 @@ const Login = () => {
 	const toast_config = {position: toast.POSITION.TOP_CENTER, autoClose:2000};
 
 	const handleSubmit = async () => {
+		if (password === "") {
+			setErrorMessage("Please enter a password");
+		} else {
 		setVerifying(true);
 		try {
 			let userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -34,6 +38,7 @@ const Login = () => {
 			}
 		};
 		setVerifying(false);
+	}
 	};
 
 	return (
