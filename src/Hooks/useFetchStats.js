@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
 import { db } from '../firebase';
-import { dashboardTrackedStats } from "../dashboardTrackedStats";
+import { systemStatMeta } from "../systemMeta";
 
 /*
 Returns { loading, stats, tolerances } where stats is an array of objects representating the stats
@@ -62,7 +62,7 @@ each representing the stats at a certain time. (see comment on useFetchStats for
 function convertStatsSnapshot(snapshot) {
 	return snapshot.docs.map(doc => ({
 		unixTime: doc.get("unix_time"),
-		stats: Object.fromEntries(dashboardTrackedStats.map(({ statKey }) => [statKey, doc.get(statKey)])),
+		stats: Object.fromEntries(systemStatMeta.map(({ statKey }) => [statKey, doc.get(statKey)])),
 	}));
 }
 

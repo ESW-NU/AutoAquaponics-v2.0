@@ -1,8 +1,10 @@
 import React from "react";
 import ComingSoon from "../Components/ComingSoon";
 
-export const Settings = () => {
+const Settings = () => {
     return (
         <ComingSoon/>
     );
 }
+
+export default Settings;

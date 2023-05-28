@@ -17,7 +17,7 @@ const Dashboard = () => {
 
 	return (
 		<Box>
-			<Typography variant="h3">System Sensors</Typography>
+			<Typography variant="h2">System Sensors</Typography>
 			<Stack direction="row" alignItems="center" spacing={2}>
 				<Box sx={{ width: 200, my: 3 }}>
 					<SelectMenu
