@@ -22,23 +22,23 @@ const Login = () => {
 		if (password === "") {
 			setErrorMessage("Please enter a password");
 		} else {
-		setVerifying(true);
-		try {
-			let userCredential = await signInWithEmailAndPassword(auth, email, password);
-			console.log(`Signed in as ${userCredential.user.email}`);
-			toast('Logged in!', toast_config);
-			navigate("/");
-		} catch(error) {
-			if (error.message.includes("auth/user-not-found") || error.message.includes("auth/invalid-email")) {
-				setErrorMessage("Invalid email");
-			} else if (error.message.includes("auth/wrong-password")) {
-				setErrorMessage("Incorrect password");
-			} else {
-				setErrorMessage("Unknown error occurred");
-			}
-		};
-		setVerifying(false);
-	}
+			setVerifying(true);
+			try {
+				let userCredential = await signInWithEmailAndPassword(auth, email, password);
+				console.log(`Signed in as ${userCredential.user.email}`);
+				toast('Logged in!', toast_config);
+				navigate("/");
+			} catch(error) {
+				if (error.message.includes("auth/user-not-found") || error.message.includes("auth/invalid-email")) {
+					setErrorMessage("Invalid email");
+				} else if (error.message.includes("auth/wrong-password")) {
+					setErrorMessage("Incorrect password");
+				} else {
+					setErrorMessage("Unknown error occurred");
+				}
+			};
+			setVerifying(false);
+		}
 	};
 
 	return (

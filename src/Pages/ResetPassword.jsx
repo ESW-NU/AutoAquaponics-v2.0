@@ -20,14 +20,13 @@ const ResetPassword = () => {
 		try {
 			await sendPasswordResetEmail(auth, email);
 			console.log(`Sent password reset email to ${email}`);
-			toast.success('Password reset email sent!', toast_config);
+			toast.success("Password reset email sent!", toast_config);
 			navigate("/login");
-		} catch(error) {
+		} catch (error) {
 			console.log(error.message)
 			if (error.message.includes("auth/invalid-email") || error.message.includes("auth/user-not-found")) {
 				setErrorMessage("Invalid email");
-			}
-			else if (error.message.includes("auth/missing-email")) {
+			} else if (error.message.includes("auth/missing-email")) {
 				setErrorMessage("Please enter an email address");
 			} else {
 				setErrorMessage("Unknown error occurred");
