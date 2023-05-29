@@ -15,6 +15,7 @@ import Dashboard from './Pages/Dashboard';
 import ControlPanel from "./Pages/ControlPanel";
 import Settings from "./Pages/Settings";
 import Login from './Pages/Login';
+import ResetPassword from './Pages/ResetPassword';
 import ComingSoon from './Components/ComingSoon';
 
 const TRACKING_ID = "G-XQDHE464FW";
@@ -52,6 +53,7 @@ const App = () => {
 								<Route path="/control-panel/*" element={<ControlPanel/>}/>
 								<Route path="/settings" element={<Settings/>}/>
 								<Route path="/login" element={<Login/>}/>
+								<Route path="/reset-password" element={<ResetPassword/>}/>
 							</Routes>
 						</Container>
 					</ThemeProvider>
