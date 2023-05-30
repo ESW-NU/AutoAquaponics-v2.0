@@ -1,10 +1,12 @@
 import React from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { Box, Paper, TextField, Button as MuiButton, Stack, Typography } from "@mui/material";
 import MyButton from "../Components/Button";
-import { auth } from "../firebase";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const requestFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdnzIE5u7dGyqt3qfcFstCCYsDW7Hskc6lQtDEGkmvgLd2bbA/viewform?usp=sf_link";
 
@@ -14,23 +16,29 @@ const Login = () => {
 	const [verifying, setVerifying] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const navigate = useNavigate();
+	const toast_config = {position: toast.POSITION.TOP_CENTER, autoClose:2000};
 
 	const handleSubmit = async () => {
-		setVerifying(true);
-		try {
-			let userCredential = await signInWithEmailAndPassword(auth, email, password);
-			console.log(`Signed in as ${userCredential.user.email}`);
-			navigate("/");
-		} catch(error) {
-			if (error.message.includes("auth/user-not-found") || error.message.includes("auth/invalid-email")) {
-				setErrorMessage("Invalid email");
-			} else if (error.message.includes("auth/wrong-password")) {
-				setErrorMessage("Incorrect password");
-			} else {
-				setErrorMessage("Unknown error occurred");
-			}
-		};
-		setVerifying(false);
+		if (password === "") {
+			setErrorMessage("Please enter a password");
+		} else {
+			setVerifying(true);
+			try {
+				let userCredential = await signInWithEmailAndPassword(auth, email, password);
+				console.log(`Signed in as ${userCredential.user.email}`);
+				toast('Logged in!', toast_config);
+				navigate("/");
+			} catch(error) {
+				if (error.message.includes("auth/user-not-found") || error.message.includes("auth/invalid-email")) {
+					setErrorMessage("Invalid email");
+				} else if (error.message.includes("auth/wrong-password")) {
+					setErrorMessage("Incorrect password");
+				} else {
+					setErrorMessage("Unknown error occurred");
+				}
+			};
+			setVerifying(false);
+		}
 	};
 
 	return (
@@ -69,6 +77,14 @@ const Login = () => {
 					) : (
 						<MyButton onClick={handleSubmit}>Login</MyButton>
 					)}
+					<MyButton
+						variant="text"
+						color="clickme"
+						sx={{ typography: "link" }}
+						onClick={() => navigate("/reset-password")}
+					>
+						Forgot password?
+					</MyButton>
 				</Stack>
 			</Paper>
 		</Box>

@@ -2,15 +2,14 @@
 
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
+import AccountBubble from "../Components/AccountBubble";
 import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
-import MyButton from "../Components/Button";
-import BubbleNavLinks from './BubbleNavLinks';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
+import MyButton from "../Components/Button";
+import BubbleNavLinks from './BubbleNavLinks';
 import theme from "../styling";
 import { UserContext } from "../Hooks/UserContext";
-import { auth } from '../firebase';
-import { signOut } from '@firebase/auth';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BuildIcon from '@mui/icons-material/Build';
@@ -30,18 +29,9 @@ export const NavBar = () => {
 	const user = useContext(UserContext);
 	const navigate = useNavigate();
 
-	const handleLogout = () => {
-		signOut(auth).then(() => {
-			console.log("Signed out");
-			navigate("/");
-		}).catch((error) => {
-			console.error(error);
-		});
-	};
-
 	return (
-		<Box>
-			<Stack direction="row" alignItems="center" spacing={3} sx={{ p: 2 }}>
+		<>
+			<Stack direction="row" alignItems="center" spacing={3} sx={{ p: 2, height: 60 }}>
 				{isSmall && <IconButton onClick={() => setOpen(!open)}>
 					{open ? <MenuOpenRoundedIcon /> : <MenuRoundedIcon />}
 				</IconButton>}
@@ -60,9 +50,7 @@ export const NavBar = () => {
 						{user === null ? (
 							<MyButton onClick={() => navigate("/login")}>Login</MyButton>
 						) : (
-							<Tooltip title={`signed in as ${user.email}`}>
-								<MyButton onClick={handleLogout}>Logout</MyButton>
-							</Tooltip>
+							<AccountBubble/>
 						)}
 					</Grid>
 				</Grid>
@@ -78,7 +66,7 @@ export const NavBar = () => {
 					<Divider sx={{ my: 2 }}/>
 				</Box>
 			</Collapse>
-		</Box>
+		</>
 	);
 };
 
