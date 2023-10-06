@@ -45,7 +45,7 @@ const Home = () => {
 			</Stack>
 			<Stack direction="column" spacing={3}>
 
-			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
+			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1} animateOnce>
 				<AboutSection
 					title="Plumbing"
 					images={[plumbing, sump, flow, filter]}
@@ -62,7 +62,7 @@ const Home = () => {
 			</AnimationOnScroll>
 
 
-			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1}>
+			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1} animateOnce>
 				<AboutSection
 					title="Electronics"
 					images={[sensor, rpi, outlet, motorized]}
@@ -80,7 +80,7 @@ const Home = () => {
 				</AboutSection>
 			</AnimationOnScroll>
 
-			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1}>
+			<AnimationOnScroll animateIn="animate__fadeInLeftBig" duration={1} animateOnce>
 				<AboutSection
 					title="Software"
 					images={[software1, videoStream, code, software2]}
@@ -99,7 +99,7 @@ const Home = () => {
 				</AboutSection>
 			</AnimationOnScroll>
 
-			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1}>
+			<AnimationOnScroll animateIn="animate__fadeInRightBig" duration={1} animateOnce>
 				<AboutSection
 					title="Biology"
 					images={[fish, topView, biofilm, plants]}
