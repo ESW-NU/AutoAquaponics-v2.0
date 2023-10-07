@@ -22,7 +22,41 @@ Data type of tolerances: {
 	},
 }
 */
+
 export function useFetchStats(timeBounds) {
+	const [loading, setLoading] = useState(true);
+
+	// get stats
+	const [stats, setStats] = useState([]);
+	useEffect(() => {
+		setLoading(true);
+		getDocs(
+			query(
+				collection(db, 'stats'),
+				where('unix_time', '>', timeBounds[0]),
+				where('unix_time', '<', timeBounds[1]),
+				orderBy('unix_time', 'asc')
+			)
+		).then(snapshot => {
+			setStats(convertStatsSnapshot(snapshot));
+			setLoading(false);
+		});
+	}, [timeBounds[0], timeBounds[1]]); // specify the bounds individually, otherwise React thinks the bounds changed and will re-run the Effect
+
+	// get tolerances
+	const [tolerances, setTolerances] = useState({});
+	useEffect(() => {
+		getDocs(
+			query(
+				collection(db, 'tolerances'),
+			)
+		).then(snapshot => setTolerances(convertTolerancesSnapshot(snapshot)));
+	}, []);
+
+	return { loading, stats, tolerances };
+}
+
+export function useFetchStatsListen(timeBounds) {
 	const [loading, setLoading] = useState(true);
 
 	// get stats
