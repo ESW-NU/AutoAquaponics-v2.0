@@ -28,10 +28,13 @@
     "web-vitals": "^3.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "FIRESTORE_EMULATED=false react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:emulators": "concurrently \"npm run start-app-emulated\" \"npm run start-firebase-emulated\"",
+    "start-app-emulated": "FIRESTORE_EMULATED=true react-scripts start",
+    "start-firebase-emulated": "firebase emulators:start --import=./emulators"
   },
   "browserslist": {
     "production": [
@@ -46,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
