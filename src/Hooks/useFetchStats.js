@@ -23,39 +23,6 @@ Data type of tolerances: {
 }
 */
 
-export function useFetchStats(timeBounds) {
-	const [loading, setLoading] = useState(true);
-
-	// get stats
-	const [stats, setStats] = useState([]);
-	useEffect(() => {
-		setLoading(true);
-		getDocs(
-			query(
-				collection(db, 'stats'),
-				where('unix_time', '>', timeBounds[0]),
-				where('unix_time', '<', timeBounds[1]),
-				orderBy('unix_time', 'asc')
-			)
-		).then(snapshot => {
-			setStats(convertStatsSnapshot(snapshot));
-			setLoading(false);
-		});
-	}, [timeBounds[0], timeBounds[1]]); // specify the bounds individually, otherwise React thinks the bounds changed and will re-run the Effect
-
-	// get tolerances
-	const [tolerances, setTolerances] = useState({});
-	useEffect(() => {
-		getDocs(
-			query(
-				collection(db, 'tolerances'),
-			)
-		).then(snapshot => setTolerances(convertTolerancesSnapshot(snapshot)));
-	}, []);
-
-	return { loading, stats, tolerances };
-}
-
 export function useFetchStatsListen(timeBounds) {
 	const [loading, setLoading] = useState(true);
 
@@ -63,13 +30,13 @@ export function useFetchStatsListen(timeBounds) {
 	const [stats, setStats] = useState([]);
 	useEffect(() => {
 		setLoading(true);
-    const q = query( // the data we want to fetch
+    const q_states = query( // the data we want to fetch
       collection(db, 'stats'),
       where('unix_time', '>', timeBounds[0]),
       where('unix_time', '<', timeBounds[1]),
       orderBy('unix_time', 'asc')
     );
-    const unsubscribe = onSnapshot(q, (snapshot) => { // real-time listener for changes to the queried stats data
+    const unsubscribe = onSnapshot(q_states, (snapshot) => { // real-time listener for changes to the queried stats data
       setStats(convertStatsSnapshot(snapshot));
 			setLoading(false);
     });
@@ -81,10 +48,10 @@ export function useFetchStatsListen(timeBounds) {
 	// get tolerances
 	const [tolerances, setTolerances] = useState({});
 	useEffect(() => {
-    const q = query(
+    const q_tolerances = query(
       collection(db, 'tolerances')
     )
-    const unsubscribe = onSnapshot(q, (snapshot) => {
+    const unsubscribe = onSnapshot(q_tolerances, (snapshot) => {
       setTolerances(convertTolerancesSnapshot(snapshot))
     });
     return() => {
