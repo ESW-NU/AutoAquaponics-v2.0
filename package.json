@@ -32,9 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:emulators": "cross-env REACT_APP_USE_EMULATOR=true concurrently \"npm run start-app-emulated\" \"npm run start-firebase-emulated\"",
-    "start-app-emulated": "react-scripts start",
-    "start-firebase-emulated": "firebase emulators:start --import=./emulators"
+    "start-emulated": "cross-env REACT_APP_USE_EMULATOR=true concurrently \"npm run start-firebase-emulator\" \"npm run start\"",
+    "start-firebase-emulator": "firebase emulators:start --import=./emulators"
   },
   "browserslist": {
     "production": [
