@@ -30,11 +30,9 @@ if (process.env.REACT_APP_USE_EMULATOR === "true") { // run this with npm run st
 	connectAuthEmulator(auth, "http://127.0.0.1:9099");
 	connectFirestoreEmulator(db, '127.0.0.1', 8080);
 	console.log('Using emulators');
-}
-else { // run this with just npm start
+} else { // run this with just npm start
 	db = getFirestore(app);
 	auth = getAuth(app);
-	console.log('Using normal');
 }
 
 export { db, auth };
