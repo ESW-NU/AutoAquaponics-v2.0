@@ -8,7 +8,7 @@ const verticalCenteredStyle = { height: "100%", display: "flex", flexDirection: 
 const GraphCard = ({ name, unit, statKey, loading, stats, tolerance, timeBounds, zoom }) => {
 	const data = stats.map(({ unixTime, stats }) => ({
 		x: unixTime,
-		y: stats[statKey],
+		y: stats[statKey] ?? NaN,
 	}));
 	const hasData = data.length > 0;
 	const latestY = hasData ? data.at(-1).y : NaN;
