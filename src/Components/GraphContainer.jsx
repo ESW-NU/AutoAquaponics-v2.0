@@ -4,11 +4,11 @@ import { db } from '../firebase';
 import GraphCard from "./GraphCard";
 import { Grid, Alert } from "@mui/material";
 import { systemStatMeta } from "../systemMeta";
-import { useFetchStats } from "../Hooks/useFetchStats";
+import { useFetchStatsListen } from "../Hooks/useFetchStats";
 import { Fade } from 'react-awesome-reveal';
 
 const GraphContainer = ({ timeBounds, zoom }) => {
-	const { loading, stats, tolerances } = useFetchStats(timeBounds);
+	const { loading, stats, tolerances } = useFetchStatsListen(timeBounds);
 
 	// idiocy ensues
 	const [doxxedPpl, setDoxxedPpl] = useState([]);
