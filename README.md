@@ -12,11 +12,11 @@ The frontend uses the React framework, with [Material UI](https://mui.com/) prov
 
 ### Setup
 
-To build and run this app, you must have the `npm` installed. To deploy the app, you must have the `firebase` command installed. Run `npm install` in the project directory once to install all required packages. (You may need to run `npm install --force` instead, if there are dependency conflicts. We ~~are~~ should be working on this!) You may also need to rerun the `npm start` script after installing. Switching between branches that have different dependencies may require running `npm install` again.
+To build and run this app, you must have the `npm` installed. To deploy the app, you must have the `firebase` command installed and also be logged into an account with access to the Firebase project. To run with emulators, you must have the appropriate emulators downloaded (look up `firebase init emulators`). Run `npm install` in the project directory once to install all required packages. (You may need to run `npm install --force` instead, if there are dependency conflicts. We ~~are~~ should be working on this!) You may also need to rerun the `npm start` script after installing. Switching between branches that have different dependencies may require running `npm install` again.
 
 ### Development
 
-Running `npm start` in the project directory will run the app in development mode on `http://localhost:3000`. The application will reload in the browser with hotfixes when changes are made to the source files. Use Ctrl + C to stop the script. Although the hotfixing works great most of the time, you may need to reload the browser page or even stop and restart the script for some changes to take place.
+Running `npm start` in the project directory will run the app in development mode on `http://localhost:3000`. *This mode uses the production database.* Running `npm run start-emulated` in the project directory will run the app in development mode using Firestore emulators. The application will reload in the browser with hotfixes when changes are made to the source files. Use Ctrl + C to stop the script. Although the hotfixing works great most of the time, you may need to reload the browser page or even stop and restart the script for some changes to take place.
 
 Note that, unless you have one of our super secret debug tokens, all Firebase App Checks will fail because of the local development environment. Normally, this would mean that the application will not be able to interact with the Firestore backend database; however, App Check is currently not enforced. Use a debug token or a [local emulator](https://firebase.google.com/docs/emulator-suite) to solve this issue.
 
