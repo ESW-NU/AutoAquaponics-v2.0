@@ -44,15 +44,9 @@ const ControlsOverviewPanel = () => {
 						<Box sx={{ width: "100%" }}><LinearProgress/></Box>
 					</>
 				) : user === null ? (
-					<>
-						<Box sx={{ width: "100%" }}>
-							Up to date! To make changes, <MuiLink component={RouterLink} to="/login">log in</MuiLink>
-						</Box>
-						<Button
-							variant="text"
-							onClick={() => reloadRemoteValues(false)}
-						>Refresh</Button>
-					</>
+          <Box sx={{ width: "100%" }}>
+            Up to date! To make changes, <MuiLink component={RouterLink} to="/login">log in</MuiLink>
+          </Box>
 				) : edited ? (
 					<>
 						<Box sx={{ width: "100%" }}>You have unsaved changes!</Box>
@@ -65,19 +59,10 @@ const ControlsOverviewPanel = () => {
 							color="warning"
 							onClick={() => dispatchCtrlVals({ type: "discard_local" })}
 						>Discard</Button>
-						<Button
-							variant="text"
-							onClick={() => reloadRemoteValues(false)}
-						>Refresh</Button>
 					</>
 				) : (
-					<>
-						<Box sx={{ width: "100%" }}>Up to date!</Box>
-						<Button
-							variant="text"
-							onClick={() => reloadRemoteValues(false)}
-						>Refresh</Button>
-					</>
+					<Box sx={{ width: "100%" }}>Up to date!</Box>
+						
 				)}
 			</Stack>
 		</Paper>
