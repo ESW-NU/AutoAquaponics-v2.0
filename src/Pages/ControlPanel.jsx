@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFan } from '@fortawesome/free-solid-svg-icons'
 import theme from "../styling";
 import { ctrlValsReducer, ControlValuesContext } from "../Hooks/ControlValuesContext";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs,query, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
 import { systemControlsCollections } from "../systemMeta";
 import NavLinksPanel from "../Components/NavLinksPanel";
@@ -25,24 +25,46 @@ const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: null, local: {} });
-	const fetchRemoteValues = (discardLocal) => {
-		dispatchCtrlVals({ type: "discard_remote" });
-		Promise.all(
-			systemControlsCollections.map(collName => getDocs(collection(db, collName)))
-		).then(querySnapshotArray => {
-			// get an array of arrays of [path, data] pairs, then flatten it to a array of [path, data] pairs
-			const pairs = querySnapshotArray.map(querySnapshot =>
-				// get an array of [path, data] pairs
-				querySnapshot.docs.map(doc => [doc.ref.path, doc.data()])
-			).flat();
-			if (discardLocal) {
-				// do this first to avoid the unnecessary checks in replace_remote
-				dispatchCtrlVals({ type: "discard_local" });
-			}
-			dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
-		});
-	};
-	useEffect(() => fetchRemoteValues(), []);
+
+  const fetchRemoteValues = (discardLocal) => {
+    useEffect(() => {
+      dispatchCtrlVals({ type: "discard_remote" });
+
+      
+      //this is the listener for the realtime updates
+      systemControlsCollections.map((collName) => {
+        const collectionRef = query(collection(db, collName));
+        console.log(collName)
+          const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
+            const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
+            if (discardLocal) {
+              // do this first to avoid the unnecessary checks in replace_remote
+              dispatchCtrlVals({ type: "discard_local" });
+            }
+            dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
+          });
+          return () => unsubscribe();
+      });
+
+      //this gets the intial values
+      Promise.all(
+        systemControlsCollections.map(collName => getDocs(collection(db, collName)))
+      ).then(querySnapshotArray => {
+        // get an array of arrays of [path, data] pairs, then flatten it to a array of [path, data] pairs
+        const pairs = querySnapshotArray.map(querySnapshot =>
+          // get an array of [path, data] pairs
+          querySnapshot.docs.map(doc => [doc.ref.path, doc.data()])
+        ).flat();
+        if (discardLocal) {
+          // do this first to avoid the unnecessary checks in replace_remote
+          dispatchCtrlVals({ type: "discard_local" });
+        }
+        dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
+      });
+
+    }, []);
+  };
+  fetchRemoteValues();
 
 	const user = useContext(UserContext);
 	const enabled = user !== null;
