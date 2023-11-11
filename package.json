@@ -31,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-emulated": "cross-env REACT_APP_USE_EMULATOR=true concurrently \"npm run start-firebase-emulator\" \"npm run start\"",
+    "start-firebase-emulator": "firebase emulators:start --import=./emulators"
   },
   "browserslist": {
     "production": [
@@ -46,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
