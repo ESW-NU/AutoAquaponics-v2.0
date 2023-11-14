@@ -60,10 +60,16 @@ export const ctrlValsReducer = (oldCtrlVals, action) => {
 		case "discard_remote": {
 			return { remote: null, local: oldCtrlVals.local };
 		}
+    case "set_remote": {
+			const { newRemote } = action;
+			return { remote: newRemote, local: oldCtrlVals.local };
+		}
 		case "replace_remote": {
 			const { local: oldLocal } = oldCtrlVals;
-			const { newRemote } = action;
+      const { remote: oldRemote } = oldCtrlVals;
+			const { newRemote: newRemoteChanges } = action;
 			const newLocal = structuredClone(oldLocal);
+      const newRemote = structuredClone(oldRemote);
 			for (const document in newLocal) {
 				for (const field in newLocal[document]) {
 					if (newRemote?.[document]?.[field] === newLocal[document][field]) {
@@ -74,6 +80,11 @@ export const ctrlValsReducer = (oldCtrlVals, action) => {
 					delete newLocal[document];
 				}
 			}
+      for (const document in newRemote) {
+        if (newRemoteChanges.hasOwnProperty(document)) {
+          newRemote[document] = newRemoteChanges[document];
+        }
+      }
 			return { remote: newRemote, local: newLocal };
 		}
 		default: {

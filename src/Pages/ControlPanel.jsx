@@ -26,45 +26,48 @@ const ControlPanel = () => {
 
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: null, local: {} });
 
-  const fetchRemoteValues = (discardLocal) => {
-    useEffect(() => {
-      dispatchCtrlVals({ type: "discard_remote" });
+  const fetchRemoteValues = () => {
+    console.log("fetching remote values");
+		Promise.all(
+			systemControlsCollections.map(collName => getDocs(collection(db, collName)))
+		).then(querySnapshotArray => {
+			// get an array of arrays of [path, data] pairs, then flatten it to a array of [path, data] pairs
+			const pairs = querySnapshotArray.map(querySnapshot =>
+				// get an array of [path, data] pairs
+				querySnapshot.docs.map(doc => [doc.ref.path, doc.data()])
+			).flat();
+			dispatchCtrlVals({ type: "set_remote", newRemote: Object.fromEntries(pairs) });
+		});
+	};
 
-      
-      //this is the listener for the realtime updates
-      systemControlsCollections.map((collName) => {
-        const collectionRef = query(collection(db, collName));
-        console.log(collName)
-          const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
-            const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
-            if (discardLocal) {
-              // do this first to avoid the unnecessary checks in replace_remote
-              dispatchCtrlVals({ type: "discard_local" });
-            }
-            dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
-          });
-          return () => unsubscribe();
-      });
-
-      //this gets the intial values
-      Promise.all(
-        systemControlsCollections.map(collName => getDocs(collection(db, collName)))
-      ).then(querySnapshotArray => {
-        // get an array of arrays of [path, data] pairs, then flatten it to a array of [path, data] pairs
-        const pairs = querySnapshotArray.map(querySnapshot =>
-          // get an array of [path, data] pairs
-          querySnapshot.docs.map(doc => [doc.ref.path, doc.data()])
-        ).flat();
-        if (discardLocal) {
-          // do this first to avoid the unnecessary checks in replace_remote
-          dispatchCtrlVals({ type: "discard_local" });
-        }
-        dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
-      });
-
-    }, []);
+  const trackCollectionValues = (collName, discardLocal) => {
+    //this is the listener for the realtime updates
+    const unsubscribe = onSnapshot(collection(db, collName), (querySnapshot) => {
+      console.log("tracking changes in remote values");
+      const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
+      if (discardLocal) {
+        // do this first to avoid the unnecessary checks in replace_remote
+        dispatchCtrlVals({ type: "discard_local" });
+      }
+      dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
+    });
+    return () => unsubscribe();
   };
-  fetchRemoteValues();
+
+  const trackAllRemoteValues = (discardLocal) => {
+      //this is the listener for the realtime updates
+      const unsubscribes = systemControlsCollections.map((collName) => {
+        return trackCollectionValues(collName, discardLocal);
+      });
+      return unsubscribes;
+  };
+  
+  useEffect(() => {
+    fetchRemoteValues()
+    const unsubscribes = trackAllRemoteValues(false)
+    return () => unsubscribes.forEach(unsubscribe => unsubscribe());
+  }, []);
+
 
 	const user = useContext(UserContext);
 	const enabled = user !== null;
@@ -73,7 +76,7 @@ const ControlPanel = () => {
 		<ControlValuesContext.Provider value={{
 			ctrlVals,
 			dispatchCtrlVals,
-			reloadRemoteValues: fetchRemoteValues,
+			reloadRemoteValues: trackAllRemoteValues,
 		}}>
 			<Grid container spacing={3}>
 				<Grid item xs={12}>

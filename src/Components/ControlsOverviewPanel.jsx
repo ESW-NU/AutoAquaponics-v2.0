@@ -14,7 +14,6 @@ const ControlsOverviewPanel = () => {
 	const edited = Object.entries(ctrlVals.local).length > 0;
 
 	const submitDocChanges = () => {
-		console.log(ctrlVals);
 		const local = ctrlVals.local;
 		Promise.all(
 			Object.keys(local).map(docPath => updateDoc(doc(db, docPath), local[docPath]))
