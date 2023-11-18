@@ -6,6 +6,7 @@ import { Grid, Alert } from "@mui/material";
 import { systemStatMeta } from "../systemMeta";
 import { useFetchStatsListen } from "../Hooks/useFetchStats";
 import { Fade } from 'react-awesome-reveal';
+import Typography from "@mui/material/Typography";
 
 
 const GraphContainer = ({ timeBounds, zoom }) => {
@@ -37,8 +38,10 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 
 	return (
 		<>
-		
-			{lastRetrieved}
+		<Typography sx={{ my: 1 }} variant="h3" color="common.black">
+		{lastRetrieved}
+      </Typography>
+	  
 			{existsBadReading && <Alert sx={{ my: 3 }} severity="error">
 				You may have noticed some sensors aren't working properly. This is 100% the fault of
 				the electronics team. Please direct your complaints and harassment
