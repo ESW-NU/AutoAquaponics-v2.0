@@ -8,7 +8,7 @@ import { updateDoc, doc } from "firebase/firestore";
 
 
 const ControlsOverviewPanel = () => {
-	const { ctrlVals, dispatchCtrlVals, reloadRemoteValues } = useContext(ControlValuesContext);
+	const { ctrlVals, dispatchCtrlVals } = useContext(ControlValuesContext);
 	const user = useContext(UserContext);
 	const loading = ctrlVals.remote === null;
 	const edited = Object.entries(ctrlVals.local).length > 0;
@@ -17,11 +17,8 @@ const ControlsOverviewPanel = () => {
 		const local = ctrlVals.local;
 		Promise.all(
 			Object.keys(local).map(docPath => updateDoc(doc(db, docPath), local[docPath]))
-		).then(() => {
-			reloadRemoteValues(true);
-		}).catch(error => {
+		).catch(error => {
 			console.log(error); // TODO make this a snackbar
-			reloadRemoteValues(false);
 		})
 	};
 
@@ -43,9 +40,9 @@ const ControlsOverviewPanel = () => {
 						<Box sx={{ width: "100%" }}><LinearProgress/></Box>
 					</>
 				) : user === null ? (
-          <Box sx={{ width: "100%" }}>
-            Up to date! To make changes, <MuiLink component={RouterLink} to="/login">log in</MuiLink>
-          </Box>
+					<Box sx={{ width: "100%" }}>
+						Up to date! To make changes, <MuiLink component={RouterLink} to="/login">log in</MuiLink>
+					</Box>
 				) : edited ? (
 					<>
 						<Box sx={{ width: "100%" }}>You have unsaved changes!</Box>

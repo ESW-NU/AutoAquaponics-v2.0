@@ -24,49 +24,30 @@ import { UserContext } from "../Hooks/UserContext";
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
-	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: null, local: {} });
+	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
-  const fetchRemoteValues = () => {
-    console.log("fetching remote values");
-		Promise.all(
-			systemControlsCollections.map(collName => getDocs(collection(db, collName)))
-		).then(querySnapshotArray => {
-			// get an array of arrays of [path, data] pairs, then flatten it to a array of [path, data] pairs
-			const pairs = querySnapshotArray.map(querySnapshot =>
-				// get an array of [path, data] pairs
-				querySnapshot.docs.map(doc => [doc.ref.path, doc.data()])
-			).flat();
-			dispatchCtrlVals({ type: "set_remote", newRemote: Object.fromEntries(pairs) });
+	const trackCollectionValues = (collName, discardLocal) => {
+		//this is the listener for the realtime updates
+		const unsubscribe = onSnapshot(collection(db, collName), (querySnapshot) => {
+			console.log("tracking changes in remote values");
+			const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
+			dispatchCtrlVals({ type: "update_remote", newRemote: Object.fromEntries(pairs) });
 		});
+		return () => unsubscribe();
 	};
 
-  const trackCollectionValues = (collName, discardLocal) => {
-    //this is the listener for the realtime updates
-    const unsubscribe = onSnapshot(collection(db, collName), (querySnapshot) => {
-      console.log("tracking changes in remote values");
-      const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
-      if (discardLocal) {
-        // do this first to avoid the unnecessary checks in replace_remote
-        dispatchCtrlVals({ type: "discard_local" });
-      }
-      dispatchCtrlVals({ type: "replace_remote", newRemote: Object.fromEntries(pairs) });
-    });
-    return () => unsubscribe();
-  };
-
-  const trackAllRemoteValues = (discardLocal) => {
-      //this is the listener for the realtime updates
-      const unsubscribes = systemControlsCollections.map((collName) => {
-        return trackCollectionValues(collName, discardLocal);
-      });
-      return unsubscribes;
-  };
-  
-  useEffect(() => {
-    fetchRemoteValues()
-    const unsubscribes = trackAllRemoteValues(false)
-    return () => unsubscribes.forEach(unsubscribe => unsubscribe());
-  }, []);
+	const trackAllRemoteValues = () => {
+			//this is the listener for the realtime updates
+			const unsubscribes = systemControlsCollections.map((collName) => {
+				return trackCollectionValues(collName, discardLocal);
+			});
+			return unsubscribes;
+	};
+	
+	useEffect(() => {
+		const unsubscribes = trackAllRemoteValues()
+		return () => unsubscribes.forEach(unsubscribe => unsubscribe());
+	}, []);
 
 
 	const user = useContext(UserContext);
