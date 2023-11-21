@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from '../firebase';
 import GraphCard from "./GraphCard";
-import { Grid, Alert } from "@mui/material";
+import { Grid, Alert, Typography } from "@mui/material";
 import { systemStatMeta } from "../systemMeta";
 import { useFetchStatsListen } from "../Hooks/useFetchStats";
 import { Fade } from 'react-awesome-reveal';
-import Typography from "@mui/material/Typography";
 
 
 const GraphContainer = ({ timeBounds, zoom }) => {
@@ -28,19 +27,18 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 	let lastRetrieved;
 	const lastTime = stats.at(-1)?.unixTime;
 	if (typeof lastTime === 'undefined') {
-	lastRetrieved = "Data not retrieved."
+		lastRetrieved = "Data not retrieved."
 	}
 	else {
 		lastRetrieved = "Last Retrieved: " + new Date(lastTime * 1000).toLocaleString();
 	}
 
-// console.log(Date(stats[0].unixTime.toLocaleString()));
 
 	return (
 		<>
-		<Typography sx={{ my: 1 }} variant="h3" color="common.black">
-		{lastRetrieved}
-      </Typography>
+		<Typography sx={{ my: 1 }} variant="body1">
+			{lastRetrieved}
+ 		</Typography>
 	  
 			{existsBadReading && <Alert sx={{ my: 3 }} severity="error">
 				You may have noticed some sensors aren't working properly. This is 100% the fault of
