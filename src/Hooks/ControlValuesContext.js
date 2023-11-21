@@ -19,13 +19,10 @@ Consists of three parts:
  * dispatchCtrlVals: the function that a control component should call to update the
 	 ctrlVals object; automatically handles detecting when a local value has change to be equivalent
 	 to the corresponding remote value.
- * reloadRemoteValues: a function that reloads the remote values (duh). Takes a boolean for whether
-	 the local values should be discarded too.
 */
 export const ControlValuesContext = createContext({
 	ctrlVals: { remote: {}, local: {} },
 	dispatchCtrlVals: () => {},
-	reloadRemoteValues: () => {},
 });
 
 /*

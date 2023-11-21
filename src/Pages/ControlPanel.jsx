@@ -28,6 +28,7 @@ const ControlPanel = () => {
 	const [syncing, setSyncing] = useState(false); // tracks when data is sent to the backend
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
+
 	// Returns a pair with:
 	// - an unsubscribe function that unsubscribes the listener
 	// - a Promise that resolves with nothing when the first snapshot has been retrieved
@@ -45,7 +46,7 @@ const ControlPanel = () => {
 						dispatchCtrlVals({ type: "update_remote", newRemote: Object.fromEntries(pairs) });
 						setSyncing(false)
 					} else {
-						// receieved fake update from local change
+						// receieved "fake" update from local change
 						setSyncing(true)
 					}
 					resolve();
@@ -54,24 +55,13 @@ const ControlPanel = () => {
 		})
 		return [unsubscribe, promise];
 	};
-
-	// Returns a pair with:
-	// - an unsubscribe function that unsubscribes all the listeners
-	// - a Promise that resolves with nothing when all the first snapshots have been retrieved
-	const trackAllCollectionValues = () => {
+	
+	useEffect(() => {
 		const [unsubscribes, promises] = unzip(systemControlsCollections.map((collName) => {
 			return trackCollectionValues(collName);
 		}));
-		return [
-			() => unsubscribes.forEach(unsubscribe => unsubscribe()),
-			Promise.all(promises),
-		];
-	};
-	
-	useEffect(() => {
-		const [unsubscribe, promise] = trackAllCollectionValues()
-		promise.then(() => setLoading(false));
-		return unsubscribe;
+		Promise.all(promises).then(() => setLoading(false));
+		return () => unsubscribes.forEach(unsubscribe => unsubscribe());
 	}, []);
 
 	const user = useContext(UserContext);
@@ -81,7 +71,6 @@ const ControlPanel = () => {
 		<ControlValuesContext.Provider value={{
 			ctrlVals,
 			dispatchCtrlVals,
-			reloadRemoteValues: trackAllCollectionValues,
 		}}>
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
@@ -120,6 +109,11 @@ function unzip(arrayOfPairs) {
 		bList.push(b);
 	});
 	return [aList, bList];
+}
+function delay(milliseconds){
+	return new Promise(resolve => {
+			setTimeout(resolve, milliseconds);
+	});
 }
 
 export default ControlPanel;
