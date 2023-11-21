@@ -24,42 +24,54 @@ import { UserContext } from "../Hooks/UserContext";
 
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
-	const [syncing, setSyncing] = useState(false)
+	const [loading, setLoading] = useState(true); // tracks the initial loading
+	const [syncing, setSyncing] = useState(false); // tracks when data is sent to the backend
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
-	function delay(milliseconds){
-		return new Promise(resolve => {
-				setTimeout(resolve, milliseconds);
-		});
-	}
-
+	// Returns a pair with:
+	// - an unsubscribe function that unsubscribes the listener
+	// - a Promise that resolves with nothing when the first snapshot has been retrieved
 	const trackCollectionValues = (collName) => {
-		//this is the listener for the realtime updates
-		const unsubscribe = onSnapshot(collection(db, collName), { includeMetadataChanges: true }, async (querySnapshot) => {
-			const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
-			if (!querySnapshot.metadata.hasPendingWrites) {
-				setSyncing(true)
-				// why the 500ms delay? it's not functional. rather, it's a UX feature of sorts that gives users confirmation that data is being updated
-				await delay(500)
-				dispatchCtrlVals({ type: "update_remote", newRemote: Object.fromEntries(pairs) });
-				setSyncing(false)
-			} 
-		});
-		return () => {unsubscribe()};
+		let unsubscribe;
+		const promise = new Promise((resolve) => {
+			// this is the listener for the realtime updates
+			unsubscribe = onSnapshot(
+				collection(db, collName),
+				{ includeMetadataChanges: true },
+				(querySnapshot) => {
+					const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
+					if (!querySnapshot.metadata.hasPendingWrites) {
+						// received real-deal update from the backend
+						dispatchCtrlVals({ type: "update_remote", newRemote: Object.fromEntries(pairs) });
+						setSyncing(false)
+					} else {
+						// receieved fake update from local change
+						setSyncing(true)
+					}
+					resolve();
+				}
+			);
+		})
+		return [unsubscribe, promise];
 	};
 
-	const trackAllRemoteValues = () => {
-		//this is the listener for the realtime updates
-		const unsubscribes = systemControlsCollections.map((collName) => {
+	// Returns a pair with:
+	// - an unsubscribe function that unsubscribes all the listeners
+	// - a Promise that resolves with nothing when all the first snapshots have been retrieved
+	const trackAllCollectionValues = () => {
+		const [unsubscribes, promises] = unzip(systemControlsCollections.map((collName) => {
 			return trackCollectionValues(collName);
-		});
-
-		return unsubscribes;
+		}));
+		return [
+			() => unsubscribes.forEach(unsubscribe => unsubscribe()),
+			Promise.all(promises),
+		];
 	};
 	
 	useEffect(() => {
-		const unsubscribes = trackAllRemoteValues()
-		return () => unsubscribes.forEach(unsubscribe => unsubscribe());
+		const [unsubscribe, promise] = trackAllCollectionValues()
+		promise.then(() => setLoading(false));
+		return unsubscribe;
 	}, []);
 
 	const user = useContext(UserContext);
@@ -69,11 +81,11 @@ const ControlPanel = () => {
 		<ControlValuesContext.Provider value={{
 			ctrlVals,
 			dispatchCtrlVals,
-			reloadRemoteValues: trackAllRemoteValues,
+			reloadRemoteValues: trackAllCollectionValues,
 		}}>
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
-					<ControlsOverviewPanel syncing = {syncing}/>
+					<ControlsOverviewPanel loading={loading} syncing={syncing}/>
 				</Grid>
 				<Grid item xs={12} md="auto">
 					<NavLinksPanel fullWidth={isSmall} links={[
@@ -98,5 +110,16 @@ const ControlPanel = () => {
 		</ControlValuesContext.Provider>
 	);
 };
+
+// "Unzips" an array of pairs into a pair of arrays
+function unzip(arrayOfPairs) {
+	const aList = []
+	const bList = []
+	arrayOfPairs.forEach(([a, b]) => {
+		aList.push(a);
+		bList.push(b);
+	});
+	return [aList, bList];
+}
 
 export default ControlPanel;
