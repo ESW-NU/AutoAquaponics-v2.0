@@ -21,34 +21,46 @@ import WaterPump from "./ControlPages/WaterPump";
 import ControlsOverviewPanel from "../Components/ControlsOverviewPanel";
 import { UserContext } from "../Hooks/UserContext";
 
+
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
-
+	const [syncing, setSyncing] = useState(false)
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
-	const trackCollectionValues = (collName, discardLocal) => {
-		//this is the listener for the realtime updates
-		const unsubscribe = onSnapshot(collection(db, collName), (querySnapshot) => {
-			console.log("tracking changes in remote values");
-			const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
-			dispatchCtrlVals({ type: "update_remote", newRemote: Object.fromEntries(pairs) });
+	function delay(milliseconds){
+		return new Promise(resolve => {
+				setTimeout(resolve, milliseconds);
 		});
-		return () => unsubscribe();
+	}
+
+	const trackCollectionValues = (collName) => {
+		//this is the listener for the realtime updates
+		const unsubscribe = onSnapshot(collection(db, collName), { includeMetadataChanges: true }, async (querySnapshot) => {
+			const pairs = querySnapshot.docs.map(doc => [doc.ref.path, doc.data()]);
+			if (!querySnapshot.metadata.hasPendingWrites) {
+				setSyncing(true)
+				// why the 500ms delay? it's not functional. rather, it's a UX feature of sorts that gives users confirmation that data is being updated
+				await delay(500)
+				dispatchCtrlVals({ type: "update_remote", newRemote: Object.fromEntries(pairs) });
+				setSyncing(false)
+			} 
+		});
+		return () => {unsubscribe()};
 	};
 
 	const trackAllRemoteValues = () => {
-			//this is the listener for the realtime updates
-			const unsubscribes = systemControlsCollections.map((collName) => {
-				return trackCollectionValues(collName, discardLocal);
-			});
-			return unsubscribes;
+		//this is the listener for the realtime updates
+		const unsubscribes = systemControlsCollections.map((collName) => {
+			return trackCollectionValues(collName);
+		});
+
+		return unsubscribes;
 	};
 	
 	useEffect(() => {
 		const unsubscribes = trackAllRemoteValues()
 		return () => unsubscribes.forEach(unsubscribe => unsubscribe());
 	}, []);
-
 
 	const user = useContext(UserContext);
 	const enabled = user !== null;
@@ -61,7 +73,7 @@ const ControlPanel = () => {
 		}}>
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
-					<ControlsOverviewPanel/>
+					<ControlsOverviewPanel syncing = {syncing}/>
 				</Grid>
 				<Grid item xs={12} md="auto">
 					<NavLinksPanel fullWidth={isSmall} links={[

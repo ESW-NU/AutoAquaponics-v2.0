@@ -7,10 +7,10 @@ import { db } from "../firebase";
 import { updateDoc, doc } from "firebase/firestore";
 
 
-const ControlsOverviewPanel = () => {
+const ControlsOverviewPanel = (props) => {
 	const { ctrlVals, dispatchCtrlVals } = useContext(ControlValuesContext);
 	const user = useContext(UserContext);
-	const loading = ctrlVals.remote === null;
+	const loading = Object.keys(ctrlVals.remote).length === 0;
 	const edited = Object.entries(ctrlVals.local).length > 0;
 
 	const submitDocChanges = () => {
@@ -34,9 +34,9 @@ const ControlsOverviewPanel = () => {
 	return (
 		<Paper sx={{ p: 2, typography: "body1", border: 2, borderColor: color }}>
 			<Stack direction="row" spacing={1} justifyContent="flex-end" alignItems="center">
-				{loading ? (
+				{loading || props.syncing ? (
 					<>
-						<Box sx={{ minWidth: 230 }}>Loading current values...</Box>
+						<Box sx={{ minWidth: 230 }}>Updating values...</Box>
 						<Box sx={{ width: "100%" }}><LinearProgress/></Box>
 					</>
 				) : user === null ? (
