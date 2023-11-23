@@ -6,7 +6,6 @@ import { UserContext } from "../Hooks/UserContext";
 import { db } from "../firebase";
 import { updateDoc, doc } from "firebase/firestore";
 
-
 const ControlsOverviewPanel = ({ loading, syncing }) => {
 	const { ctrlVals, dispatchCtrlVals } = useContext(ControlValuesContext);
 	const user = useContext(UserContext);
@@ -57,7 +56,6 @@ const ControlsOverviewPanel = ({ loading, syncing }) => {
 					</>
 				) : (
 					<Box sx={{ width: "100%" }}>Up to date!</Box>
-						
 				)}
 			</Stack>
 		</Paper>

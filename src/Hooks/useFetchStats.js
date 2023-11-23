@@ -40,9 +40,8 @@ export function useTrackStats(timeBounds) {
 			setStats(convertStatsSnapshot(snapshot));
 			setLoading(false);
 		});
-		return () => {
-			unsubscribe(); // make sure to unsubscribe when the component unmounts cause idek but like efficiency probably
-		}
+		// make sure to unsubscribe when the component unmounts cause idek but like efficiency probably
+		return unsubscribe;
 	}, [timeBounds[0], timeBounds[1]]); // specify the bounds individually, otherwise React thinks the bounds changed and will re-run the Effect
 
 	// get tolerances

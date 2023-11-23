@@ -28,7 +28,6 @@ const ControlPanel = () => {
 	const [syncing, setSyncing] = useState(false); // tracks when data is sent to the backend
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
-
 	// Returns a pair with:
 	// - an unsubscribe function that unsubscribes the listener
 	// - a Promise that resolves with nothing when the first snapshot has been retrieved
@@ -109,11 +108,6 @@ function unzip(arrayOfPairs) {
 		bList.push(b);
 	});
 	return [aList, bList];
-}
-function delay(milliseconds){
-	return new Promise(resolve => {
-			setTimeout(resolve, milliseconds);
-	});
 }
 
 export default ControlPanel;
