@@ -24,13 +24,15 @@ if (process.env.NODE_ENV === "development") {
 let db;
 let auth;
 
-if (process.env.REACT_APP_USE_EMULATOR === "true") { // run this with npm run start-emulated
+if (process.env.REACT_APP_USE_EMULATOR === "true") { 
+	// run this with npm run start-emulated
 	db = getFirestore();
 	auth = getAuth();
 	connectAuthEmulator(auth, "http://127.0.0.1:9099");
 	connectFirestoreEmulator(db, '127.0.0.1', 8080);
-	console.log('Using emulators');
-} else { // run this with just npm start
+	console.log("Data from emulator (http://127.0.0.1:9099)")
+} else {  
+	// run this with: npm start
 	db = getFirestore(app);
 	auth = getAuth(app);
 }

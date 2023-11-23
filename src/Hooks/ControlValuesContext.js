@@ -17,24 +17,22 @@ export const getValueAndStatus = (ctrlVals, document, field) => ({
 Consists of three parts:
  * ctrlVals: an object representing the control values (see above)
  * dispatchCtrlVals: the function that a control component should call to update the
-   ctrlVals object; automatically handles detecting when a local value has change to be equivalent
-   to the corresponding remote value.
- * reloadRemoteValues: a function that reloads the remote values (duh). Takes a boolean for whether
-   the local values should be discarded too.
+	 ctrlVals object; automatically handles detecting when a local value has change to be equivalent
+	 to the corresponding remote value.
 */
 export const ControlValuesContext = createContext({
-	ctrlVals: { remote: null, local: {} },
+	ctrlVals: { remote: {}, local: {} },
 	dispatchCtrlVals: () => {},
-	reloadRemoteValues: () => {},
 });
 
 /*
 types of action:
  * "discard_local": no arguments; discards all local values
  * "set_local": sets local[document][field] = newValue, unless it's the same as the corresponding
-   remote value, in which case it deletes
- * "discard_remote": same as "replace_remote" with null
- * "replace_remote": sets remote to newRemote
+	 remote value, in which case it deletes
+ * "set_remote": sets remote to newRemote
+ * "discard_remote": same as "set_remote" with {}
+ * "update_remote": sets remote to newRemote
 */
 export const ctrlValsReducer = (oldCtrlVals, action) => {
 	switch (action.type) {
@@ -60,10 +58,19 @@ export const ctrlValsReducer = (oldCtrlVals, action) => {
 		case "discard_remote": {
 			return { remote: null, local: oldCtrlVals.local };
 		}
-		case "replace_remote": {
-			const { local: oldLocal } = oldCtrlVals;
+		case "set_remote": {
 			const { newRemote } = action;
+			return { remote: newRemote, local: oldCtrlVals.local };
+		}
+		case "update_remote": {
+			const { local: oldLocal } = oldCtrlVals;
+			const { remote: oldRemote } = oldCtrlVals;
+			const { newRemote: newRemoteChanges } = action;
 			const newLocal = structuredClone(oldLocal);
+			const newRemote = structuredClone(oldRemote);
+			for (const document in newRemoteChanges) {
+				newRemote[document] = newRemoteChanges[document];
+			}
 			for (const document in newLocal) {
 				for (const field in newLocal[document]) {
 					if (newRemote?.[document]?.[field] === newLocal[document][field]) {
