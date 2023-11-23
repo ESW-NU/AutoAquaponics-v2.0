@@ -18,3 +18,8 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTOAQUAPONICS_V2 }}'
           channelId: live
           projectId: autoaquaponics-v2
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only firestore
+        env:
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTOAQUAPONICS_V2 }}
