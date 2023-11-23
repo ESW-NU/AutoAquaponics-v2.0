@@ -12,7 +12,7 @@ The frontend uses the React framework, with [Material UI](https://mui.com/) prov
 
 ### Setup
 
-To build and run this app, you must have the `npm` installed. To deploy the app, you must have the `firebase` command installed and also be logged into an account with access to the Firebase project. To run with emulators, you must have the appropriate emulators downloaded (look up `firebase init emulators`). Run `npm install` in the project directory once to install all required packages. (You may need to run `npm install --force` instead, if there are dependency conflicts. We ~~are~~ should be working on this!) You may also need to rerun the `npm start` script after installing. Switching between branches that have different dependencies may require running `npm install` again.
+To build and run this app, you must have the `npm` installed. To deploy the app, you must have the `firebase` command installed and also be logged into an account with access to the Firebase project. To run with emulators, you must have the appropriate emulators downloaded (look up `firebase init emulators`). Run `npm install` in the project directory once to install all required packages. (You may need to run `npm install --force` instead, if there are dependency conflicts.) You may also need to rerun the `npm start` script after installing. Switching between branches that have different dependencies may require running `npm install` again.
 
 ### Development
 

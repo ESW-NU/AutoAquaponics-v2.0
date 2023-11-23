@@ -3,7 +3,7 @@
 import { Box, Stack, Typography, Link, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AboutSection from "../Components/AboutSection";
-import Typed from 'react-typed';
+import TypedText from '../Components/TypedText';
 import "animate.css/animate.min.css";
 import { AnimationOnScroll } from 'react-animation-on-scroll';
 
@@ -36,7 +36,7 @@ const Home = () => {
 			<Stack direction={{ xs: "column-reverse", md: "row" }} alignItems="center">
 				<img style={{ width: "50vw" }} src={systemCAD} alt="System CAD"/>
 				<Box>
-					<Typography variant="h1"><Typed strings={["Northwestern AutoAquaponics"]} typeSpeed={40} onComplete={(self) => self.cursor.remove()}/></Typography>
+					<Typography variant="h1"><TypedText string={"Northwestern AutoAquaponics"} typeSpeed={40}/></Typography>
 					<Typography variant="body1">
 						A fully automated aquaponic system that grows both fish and plants
 						unattended for months and can be <Link component={RouterLink} to="/dashboard">monitored</Link> and <Link component={RouterLink} to="/control-panel">controlled</Link> remotely
