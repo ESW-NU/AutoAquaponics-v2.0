@@ -24,5 +24,9 @@
     "auth": {
       "port": 9099
     }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
 }
