@@ -8,7 +8,7 @@ on:
     branches:
       - deploy
 jobs:
-  build_and_deploy:
+  build_and_deploy_hosting:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -33,3 +33,16 @@ jobs:
           args: deploy --only firestore
         env:
           GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTOAQUAPONICS_V2 }}
+  add_tag:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs:
+      - build_and_deploy_hosting
+      - deploy_firestore
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Adding tag with date and time
+        run: |
+          CURRENT_DATETIME=$(date +'deploy%Y-%m-%d-%H-%M-%S')
+          git tag $CURRENT_DATETIME
