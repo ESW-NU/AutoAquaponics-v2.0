@@ -11,15 +11,19 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build artifact
+        run: npm ci && npm run build
+      - name: Deploy to Firebase Hosting live channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTOAQUAPONICS_V2 }}'
           channelId: live
           projectId: autoaquaponics-v2
-      - uses: w9jds/firebase-action@master
+      - name: Deploy rules and indexes to Firebase Firestore
+        uses: w9jds/firebase-action@master
         with:
           args: deploy --only firestore
         env:
