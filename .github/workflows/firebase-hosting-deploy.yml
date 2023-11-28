@@ -2,11 +2,11 @@
 # https://github.com/firebase/firebase-tools
 
 name: firebase-hosting-deploy
-run-name: Deploy to Firebase Hosting on push to deploy
+run-name: Deploy to Firebase Hosting on release
 on:
-  push:
-    branches:
-      - deploy
+  release:
+    types:
+      - released
 jobs:
   build_and_deploy_hosting:
     runs-on: ubuntu-latest
@@ -33,16 +33,3 @@ jobs:
           args: deploy --only firestore
         env:
           GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTOAQUAPONICS_V2 }}
-  add_tag:
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    needs:
-      - build_and_deploy_hosting
-      - deploy_firestore
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Adding tag with date and time
-        run: |
-          CURRENT_DATETIME=$(date +'deploy%Y-%m-%d-%H-%M-%S')
-          git tag $CURRENT_DATETIME
