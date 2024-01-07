@@ -14,6 +14,7 @@
     "@radix-ui/react-navigation-menu": "^1.1.2",
     "animate.css": "^4.1.1",
     "dayjs": "^1.11.7",
+    "file-saver": "^2.0.5",
     "firebase": "^9.17.1",
     "react": "^18.2.0",
     "react-animation-on-scroll": "^5.1.0",

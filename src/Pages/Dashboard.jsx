@@ -1,7 +1,10 @@
-import { Box, FormControlLabel, Stack, Switch, Typography } from "@mui/material";
+import { Box, FormControlLabel, Stack, Switch, Typography, Button } from "@mui/material";
 import { useState, useTransition } from "react";
 import SelectMenu from "../Components/SelectMenu";
 import GraphContainer from "../Components/GraphContainer";
+import { saveAs } from 'file-saver';
+import { useTrackStats } from '../Hooks/useFetchStats';
+
 
 const timescaleOptions = [ // in seconds, not milliseconds
 	{ value: 60 * 60, display: "1 hour" },
@@ -12,6 +15,21 @@ const timescaleOptions = [ // in seconds, not milliseconds
 const Dashboard = () => {
 	const [zoom, setZoom] = useState(false); // whether to zoom in on available portion of graph
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
+	const { loading, stats, tolerances } = useTrackStats(timeBounds); // fetch the stats using the useTrackStats hook
+
+	const downloadCSV = () => {
+		if (!stats || stats.length === 0) {
+			// Handle the case where stats is empty or not loaded
+			console.error('No data available to download');
+			return;
+		}
+
+		let csvContent = "data:text/csv;charset=utf-8,";
+		csvContent += Object.keys(stats).join(",") + "\n";
+		csvContent += stats.map(row => Object.values(row).join(",")).join("\n");
+		const blob = new Blob([csvContent], { type: 'text/csv' });
+		saveAs(blob, 'exportedData.csv');
+	};
 
 	return (
 		<Box>
@@ -33,6 +51,9 @@ const Dashboard = () => {
 					checked={zoom}
 					onChange={() => setZoom(!zoom)}
 				/>
+				<Button onClick={downloadCSV} variant="contained" color="primary">
+					Export as CSV
+				</Button>
 			</Stack>
 			<GraphContainer timescale = {timescale} zoom={zoom} />
 		</Box>
