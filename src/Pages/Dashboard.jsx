@@ -26,7 +26,7 @@ const Dashboard = () => {
 
 		let csvContent = "data:text/csv;charset=utf-8,";
 		csvContent += Object.keys(stats).join(",") + "\n";
-		csvContent += stats.map(row => Object.values(row).join(",")).join("\n");
+		csvContent += stats.map(row => [row.unixTime, ...Object.values(row.stats)].join(",")).join("\n");
 		const blob = new Blob([csvContent], { type: 'text/csv' });
 		saveAs(blob, 'exportedData.csv');
 	};
