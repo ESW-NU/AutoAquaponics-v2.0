@@ -3,8 +3,7 @@ import { useState, useTransition } from "react";
 import SelectMenu from "../Components/SelectMenu";
 import GraphContainer from "../Components/GraphContainer";
 import { saveAs } from 'file-saver';
-import { useTrackStats } from '../Hooks/useFetchStats';
-
+import { useTrackStats } from '../Hooks/useTracksStats';
 
 const timescaleOptions = [ // in seconds, not milliseconds
 	{ value: 60 * 60, display: "1 hour" },
@@ -15,7 +14,7 @@ const timescaleOptions = [ // in seconds, not milliseconds
 const Dashboard = () => {
 	const [zoom, setZoom] = useState(false); // whether to zoom in on available portion of graph
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
-	const { loading, stats, tolerances } = useTrackStats(timeBounds); // fetch the stats using the useTrackStats hook
+	const { loading, stats, tolerances } = useTrackStats(timescale); // fetch the stats using the useTrackStats hook
 
 	const downloadCSV = () => {
 		if (!stats || stats.length === 0) {
@@ -55,7 +54,7 @@ const Dashboard = () => {
 					Export as CSV
 				</Button>
 			</Stack>
-			<GraphContainer timescale = {timescale} zoom={zoom} />
+			<GraphContainer timescale={timescale} zoom={zoom} stats={stats} loading={loading} tolerances={tolerances}/>
 		</Box>
 	);
 };

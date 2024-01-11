@@ -4,11 +4,9 @@ import { db } from '../firebase';
 import GraphCard from "./GraphCard";
 import { Grid, Alert, Typography } from "@mui/material";
 import { systemStatMeta } from "../systemMeta";
-import { useTrackStats } from "../Hooks/useTracksStats";
 import { Fade } from 'react-awesome-reveal';
 
-const GraphContainer = ({ timescale, zoom }) => {
-	const { loading, stats, tolerances } = useTrackStats(timescale);
+const GraphContainer = ({ timescale, zoom, stats, loading, tolerances }) => {
 
 	// idiocy ensues
 	const [doxxedPpl, setDoxxedPpl] = useState([]);
