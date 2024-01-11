@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from '../firebase';
 import GraphCard from "./GraphCard";
-import { Grid, Alert } from "@mui/material";
+import { Grid, Alert, Typography } from "@mui/material";
 import { systemStatMeta } from "../systemMeta";
 import { useTrackStats } from "../Hooks/useFetchStats";
 import { Fade } from 'react-awesome-reveal';
@@ -24,8 +24,20 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 	const existsBadReading = !loading && (stats.length == 0 || Object.values(stats.at(-1).stats).includes(NaN));
 	//
 
+	let lastRetrieved;
+	const lastTime = stats.at(-1)?.unixTime;
+	if (typeof lastTime === 'undefined') {
+		lastRetrieved = "Data not retrieved."
+	} else {
+		lastRetrieved = "Last Retrieved: " + new Date(lastTime * 1000).toLocaleString();
+	}
+
 	return (
 		<>
+			<Typography sx={{ my: 1 }} variant="body1">
+				{lastRetrieved}
+			</Typography>
+
 			{existsBadReading && <Alert sx={{ my: 3 }} severity="error">
 				You may have noticed some sensors aren't working properly. This is 100% the fault of
 				the electronics team. Please direct your complaints and harassment
