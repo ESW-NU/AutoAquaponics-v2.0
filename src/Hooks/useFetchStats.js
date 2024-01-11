@@ -37,11 +37,21 @@ export function useTrackStats(timeBounds) {
 			orderBy('unix_time', 'asc')
 		);
 		const unsubscribe = onSnapshot(q_states, (snapshot) => { // real-time listener for changes to the queried stats data
-			setStats(convertStatsSnapshot(snapshot));
+			setStats(convertStatsSnapshot(snapshot)); //this is the initial data fetch
 			setLoading(false);
+      console.log("hi")
 		});
-		// make sure to unsubscribe when the component unmounts cause idek but like efficiency probably
-		return unsubscribe;
+    // Creates an interval which will update the current data every minute
+    const timer = setInterval(() => { 
+      // filter the stats to only include data from the last [timescale] seconds
+      setStats(prevStats => prevStats.filter((stat) => stat.unixTime > Math.floor(Date.now() / 1000) - timescale));
+    }, 60 * 1000); // 60 * 1000 milsec = 1 minute
+
+		// make sure to unsubscribe when the component unmounts so that we don't have a bunch of listeners running
+		return () => { 
+      unsubscribe;
+      clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
+    }
 	}, [timeBounds[0], timeBounds[1]]); // specify the bounds individually, otherwise React thinks the bounds changed and will re-run the Effect
 
 	// get tolerances
