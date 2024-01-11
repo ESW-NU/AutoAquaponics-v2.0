@@ -42,10 +42,11 @@ export function useTrackStats(timeBounds) {
       console.log("hi")
 		});
     // Creates an interval which will update the current data every minute
+    const timescale = timeBounds[1] - timeBounds[0]
     const timer = setInterval(() => { 
       // filter the stats to only include data from the last [timescale] seconds
       setStats(prevStats => prevStats.filter((stat) => stat.unixTime > Math.floor(Date.now() / 1000) - timescale));
-    }, 60 * 1000); // 60 * 1000 milsec = 1 minute
+    }, 1 * 1000); // 60 * 1000 milsec = 1 minute
 
 		// make sure to unsubscribe when the component unmounts so that we don't have a bunch of listeners running
 		return () => { 
