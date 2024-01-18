@@ -23,28 +23,37 @@ Data type of tolerances: {
 }
 */
 
-export function useTrackStats(timeBounds) {
+export function useTrackStats(timescale) {
 	const [loading, setLoading] = useState(true);
 
 	// get stats
 	const [stats, setStats] = useState([]);
 	useEffect(() => {
 		setLoading(true);
+		const lowerTimeBound = Math.floor(Date.now()/1000) - timescale;
 		const q_states = query( // the data we want to fetch
 			collection(db, 'stats'),
-			where('unix_time', '>', timeBounds[0]),
-			// where('unix_time', '<', timeBounds[1]),
+			where('unix_time', '>', lowerTimeBound),
 			orderBy('unix_time', 'asc')
 		);
 		const unsubscribe = onSnapshot(q_states, (snapshot) => { // real-time listener for changes to the queried stats data
-			setStats(convertStatsSnapshot(snapshot));
+			setStats(convertStatsSnapshot(snapshot)); //this is the initial data fetch
 			setLoading(false);
 		});
-		// make sure to unsubscribe when the component unmounts cause idek but like efficiency probably
-		return unsubscribe;
-	}, [timeBounds[0], timeBounds[1]]); // specify the bounds individually, otherwise React thinks the bounds changed and will re-run the Effect
+		const timer = setInterval(() => {
+			const lowerTimeBoundNow = Math.floor(Date.now()/1000) - timescale;
+			// filter the stats to only include data from the last [timescale] seconds
+			setStats(prevStats => prevStats.filter((stat) => stat.unixTime > lowerTimeBoundNow));
+		}, 60 * 1000); // 1 min
 
-	// get tolerances
+		// make sure to unsubscribe when the component unmounts so that we don't have a bunch of listeners running
+		return () => {
+			unsubscribe();
+			clearInterval(timer);
+		}
+	}, [timescale]);
+
+  // get tolerances
 	const [tolerances, setTolerances] = useState({});
 	useEffect(() => {
 		const q_tolerances = query(
@@ -54,7 +63,7 @@ export function useTrackStats(timeBounds) {
 			setTolerances(convertTolerancesSnapshot(snapshot))
 		});
 		return() => {
-			unsubscribe()
+			unsubscribe();
 		}
 	}, []);
 
@@ -63,7 +72,7 @@ export function useTrackStats(timeBounds) {
 
 /*
 Takes an snapshot of the 'stats' collection on Firestore and converts it to an array of objects
-each representing the stats at a certain time. (see comment on useFetchStats for the data type)
+each representing the stats at a certain time.
 */
 function convertStatsSnapshot(snapshot) {
 	return snapshot.docs.map(doc => ({
@@ -74,7 +83,7 @@ function convertStatsSnapshot(snapshot) {
 
 /*
 Takes a snapshot of the 'tolerances' collection on Firestore and converts it to an object that maps
-stat keys to their tolerances. (see comment on useFetchStats for the data type)
+stat keys to their tolerances.
 */
 function convertTolerancesSnapshot(snapshot) {
 	return Object.fromEntries(snapshot.docs.map(doc => [doc.id, doc.data()]));

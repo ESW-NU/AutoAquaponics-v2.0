@@ -4,11 +4,11 @@ import { db } from '../firebase';
 import GraphCard from "./GraphCard";
 import { Grid, Alert, Typography } from "@mui/material";
 import { systemStatMeta } from "../systemMeta";
-import { useTrackStats } from "../Hooks/useFetchStats";
+import { useTrackStats } from "../Hooks/useTracksStats";
 import { Fade } from 'react-awesome-reveal';
 
-const GraphContainer = ({ timeBounds, zoom }) => {
-	const { loading, stats, tolerances } = useTrackStats(timeBounds);
+const GraphContainer = ({ timescale, zoom }) => {
+	const { loading, stats, tolerances } = useTrackStats(timescale);
 
 	// idiocy ensues
 	const [doxxedPpl, setDoxxedPpl] = useState([]);
@@ -58,7 +58,7 @@ const GraphContainer = ({ timeBounds, zoom }) => {
 							loading={loading}
 							stats={stats}
 							tolerance={tolerances.hasOwnProperty(statKey) ? tolerances[statKey] : { min: 0, max: 0 }} // in case tolerances haven't loaded in yet
-							timeBounds={timeBounds}
+							timescale={timescale}
 							zoom={zoom}
 						/>
 						</Fade>

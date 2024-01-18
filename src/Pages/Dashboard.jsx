@@ -12,8 +12,6 @@ const timescaleOptions = [ // in seconds, not milliseconds
 const Dashboard = () => {
 	const [zoom, setZoom] = useState(false); // whether to zoom in on available portion of graph
 	const [timescale, setTimescale] = useState(timescaleOptions[0].value);
-	const [endTime, setEndTime] = useState(timeNowInSeconds());
-	const timeBounds = [endTime - timescale, endTime];
 
 	return (
 		<Box>
@@ -26,7 +24,6 @@ const Dashboard = () => {
 						variable={timescale}
 						setVariable={newTimescale => {
 							setTimescale(newTimescale);
-							setEndTime(timeNowInSeconds());
 						}}
 					/>
 				</Box>
@@ -37,13 +34,10 @@ const Dashboard = () => {
 					onChange={() => setZoom(!zoom)}
 				/>
 			</Stack>
-			<GraphContainer timeBounds={timeBounds} zoom={zoom}/>
+			<GraphContainer timescale = {timescale} zoom={zoom} />
 		</Box>
 	);
 };
 
-function timeNowInSeconds() {
-	return Math.floor((Date.now()) / 1000);
-}
 
 export default Dashboard;
