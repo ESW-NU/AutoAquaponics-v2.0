@@ -5,7 +5,7 @@ import AreaGraph from "./AreaGraph";
 const overflowStyle = { whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" };
 const verticalCenteredStyle = { height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" };
 
-const GraphCard = ({ name, unit, statKey, loading, stats, tolerance, timeBounds, zoom }) => {
+const GraphCard = ({ name, unit, statKey, loading, stats, tolerance, timescale, zoom }) => {
 	const data = stats.map(({ unixTime, stats }) => ({
 		x: unixTime,
 		y: stats[statKey] ?? NaN,
@@ -32,7 +32,7 @@ const GraphCard = ({ name, unit, statKey, loading, stats, tolerance, timeBounds,
 			<Typography variant="body1">Loading</Typography>
 		</Box>
 	) : hasData ? (
-		<AreaGraph name={name} unit={unit} stats={data} isGreen={inRange} timeBounds={timeBounds} zoom={zoom}/>
+		<AreaGraph name={name} unit={unit} stats={data} isGreen={inRange} timescale={timescale} zoom={zoom}/>
 	) : (
 		<Box sx={verticalCenteredStyle}>
 			<WarningAmberIcon color="warning" sx={{ fontSize: 128 }}/>
