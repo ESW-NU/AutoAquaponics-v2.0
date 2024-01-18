@@ -1,7 +1,6 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Paper, Typography, useTheme } from "@mui/material";
 
-
 const colorGood = "#009444";
 const colorBad = "red";
 const gradientGoodName = "gradientGood";
@@ -23,7 +22,7 @@ const AreaGraph = ({ name, unit, stats, isGreen, timescale, zoom }) => {
 	const theme = useTheme();
 
 	const [color, gradientName] = isGreen ? [colorGood, gradientGoodName] : [colorBad, gradientBadName];
-  const timeInSecondsNow = Math.floor((Date.now()) / 1000);
+	const timeInSecondsNow = Math.floor((Date.now()) / 1000);
 	const renderTooltip = ({ active, payload }) => {
 		// use early return to prevent running into undefined values
 		if (!active) { return false; }
@@ -38,9 +37,6 @@ const AreaGraph = ({ name, unit, stats, isGreen, timescale, zoom }) => {
 			</Paper>
 		);
 	};
-
-
-
 
 	return (
 		<ResponsiveContainer>
@@ -80,6 +76,5 @@ const AreaGraph = ({ name, unit, stats, isGreen, timescale, zoom }) => {
 		</ResponsiveContainer>
 	);
 };
-
 
 export default AreaGraph;

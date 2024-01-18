@@ -30,7 +30,7 @@ export function useTrackStats(timescale) {
 	const [stats, setStats] = useState([]);
 	useEffect(() => {
 		setLoading(true);
-    const lowerTimeBound = Math.floor(Date.now()/1000) - timescale;
+		const lowerTimeBound = Math.floor(Date.now()/1000) - timescale;
 		const q_states = query( // the data we want to fetch
 			collection(db, 'stats'),
 			where('unix_time', '>', lowerTimeBound),
@@ -40,21 +40,22 @@ export function useTrackStats(timescale) {
 			setStats(convertStatsSnapshot(snapshot)); //this is the initial data fetch
 			setLoading(false);
 		});
-    const timer = setInterval(() => { 
-      // filter the stats to only include data from the last [timescale] seconds
-      setStats(prevStats => prevStats.filter((stat) => stat.unixTime > lowerTimeBound));
-    }, 60 * 1000); // 1 min
+		const timer = setInterval(() => {
+			const lowerTimeBoundNow = Math.floor(Date.now()/1000) - timescale;
+			// filter the stats to only include data from the last [timescale] seconds
+			setStats(prevStats => prevStats.filter((stat) => stat.unixTime > lowerTimeBoundNow));
+		}, 60 * 1000); // 1 min
 
 		// make sure to unsubscribe when the component unmounts so that we don't have a bunch of listeners running
-		return () => { 
-      unsubscribe();
-      clearInterval(timer);
-    }
-	}, [timescale]); // specify the bounds individually, otherwise React thinks the bounds changed and will re-run the Effect
-	
+		return () => {
+			unsubscribe();
+			clearInterval(timer);
+		}
+	}, [timescale]);
+
   // get tolerances
 	const [tolerances, setTolerances] = useState({});
-  useEffect(() => {
+	useEffect(() => {
 		const q_tolerances = query(
 			collection(db, 'tolerances')
 		)
@@ -82,7 +83,7 @@ function convertStatsSnapshot(snapshot) {
 
 /*
 Takes a snapshot of the 'tolerances' collection on Firestore and converts it to an object that maps
-stat keys to their tolerances. 
+stat keys to their tolerances.
 */
 function convertTolerancesSnapshot(snapshot) {
 	return Object.fromEntries(snapshot.docs.map(doc => [doc.id, doc.data()]));
