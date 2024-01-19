@@ -23,8 +23,8 @@ const Dashboard = () => {
 			return;
 		}
 
-		let csvContent = "data:text/csv;charset=utf-8,";
-		csvContent += Object.keys(stats).join(",") + "\n";
+		let csvContent = "data:text/csv;charset=utf-8,\n";
+		csvContent += ["unixTime", ...Object.keys(stats[0].stats)].join(",") + "\n";
 		csvContent += stats.map(row => [row.unixTime, ...Object.values(row.stats)].join(",")).join("\n");
 		const blob = new Blob([csvContent], { type: 'text/csv' });
 		saveAs(blob, 'exportedData.csv');
