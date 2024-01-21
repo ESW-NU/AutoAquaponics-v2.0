@@ -1,5 +1,5 @@
 import { Tooltip, IconButton, Avatar, Menu, MenuItem } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../Hooks/UserContext";
 import { auth } from "../firebase";
@@ -26,17 +26,6 @@ const AccountBubble = () => {
 		}).catch((error) => {
 			toast.error("Error logging out", toast_config);
 			console.error(error);
-		});
-	};
-
-	const handlePasswordChange = () => {
-		console.log(user.email)
-		sendPasswordResetEmail(auth, user.email)
-		.then(() => {
-			toast.success("Password reset email sent!", toast_config);
-		}).catch((error) => {
-			toast.error("Error sending password reset email", toast_config);
-			console.error(error)
 		});
 	};
 
@@ -67,8 +56,8 @@ const AccountBubble = () => {
 				<MenuItem onClick={handleLogout}>
 					Logout
 				</MenuItem>
-				<MenuItem onClick={handlePasswordChange}>
-					Change Password
+				<MenuItem component={Link} to="/settings">
+                	Settings
 				</MenuItem>
 			</Menu>
 		</>
