@@ -7,7 +7,7 @@ import WavesIcon from '@mui/icons-material/Waves';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFan } from '@fortawesome/free-solid-svg-icons'
-import theme from "../styling";
+import { theme } from "../styling";
 import { ctrlValsReducer, ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { collection, getDocs,query, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';

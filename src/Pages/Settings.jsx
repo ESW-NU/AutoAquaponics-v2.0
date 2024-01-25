@@ -1,20 +1,23 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../Hooks/UserContext";
-import { TextField, Button, Switch, FormControlLabel } from "@mui/material";
+import { Container, Typography, TextField, Button, FormControlLabel, Box, Grid, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 import { auth } from "../firebase";
 import { deleteUser, updatePassword } from "firebase/auth";
+import { ThemeContext } from '../themeContent';
 
 const Settings = () => {
     const user = useContext(UserContext);
+    const { darkMode, toggleDarkMode } = useContext(ThemeContext);
     const [editMode, setEditMode] = useState({ contact: false, account: false });
     const [contactInfo, setContactInfo] = useState({ email: user.email, phone: "" }); // Replace with actual data
     const [accountInfo, setAccountInfo] = useState({ displayName: user.displayName || user.email });
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-    const [darkMode, setDarkMode] = useState(false); // Replace with actual state
     const [animations, setAnimations] = useState(true); // Replace with actual state
     const toast_config = { position: toast.POSITION.TOP_CENTER, autoClose: 2000 };
     const [emailToDelete, setEmailToDelete] = useState('');
+    const email = user ? user.email : '';
+    const displayName = user ? (user.displayName || user.email) : '';
 
     const handleEditToggle = (section) => {
         setEditMode({ ...editMode, [section]: !editMode[section] });
@@ -102,7 +105,10 @@ const Settings = () => {
             </div>
             <div>
                 <h3>Appearance</h3>
-                <FormControlLabel control={<Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />} label="Dark Mode" />
+                <FormControlLabel
+                    control={<Switch checked={darkMode} onChange={toggleDarkMode} />}
+                    label="Dark Mode"
+                />
                 <FormControlLabel control={<Switch checked={animations} onChange={() => setAnimations(!animations)} />} label="Animations" />
             </div>
         </div>

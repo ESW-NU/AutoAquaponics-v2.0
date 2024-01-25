@@ -6,7 +6,7 @@ import { auth } from "../firebase";
 import { signOut, sendPasswordResetEmail } from "firebase/auth";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import theme from "../styling";
+import { theme } from "../styling";
 
 const AccountBubble = () => {
 	const user = useContext(UserContext);

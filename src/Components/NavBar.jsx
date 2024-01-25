@@ -8,7 +8,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import MyButton from "../Components/Button";
 import BubbleNavLinks from './BubbleNavLinks';
-import theme from "../styling";
+import { theme } from "../styling";
 import { UserContext } from "../Hooks/UserContext";
 import VideocamIcon from '@mui/icons-material/Videocam';
 import DashboardIcon from '@mui/icons-material/Dashboard';
