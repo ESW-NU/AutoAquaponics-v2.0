@@ -20,7 +20,7 @@ import Lights from "./ControlPages/Lights";
 import WaterPump from "./ControlPages/WaterPump";
 import ControlsOverviewPanel from "../Components/ControlsOverviewPanel";
 import { UserContext } from "../Hooks/UserContext";
-
+import { useFetchRecentActivity } from "../Hooks/useFetchRecentActivity";
 
 const ControlPanel = () => {
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
@@ -28,6 +28,7 @@ const ControlPanel = () => {
 	const [syncing, setSyncing] = useState(false); // tracks when data is sent to the backend
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
+  console.log("recent activity", useFetchRecentActivity(2)); // fetch the 10 most recent activities
 	// Returns a pair with:
 	// - an unsubscribe function that unsubscribes the listener
 	// - a Promise that resolves with nothing when the first snapshot has been retrieved
