@@ -29,7 +29,7 @@ const ControlPanel = () => {
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
   // console.log("recent activity", useFetchRecentActivity(1)); // fetch most recent activity
-  const recentActivity = useFetchRecentActivity(3);
+  const recentActivity = useFetchRecentActivity(1);
 	// Returns a pair with:
 	// - an unsubscribe function that unsubscribes the listener
 	// - a Promise that resolves with nothing when the first snapshot has been retrieved
