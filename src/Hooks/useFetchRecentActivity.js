@@ -3,8 +3,6 @@ import { collection, query, orderBy, limit, onSnapshot, getDocs, startAfter } fr
 import { db } from '../firebase';
 
 export function useFetchRecentActivity(page_number) {
-	
-  // snapshot listener only listening to the first page, otherwise there's no need to use a snapshot listener
   const pagination_limit = 1;
   const [recentActivity, setRecentActivity] = useState([]);
   const [seenCursors, setSeenCursors] = useState({});
