@@ -5,35 +5,58 @@ import { db } from '../firebase';
 export function useFetchRecentActivity(page_number) {
 	
   // snapshot listener only listening to the first page, otherwise there's no need to use a snapshot listener
-  const pagination_limit = 2;
+  const pagination_limit = 1;
   const [recentActivity, setRecentActivity] = useState([]);
-  
-  useEffect(() => {
-    // currently this will loop through the pages every time starting from the first page. 
-    // next step is to implement a way to keep track of the last visible document so that we can start from there and go next or previous page
-    async function fetchPaginatedActivity() {
-      let currentQuery = query(collection(db, "recent-activity"), orderBy("unix_time"), limit(pagination_limit));
-      let currPage = await getDocs(currentQuery);
-      let lastVisible = currPage.docs[currPage.docs.length-1];
-      for (let i = 1; i < page_number; i++) {
-        currentQuery = query(collection(db, "recent-activity"), orderBy("unix_time"), startAfter(lastVisible), limit(pagination_limit));
-        currPage = await getDocs(currentQuery);
-        lastVisible = currPage.docs[currPage.docs.length-1];
+  const [seenCursors, setSeenCursors] = useState({});
+  const [largestSeenPage, setLargestSeenPage] = useState(1);
+
+  async function iterateThroughPages() {
+    let currPage;
+    for (let i = largestSeenPage; i < page_number; i++) {
+      console.log("iterating through page", i);
+      if (seenCursors[i] === undefined) {
+        console.log("seenCursors[i] is undefined, breaking");
+        break;
       }
+      const new_q = query(collection(db, "recent-activity"), orderBy("unix_time"), startAfter(seenCursors[i]), limit(pagination_limit));
+      currPage = await getDocs(new_q);
+      setSeenCursors(prevCursors => {
+        const updatedCursors = { ...prevCursors };
+        updatedCursors[i+1] = currPage.docs[currPage.docs.length - 1];
+        console.log("updatedCursors", updatedCursors);
+        return updatedCursors;
+      });
+    }
+    if (page_number > largestSeenPage) {
+      setLargestSeenPage(page_number);
+    }
+  }
+
+  useEffect(() => {
+    
+    async function fetchPaginatedActivity() {
+      await iterateThroughPages();
+      console.log("seenCursors", seenCursors);
+      const new_q = query(collection(db, "recent-activity"), orderBy("unix_time"), startAfter(seenCursors[page_number-1]), limit(pagination_limit));
+      const currPage = await getDocs(new_q);
       setRecentActivity(convertActivitySnapshot(currPage));
     }
-    if (page_number > 1) {
+    
+    if (page_number > 1) { // this is 1 indexed because that is presumably what the pages will look like
       fetchPaginatedActivity();
     }
+    
     const q = query(collection(db, "recent-activity"), orderBy("unix_time"), limit(pagination_limit));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const activity = convertActivitySnapshot(snapshot);
       if (page_number === 1) {
         setRecentActivity(activity);
+        // for the next page (page 2), the last visible document is end of the first page. 
+        // we want to reset the entire dict to just hold this one value, because the snapshot may have changed and we have new data
+        setSeenCursors({1: snapshot.docs[snapshot.docs.length-1]}); 
+        setLargestSeenPage(1);
       }
-      // set last visible
     });
-
     return () => unsubscribe();
   }, [page_number]);
 
