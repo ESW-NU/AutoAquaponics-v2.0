@@ -4,7 +4,7 @@ import { db } from '../firebase';
 import GraphCard from "./GraphCard";
 import { Grid, Alert, Typography } from "@mui/material";
 import { systemStatMeta } from "../systemMeta";
-import { useTrackStats } from "../Hooks/useFetchStats";
+import { useTrackStats } from "../Hooks/useTrackStats";
 import { Fade } from 'react-awesome-reveal';
 
 const GraphContainer = ({ timeBounds, zoom }) => {

@@ -63,7 +63,7 @@ export function useTrackStats(timeBounds) {
 
 /*
 Takes an snapshot of the 'stats' collection on Firestore and converts it to an array of objects
-each representing the stats at a certain time. (see comment on useFetchStats for the data type)
+each representing the stats at a certain time. (see comment on useTrackStats for the data type)
 */
 function convertStatsSnapshot(snapshot) {
 	return snapshot.docs.map(doc => ({
@@ -74,7 +74,7 @@ function convertStatsSnapshot(snapshot) {
 
 /*
 Takes a snapshot of the 'tolerances' collection on Firestore and converts it to an object that maps
-stat keys to their tolerances. (see comment on useFetchStats for the data type)
+stat keys to their tolerances. (see comment on useTrackStats for the data type)
 */
 function convertTolerancesSnapshot(snapshot) {
 	return Object.fromEntries(snapshot.docs.map(doc => [doc.id, doc.data()]));

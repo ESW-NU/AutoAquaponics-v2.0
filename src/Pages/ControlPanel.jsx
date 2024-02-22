@@ -28,8 +28,7 @@ const ControlPanel = () => {
 	const [syncing, setSyncing] = useState(false); // tracks when data is sent to the backend
 	const [ctrlVals, dispatchCtrlVals] = useReducer(ctrlValsReducer, { remote: {}, local: {} });
 
-  // console.log("recent activity", useFetchRecentActivity(1)); // fetch most recent activity
-  const recentActivity = useFetchRecentActivity(1);
+  const recentActivity = useFetchRecentActivity(0);
 	// Returns a pair with:
 	// - an unsubscribe function that unsubscribes the listener
 	// - a Promise that resolves with nothing when the first snapshot has been retrieved
