@@ -12,7 +12,7 @@ const ComingSoon = () => {
 				typography: "h1"
 			}}
 		>
-			COMING FALL 2023
+			COMING SOON
 		</Box>
 	);
 };
