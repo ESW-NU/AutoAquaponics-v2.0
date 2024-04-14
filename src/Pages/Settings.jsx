@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { TextField, Button, Switch, FormControlLabel, Paper, Typography, Box } from '@mui/material';
+import {
+    TextField, Button, Switch, FormControlLabel, Paper, Typography, Box, MenuItem, Select, FormGroup
+} from '@mui/material';
 
 const Settings = () => {
-    const [profile, setProfile] = useState({ name: '', email: '' });
-    const [notifications, setNotifications] = useState({ email: true, push: false });
+    const [profile, setProfile] = useState({ name: '', email: '', language: 'English' });
+    const [notifications, setNotifications] = useState({ email: true, push: false, sms: false });
+    const [privacy, setPrivacy] = useState({ profileVisibility: 'public', dataDownload: false });
+    const [theme, setTheme] = useState('Light');
     const [loading, setLoading] = useState(false);
 
     const handleInputChange = (e) => {
@@ -15,6 +19,14 @@ const Settings = () => {
         setNotifications((prev) => ({ ...prev, [name]: !prev[name] }));
     };
 
+    const handlePrivacyChange = (name) => {
+        setPrivacy((prev) => ({ ...prev, [name]: !prev[name] }));
+    };
+
+    const handleThemeChange = (event) => {
+        setTheme(event.target.value);
+    };
+
     const handleSubmit = async () => {
         setLoading(true);
         try {
@@ -22,6 +34,8 @@ const Settings = () => {
             setTimeout(() => {
                 console.log('Profile updated:', profile);
                 console.log('Notification settings:', notifications);
+                console.log('Privacy settings:', privacy);
+                console.log('Selected theme:', theme);
                 setLoading(false);
             }, 1000);
         } catch (error) {
@@ -51,17 +65,62 @@ const Settings = () => {
                     value={profile.email}
                     onChange={handleInputChange}
                 />
+                <Select
+                    value={profile.language}
+                    onChange={(e) => setProfile({ ...profile, language: e.target.value })}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                >
+                    <MenuItem value="English">English</MenuItem>
+                    <MenuItem value="Spanish">Spanish</MenuItem>
+                    <MenuItem value="French">French</MenuItem>
+                </Select>
+
                 <Typography variant="subtitle1" sx={{ mt: 2 }}>
                     Notification Settings
                 </Typography>
-                <FormControlLabel
-                    control={<Switch checked={notifications.email} onChange={() => handleNotificationChange('email')} />}
-                    label="Email Notifications"
-                />
-                <FormControlLabel
-                    control={<Switch checked={notifications.push} onChange={() => handleNotificationChange('push')} />}
-                    label="Push Notifications"
-                />
+                <FormGroup>
+                    <FormControlLabel
+                        control={<Switch checked={notifications.email} onChange={() => handleNotificationChange('email')} />}
+                        label="Email Notifications"
+                    />
+                    <FormControlLabel
+                        control={<Switch checked={notifications.push} onChange={() => handleNotificationChange('push')} />}
+                        label="Push Notifications"
+                    />
+                    <FormControlLabel
+                        control={<Switch checked={notifications.sms} onChange={() => handleNotificationChange('sms')} />}
+                        label="SMS Notifications"
+                    />
+                </FormGroup>
+
+                <Typography variant="subtitle1" sx={{ mt: 2 }}>
+                    Privacy Settings
+                </Typography>
+                <FormGroup>
+                    <FormControlLabel
+                        control={<Switch checked={privacy.profileVisibility === 'public'} onChange={() => setPrivacy({ ...privacy, profileVisibility: privacy.profileVisibility === 'public' ? 'private' : 'public' })} />}
+                        label="Profile Visible to Public"
+                    />
+                    <FormControlLabel
+                        control={<Switch checked={privacy.dataDownload} onChange={() => handlePrivacyChange('dataDownload')} />}
+                        label="Allow Data Download"
+                    />
+                </FormGroup>
+
+                <Typography variant="subtitle1" sx={{ mt: 2 }}>
+                    Theme Settings
+                </Typography>
+                <Select
+                    value={theme}
+                    onChange={handleThemeChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                >
+                    <MenuItem value="Light">Light</MenuItem>
+                    <MenuItem value="Dark">Dark</MenuItem>
+                </Select>
+
                 <Button
                     variant="contained"
                     color="primary"
