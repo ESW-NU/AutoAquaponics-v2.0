@@ -13,14 +13,12 @@ import { UserContext } from "../Hooks/UserContext";
 import VideocamIcon from '@mui/icons-material/Videocam';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BuildIcon from '@mui/icons-material/Build';
-import SettingsIcon from '@mui/icons-material/Settings';
 import NavLinksPanel from './NavLinksPanel';
 
 const links = [
 	{ addr: "/video-stream", label: "Video Stream" },
 	{ addr: "/dashboard", label: "Dashboard" },
 	{ addr: "/control-panel", label: "Control Panel" },
-	{ addr: "settings", label: "Settings" }
 ];
 
 export const NavBar = () => {
@@ -61,7 +59,6 @@ export const NavBar = () => {
 						{ label: "Video Stream", addr: "/video-stream", icon: <VideocamIcon/> },
 						{ label: "Dashboard", addr: "/dashboard", icon: <DashboardIcon/> },
 						{ label: "Control Panel", addr: "/control-panel", icon: <BuildIcon/> },
-						{ label: "Settings", addr: "/settings", icon: <SettingsIcon/> },
 					]}/>
 					<Divider sx={{ my: 2 }}/>
 				</Box>
