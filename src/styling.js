@@ -1,6 +1,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-const themeBase = createTheme({
+const commonThemeOptions = {
 	typography: {
 		h1: {
 			fontFamily: "Space Grotesk",
@@ -51,6 +51,10 @@ const themeBase = createTheme({
 			fontFamily: "Inter",
 		},
 	},
+};
+
+const lightThemeOptions = {
+	...commonThemeOptions,
 	palette: {
 		primary: {
 			light: "#4cc174",
@@ -67,8 +71,39 @@ const themeBase = createTheme({
 			light: "#ffcd38",
 		},
 	},
-});
+};
 
-const theme = responsiveFontSizes(themeBase);
+const darkThemeOptions = {
+	...commonThemeOptions,
+	palette: {
+		mode: 'dark',
+		primary: {
+			light: "#4cc174",
+			main: "#009444",
+			dark: "#006326",
+		},
+		clickme: {
+			main: "#FBB040",
+			dark: "#C98C30",
+		},
+		edited: {
+			dark: "#b28704",
+			main: "#ffc107",
+			light: "#ffcd38",
+		},
+	},
+};
 
-export default theme;
+const lightTheme = responsiveFontSizes(createTheme(lightThemeOptions));
+const darkTheme = responsiveFontSizes(createTheme(darkThemeOptions));
+
+const getTheme = (themeName, prefersDarkMode) => {
+	switch (themeName) {
+		case 'light': return lightTheme;
+		case 'dark': return darkTheme;
+		case 'system': return prefersDarkMode ? darkTheme : lightTheme;
+		default: return lightTheme;
+	}
+}
+
+export { getTheme };

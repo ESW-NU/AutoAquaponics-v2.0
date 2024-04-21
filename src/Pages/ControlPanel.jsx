@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Grid, useMediaQuery } from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import HeightIcon from '@mui/icons-material/Height';
 import WavesIcon from '@mui/icons-material/Waves';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFan } from '@fortawesome/free-solid-svg-icons'
-import theme from "../styling";
 import { ctrlValsReducer, ControlValuesContext } from "../Hooks/ControlValuesContext";
 import { collection, getDocs,query, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
@@ -23,6 +22,7 @@ import { UserContext } from "../Hooks/UserContext";
 
 
 const ControlPanel = () => {
+	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 	const [loading, setLoading] = useState(true); // tracks the initial loading
 	const [syncing, setSyncing] = useState(false); // tracks when data is sent to the backend
@@ -54,7 +54,7 @@ const ControlPanel = () => {
 		})
 		return [unsubscribe, promise];
 	};
-	
+
 	useEffect(() => {
 		const [unsubscribes, promises] = unzip(systemControlsCollections.map((collName) => {
 			return trackCollectionValues(collName);

@@ -3,12 +3,11 @@
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import AccountBubble from "../Components/AccountBubble";
-import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import { Grid, Stack, Box, useMediaQuery, Typography, IconButton, Collapse, Tooltip, Paper, List, ListItemButton, ListItemIcon, ListItemText, Divider, useTheme } from '@mui/material';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import MyButton from "../Components/Button";
 import BubbleNavLinks from './BubbleNavLinks';
-import theme from "../styling";
 import { UserContext } from "../Hooks/UserContext";
 import VideocamIcon from '@mui/icons-material/Videocam';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -22,6 +21,7 @@ const links = [
 ];
 
 export const NavBar = () => {
+	const theme = useTheme();
 	const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 	const [open, setOpen] = useState(false);
 	const user = useContext(UserContext);

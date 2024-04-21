@@ -1,4 +1,4 @@
-import { Tooltip, IconButton, Avatar, Menu, MenuItem } from "@mui/material";
+import { Tooltip, IconButton, Avatar, Menu, MenuItem, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../Hooks/UserContext";
@@ -6,9 +6,9 @@ import { auth } from "../firebase";
 import { signOut, sendPasswordResetEmail } from "firebase/auth";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import theme from "../styling";
 
 const AccountBubble = () => {
+    const theme = useTheme();
     const user = useContext(UserContext);
     const letter = user.email[0].toUpperCase();
     const navigate = useNavigate();

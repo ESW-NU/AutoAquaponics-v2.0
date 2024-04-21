@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import {
-    TextField, Button, Switch, FormControlLabel, Paper, Typography, Box, MenuItem, Select, FormGroup
-} from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { TextField, Button, Switch, FormControlLabel, Paper, Typography, Box, MenuItem, Select, FormGroup } from '@mui/material';
+import { ThemeNameContext } from '../Hooks/ThemeNameContext';
 
 const Settings = () => {
+    const { themeName, setThemeName, prefersDarkMode } = useContext(ThemeNameContext);
     const [profile, setProfile] = useState({ name: '', email: '', language: 'English' });
     const [notifications, setNotifications] = useState({ email: true, push: false, sms: false });
     const [privacy, setPrivacy] = useState({ profileVisibility: 'public', dataDownload: false });
-    const [theme, setTheme] = useState('Light');
     const [loading, setLoading] = useState(false);
 
     const handleInputChange = (e) => {
@@ -24,7 +23,7 @@ const Settings = () => {
     };
 
     const handleThemeChange = (event) => {
-        setTheme(event.target.value);
+        setThemeName(event.target.value);
     };
 
     const handleSubmit = async () => {
@@ -35,7 +34,7 @@ const Settings = () => {
                 console.log('Profile updated:', profile);
                 console.log('Notification settings:', notifications);
                 console.log('Privacy settings:', privacy);
-                console.log('Selected theme:', theme);
+                console.log('Selected theme:', themeName);
                 setLoading(false);
             }, 1000);
         } catch (error) {
@@ -112,13 +111,14 @@ const Settings = () => {
                     Theme Settings
                 </Typography>
                 <Select
-                    value={theme}
+                    value={themeName}
                     onChange={handleThemeChange}
                     displayEmpty
                     inputProps={{ 'aria-label': 'Without label' }}
                 >
-                    <MenuItem value="Light">Light</MenuItem>
-                    <MenuItem value="Dark">Dark</MenuItem>
+                    <MenuItem value='light'>Light</MenuItem>
+                    <MenuItem value='dark'>Dark</MenuItem>
+                    <MenuItem value='system'>System default ({prefersDarkMode ? 'Dark' : 'Light'})</MenuItem>
                 </Select>
 
                 <Button
