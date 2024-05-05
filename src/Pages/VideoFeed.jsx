@@ -13,7 +13,12 @@ export const VideoFeed = () => {
         if (!hlsSupported) {
             return () => {};
         } else {
-            const hls = new Hls();
+            const hls = new Hls({
+                debug: false,
+                liveSyncDurationCount: 2, // try to be about 2 segments away from the newest segment
+                liveMaxLatencyDurationCount: 5, // don't be more than 5 segments away from newest
+                maxLiveSyncPlaybackRate: 1.5, // allow speedup of up to 1.5x to catch up to live
+            });
             hls.loadSource(`http://${activeStreamHostname}/stream.m3u8`);
             hls.attachMedia(videoRef.current);
 
