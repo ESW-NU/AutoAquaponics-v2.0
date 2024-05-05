@@ -64,16 +64,7 @@ const Settings = () => {
                     value={profile.email}
                     onChange={handleInputChange}
                 />
-                <Select
-                    value={profile.language}
-                    onChange={(e) => setProfile({ ...profile, language: e.target.value })}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                >
-                    <MenuItem value="English">English</MenuItem>
-                    <MenuItem value="Spanish">Spanish</MenuItem>
-                    <MenuItem value="French">French</MenuItem>
-                </Select>
+          
 
                 <Typography variant="subtitle1" sx={{ mt: 2 }}>
                     Notification Settings
@@ -93,19 +84,7 @@ const Settings = () => {
                     />
                 </FormGroup>
 
-                <Typography variant="subtitle1" sx={{ mt: 2 }}>
-                    Privacy Settings
-                </Typography>
-                <FormGroup>
-                    <FormControlLabel
-                        control={<Switch checked={privacy.profileVisibility === 'public'} onChange={() => setPrivacy({ ...privacy, profileVisibility: privacy.profileVisibility === 'public' ? 'private' : 'public' })} />}
-                        label="Profile Visible to Public"
-                    />
-                    <FormControlLabel
-                        control={<Switch checked={privacy.dataDownload} onChange={() => handlePrivacyChange('dataDownload')} />}
-                        label="Allow Data Download"
-                    />
-                </FormGroup>
+            
 
                 <Typography variant="subtitle1" sx={{ mt: 2 }}>
                     Theme Settings
