@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
 import { Alert, Box, Button, TextField } from "@mui/material";
+import { toast } from 'react-toastify';
 
 export const VideoFeed = () => {
     const videoRef = useRef();
     const streamHostnameInputRef = useRef();
-    const [activeStreamHostname, setActiveStreamHostname] = useState("127.0.0.1:8080");
+    // the below state is an object so that, even if the value remains the same,
+    // if the user presses reload stream it will actually rerun the Effect
+    const [activeStreamHostname, setActiveStreamHostname] = useState({ value: "127.0.0.1:8080" });
     const [measuredLatency, setMeasuredLatency] = useState(0);
 
     const hlsSupported = Hls.isSupported();
@@ -20,7 +23,26 @@ export const VideoFeed = () => {
                 liveMaxLatencyDurationCount: 5, // don't be more than 5 segments away from newest
                 maxLiveSyncPlaybackRate: 1.5, // allow speedup of up to 1.5x to catch up to live
             });
-            hls.loadSource(`http://${activeStreamHostname}/stream.m3u8`);
+
+            hls.on(Hls.Events.MANIFEST_LOADED, (_event, _data) => {
+                toast.info(`Loaded video from ${activeStreamHostname.value}`);
+            });
+            hls.on(Hls.Events.ERROR, (_event, data) => {
+                switch (data.details) {
+                    case Hls.ErrorDetails.MANIFEST_LOAD_ERROR:
+                        toast.error("Unable to load manifest (incorrect stream source hostname?)");
+                        break;
+                    case Hls.ErrorDetails.BUFFER_STALLED_ERROR:
+                        toast.warning("Buffer stalled.");
+                        break;
+                    default:
+                        console.log(data);
+                        toast.error("Encountered an error (see console)");
+                }
+            });
+
+            // load and and attach video
+            hls.loadSource(`http://${activeStreamHostname.value}/stream.m3u8`);
             hls.attachMedia(videoRef.current);
 
             // initialize latency measurement
@@ -30,8 +52,6 @@ export const VideoFeed = () => {
 
             // autoplay
             videoRef.current.play().catch(() => { /* do nothing */ });
-
-            // TODO error handling
 
             return () => {
                 hls.destroy();
@@ -48,10 +68,10 @@ export const VideoFeed = () => {
                         id="stream-hostname"
                         label="stream hostname"
                         inputRef={streamHostnameInputRef}
-                        defaultValue={activeStreamHostname}
+                        defaultValue={activeStreamHostname.value}
                     />
                     <Button
-                        onClick={() => setActiveStreamHostname(streamHostnameInputRef.current.value)}
+                        onClick={() => setActiveStreamHostname({ value: streamHostnameInputRef.current.value })}
                         variant="contained"
                     >Reload stream</Button>
                 </Box>
