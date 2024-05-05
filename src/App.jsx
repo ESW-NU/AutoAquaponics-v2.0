@@ -43,12 +43,18 @@ const App = () => {
 		}
 	}, []);
 
+	const setThemeNameShim = (newThemeName) => {
+		// imperatively set <body> background color
+		// getElementByTagName("body").style.backgroundcolor = "$000";
+		setThemeName(newThemeName);
+	};
+
 	return (
 		<BrowserRouter>
 			<LocalizationProvider dateAdapter={AdapterDayjs}>
 				<UserContext.Provider value={user}>
 					<ThemeProvider theme={getTheme(themeName, prefersDarkMode)}>
-						<ThemeNameContext.Provider value={{ themeName, setThemeName, prefersDarkMode }}>
+						<ThemeNameContext.Provider value={{ themeName, setThemeNameShim, prefersDarkMode }}>
 							<ToastContainer/>
 							<NavBar/>
 							<Container maxWidth="xl">
