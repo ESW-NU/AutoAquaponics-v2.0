@@ -1,26 +1,51 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
-
-const streamHostname = "127.0.0.1:8080";
+import { Alert, Box, Button, TextField } from "@mui/material";
 
 export const VideoFeed = () => {
     const videoRef = useRef();
+    const streamHostnameInputRef = useRef();
+    const [activeStreamHostname, setActiveStreamHostname] = useState("127.0.0.1:8080");
+
+    const hlsSupported = Hls.isSupported();
 
     useEffect(() => {
-        const hls = new Hls();
-        hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-            console.log("video and hls.js are now bound together!");
-        });
-        hls.on(Hls.Events.MANIFEST_PARSED, (_event, data) => {
-            console.log(`manifest loaded, found ${data.levels.length} quality levels`);
-        });
-        hls.loadSource(`http://${streamHostname}/stream.m3u8`);
-        hls.attachMedia(videoRef.current);
-    }, []);
+        if (!hlsSupported) {
+            return () => {};
+        } else {
+            const hls = new Hls();
+            hls.loadSource(`http://${activeStreamHostname}/stream.m3u8`);
+            hls.attachMedia(videoRef.current);
+
+            // autoplay
+            videoRef.current.play();
+
+            // TODO error handling
+
+            return () => {
+                hls.destroy();
+            };
+        }
+    }, [activeStreamHostname]);
 
     return (
         <div>
-            <p>HLS supported: {Hls.isSupported() ? 'true' : 'false'}</p>
+            {hlsSupported ? (
+                <Box>
+                    <TextField
+                        id="stream-hostname"
+                        label="stream hostname"
+                        inputRef={streamHostnameInputRef}
+                        defaultValue={activeStreamHostname}
+                    />
+                    <Button
+                        onClick={() => setActiveStreamHostname(streamHostnameInputRef.current.value)}
+                        variant="contained"
+                    >Reload stream</Button>
+                </Box>
+            ) : (
+                <Alert severity="error">HLS is not supported in your browser</Alert>
+            )}
             <video ref={videoRef} width="100%" controls></video>
         </div>
     );
