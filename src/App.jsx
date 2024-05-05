@@ -27,6 +27,7 @@ const App = () => {
 
 	const [user, setUser] = useState(null);
 	const [themeName, setThemeName] = useState('light');
+		
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -44,17 +45,23 @@ const App = () => {
 	}, []);
 
 	const setThemeNameShim = (newThemeName) => {
-		// imperatively set <body> background color
-		// getElementByTagName("body").style.backgroundcolor = "$000";
 		setThemeName(newThemeName);
-	};
+	  };
+	
+	  const { muiTheme, bgcolor } = getTheme(themeName, prefersDarkMode);
+
+	  useEffect(() => {
+		const body = document.getElementsByTagName('body')[0];
+		body.style.backgroundColor = bgcolor;
+	  }, [themeName]);
+
 
 	return (
 		<BrowserRouter>
 			<LocalizationProvider dateAdapter={AdapterDayjs}>
 				<UserContext.Provider value={user}>
-					<ThemeProvider theme={getTheme(themeName, prefersDarkMode)}>
-						<ThemeNameContext.Provider value={{ themeName, setThemeNameShim, prefersDarkMode }}>
+					<ThemeProvider theme={muiTheme}>
+						<ThemeNameContext.Provider value={{ themeName: themeName, setThemeName: setThemeName, prefersDarkMode: prefersDarkMode }}>
 							<ToastContainer/>
 							<NavBar/>
 							<Container maxWidth="xl">

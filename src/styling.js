@@ -1,4 +1,5 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { light } from "@mui/material/styles/createPalette";
 
 const commonThemeOptions = {
 	typography: {
@@ -94,8 +95,16 @@ const darkThemeOptions = {
 	},
 };
 
-const lightTheme = responsiveFontSizes(createTheme(lightThemeOptions));
-const darkTheme = responsiveFontSizes(createTheme(darkThemeOptions));
+const lightThemeMui = responsiveFontSizes(createTheme(lightThemeOptions));
+const lightTheme = {
+	muiTheme: lightThemeMui,
+	bgcolor: "#F2F2F2",
+};
+const darkThemeMui = responsiveFontSizes(createTheme(darkThemeOptions));
+const darkTheme = {
+	muiTheme: darkThemeMui,
+	bgcolor: "#444444",
+};
 
 const getTheme = (themeName, prefersDarkMode) => {
 	switch (themeName) {
