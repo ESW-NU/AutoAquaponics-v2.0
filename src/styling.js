@@ -62,10 +62,6 @@ const lightThemeOptions = {
 			main: "#009444",
 			dark: "#006326",
 		},
-		clickme: {
-			main: "#FBB040",
-			dark: "#C98C30",
-		},
 		edited: {
 			dark: "#b28704",
 			main: "#ffc107",
@@ -82,10 +78,6 @@ const darkThemeOptions = {
 			light: "#e3f2fd",
 			main: "#90caf9",
 			dark: "#42a5f5",
-		},
-		clickme: {
-			main: "#FBB040",
-			dark: "#C98C30",
 		},
 		edited: {
 			dark: "#b28704",
