@@ -75,8 +75,8 @@ const ControlPanel = () => {
 				<Grid item xs={12}>
 					<ControlsOverviewPanel loading={loading} syncing={syncing}/>
 				</Grid>
-				<Grid item xs={12} md="auto">
-					<NavLinksPanel fullWidth={isSmall} links={[
+				<Grid item xs={12} md="auto" >
+					<NavLinksPanel fullWidth={isSmall} links={[ 
 						{ label: "Tolerances", addr: "tolerances", icon: <HeightIcon/> },
 						{ label: "Backwashing", addr: "backwashing", icon: <WavesIcon/>},
 						{ label: "Fish Feeder", addr: "fishFeeder", icon: <FastfoodIcon/> },
@@ -84,7 +84,7 @@ const ControlPanel = () => {
 						{ label: "Water Pump", addr: "waterPump", icon: <FontAwesomeIcon icon={faFan}/> },
 					]}/>
 				</Grid>
-				<Grid item xs>
+				<Grid item xs sx={{color: "text.primary"}}>
 					<Routes>
 						<Route index element={<Navigate replace to="tolerances"/>}/>
 						<Route path="tolerances" element={<Tolerances enabled={enabled}/>}/>

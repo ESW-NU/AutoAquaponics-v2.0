@@ -79,9 +79,9 @@ const darkThemeOptions = {
 	palette: {
 		mode: 'dark',
 		primary: {
-			light: "#4cc174",
-			main: "#009444",
-			dark: "#006326",
+			light: "#e3f2fd",
+			main: "#90caf9",
+			dark: "#42a5f5",
 		},
 		clickme: {
 			main: "#FBB040",
