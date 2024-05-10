@@ -4,19 +4,30 @@ import { Alert, Box, Button, TextField } from "@mui/material";
 import { toast } from 'react-toastify';
 
 export const VideoFeed = () => {
-    const videoRef = useRef();
-    const streamHostnameInputRef = useRef();
+    const videoDivRef = useRef();
+    const streamUrlInputRef = useRef();
     // the below state is an object so that, even if the value remains the same,
     // if the user presses reload stream it will actually rerun the Effect
-    const [activeStreamHostname, setActiveStreamHostname] = useState({ value: "127.0.0.1:8080" });
-    const [measuredLatency, setMeasuredLatency] = useState(0);
-
-    const hlsSupported = Hls.isSupported();
+    const [activeStreamUrl, setActiveStreamUrl] = useState({ value: "https://content.jwplatform.com/manifests/yp34SRmf.m3u8" });
+    const [hlsSupport, setHlsSupport] = useState("pending");
 
     useEffect(() => {
-        if (!hlsSupported) {
-            return () => {};
+        let cleanup = () => {};
+
+        // replace the current video element
+        const video = document.createElement("video");
+        if (videoDivRef.current.firstChild) {
+            videoDivRef.current.replaceChild(video, videoDivRef.current.firstChild);
         } else {
+            videoDivRef.current.appendChild(video);
+        }
+        video.style.width = "100%";
+
+        if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            setHlsSupport("native");
+            video.src = activeStreamUrl.value;
+        } else if (Hls.isSupported()) {
+            setHlsSupport("hls.js");
             const hls = new Hls({
                 debug: false,
                 liveSyncDurationCount: 1, // try to be about 1 segment away from the newest segment
@@ -25,7 +36,7 @@ export const VideoFeed = () => {
             });
 
             hls.on(Hls.Events.MANIFEST_LOADED, (_event, _data) => {
-                toast.info(`Loaded video from ${activeStreamHostname.value}`);
+                toast.info(`Loaded video from ${activeStreamUrl.value}`);
             });
             hls.on(Hls.Events.ERROR, (_event, data) => {
                 switch (data.details) {
@@ -42,44 +53,43 @@ export const VideoFeed = () => {
             });
 
             // load and and attach video
-            hls.loadSource(`http://${activeStreamHostname.value}/stream.m3u8`);
-            hls.attachMedia(videoRef.current);
+            hls.loadSource(activeStreamUrl.value);
+            hls.attachMedia(video);
 
-            // initialize latency measurement
-            const latencyMeasurementIntervalId = setInterval(() => {
-                setMeasuredLatency(hls.latency);
-            }, 100);
-
-            // autoplay
-            videoRef.current.play().catch(() => { /* do nothing */ });
-
-            return () => {
+            cleanup = () => {
                 hls.destroy();
-                clearInterval(latencyMeasurementIntervalId);
             };
+        } else {
+            setHlsSupport("none");
         }
-    }, [activeStreamHostname]);
+
+        // autoplay
+        video.play().catch(() => { /* do nothing */ });
+
+        return cleanup;
+    }, [activeStreamUrl]);
 
     return (
         <div>
-            {hlsSupported ? (
+            {hlsSupport == "pending" ? (
+                <Alert severity="info">Detecting HLS support...</Alert>
+            ) : hlsSupport == "none" ? (
+                <Alert severity="error">HLS is not supported in your browser</Alert>
+            ) : (
                 <Box>
                     <TextField
-                        id="stream-hostname"
-                        label="stream hostname"
-                        inputRef={streamHostnameInputRef}
-                        defaultValue={activeStreamHostname.value}
+                        id="stream-url"
+                        label="stream url"
+                        inputRef={streamUrlInputRef}
+                        defaultValue={activeStreamUrl.value}
                     />
                     <Button
-                        onClick={() => setActiveStreamHostname({ value: streamHostnameInputRef.current.value })}
+                        onClick={() => setActiveStreamUrl({ value: streamUrlInputRef.current.value })}
                         variant="contained"
                     >Reload stream</Button>
                 </Box>
-            ) : (
-                <Alert severity="error">HLS is not supported in your browser</Alert>
             )}
-            <video ref={videoRef} width="100%" controls></video>
-            latency: {measuredLatency}
+            <div ref={videoDivRef} width="100%"></div>
         </div>
     );
 }
