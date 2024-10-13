@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { TextField, Button, Switch, FormControlLabel, Paper, Typography, Box, MenuItem, Select, FormGroup } from '@mui/material';
+import { TextField, Button, Switch, FormControlLabel, Paper, Typography, Box, MenuItem, Select, FormGroup, Stack } from '@mui/material';
 import { ThemeNameContext } from '../Hooks/ThemeNameContext';
 
 const Settings = () => {
@@ -64,7 +64,6 @@ const Settings = () => {
                     value={profile.email}
                     onChange={handleInputChange}
                 />
-          
 
                 <Typography variant="subtitle1" sx={{ mt: 2 }}>
                     Notification Settings
@@ -84,31 +83,31 @@ const Settings = () => {
                     />
                 </FormGroup>
 
-            
-
                 <Typography variant="subtitle1" sx={{ mt: 2 }}>
                     Theme Settings
                 </Typography>
-                <Select
-                    value={themeName}
-                    onChange={handleThemeChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                >
-                    <MenuItem value='light'>Light</MenuItem>
-                    <MenuItem value='dark'>Dark</MenuItem>
-                    <MenuItem value='system'>System default ({prefersDarkMode ? 'Dark' : 'Light'})</MenuItem>
-                </Select>
+                <Stack direction="row" spacing={1}>
+                    <Select
+                        value={themeName}
+                        onChange={handleThemeChange}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                        <MenuItem value='light'>Light</MenuItem>
+                        <MenuItem value='dark'>Dark</MenuItem>
+                        <MenuItem value='system'>System default ({prefersDarkMode ? 'Dark' : 'Light'})</MenuItem>
+                    </Select>
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    disabled={loading}
-                    sx={{ mt: 2 }}
-                >
-                    Save Changes
-                </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSubmit}
+                        disabled={loading}
+                        sx={{ mt: 2 }}
+                    >
+                        Save Changes
+                    </Button>
+                </Stack>
             </Box>
         </Paper>
     );
